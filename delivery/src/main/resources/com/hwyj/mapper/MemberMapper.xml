@@ -60,10 +60,11 @@
 	</insert>
 	
 	<!-- 	중복 -->
-	<select id="selectCustomer" parameterType="com.hwyj.domain.CustomerVO" resultMap="int">
+	<select id="selectCustomer" parameterType="com.hwyj.domain.CustomerVO" resultType="int">
  	select count(*) from member
      where id = #{id}
 	</select>
+	
 	
 	
 	

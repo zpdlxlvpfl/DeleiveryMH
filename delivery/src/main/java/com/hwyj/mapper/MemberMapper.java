@@ -30,10 +30,9 @@ public interface MemberMapper {
 		public int insertCustomer(CustomerVO csVO);
 			
 		
-		public int selectCustomer(String id);
 
 		//아이디 중복체크
-		public int checkCustomer(CustomerVO csVO);
+		public int selectCustomer(CustomerVO csVO);
 
 
 

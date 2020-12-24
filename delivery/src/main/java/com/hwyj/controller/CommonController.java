@@ -87,16 +87,23 @@ public class CommonController {
 	@ResponseBody
 	public String insertCustomer(Locale locale, CustomerVO csVO, Model model) {
 		int check = 0;
-		check = memberMapper.checkCustomer(csVO);
-		PasswordEncoder encode = new BCryptPasswordEncoder();
-		csVO.setPw(encode.encode(csVO.getPw()));
-		
-		
-		check = memberMapper.insertCustomer(csVO);
+		check = memberMapper.selectCustomer(csVO);
+		if(check>=0) {
+			check=0;
+			
+		}else {
+			check=0;
+			PasswordEncoder encode = new BCryptPasswordEncoder();
+			csVO.setPw(encode.encode(csVO.getPw()));
+			
+			
+			check = memberMapper.insertCustomer(csVO);
 
-		System.out.println(check);
+			System.out.println(check);
 
-		return check + "";
+			
+		}
+		return check+"";
 	}
 	
 

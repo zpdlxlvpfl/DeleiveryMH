@@ -335,11 +335,17 @@
 										url : "/insertCustomer",
 										data : json,
 										success : function(string) {
-											alert('가입 성공' + string);
-											document.location.href="/login";
+											if(string=="1"){
+												alert('가입 성공' + string);
+												document.location.href="/login";
+												
+											}
+											else{
+												alert('ID가 중복되었습니다.' + string);
+											}
 										},
 										error : function(error) {
-											alert("이미존재하는 아이디 입니다.");
+											alert("데이터 전송에 실패했습니다. 다시 시도해 주세요");
 										}
 									});
 								} else {
