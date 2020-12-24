@@ -29,7 +29,7 @@ public class MemberTest {
 	private DataSource ds;
 	
 	@Test //member테이블에 인코딩된 패스워드 가진 사용자 추가하는 테스트
-	public void testInsertMember() {
+	public void c() {
 		String sql = "insert into member(id, pw, m_name) values(?,?,?)";
 		
 		for(int i=0; i<100; ++i) {

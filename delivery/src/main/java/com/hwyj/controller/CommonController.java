@@ -1,13 +1,9 @@
 package com.hwyj.controller;
 
-import java.sql.PreparedStatement;
 import java.util.Locale;
-import java.util.Map;
 
-import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,8 +20,6 @@ import com.hwyj.domain.ResVO;
 import com.hwyj.mapper.MemberMapper;
 import com.hwyj.mapper.RestaurantMapper;
 
-import lombok.AllArgsConstructor;
-import lombok.AllArgsConstructor.AnyAnnotation;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -86,11 +80,14 @@ public class CommonController {
 	@GetMapping("/insertCustomer") // ㅎㅗㅣㅇㅜㅓㄴㄱㅏㅇㅣㅂ
 	@ResponseBody
 	public String insertCustomer(Locale locale, CustomerVO csVO, Model model) {
+		
+		System.out.println("InsertCustomer start" + csVO.getId());
 		int check = 0;
+		
 		check = memberMapper.selectCustomer(csVO);
+		System.out.println("result "+ check);
 		if(check>=0) {
 			check=0;
-			
 		}else {
 			check=0;
 			PasswordEncoder encode = new BCryptPasswordEncoder();
