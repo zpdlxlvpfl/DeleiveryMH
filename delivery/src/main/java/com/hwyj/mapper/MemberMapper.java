@@ -32,7 +32,7 @@ public interface MemberMapper {
 		
 
 		//아이디 중복체크
-		public int selectCustomer(CustomerVO csVO);
+		public String selectCustomer(CustomerVO csVO);
 
 
 

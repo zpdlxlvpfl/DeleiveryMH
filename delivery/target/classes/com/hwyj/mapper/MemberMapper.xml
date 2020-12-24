@@ -58,12 +58,12 @@
 		 	#{m_name}	 , 
 			#{email})
 	</insert>
-	
-	<!-- 	중복 -->
-	<select id="selectCustomer" parameterType="com.hwyj.domain.CustomerVO" resultType="int">
- 	select count(*) from testdb.member
-     where id = #{id}
+	<!-- 	멤버 목록보기 (auth별로 보기) -->
+	<select id="selectCustomer" resultType="String"> 
+		select count(*) from testdb.member
+		where id=#{id}
 	</select>
+
 	
 	
 	

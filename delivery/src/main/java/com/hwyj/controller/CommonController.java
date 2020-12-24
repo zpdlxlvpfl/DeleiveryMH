@@ -80,23 +80,22 @@ public class CommonController {
 	@GetMapping("/insertCustomer") // ㅎㅗㅣㅇㅜㅓㄴㄱㅏㅇㅣㅂ
 	@ResponseBody
 	public String insertCustomer(Locale locale, CustomerVO csVO, Model model) {
-		
+		log.info("test");
 		System.out.println("InsertCustomer start" + csVO.getId());
-		int check = 0;
+		String check = "";
 		
 		check = memberMapper.selectCustomer(csVO);
 		System.out.println("result "+ check);
-		if(check>=0) {
-			check=0;
+		if(check=="0") {
+			check="0";
 		}else {
-			check=0;
+			check="0";
 			PasswordEncoder encode = new BCryptPasswordEncoder();
 			csVO.setPw(encode.encode(csVO.getPw()));
 			
 			
-			check = memberMapper.insertCustomer(csVO);
-
-			System.out.println(check);
+			int check2 = memberMapper.insertCustomer(csVO);
+			check = check2+"";
 
 			
 		}
