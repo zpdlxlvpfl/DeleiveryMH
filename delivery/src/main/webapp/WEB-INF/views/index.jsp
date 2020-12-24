@@ -1,8 +1,7 @@
-<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -34,9 +33,11 @@
 		<ul class="nav flex-column">
 			<li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="login.html"><span>LOGIN</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="join.html"><span>JOIN</span></a></li>
+			<sec:authorize access="isAnonymous()"><li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li></sec:authorize>
+			<sec:authorize access="isAnonymous()"><li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li></sec:authorize>
 			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="/member/myPage"><span>MyPage</span></a></li>
+            <sec:authorize access="hasRole('ROLE_ADMIN')"><li class="nav-item"><a class="nav-link" href="/admin/memberList?auth=ROLE_MEMBER"><span>#관리자페이지</span></a></li></sec:authorize>
 		</ul>
 	</div>
 
