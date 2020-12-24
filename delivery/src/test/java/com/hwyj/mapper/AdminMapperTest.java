@@ -37,7 +37,7 @@ public class AdminMapperTest {
 	
 	@Test //멤버 삭제 테스트
 	public void testDeleteMember() {
-		log.info("멤버 삭제 확인: "+mapper.deleteMember("user48"));
+		log.info("멤버 삭제 확인: "+mapper.deleteMember("user95"));
 	}
 
 }
