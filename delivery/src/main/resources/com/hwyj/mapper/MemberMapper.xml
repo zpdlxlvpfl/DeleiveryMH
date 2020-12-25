@@ -33,22 +33,6 @@
 	
 	
 	
-<!-- 	멤버정보 상세보기 -->
-	<select id="read" resultType="com.hwyj.domain.MemberVO"> 
-		select member.id, pw, m_name, enabled, auth from member left outer join auth on member.id=auth.id
-		where member.id=#{id}
-	</select>
-	
-<!-- 	멤버 목록보기 (auth별로 보기) -->
-	<select id="getMemberList" resultMap="memberMap"> 
-		select member.id, pw, m_name, enabled, auth from member left outer join auth on member.id=auth.id
-		where auth=#{auth}
-	</select>
-	
-<!-- 	멤버 삭제 -->
-	<delete id="deleteMember">
-		delete from member where id=#{id}
-	</delete>
 	
 	<!-- 회원가입 -->
 	<insert id="insertCustomer" parameterType="com.hwyj.domain.CustomerVO"> 

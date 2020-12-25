@@ -43,7 +43,11 @@ public class CommonController {
 	}
 
 	@GetMapping("/login") // 로그인 페이지
-	public void login() {
+	public void login(String error, Model model) {
+		log.info("에러: "+error);
+		if(error != null) { //로그인실패
+			model.addAttribute("error", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+		}
 
 	}
 
