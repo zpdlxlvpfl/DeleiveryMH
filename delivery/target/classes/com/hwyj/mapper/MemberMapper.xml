@@ -52,12 +52,26 @@
 	
 	<!-- 회원가입 -->
 	<insert id="insertCustomer" parameterType="com.hwyj.domain.CustomerVO"> 
-		INSERT into testdb.member(id, pw, m_name, email)
+		INSERT into testdb.member(id, pw, m_name, email, address, tel)
 		VALUES (#{id}	,
-		 		#{pw} 	,
-		 	#{m_name}	 , 
-			#{email})
+		 		#{pw}	,
+		 	#{m_name}	, 
+			#{email}	,
+			#{address}	,
+			#{tel})
 	</insert>
+	
+	
+	
+	<insert id="seatStatus" parameterType="com.hwyj.domain.CustomerVO"> 
+		INSERT into testdb.member(res_no, enabled)
+		VALUES (#{res_no}	,
+		 		#{enabled}	,
+	</insert>
+	
+	
+	
+	
 	<!-- 	멤버 목록보기 (auth별로 보기) -->
 	<select id="selectCustomer" resultType="String"> 
 		select count(*) from testdb.member

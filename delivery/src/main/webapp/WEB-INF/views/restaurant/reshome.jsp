@@ -24,7 +24,7 @@
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
 	rel="stylesheet">
 
-<script src="resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+<script src="../resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 
 
@@ -234,7 +234,7 @@
 	<script>
 		window.jQuery
 				|| document
-						.write('<script src="resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
+						.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
 	</script>
 <script src="../resources/js/vendor/bootstrap.min.js"></script>
 <script src="../resources/js/plugins.js"></script>

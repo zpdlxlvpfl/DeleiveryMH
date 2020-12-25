@@ -55,8 +55,9 @@ public class RestaurantController {
 	}
 	
 	
+	
 
-	@Autowired
+	@Autowired  //매장 등록 
 	private RestaurantMapper restmapper;
 	@GetMapping("/insertres")
 	@ResponseBody

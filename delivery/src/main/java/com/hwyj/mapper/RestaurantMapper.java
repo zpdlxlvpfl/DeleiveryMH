@@ -18,6 +18,8 @@ public interface RestaurantMapper {
 	
 	//public String saveImage(FileVO vo);
 	
+	public void status (ResVO resvo);
+	
 	public void insertres (ResVO resvo);
 
 	

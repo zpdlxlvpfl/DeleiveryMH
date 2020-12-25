@@ -11,6 +11,8 @@ public class CustomerVO {
 	private String m_name;
 	private String pw;
 	private String email;
+	private String address;
+	private String tel;
 	
 	
 	

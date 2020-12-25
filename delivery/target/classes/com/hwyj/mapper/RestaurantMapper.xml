@@ -25,7 +25,7 @@
 	<!-- 메뉴등록 -->
 	<insert id="insertres" parameterType="com.hwyj.domain.ResVO">
 		INSERT INTO testdb.res
-		(RES_CODE,RES_NAME,RES_ADDRESS,RES_TEL,RES_MENU_EXPLAN)
+		(RES_CODE,RES_NAME,ADDRESS,TEL,RES_MENU_EXPLAN)
 		VALUES 
 		(#{RES_CODE},
 		#{RES_NAME},

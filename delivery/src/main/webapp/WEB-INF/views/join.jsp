@@ -116,14 +116,13 @@
 				<p>
 					<span><em>JOIN</em> TEST</span>
 				</p>
-				<br>
-				<br>
+				<br> <br>
 
 
 				<div class="contact-form">
 					<div class="form-group">
 
-						<form id="contact" action="index.html" method="post">
+						<form id="contact" action="login" method="post">
 
 
 							<div style="margin: 0 auto; width: 300px;">
@@ -170,14 +169,15 @@
 									<div id="map"
 										style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
 
-								
+
 									<input type="text" id="sample5_address"
 										placeholder="Address..."> <input type="text"
 										id="sample5_address" placeholder="Detailed Address...">
 									<input type="button" onclick="sample5_execDaumPostcode()"
-										value="Address Search" style="width:300px; height:40px; text-align: left; font-family:inherit; font-size: 13px;
-                                    background-color:#fd7e14; color:white; "><br>
-									<div id="map" style="width:150px;height:150px;margin-top:10px;display:none"></div>
+										value="Address Search"
+										style="width: 300px; height: 40px; text-align: left; font-family: inherit; font-size: 13px; background-color: #fd7e14; color: white;"><br>
+									<div id="map"
+										style="width: 150px; height: 150px; margin-top: 10px; display: none"></div>
 
 									<script
 										src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -251,19 +251,52 @@
 
 								<fieldset>
 									<input name="tel" type="number" class="form-control" id="TEL"
-										placeholder="Phone number"
+										placeholder="Tel number..."
 										style="font-family: inherit; width: 300px; height: 40px;">
 								</fieldset>
 
 								<fieldset>
 									<font size="2em" color="white"> <input type="radio"
-										name="owner"
-										style="font-family: inherit; width: 19px; height: 19px"
-										 value="female">owner
+										name="enabled" value="2"
+										style="font-family: inherit; width: 19px; height: 19px" checked>owner
+
+										<input type="radio" name="enabled" value="1"
+										style="font-family: inherit; width: 19px; height: 19px">user
 									</font>
 								</fieldset>
+							<!-- 	<script type="text/javascript">
+								function() {
+								    var radVal = $("input[type=radio][name=enabled]:checked").val();
+										$.ajax({
+											type : "get",
+											url : "seatstatus",
+											data : val 
+												if (data == "2") {
+													alert('owner'
+															+ string);
+												} else if(data=="1"){
+													alert('user'
+															+ string);
+												}
+										})
+										})
+								</script> -->
 
+								<script>
 
+									$(function(){
+										  $('input[type="radio"]').click(function(){
+										    if ($(this).is(':checked'))  {
+										    	$.ajax({
+													type : "get",
+													url :"/seatstatus"
+										    })
+										    }
+										  });
+										});
+								
+									</script>
+									
 								<fieldset>
 
 									<p>
@@ -273,16 +306,16 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 								</fieldset>
-								</div>
-								
+							</div>
+
 						</form>
 					</div>
-					
+
 				</div>
-					</div>	
+			</div>
 
 
-	</div>
+		</div>
 		<footer>
 			<div class="container">
 				<div class="row">
@@ -302,59 +335,70 @@
 			</div>
 
 
-	
-	</footer>
+
+		</footer>
 
 
-	<script src="/resources/js/jquery3.3.1.min.js"></script>
-	<script src="/resources/js/semantic.min.js"></script>
-	<script>
-		$(document).ready(
-				function() {
-					$("#join").click(
+		<script src="/resources/js/jquery3.3.1.min.js"></script>
+		<script src="/resources/js/semantic.min.js"></script>
+		<script>
+			$(document)
+					.ready(
 							function() {
-								var json = {
-									id : $("#id").val(),
-									pw : $("#pw").val(),
-									m_name : $("#m_name").val(),
-									email : $("#email").val()
+								$("#join")
+										.click(
+												function() {
+													var json = {
+														id : $("#id").val(),
+														pw : $("#pw").val(),
+														m_name : $("#m_name")
+																.val(),
+														email : $("#email")
+																.val()
 
-								};
+													};
 
-								for ( var str in json) {
-									if (json[str].length == 0) {
-										alert($("#" + str).attr("placeholder")
-												+ " 정보를 입력해주세요.");
-										$("#" + str).focus();
-										return false;
-									}
-								}
-								if ($("#pw").val() == $("#pw2").val()) {
-									$.ajax({
-										type : "get",
-										url : "/insertCustomer",
-										data : json,
-										success : function(string) {
-											if(string=="1"){
-												alert('가입 성공' + string);
-												document.location.href="/login";
-												
-											}
-											else{
-												alert('ID가 중복되었습니다.' + string);
-											}
-										},
-										error : function(error) {
-											alert("데이터 전송에 실패했습니다. 다시 시도해 주세요");
-										}
-									});
-								} else {
-									alert('비밀번호 가 일치하지 않습니다.');
-								}
+													for ( var str in json) {
+														if (json[str].length == 0) {
+															alert($("#" + str)
+																	.attr(
+																			"placeholder")
+																	+ " 정보를 입력해주세요.");
+															$("#" + str)
+																	.focus();
+															return false;
+														}
+													}
+													if ($("#pw").val() == $(
+															"#pw2").val()) {
+														$
+																.ajax({
+																	type : "get",
+																	url : "/insertCustomer",
+																	data : json,
+																	success : function(
+																			string) {
+																		if (string == "1") {
+																			alert('가입 성공'
+																					+ string);
+																			document.location.href = "/login";
+
+																		} else {
+																			alert('ID가 중복되었습니다.'
+																					+ string);
+																		}
+																	},
+																	error : function(
+																			error) {
+																		alert("데이터 전송에 실패했습니다. 다시 시도해 주세요");
+																	}
+																});
+													} else {
+														alert('비밀번호 가 일치하지 않습니다.');
+													}
+												});
 							});
-				});
-	</script>
-
+		</script>
 </body>
 </html>
 
