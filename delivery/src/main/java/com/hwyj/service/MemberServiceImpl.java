@@ -37,6 +37,12 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(a);
 		 return 0;
 	}
+
+	@Override //아이디 찾기(이메일, 이름으로)
+	public CustomerVO findId(CustomerVO customerVO) {
+		
+		return memberMapper.findId(customerVO);
+	}
 	
 	
 	

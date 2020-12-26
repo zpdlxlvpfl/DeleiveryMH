@@ -34,6 +34,15 @@ public class MemberMapperTest {
 		log.info("내정보 수정 성공이면 1: "+mapper.update(customerVO));
 	}
 	
+	@Test //아이디 찾기 테스트
+	public void testFindId() {
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setEmail("abc1234@gamil.com");
+		customerVO.setM_name("이름수정");
+		customerVO=mapper.findId(customerVO);
+		log.info("아이디찾기: "+customerVO);
+	}
+	
 	
 
 }

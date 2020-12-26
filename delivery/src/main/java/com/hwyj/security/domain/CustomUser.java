@@ -28,5 +28,6 @@ public class CustomUser extends User {
 		
 		this.customerVO= customerVO;
 	}
+	
 
 }

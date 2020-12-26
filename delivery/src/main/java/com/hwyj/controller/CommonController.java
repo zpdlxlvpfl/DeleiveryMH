@@ -17,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.CustomerVO;
+import com.hwyj.domain.EmailVO;
 import com.hwyj.domain.ResVO;
 import com.hwyj.mapper.MemberMapper;
 import com.hwyj.mapper.RestaurantMapper;
+import com.hwyj.service.EmailService;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -33,6 +36,9 @@ public class CommonController {
 
 	@Setter(onMethod_ = @Autowired)
 	private PasswordEncoder pwencoder;
+	
+	@Setter(onMethod_ = @Autowired)
+	private EmailService emailService;
 
 	// 로그인 테스트용 나중에 지우기
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')") // auth가 ROLE_ADMIN이랑 ROLE_MEMBER일때만 페이지 열 수 있음
@@ -54,6 +60,29 @@ public class CommonController {
 	public String logout() {
 		return "redirect:/login";
 	}
+	
+	@GetMapping("findId") //아이디 찾기
+	public void findId() {
+		
+	}
+	
+	@PostMapping("findId")
+	public String findIdSuccess(CustomerVO customerVO, RedirectAttributes rttr) {
+		CustomerVO cusVO=memberMapper.findId(customerVO); //아이디 찾기(아이디, 이메일)
+		if(cusVO!=null) { //해당 회원이 있으면
+			EmailVO emailVO = new EmailVO();
+			emailVO.setReceiveMail(cusVO.getEmail()); //회원정보에 있는 메일로
+			emailVO.setContent(cusVO.getId()); //아이디 보내기
+			emailService.sendEmail(emailVO);	
+			rttr.addFlashAttribute("result","메일을 발송했습니다."); //메일 발송하면 나오는 메세지
+			return "redirect:/findId";
+		}else {
+			rttr.addFlashAttribute("result","회원정보를 찾을 수 없습니다."); //회원 정보가 없으면 나오는 메세지
+			return "redirect:/findId";
+		}	
+	}
+	
+	
 
 	@GetMapping("/join") // 가입
 	public void join() {

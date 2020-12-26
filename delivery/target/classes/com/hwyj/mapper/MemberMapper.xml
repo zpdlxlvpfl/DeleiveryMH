@@ -32,6 +32,12 @@
 	</update>
 	
 	
+<!-- 	아이디 찾기 (이메일,이름으로) -->
+	<select id="findId" resultType="com.hwyj.domain.CustomerVO"> 
+		select id, email from member where email=#{email} and m_name=#{m_name}
+	</select>
+	
+	
 	
 	
 	<!-- 회원가입 -->

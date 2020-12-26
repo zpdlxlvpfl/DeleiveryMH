@@ -9,6 +9,9 @@ public interface MemberMapper {
 		
 		//내정보 수정
 		public int update(CustomerVO customerVO);
+		
+		//아이디 찾기 (이메일과 이름으로)
+		public CustomerVO findId(CustomerVO customerVO);
 			
 					
 		

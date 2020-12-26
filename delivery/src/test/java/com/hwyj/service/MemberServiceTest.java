@@ -35,5 +35,14 @@ public class MemberServiceTest {
 		log.info("내정보 수정 성공여부: "+service.modifyMyInfo(customerVO));
 	}
 	
+	@Test //아이디 찾기 서비스 테스트
+	public void testFindId() {
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setEmail("abc1234@gamil.com");
+		customerVO.setM_name("이름수정");
+		customerVO=service.findId(customerVO);
+		log.info("아이디 찾기: "+customerVO);
+	}
+	
 
 }
