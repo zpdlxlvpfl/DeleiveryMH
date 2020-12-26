@@ -11,11 +11,11 @@
 	<div class="form-group">
 	  <fieldset>
 	    <label class="control-label" for="readOnlyInput">#아이디</label>
-	    <input name="id" class="form-control" id="readOnlyInput" type="text" value='<sec:authentication property="principal.memberVO.id"/>' readonly>
+	    <input name="id" class="form-control" id="readOnlyInput" type="text" value='<sec:authentication property="principal.CustomerVO.id"/>' readonly>
 	  </fieldset>
 	  <fieldset>
 	    <label class="control-label" for="readOnlyInput">#이름</label>
-	    <input name="m_name" maxlength="20" class="form-control" id="readOnlyInput" type="text" value='<sec:authentication property="principal.memberVO.m_name"/>'>
+	    <input name="m_name" maxlength="20" class="form-control" id="readOnlyInput" type="text" value='<sec:authentication property="principal.CustomerVO.m_name"/>'>
 	  </fieldset>
 	  <fieldset>
 	    <label class="control-label" for="readOnlyInput">#Email address</label>

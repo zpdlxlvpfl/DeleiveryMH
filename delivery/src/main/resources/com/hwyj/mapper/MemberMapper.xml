@@ -10,7 +10,7 @@
       <result property="auth" column="auth" />
    </resultMap>
 
-	<resultMap type="com.hwyj.domain.MemberVO" id="memberMap">
+	<resultMap type="com.hwyj.domain.CustomerVO" id="memberMap">
 		<id property="id" column="id" />
 		<result property="id" column="id" />
 		<result property="pw" column="pw" />

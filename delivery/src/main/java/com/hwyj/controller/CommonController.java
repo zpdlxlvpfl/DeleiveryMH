@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hwyj.domain.CustomerVO;
-import com.hwyj.domain.MemberVO;
 import com.hwyj.domain.ResVO;
 import com.hwyj.mapper.MemberMapper;
 import com.hwyj.mapper.RestaurantMapper;
@@ -111,7 +110,7 @@ public class CommonController {
 	}
 	
 	 @GetMapping("/seatstatus") //test중
-	  public @ResponseBody void seatstatus(@RequestParam("enabled")int enabled,Model model,MemberVO membervo) {
+	  public @ResponseBody void seatstatus(@RequestParam("enabled")int enabled,Model model,CustomerVO customerVO) {
 		 	log.info("dddddddddddddddddddddddd" + enabled);
 		 	
 			System.out.print("status start@@@@@@@"); 

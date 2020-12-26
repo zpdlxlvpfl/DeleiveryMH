@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hwyj.domain.CustomerVO;
-import com.hwyj.domain.MemberVO;
 import com.hwyj.mapper.Custmapper;
 import com.hwyj.mapper.MemberMapper;
 
@@ -27,9 +26,9 @@ public class MemberServiceImpl implements MemberService {
 
 	//내정보 수정 서비스
 	@Override
-	public boolean modifyMyInfo(MemberVO memberVO) {
-		log.info("내정보수정:"+memberVO);
-		return memberMapper.update(memberVO)==1; //수정처리가 정상적으로 되면 1리턴 -> 1==1이면 true
+	public boolean modifyMyInfo(CustomerVO customerVO) {
+		log.info("내정보수정:"+customerVO);
+		return memberMapper.update(customerVO)==1; //수정처리가 정상적으로 되면 1리턴 -> 1==1이면 true
 	}
 
 	@Override //회원가입

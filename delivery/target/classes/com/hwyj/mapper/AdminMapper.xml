@@ -5,7 +5,7 @@
   
 <mapper namespace="com.hwyj.mapper.AdminMapper">
 
-	<resultMap type="com.hwyj.domain.MemberVO" id="memberMap">
+	<resultMap type="com.hwyj.domain.CustomerVO" id="memberMap">
 		<id property="id" column="id" />
 		<result property="id" column="id" />
 		<result property="pw" column="pw" />
@@ -21,7 +21,7 @@
 	
 	
 <!-- 	멤버정보 상세보기 -->
-	<select id="read" resultType="com.hwyj.domain.MemberVO"> 
+	<select id="read" resultType="com.hwyj.domain.CustomerVO"> 
 		select member.id, pw, m_name, enabled, auth from member left outer join auth on member.id=auth.id
 		where member.id=#{id}
 	</select>
