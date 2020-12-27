@@ -37,21 +37,18 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(a);
 		 return 0;
 	}
-<<<<<<< HEAD
 	@Override
 	public String enabled(CustomerVO csVO) {
 		String a = memberMapper.enabled(csVO);
 		System.out.println(a);
 		return "";
 	} 
-=======
 
 	@Override //아이디 찾기(이메일, 이름으로)
 	public CustomerVO findId(CustomerVO customerVO) {
 		
 		return memberMapper.findId(customerVO);
 	}
->>>>>>> 5423cbcc703407b9753d4f6a1966559ef9e78101
 	
 	
 	

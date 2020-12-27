@@ -140,18 +140,13 @@ public class CommonController {
 		return check + "";
 	}
 	
-<<<<<<< HEAD
 
-	@GetMapping("/enabled") //test중
-	  public @ResponseBody void seatstatus(@RequestParam("enabled")int enabled,Model model,MemberVO membervo) {
-			System.out.print("status start@@@@@@@" + enabled); 
-=======
+
 	 @GetMapping("/seatstatus") //test중
 	  public @ResponseBody void seatstatus(@RequestParam("enabled")int enabled,Model model,CustomerVO customerVO) {
 		 	log.info("dddddddddddddddddddddddd" + enabled);
 		 	
 			System.out.print("status start@@@@@@@"); 
->>>>>>> 5423cbcc703407b9753d4f6a1966559ef9e78101
 			log.info(enabled);
 			
 
