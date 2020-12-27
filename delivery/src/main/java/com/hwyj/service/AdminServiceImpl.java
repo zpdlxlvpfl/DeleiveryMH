@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.hwyj.domain.MemberVO;
+import com.hwyj.domain.CustomerVO;
 import com.hwyj.mapper.AdminMapper;
 
 import lombok.AllArgsConstructor;
@@ -19,14 +19,14 @@ public class AdminServiceImpl implements AdminService {
 
 	//멤버 목록 보기 서비스
 	@Override
-	public List<MemberVO> getMemberList(String auth) {
+	public List<CustomerVO> getMemberList(String auth) {
 		log.info("멤버 목록 보기: "+adminMapper.getMemberList(auth));
 		return adminMapper.getMemberList(auth);
 	}
 		
 	//멤버정보 상세보기 서비스
 	@Override
-	public MemberVO getMemberInfo(String id) {
+	public CustomerVO getMemberInfo(String id) {
 		log.info("멤버정보 상세보기: "+adminMapper.read(id));	
 		return adminMapper.read(id);
 	}

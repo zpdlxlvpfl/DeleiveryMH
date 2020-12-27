@@ -12,9 +12,10 @@
 	<result property="RES_MENU_EXPLAN" column="RES_MENU_EXPLAN" />
 	</resultMap>
 		
-<!--  메뉴보기 -->
+<!--  메뉴보기 (식당이름, 메뉴이름, 메뉴설명, 메뉴가격) -->
 	<select id="readMenu" resultType="com.hwyj.domain.ResMenuVO">	
-	select m_name, menu_name, menu_info, price from menu left outer join member on member.id=menu.id where menu.id=#{id}
+	select m_name, res_menu_name, res_menu_explan, res_menu_price from res_menu left outer join member on res_menu.res_code=member.res_code
+	where res_menu.res_code=#{res_code}
 	</select>
 	
 	<!-- 이미지저장 테스트 -->

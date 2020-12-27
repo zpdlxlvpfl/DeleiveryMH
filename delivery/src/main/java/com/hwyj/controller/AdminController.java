@@ -6,12 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hwyj.domain.MemberVO;
+import com.hwyj.domain.CustomerVO;
 import com.hwyj.service.AdminService;
-import com.hwyj.service.MemberService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -41,8 +39,8 @@ public class AdminController {
 	//멤버 삭제
 	@PostMapping("/deleteMember")
 	public String memberRemove(String id, RedirectAttributes rttr) {
-		MemberVO memberVO=adminService.getMemberInfo(id);
-		String url=memberVO.getAuth(); //삭제하는 멤버의 권한을 알아내고
+		CustomerVO customerVO=adminService.getMemberInfo(id);
+		String url=customerVO.getAuth(); //삭제하는 멤버의 권한을 알아내고
 		if(adminService.deleteMember(id)) { //멤버 삭제가 성공하면 
 			rttr.addFlashAttribute("result", "success");
 		}		

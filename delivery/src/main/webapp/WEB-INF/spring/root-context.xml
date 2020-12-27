@@ -32,8 +32,7 @@
 	</bean>
 
 	<mybatis-spring:scan base-package="com.hwyj.mapper" />
-	<context:component-scan
-		base-package="com.hwyj.service"></context:component-scan>
+	<context:component-scan base-package="com.hwyj.service"></context:component-scan>
 
 
 	<!-- 파일업로드 디렉토리 설정 -->
@@ -51,6 +50,26 @@
 	<bean id="uploadPath" class="java.lang.String">
 		<constructor-arg value="/profileImage" />
 	</bean>
+	
+	
+	<!-- 이메일 발송 bean 설정 -->
+    <bean id="mailSender" 
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" /> 
+        <property name="port" value="587" />
+        <property name="username" value="hantest443370@gmail.com" />
+        <property name="password" value="iot0807#" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+
+	
 
 
 </beans>

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.hwyj.domain.MemberVO;
+import com.hwyj.domain.CustomerVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -30,18 +30,18 @@ public class AdminServiceTest {
 	
 	@Test //권한별로 멤버 목록보기 테스트
 	public void getMemberList() {
-		List<MemberVO> memberList=service.getMemberList("ROLE_ADMIN");
+		List<CustomerVO> memberList=service.getMemberList("ROLE_ADMIN");
 		log.info("목록보기-----------------");
-		for(MemberVO temp : memberList) {
+		for(CustomerVO temp : memberList) {
 			log.info(temp);
 		}
 	}
 	
 	@Test //멤버정보 상세보기 테스트
 	public void getMemberInfo() {
-		MemberVO memberVO = new MemberVO();
-		memberVO=service.getMemberInfo("user4");
-		log.info("멤버정보: "+memberVO);
+		CustomerVO customerVO = new CustomerVO();
+		customerVO=service.getMemberInfo("user4");
+		log.info("멤버정보: "+customerVO);
 	}
 	
 	@Test //멤버삭제 테스트

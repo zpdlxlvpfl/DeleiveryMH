@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.CustomerVO;
-import com.hwyj.domain.MemberVO;
 import com.hwyj.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -51,15 +50,12 @@ public class MemberController {
 	
 	//내정보 수정하면 다시 내정보보기 페이지로
 	@PostMapping("modifyMyInfo")
-	public String modifyMyInfo(MemberVO memberVO, RedirectAttributes rttr) {
-		if(memberService.modifyMyInfo(memberVO)) {
+	public String modifyMyInfo(CustomerVO customerVO, RedirectAttributes rttr) {
+		if(memberService.modifyMyInfo(customerVO)) {
 			rttr.addFlashAttribute("result", "m_success");
 		}	
 		return "redirect:/member/myInfo";
 	}
-	
-
-	
 	
 	
 

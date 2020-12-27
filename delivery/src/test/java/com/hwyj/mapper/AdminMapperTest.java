@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.hwyj.domain.MemberVO;
+import com.hwyj.domain.CustomerVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -23,16 +23,16 @@ public class AdminMapperTest {
 	
 	@Test //권한별 멤버 목록 보기 테스트
 	public void testGetList() {
-		List<MemberVO> memberList=mapper.getMemberList("ROLE_MEMBER");
-		for(MemberVO temp : memberList) {
+		List<CustomerVO> memberList=mapper.getMemberList("ROLE_MEMBER");
+		for(CustomerVO temp : memberList) {
 			log.info(temp);
 		}		
 	}
 	
 	@Test //멤버정보 상세보기 테스트
 	public void testRead() { 	
-		MemberVO memberVO=mapper.read("user3");
-		log.info("read------------- "+memberVO);
+		CustomerVO customerVO=mapper.read("user3");
+		log.info("read------------- "+customerVO);
 	}
 	
 	@Test //멤버 삭제 테스트
