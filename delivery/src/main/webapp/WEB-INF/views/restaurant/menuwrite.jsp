@@ -11,7 +11,6 @@
 <title>Restaurant</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 
         <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
@@ -26,8 +25,9 @@
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
 	rel="stylesheet">
 
-<script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+<script src="../resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
+<body>
 
     <div class="fixed-side-navbar">
         <ul class="nav flex-column">
@@ -66,31 +66,46 @@
 
 					
 						<div style="margin: 0 auto; width: 300px;">
+						
+							<fieldset>
+						
+							<input name="res_code"  type="number" class="form-control"
+								id="res_code" placeholder="res_code"
+								style="font-family: inherit; width: 300px; height: 40px;">
+						</fieldset>
+						
+							<fieldset>
+						
+							<input name="res_menu_code" type="number" class="form-control"
+								id="res_menu_code" placeholder="res_menu_code"
+								style="font-family: inherit; width: 300px; height: 40px;">
+						</fieldset>
+						
 						<fieldset>
 						
-							<input name="food_name" id="" type="text" class="form-control"
-								id="food_name" placeholder="food_name"
+							<input name="res_menu_name"  type="text" class="form-control"
+								id="res_menu_name" placeholder="food_name"
 								style="font-family: inherit; width: 300px; height: 40px;">
 						</fieldset>
 
 						<fieldset>
 
-							<input name="food_price" type="text" class="form-control"
-								id="food_price" placeholder="food_price"
+							<input name="res_menu_price"  type="number" class="form-control"
+								id="res_menu_price" placeholder="food_price"
 								style="font-family: inherit; width: 300px; height: 40px;">
 						</fieldset>
 
 						<fieldset>
 
-							<input name="food_introduction" type="text" class="form-control"
-								id="food_introduction" placeholder="food_introduction...."
+							<input name="res_menu_explan" type="text" class="form-control"
+								id="res_menu_explan" placeholder="food_introduction...."
 								style="font-family: inherit; width: 300px; height: 300px;">
 						</fieldset>
 					</div>
 						<fieldset>
 							<div style="float: center;">
 								<p>
-									<button type="button" id="insesrtmenu" onclick="location.href='index.html'"
+									<button type="button" id="insertmenu" name="insertmenu" 
 										class="btn"
 										style="font-family: inherit; width: 300px; height: 60px;">WRITE</button>
 								</p>
@@ -130,53 +145,48 @@
 
 
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 	window.jQuery
 			|| document
-					.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+			.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
 </script>
-<script src="../js/vendor/bootstrap.min.js"></script>
-<script src="../js/plugins.js"></script>
-<script src="../js/main.js"></script>
-script>
+	<script src="../resources/js/vendor/bootstrap.min.js"></script>
+	<script src="../resources/js/plugins.js"></script>
+	<script src="../resources/js/main.js"></script>
+<script>
 		$(document).ready(
 				function() {
 					$("#insertmenu").click(
 							function() {
 								var json = {
-									id : $("#id").val(),
-									pw : $("#pw").val(),
-									m_name : $("#m_name").val(),
-									email : $("#email").val()
+									res_code : $("#res_code").val(),
+									res_menu_code : $("#res_menu_code").val(),
+									res_menu_name : $("#res_menu_name").val(),
+									res_menu_explan : $("#res_menu_explan").val(),
+									res_menu_price : $("#res_menu_price").val()
 
 								};
 
-								for ( var str in json) {
-									if (json[str].length == 0) {
-										alert($("#" + str).attr("placeholder")
+								for (var data in json) {
+									if (json[data] == 0) {
+										alert($("#" + data).attr("placeholder")
 												+ " 정보를 입력해주세요.");
-										$("#" + str).focus();
+										$("#" + data).focus();
 										return false;
 									}
 								}
-								if ($("#pw").val() == $("#pw2").val()) {
 									$.ajax({
 										type : "get",
-										url : "/insertCustomer",
+										url : "/insertmenu",
 										data : json,
 										success : function(string) {
-											alert('가입 성공' + string);
-											document.location.href="/login";
+											alert('등록 성공' + string);
+											document.location.href="/restaurant/reshome";
 										},
 										error : function(error) {
-											alert("이미존재하는 아이디 입니다.");
+											alert("ttttttttt.");
 										}
 									});
-								} else {
-									alert('비밀번호 가 일치하지 않습니다.');
-								}
 							});
 				});
 	</script>

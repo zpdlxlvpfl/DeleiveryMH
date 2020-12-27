@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.CustomerVO;
 import com.hwyj.domain.EmailVO;
+import com.hwyj.domain.ResMenuVO;
 import com.hwyj.domain.ResVO;
 import com.hwyj.mapper.MemberMapper;
 import com.hwyj.mapper.RestaurantMapper;
@@ -126,7 +127,7 @@ public class CommonController {
 
 		check = memberMapper.selectCustomer(csVO);
 		System.out.println("result " + check);
-		if (check == "0") {
+		if (check == "0") {   //패스워드 암호화
 			check = "0";
 		} else {
 			check = "0";
@@ -139,6 +140,27 @@ public class CommonController {
 		}
 		return check + "";
 	}
+	
+	@Autowired
+	private RestaurantMapper restmapper;
+
+	@GetMapping("/insertres")
+	@ResponseBody
+	public void insertres(Locale locale, ResVO resvo, Model model) {
+		restmapper.insertres(resvo);
+		System.out.println(resvo);
+	}
+	
+	 
+	@GetMapping("/insertmenu") //메뉴 등록 
+	@ResponseBody
+	public void insertmenu (Locale locale,ResMenuVO menuvo, Model model) {
+		restmapper.insertmenu(menuvo);
+		log.info(menuvo);
+		System.out.println(menuvo);
+	}
+		
+	
 	
 
 

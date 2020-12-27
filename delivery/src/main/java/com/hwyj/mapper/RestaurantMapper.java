@@ -21,6 +21,8 @@ public interface RestaurantMapper {
 	public void status (ResVO resvo);
 	
 	public void insertres (ResVO resvo);
+	
+	public void insertmenu (ResMenuVO menuvo);
 
 	
 	

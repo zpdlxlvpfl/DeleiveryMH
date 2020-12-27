@@ -54,7 +54,7 @@
 				<div class="form-group" style="float: center;">
 					<form id="contact"
 						action="${pageContext.request.contextPath }/file/upload.do"
-						method="post">
+						method="post"> <!-- 파일 업로드 구현 테스트중임 -->
 
 
 						<div class="filebox">
@@ -68,17 +68,17 @@
 						<div style="margin: 0 auto; width: 300px;">
 						
 						
-						<!-- <fieldset>
+						<fieldset>
 
-								<input name="Restaurant_name" id="RES_CODE" type="number"
+								<input name="RES_CODE" id="RES_CODE" type="number"
 									class="form-control" 
-									placeholder="Restaurant_name.."
+									placeholder="Restaurant_Code"
 									style="font-family: inherit; width: 300px; height: 40px;">
-							</fieldset> -->
+							</fieldset> 
 
 							<fieldset>
 
-								<input name="Restaurant_name" id="RES_NAME" type="text"
+								<input name="RES_NAME" id="RES_NAME" type="text"
 									class="form-control" 
 									placeholder="Restaurant_name.."
 									style="font-family: inherit; width: 300px; height: 40px;">
@@ -86,30 +86,35 @@
 
 							<fieldset>
 
-								<input name="Restauran_Explan" type="text" class="form-control"
+								<input name="RES_INFO" type="text" class="form-control"
 									id="RES_INFO" placeholder="Restauran_Explan.."
-									style="font-family: inherit; width: 300px; height: 40px;">
+									style="font-family: inherit; width: 300px; height: 150px;">
 							</fieldset>
 
-							<fieldset>
 							
-								<input name="del_price" id="del_price" type="number"
-									class="form-control"  placeholder="Restauran Tel.."
+								<fieldset>
+							
+								<input name="DEL_PRICE" id="DEL_PRICE" type="number"
+									class="form-control"  placeholder="Del_price .."
 									style="font-family: inherit; width: 300px; height: 40px;">
 							</fieldset>
+							
 							<fieldset>
+							<!-- 
 							<div id="map"
 										style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
 										
-							<input type="text" id="RES_ADDRESS" placeholder="Address...">
+							<input type="text" id="ADDRESS" placeholder="Address...">
 							<input type="text" 
 								placeholder="Detailed Address..."> 
 								<input type="button" id="addressSearch" onclick="sample5_execDaumPostcode()" 
 								value="Address Search" 
 								style="width: 300px; height: 40px; text-align: left; font-family: inherit; font-size: 13px; background-color: #fd7e14; color: white;"><br>
 							<div id="map"
-								style="width: 150px; height: 150px; margin-top: 10px; display: none"></div>
-							<script
+								style="width: 150px; height: 150px; margin-top: 10px; display: none"></div> -->
+						
+						
+							<!-- <script
 								src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 							<script
 								src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1ae9605eb7fea18b91aa4e9f1d11e64&libraries=services"></script>
@@ -145,7 +150,7 @@
 
 															// 주소 정보를 해당 필드에 넣는다.
 															document
-																	.getElementById("RES_ADDRESS").value = addr;
+																	.getElementById("ADDRESS").value = addr;
 															// 주소로 상세 정보를 검색
 															geocoder
 																	.addressSearch(
@@ -177,13 +182,13 @@
 														}
 													}).open();
 										}
-									</script>
+									</script> -->
 							</fieldset>
 						</div>
 						<fieldset>
 							<div style="float: center;">
 								<p>
-									<button type="button" id="insertres"
+									<button type="button" id="insertres" name ="insertres"
 										class="btn"	style="font-family: inherit; width: 300px; height: 60px;">WRITE</button>
 								</p>
 							</div>
@@ -221,13 +226,12 @@
 
 
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>
 	window.jQuery
 			|| document
-					.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+					.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
 </script>
+
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/plugins.js"></script>
 	<script src="../resources/js/main.js"></script>
@@ -240,10 +244,10 @@
 							function() {
 								var json = {
 									RES_CODE : $("#RES_CODE").val(),
-									RES_ADDRESS : $("#RES_ADDRESS").val(),
 									RES_NAME : $("#RES_NAME").val(),
-									RES_TEL : $("#RES_TEL").val(),
-									RES_MENU_EXPLAN : $("#RES_MENU_EXPLAN").val()
+									RES_INFO : $("#RES_INFO").val(),
+									DEL_PRICE : $("#DEL_PRICE").val(),
+									//RES_DATE : $("#RES_DATE").val()
 								};
 
 								for (var data in json) {
