@@ -86,7 +86,15 @@
         <div class="parallax-content baner-content" id="home">
             <div class="container">
                 <div class="first-content">
-                  
+                  <font color="red">
+                  <c:out value="${result }" />
+                  </font>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
                     <p> <span><em>아이디</em> 찾기</span> </p> <br>
       
 
@@ -106,9 +114,7 @@
                            
                             
                                 <input type="hidden" name="${_csrf.parameterName }"value="${_csrf.token }" />
-                                <font color="red">
-                                <c:out value="${result }" />
-                                </font>
+                                
                        
                             
                                     <p> <button type="submit" id="form-submit" class="btn" style=" font-family:inherit; width:300px; height:50px;">아이디 찾기</button></p>
