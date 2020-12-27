@@ -29,8 +29,8 @@ public interface MemberMapper {
 		//회원가입
 		public int insertCustomer(CustomerVO csVO);
 			
+		public String enabled(CustomerVO csVO);
 		
-
 		//아이디 중복체크
 		public String selectCustomer(CustomerVO csVO);
 

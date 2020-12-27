@@ -87,13 +87,13 @@
 							<fieldset>
 
 								<input name="Restauran_Explan" type="text" class="form-control"
-									id="RES_MENU_EXPLAN" placeholder="Restauran_Explan.."
+									id="RES_INFO" placeholder="Restauran_Explan.."
 									style="font-family: inherit; width: 300px; height: 40px;">
 							</fieldset>
 
 							<fieldset>
 							
-								<input name="tel" id="RES_TEL" type="number"
+								<input name="del_price" id="del_price" type="number"
 									class="form-control"  placeholder="Restauran Tel.."
 									style="font-family: inherit; width: 300px; height: 40px;">
 							</fieldset>

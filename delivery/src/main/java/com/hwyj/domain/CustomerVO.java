@@ -1,6 +1,8 @@
 package com.hwyj.domain;
 
 
+import java.util.Date;
+
 import lombok.Data;
 
 
@@ -13,6 +15,9 @@ public class CustomerVO {
 	private String email;
 	private String address;
 	private String tel;
+	private String enabled;
+	//private Date MEMBER_DATE;
+	
 	
 	
 	

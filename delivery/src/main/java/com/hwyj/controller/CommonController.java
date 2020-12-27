@@ -1,7 +1,11 @@
 package com.hwyj.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -87,47 +91,29 @@ public class CommonController {
 		log.info("test");
 		System.out.println("InsertCustomer start" + csVO.getId());
 		String check = "";
-		
+
 		check = memberMapper.selectCustomer(csVO);
-		System.out.println("result "+ check);
-		if(check=="0") {
-			check="0";
-		}else {
-			check="0";
+		System.out.println("result " + check);
+		if (check == "0") {
+			check = "0";
+		} else {
+			check = "0";
 			PasswordEncoder encode = new BCryptPasswordEncoder();
 			csVO.setPw(encode.encode(csVO.getPw()));
-			
-			
-			int check2 = memberMapper.insertCustomer(csVO);
-			check = check2+"";
 
-			
+			int check2 = memberMapper.insertCustomer(csVO);
+			check = check2 + "";
+
 		}
-		return check+"";
+		return check + "";
 	}
 	
-	 @GetMapping("/seatstatus") //test중
+
+	@GetMapping("/enabled") //test중
 	  public @ResponseBody void seatstatus(@RequestParam("enabled")int enabled,Model model,MemberVO membervo) {
-		 	log.info("dddddddddddddddddddddddd" + enabled);
-		 	
-			System.out.print("status start@@@@@@@"); 
+			System.out.print("status start@@@@@@@" + enabled); 
 			log.info(enabled);
 			
 
-		  //model.addAttribute("SeatStatus",service.SeatStatus(sno)); 
-		 /* sno 에 담긴 좌석번호를 service.SeatStatus 를 호출하며 넘깁니다. */	
-
 	  }
-	
-
-	@Autowired
-	private RestaurantMapper restmapper;
-
-	@GetMapping("/insertres")
-	@ResponseBody
-	public void insertres(Locale locale, ResVO resvo, Model model) {
-		restmapper.insertres(resvo);
-		System.out.println(resvo);
-	}
-
 }

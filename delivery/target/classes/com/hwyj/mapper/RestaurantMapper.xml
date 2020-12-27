@@ -22,16 +22,16 @@
 		INSERT INTO testdb.img_table VALUES #({img})
 	</insert>
 
-	<!-- 메뉴등록 -->
+	<!-- 메장등록 -->
 	<insert id="insertres" parameterType="com.hwyj.domain.ResVO">
-		INSERT INTO testdb.res
-		(RES_CODE,RES_NAME,ADDRESS,TEL,RES_MENU_EXPLAN)
+		INSERT INTO testdb.member
+		(RES_CODE,RES_NAME,RES_INFO,DEL_PRICE,RES_DATE)
 		VALUES 
 		(#{RES_CODE},
 		#{RES_NAME},
-		#{RES_ADDRESS},
-		#{RES_TEL},
-		#{RES_MENU_EXPLAN})
+		#{RES_DATE},
+		#{RES_INFO},
+		#{DEL_PRICE})
 	</insert>
 
 </mapper>

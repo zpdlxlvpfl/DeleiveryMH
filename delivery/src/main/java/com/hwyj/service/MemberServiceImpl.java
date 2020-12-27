@@ -38,6 +38,12 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(a);
 		 return 0;
 	}
+	@Override
+	public String enabled(CustomerVO csVO) {
+		String a = memberMapper.enabled(csVO);
+		System.out.println(a);
+		return "";
+	} 
 	
 	
 	

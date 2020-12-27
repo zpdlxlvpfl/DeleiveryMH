@@ -257,39 +257,26 @@
 
 								<fieldset>
 									<font size="2em" color="white"> <input type="radio"
-										name="enabled" value="2"
-										style="font-family: inherit; width: 19px; height: 19px" checked>owner
+										name="enabled" value="2" id=""
+										style="font-family: inherit; width: 19px; height: 19px" checked="checked"> 
+										<label>owner</label>
 
 										<input type="radio" name="enabled" value="1"
-										style="font-family: inherit; width: 19px; height: 19px">user
+										style="font-family: inherit; width: 19px; height: 19px" >
+										<label>user</label>
 									</font>
+						
 								</fieldset>
-							<!-- 	<script type="text/javascript">
-								function() {
-								    var radVal = $("input[type=radio][name=enabled]:checked").val();
-										$.ajax({
-											type : "get",
-											url : "seatstatus",
-											data : val 
-												if (data == "2") {
-													alert('owner'
-															+ string);
-												} else if(data=="1"){
-													alert('user'
-															+ string);
-												}
-										})
-										})
-								</script> -->
-
-								<script>
-
+							
+									<script>
 									$(function(){
-										  $('input[type="radio"]').click(function(){
+										  $("input[name='enabled']:checked").click(function(){
+											  console.log($(this).val())
 										    if ($(this).is(':checked'))  {
 										    	$.ajax({
+										    		data : string ,
 													type : "get",
-													url :"/seatstatus"
+													url :"/enabled"
 										    })
 										    }
 										  });
