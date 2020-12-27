@@ -184,7 +184,7 @@
 											document.location.href="/restaurant/reshome";
 										},
 										error : function(error) {
-											alert("ttttttttt.");
+											alert("error.");
 										}
 									});
 							});
