@@ -105,6 +105,7 @@
 						<fieldset>
 							<div style="float: center;">
 								<p>
+<<<<<<< HEAD
 									<button type="button" id="insertmenu" 
 										class="btn"
 										style="font-family: inherit; width: 300px; height: 60px;">WRITE</button>
@@ -181,6 +182,85 @@
 										data : json,
 										success : function() {
 											alert('등록 성공');
+=======
+									<button type="button" id="insertmenu" name="insertmenu" 
+										class="btn"
+										style="font-family: inherit; width: 300px; height: 60px;">WRITE</button>
+								</p>
+							</div>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</fieldset>
+						</form>
+				</div>
+			</div>
+	</div>
+	</div>
+	
+
+	<div class="col-md-6"></div>
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="primary-button">
+						<a href="#home">Back To Top</a>
+					</div>
+					<ul>
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+						<li><a href="#"><i class="fa fa-google"></i></a></li>
+						<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		</footer>
+
+
+
+
+
+<script>
+	window.jQuery
+			|| document
+			.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
+</script>
+	<script src="../resources/js/vendor/bootstrap.min.js"></script>
+	<script src="../resources/js/plugins.js"></script>
+	<script src="../resources/js/main.js"></script>
+<script>
+		$(document).ready(
+				function() {
+					$("#insertmenu").click(
+							function() {
+								var json = {
+									res_code : $("#res_code").val(),
+									res_menu_code : $("#res_menu_code").val(),
+									res_menu_name : $("#res_menu_name").val(),
+									res_menu_explan : $("#res_menu_explan").val(),
+									res_menu_price : $("#res_menu_price").val()
+
+								};
+
+								for (var data in json) {
+									if (json[data] == 0) {
+										alert($("#" + data).attr("placeholder")
+												+ " 정보를 입력해주세요.");
+										$("#" + data).focus();
+										return false;
+									}
+								}
+									$.ajax({
+										type : "get",
+										url : "/insertmenu",
+										data : json,
+										success : function(string) {
+											alert('등록 성공' + string);
+											document.location.href="/restaurant/reshome";
+>>>>>>> branch 'master' of https://github.com/zpdlxlvpfl/DeleiveryMH
 										},
 										error : function(error) {
 											alert("error.");

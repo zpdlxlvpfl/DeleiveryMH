@@ -38,10 +38,13 @@ public class RestaurantServiceImpl implements RestaurantService {
 	//	return 0;
 		//return restaurantMapper.insertres(resvo);
 	}
+<<<<<<< HEAD
 	
 	@Override
 	public void insertmenu(ResMenuVO menuvo) {
 		restaurantMapper.insertmenu(menuvo);
 		log.info("메뉴등록@@@@@@@@" + menuvo);
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/zpdlxlvpfl/DeleiveryMH
 }

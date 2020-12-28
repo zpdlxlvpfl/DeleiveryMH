@@ -14,8 +14,11 @@ public interface RestaurantService {
 	public List<ResMenuVO> menuList(String id);
 	//식당등록
 	public void insertres(ResVO resvo);
+<<<<<<< HEAD
 	
 	public void insertmenu(ResMenuVO menuvo);
+=======
+>>>>>>> branch 'master' of https://github.com/zpdlxlvpfl/DeleiveryMH
 
 	//public String saveImage(FileVO vo);
 }

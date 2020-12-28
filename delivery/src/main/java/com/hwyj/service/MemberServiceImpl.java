@@ -34,6 +34,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override //회원가입
 	public int insertCustomer(CustomerVO csVO) {		
 		int a = memberMapper.insertCustomer(csVO);
+<<<<<<< HEAD
 	//	memberMapper.insertAuth(csVO); //(권한등록)
 		System.out.println(a);
 		 return 0;
@@ -57,6 +58,26 @@ public class MemberServiceImpl implements MemberService {
 	public String selectCustomer(CustomerVO csVO) {
 		return "";
 	} 
+=======
+		memberMapper.insertAuth(csVO); //(권한등록)
+		System.out.println(a);
+		 return 0;
+	}
+	
+	@Override
+	public String enabled(CustomerVO csVO) {
+		String a = memberMapper.enabled(csVO);
+		System.out.println(a);
+		return "";
+	} 
+
+	@Override //아이디 찾기(이메일, 이름으로)
+	public CustomerVO findId(CustomerVO customerVO) {
+		
+		return memberMapper.findId(customerVO);
+	}
+
+>>>>>>> branch 'master' of https://github.com/zpdlxlvpfl/DeleiveryMH
 	
 	
 	

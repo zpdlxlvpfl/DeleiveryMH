@@ -209,6 +209,7 @@
                     <div class="wrapper">
                     <section id="first-tab-group" class="tabgroup">
                       <div id="tab1">
+<<<<<<< HEAD
                         <img src="resources/img/1st-tab.jpg" alt=""><br>
                         <p>lalallalalalalalalalsdatstseTESTSETETSETWQE!.</p> 
                       </div>
@@ -223,6 +224,22 @@
                       <div id="tab4">
                         <img src="resources/img/4th-tab.jpg" alt=""><br>
                          <p>lalallalalalalalalalsd tstseTESTSETETSETWQE!.</p>
+=======
+                        <img src="resources/img/1st-tab.jpg" alt="">
+                        <p>Please do not re-distribute our template ZIP file on your template collection sites. You can make a screenshot and a link back to our website. This template can be used for personal or commercial purposes by end-users.</p>
+                      </div>
+                      <div id="tab2">
+                        <img src="resources/img/2nd-tab.jpg" alt="">
+                        <p>Aliquam eu ultrices risus, sed condimentum diam. Duis risus nulla, elementum vitae nisi a, ornare maximus nisl. Morbi et vehicula est. Cras at vulputate justo. Cras eu nulla metus. Ut et pretium velit. Pellentesque at neque tristique dui tempor venenatis.</p>
+                      </div>
+                      <div id="tab3">
+                        <img src="resources/img/3rd-tab.jpg" alt="">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia ligula est, at venenatis ex iaculis quis. Morbi sollicitudin nulla eget odio pellentesque, sed cursus diam iaculis.</p>
+                      </div>
+                      <div id="tab4">
+                        <img src="resources/img/4th-tab.jpg" alt="">
+                        <p>Duis risus nulla, elementum vitae nisi a, ornare maximus nisl. Morbi et vehicula est. Cras at vulputate justo. Cras eu nulla metus. Ut et pretium velit. Pellentesque at neque tristique.</p>
+>>>>>>> branch 'master' of https://github.com/zpdlxlvpfl/DeleiveryMH
                       </div>
                     </section>
                     <ul class="tabs clearfix" data-tabgroup="first-tab-group">
