@@ -59,7 +59,7 @@
 				
 					<div class="filebox">
 					<label><input type="file" name="upload" 
-					style="font-family: inherit; width: 220px; height: 40px;"/> </label>
+					style="font-family: inherit; width:220px; height: 40px;"/> </label>
 					</div>
 
 
