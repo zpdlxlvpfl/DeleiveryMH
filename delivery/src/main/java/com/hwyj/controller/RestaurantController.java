@@ -67,7 +67,7 @@ public class RestaurantController {
 
 	
 	@GetMapping("/insertres")  //매장 등록 
-	public String insertres (Locale locale, ResVO resvo, Model model) {
+	public String insertres (Locale locale, ResVO resvo,RedirectAttributes rttr) {
 		restaurantService.insertres(resvo);
 		log.info(resvo);
 		System.out.println(resvo);
@@ -75,7 +75,7 @@ public class RestaurantController {
 	}
 	 
 	@GetMapping("/insertmenu") //메뉴 등록 
-	public String insertmenu (ResMenuVO menuvo, Model model,RedirectAttributes rttr) {
+	public String insertmenu (ResMenuVO menuvo,RedirectAttributes rttr) {
 		restaurantService.insertmenu(menuvo);
 		log.info(menuvo);
 		System.out.println(menuvo);

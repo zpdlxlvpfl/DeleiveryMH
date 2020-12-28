@@ -1,17 +1,11 @@
 package com.hwyj.service;
 
-import java.util.List;
 
-import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import com.hwyj.domain.CustomerVO;
-import com.hwyj.mapper.Custmapper;
 import com.hwyj.mapper.MemberMapper;
 
 import lombok.AllArgsConstructor;
@@ -34,7 +28,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override //회원가입
 	public int insertCustomer(CustomerVO csVO) {		
 		int a = memberMapper.insertCustomer(csVO);
-	//	memberMapper.insertAuth(csVO); //(권한등록)
 		System.out.println(a);
 		 return 0;
 	}
@@ -55,8 +48,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public String selectCustomer(CustomerVO csVO) {
-		
-		memberMapper.insertAuth(csVO); //(권한등록)
+		memberMapper.selectCustomer(csVO);
+		//memberMapper.insertAuth(csVO); //(권한등록)
 		System.out.println(csVO);
 		return "";
 	}

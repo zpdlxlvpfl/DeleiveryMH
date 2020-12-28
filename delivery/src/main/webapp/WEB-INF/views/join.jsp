@@ -170,7 +170,7 @@
 										style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
 
 
-									<input type="text" id="sample5_address"
+									<input type="text" id="address" name="address"
 										placeholder="Address..."> <input type="text"
 										id="sample5_address" placeholder="Detailed Address...">
 									<input type="button" onclick="sample5_execDaumPostcode()"
@@ -214,7 +214,7 @@
 
 															// 주소 정보를 해당 필드에 넣는다.
 															document
-																	.getElementById("sample5_address").value = addr;
+																	.getElementById("sample5_execDaumPostcode").value = addr;
 															// 주소로 상세 정보를 검색
 															geocoder
 																	.addressSearch(
@@ -250,27 +250,19 @@
 								</fieldset>
 
 								<fieldset>
-									<input name="tel" type="number" class="form-control" id="TEL"
+									<input name="tel" type="number" class="form-control" id="tel"
 										placeholder="Tel number..."
 										style="font-family: inherit; width: 300px; height: 40px;">
 								</fieldset>
 
-								<fieldset>
+							<fieldset>
 									<font size="2em" color="white"> <input type="radio"
-<<<<<<< HEAD
-										name="enabled" value="2" id=""
-										style="font-family: inherit; width: 19px; height: 19px" checked="checked"> 
+										name="enabled" value="2"
+										style="font-family: inherit; width: 19px; height: 19px" checked>
 										<label>owner</label>
 
 										<input type="radio" name="enabled" value="1"
-=======
-										name="auth" value="ROLE_RES" id=""
-										style="font-family: inherit; width: 19px; height: 19px" checked="checked"> 
-										<label>owner</label>
-
-										<input type="radio" name="auth" value="ROLE_MEMBER"
->>>>>>> branch 'master' of https://github.com/zpdlxlvpfl/DeleiveryMH
-										style="font-family: inherit; width: 19px; height: 19px" >
+										style="font-family: inherit; width: 19px; height: 19px">
 										<label>user</label>
 									</font>
 						
@@ -282,7 +274,7 @@
 											  console.log($(this).val())
 										    if ($(this).is(':checked'))  {
 										    	$.ajax({
-										    		data : string ,
+										    		data : data ,
 													type : "get",
 													url :"/enabled"
 										    })
@@ -334,65 +326,48 @@
 		</footer>
 
 
-		<script src="/resources/js/jquery3.3.1.min.js"></script>
-		<script src="/resources/js/semantic.min.js"></script>
+		<script src="resources/js/jquery3.3.1.min.js"></script>
+		<script src="resources/js/semantic.min.js"></script>
 		<script>
-			$(document)
-					.ready(
+		$(document).ready(
+				function() {
+					$("#join").click(
 							function() {
-								$("#join")
-										.click(
-												function() {
-													var json = {
-														id : $("#id").val(),
-														pw : $("#pw").val(),
-														m_name : $("#m_name")
-																.val(),
-														email : $("#email")
-																.val()
+								var json = {
+									id : $("#id").val(),
+									m_name : $("#m_name").val(),
+									pw : $("#pw").val(),
+									email : $("#email").val(),
+									address : $("#address").val(),
+									tel : $("#tel").val()
+								};
 
-													};
-
-													for ( var str in json) {
-														if (json[str].length == 0) {
-															alert($("#" + str)
-																	.attr(
-																			"placeholder")
-																	+ " 정보를 입력해주세요.");
-															$("#" + str)
-																	.focus();
-															return false;
-														}
-													}
-													if ($("#pw").val() == $(
-															"#pw2").val()) {
-														$
-																.ajax({
-																	type : "get",
-																	url : "/insertCustomer",
-																	data : json,
-																	success : function(
-																			string) {
-																		if (string == "1") {
-																			alert('가입 성공'
-																					+ string);
-																			document.location.href = "/login";
-
-																		} else {
-																			alert('ID가 중복되었습니다.'
-																					+ string);
-																		}
-																	},
-																	error : function(
-																			error) {
-																		alert("데이터 전송에 실패했습니다. 다시 시도해 주세요");
-																	}
-																});
-													} else {
-														alert('비밀번호 가 일치하지 않습니다.');
-													}
-												});
+								for ( var str in json) {
+									if (json[str].length == 0) {
+										alert($("#" + str).attr("placeholder")
+												+ " 정보를 입력해주세요.");
+										$("#" + str).focus();
+										return false;
+									}
+								}
+								if ($("#pw").val() == $("#pw2").val()) {
+									$.ajax({
+										type :"get",
+										url :"/insertCustomer",
+										data : json,
+										success : function(string) {
+											alert('가입 성공' + string);
+											document.location.href="/login";
+										},
+										error : function(error) {
+											alert("이미존재하는 아이디 입니다.");
+										}
+									});
+								} else {
+									alert('비밀번호 가 일치하지 않습니다.');
+								}
 							});
+				});
 		</script>
 </body>
 </html>

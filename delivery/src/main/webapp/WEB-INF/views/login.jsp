@@ -117,11 +117,8 @@
                             
                                     <p> <button type="submit" id="form-submit" class="btn" style=" font-family:inherit; width:300px; height:50px;">LOGIN</button></p>
 
-<<<<<<< HEAD
                                     <p> <button type="button" onclick="location.href='join'" class="btn" style=" font-family:inherit; width:300px; height:50px;">JOIN</button> </p>
-=======
                                     <p> <button type="button" onclick="location.href='join.html'" class="btn" style=" font-family:inherit; width:300px; height:50px;">JOIN</button> </p>
->>>>>>> branch 'master' of https://github.com/zpdlxlvpfl/DeleiveryMH
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </form>
                     </div>
@@ -150,7 +147,6 @@
                 </div>
         </div>
 
-        </div>
         </div>
         </footer>
 

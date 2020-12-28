@@ -57,7 +57,6 @@
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
-<<<<<<< HEAD
 									src="../resources/img/1st-item.jpg" alt="" id="${res_menu_name}"></a>
 								<div class="text-content">
 										<h4>${res_menu_name}</h4>
@@ -131,10 +130,6 @@
 									src="../resources/img/1st-item.jpg" alt="" id="${res_menu_name}"></a>
 								<div class="text-content">
 									<h4>${res_menu_name}</h4>
-=======
-									src="../resources/img/1st-item.jpg" alt=""></a>
-								<div class="text-content">
-									<h4>foodname</h4>
 									<span>123 &#8361; </span>
 								</div>
 							</div>
@@ -159,62 +154,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/4th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/4th-item.jpg" alt=""></a>
-								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/5th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/5th-item.jpg" alt=""></a>
-								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/6th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/6th-item.jpg" alt=""></a>
-								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/2nd-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/2nd-item.jpg" alt=""></a>
-								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/1st-item.jpg" alt=""></a>
-								<div class="text-content">
-									<h4>foodname</h4>
->>>>>>> branch 'master' of https://github.com/zpdlxlvpfl/DeleiveryMH
-									<span>123 &#8361; </span>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	
 
 	<div class="service-content" id="services">
