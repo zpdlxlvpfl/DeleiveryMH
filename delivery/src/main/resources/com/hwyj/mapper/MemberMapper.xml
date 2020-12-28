@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="com.hwyj.mapper.MemberMapper">
+
+<resultMap type="com.hwyj.domain.AuthVO" id="authMap">
+      <result property="id" column="id" />
+      <result property="auth" column="auth" />
+   </resultMap>
+
+	<resultMap type="com.hwyj.domain.CustomerVO" id="memberMap">
+		<id property="id" column="id" />
+		<result property="id" column="id" />
+		<result property="pw" column="pw" />
+		<result property="m_name" column="m_name" />
+		<collection property="authList" resultMap="authMap">
+		</collection>
+	</resultMap>
+	
+	
+<!-- 	로그인 -->
+	<select id="login" resultMap="memberMap"> 
+		select member.id, pw, m_name, enabled, auth from member left outer join auth on member.id=auth.id
+		where member.id=#{id}
+	</select>
+	
+<!-- 	내정보 수정 -->
+	<update id="update">
+  	update member set m_name=#{m_name} where id=#{id} <!-- 나중에 테이블 컬럼 추가되면 여기도 추가해야됨 -->
+	</update>
+	
+	
+<!-- 	아이디 찾기 (이메일,이름으로) -->
+	<select id="findId" resultType="com.hwyj.domain.CustomerVO"> 
+		select id, email from member where email=#{email} and m_name=#{m_name}
+	</select>
+	
+	
+	
+	
+	<!-- 회원가입 -->
+	<insert id="insertCustomer" parameterType="com.hwyj.domain.CustomerVO"> 
+		INSERT into testdb.member(id, pw, m_name, email, address, tel)
+		VALUES (#{id}	,
+		 		#{pw}	,
+		 	#{m_name}	, 
+			#{email}	,
+			#{address}	,
+			#{tel})
+	</insert>
+<!-- 	회원가입-권한등록 -->
+	<!-- <insert id="insertAuth">
+		INSERT into auth(id, auth) VALUES (#{id},#{auth})
+	</insert> -->
+	
+	<insert id="enabled" parameterType="com.hwyj.domain.CustomerVO"> 
+		INSERT into testdb.member(res_no, enabled)
+		VALUES (#{res_no}	,
+		 		#{enabled})
+	</insert>
+	
+	
+	
+	
+	<!-- 	멤버 목록보기 (auth별로 보기) -->
+	<select id="selectCustomer" resultType="String"> 
+		select count(*) from testdb.member
+		where id=#{id}
+	</select>
+
+	
+	
+	
+	
+	
+
+	
+	
+
+
+</mapper>
