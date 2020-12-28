@@ -12,12 +12,9 @@ public interface MemberService {
 	
 	public String enabled(CustomerVO csVO);
 	
-<<<<<<< HEAD
 	public String selectCustomer(CustomerVO csVO);
 	
 	
-=======
->>>>>>> branch 'master' of https://github.com/zpdlxlvpfl/DeleiveryMH
 	public CustomerVO findId(CustomerVO customerVO);
 	
 }

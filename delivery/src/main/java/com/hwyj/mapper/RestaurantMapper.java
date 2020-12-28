@@ -18,10 +18,7 @@ public interface RestaurantMapper {
 	
 	//public String saveImage(FileVO vo);
 	
-<<<<<<< HEAD
-=======
 	public void status (ResVO resvo);
->>>>>>> branch 'master' of https://github.com/zpdlxlvpfl/DeleiveryMH
 	
 	public void insertres (ResVO resvo);
 	
