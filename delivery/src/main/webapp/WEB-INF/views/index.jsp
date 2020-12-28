@@ -35,7 +35,6 @@
 			<sec:authorize access="isAnonymous()"><li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li></sec:authorize>
 			<sec:authorize access="isAnonymous()"><li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li></sec:authorize>
 			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="/member/myPage"><span>MyPage</span></a></li>
             <sec:authorize access="hasRole('ROLE_ADMIN')"><li class="nav-item"><a class="nav-link" href="/admin/memberList?auth=ROLE_MEMBER"><span>#관리자페이지</span></a></li></sec:authorize>
 		</ul>
 	</div>
@@ -113,10 +112,10 @@
 
 
 	<div class="parallax-content projects-content" id="portfolio">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div id="owl-testimonials" class="owl-carousel owl-theme">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="owl-testimonials" class="owl-carousel owl-theme">
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
@@ -194,14 +193,50 @@
 								<div class="text-content">
 									<h4>foodname</h4>
 									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+								           </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tabs-content" id="our-story">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="wrapper">
+                    <section id="first-tab-group" class="tabgroup">
+                      <div id="tab1">
+                        <img src="resources/img/1st-tab.jpg" alt="">
+                        <p>Please do not re-distribute our template ZIP file on your template collection sites. You can make a screenshot and a link back to our website. This template can be used for personal or commercial purposes by end-users.</p>
+                      </div>
+                      <div id="tab2">
+                        <img src="resources/img/2nd-tab.jpg" alt="">
+                        <p>Aliquam eu ultrices risus, sed condimentum diam. Duis risus nulla, elementum vitae nisi a, ornare maximus nisl. Morbi et vehicula est. Cras at vulputate justo. Cras eu nulla metus. Ut et pretium velit. Pellentesque at neque tristique dui tempor venenatis.</p>
+                      </div>
+                      <div id="tab3">
+                        <img src="resources/img/3rd-tab.jpg" alt="">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia ligula est, at venenatis ex iaculis quis. Morbi sollicitudin nulla eget odio pellentesque, sed cursus diam iaculis.</p>
+                      </div>
+                      <div id="tab4">
+                        <img src="resources/img/4th-tab.jpg" alt="">
+                        <p>Duis risus nulla, elementum vitae nisi a, ornare maximus nisl. Morbi et vehicula est. Cras at vulputate justo. Cras eu nulla metus. Ut et pretium velit. Pellentesque at neque tristique.</p>
+                      </div>
+                    </section>
+                    <ul class="tabs clearfix" data-tabgroup="first-tab-group">
+                      <li><a href="#tab1" class="active">2008 - 2014</a></li>
+                      <li><a href="#tab2">2014 - 2016</a></li>
+                      <li><a href="#tab3">2016 - 2019</a></li>
+                      <li><a href="#tab4">2019 - Now</a></li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
 
 
 
@@ -397,9 +432,9 @@
 	</footer>
 
 
-
+<!-- 
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 	<script>
 		window.jQuery
 				|| document
