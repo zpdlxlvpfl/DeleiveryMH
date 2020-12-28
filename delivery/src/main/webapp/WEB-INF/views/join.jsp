@@ -257,11 +257,11 @@
 
 								<fieldset>
 									<font size="2em" color="white"> <input type="radio"
-										name="enabled" value="2" id=""
+										name="auth" value="ROLE_RES" id=""
 										style="font-family: inherit; width: 19px; height: 19px" checked="checked"> 
 										<label>owner</label>
 
-										<input type="radio" name="enabled" value="1"
+										<input type="radio" name="auth" value="ROLE_MEMBER"
 										style="font-family: inherit; width: 19px; height: 19px" >
 										<label>user</label>
 									</font>

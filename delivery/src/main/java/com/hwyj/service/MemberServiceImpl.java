@@ -32,11 +32,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override //회원가입
-	public int insertCustomer(CustomerVO csVO) {
+	public int insertCustomer(CustomerVO csVO) {		
 		int a = memberMapper.insertCustomer(csVO);
+		memberMapper.insertAuth(csVO); //(권한등록)
 		System.out.println(a);
 		 return 0;
 	}
+	
 	@Override
 	public String enabled(CustomerVO csVO) {
 		String a = memberMapper.enabled(csVO);
@@ -49,6 +51,8 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberMapper.findId(customerVO);
 	}
+
+	
 	
 	
 	

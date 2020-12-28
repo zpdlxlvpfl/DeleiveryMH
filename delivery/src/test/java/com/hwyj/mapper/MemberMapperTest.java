@@ -43,6 +43,13 @@ public class MemberMapperTest {
 		log.info("아이디찾기: "+customerVO);
 	}
 	
+	@Test //회원가입-권한등록 테스트
+	public void testInsertAuth() {
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setId("test");
+		customerVO.setAuth("ROLE_MEMBER");
+		log.info("권한등록 : "+mapper.insertAuth(customerVO));
+	}
 	
 
 }

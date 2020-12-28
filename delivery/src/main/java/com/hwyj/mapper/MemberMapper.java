@@ -18,6 +18,9 @@ public interface MemberMapper {
 	
 		//회원가입
 		public int insertCustomer(CustomerVO csVO);
+		
+		//회원가입-권한 등록
+		public int insertAuth(CustomerVO customerVO);
 			
 		public String enabled(CustomerVO csVO);
 		
