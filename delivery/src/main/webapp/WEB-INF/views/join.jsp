@@ -257,11 +257,11 @@
 
 							<fieldset>
 									<font size="2em" color="white"> <input type="radio"
-										name="enabled" value="2"
+										name="auth" value="ROLE_RES" id="auth"
 										style="font-family: inherit; width: 19px; height: 19px" checked>
 										<label>owner</label>
 
-										<input type="radio" name="enabled" value="1"
+										<input type="radio" name="auth" value="ROLE_MEMBER" id="auth"
 										style="font-family: inherit; width: 19px; height: 19px">
 										<label>user</label>
 									</font>
@@ -339,7 +339,8 @@
 									pw : $("#pw").val(),
 									email : $("#email").val(),
 									address : $("#address").val(),
-									tel : $("#tel").val()
+									tel : $("#tel").val(),
+									auth : $("#auth").val
 								};
 
 								for ( var str in json) {

@@ -44,4 +44,14 @@ public class MemberServiceTest {
 		log.info("아이디 찾기: "+customerVO);
 	}
 	
+	 @Test //회원가입 +권한등록 서비스 테스트
+	 public void testInsertCustomer() {
+		 CustomerVO customerVO = new CustomerVO();
+		 customerVO.setId("test2");
+		 customerVO.setPw("555");
+		 customerVO.setM_name("테스트2이름");
+		 customerVO.setAuth("ROLE_RES");
+		 service.insertCustomer(customerVO);
+	 }
+	
 }

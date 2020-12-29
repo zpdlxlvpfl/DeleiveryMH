@@ -25,9 +25,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.update(customerVO)==1; //수정처리가 정상적으로 되면 1리턴 -> 1==1이면 true
 	}
 
-	@Override //회원가입
+	@Override //회원가입 +권한등록
 	public int insertCustomer(CustomerVO csVO) {		
 		int a = memberMapper.insertCustomer(csVO);
+		memberMapper.insertAuth(csVO); //(권한등록)
 		System.out.println(a);
 		 return 0;
 	}
@@ -49,7 +50,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String selectCustomer(CustomerVO csVO) {
 		memberMapper.selectCustomer(csVO);
-		//memberMapper.insertAuth(csVO); //(권한등록)
 		System.out.println(csVO);
 		return "";
 	}

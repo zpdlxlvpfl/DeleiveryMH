@@ -53,9 +53,9 @@
 			#{tel})
 	</insert>
 <!-- 	회원가입-권한등록 -->
-	<!-- <insert id="insertAuth">
+	<insert id="insertAuth">
 		INSERT into auth(id, auth) VALUES (#{id},#{auth})
-	</insert> -->
+	</insert>
 
 	
 	<insert id="enabled" parameterType="com.hwyj.domain.CustomerVO"> 
