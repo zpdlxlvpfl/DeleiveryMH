@@ -1,5 +1,7 @@
 package com.hwyj.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -13,5 +15,6 @@ public class CartVO {
 	private int amount; //수량
 	private int res_menu_price;
 	private int sum; //메뉴당 총금액
+	
 
 }
