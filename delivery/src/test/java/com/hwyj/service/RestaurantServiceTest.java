@@ -35,5 +35,8 @@ public class RestaurantServiceTest {
 			log.info("메뉴: "+temp);
 		}		
 	}
+	
+	
+	
 
 }

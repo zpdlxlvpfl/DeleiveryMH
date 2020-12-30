@@ -20,9 +20,10 @@ public interface RestaurantMapper {
 	
 	public void status (ResVO resvo);
 	
-	public void insertres (ResVO resvo);
+	public void insertres (ResVO resvo); // 매장등록
 	
-	public void insertmenu (ResMenuVO menuvo);
+	public void insertmenu (ResMenuVO menuvo); //메뉴등록
+	
 
 	
 	

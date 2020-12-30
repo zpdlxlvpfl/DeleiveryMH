@@ -181,8 +181,8 @@
 										url : "/restaurant/insertmenu",
 										data : json,
 										success : function(string) {
-											alert('등록 성공' + string);
-											document.location.href="/restaurant/reshome";
+											alert('등록 성공');
+											document.location.href="";
 										},
 										error : function(error) {
 											alert("error.");

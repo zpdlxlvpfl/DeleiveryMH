@@ -26,6 +26,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return restaurantMapper.readMenu(id);
 	}
 	
+
+	
 	/*
 	 * @Override public String saveImage(FileVO vo) {
 	 * log.info(restaurantMapper.saveImage(vo)); return "redirect:/formFile"; }
@@ -42,6 +44,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public void insertmenu(ResMenuVO menuvo) {
 		restaurantMapper.insertmenu(menuvo);
-		log.info("메뉴등록@@@@@@@@" + menuvo);
+		log.info("메장등록@@@@@@@@" + menuvo);
 	}
+	
+	
+	
+	
 }

@@ -11,6 +11,10 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+
 
         <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="../resources/css/fontAwesome.css">
@@ -50,26 +54,57 @@
 	
 		<h1><font color="white">Restorent Home TEST</font></h1> 
 		<span><font color="orange">Restorent Home TEST </font></span>
+		
+		
+	
 		<div class="container">
+			
 			<div class="row">
+			
 				<div class="col-md-12">
+				
 					<div id="owl-testimonials" class="owl-carousel owl-theme">
+					
+					
+					<script type="text/javascript">
+					function test() {
+						$.ajax({
+							type : "GET",
+							url : "get.do",
+							data : {
+								kor : "${Foodname}",
+								us : "${FoodPrice}"
+							},
+							error : function(error) {
+								console.log("error");
+							},
+							success : function(data) {
+								console.log("success");
+
+							}
+						});
+					}
+					</script>
+						
 						<div class="item">
+							<c:out value="${menuList}" var="menuList" varStatus="status">
 							<div class="testimonials-item">
 								<a href="resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/1st-item.jpg" alt="" id="${res_menu_name}"></a>
+									src="../resources/img/1st-item.jpg" alt=""></a>
 								<div class="text-content">
-										<h4>${res_menu_name}</h4>
-									<span>123 &#8361; </span>
+										<h4><c:out value="${menuList.res_menu_name}"/>${Foodname }</h4>
+									<span><c:out value="${menuList.res_menu_price}"/> ${FoodPrice }&#8361; </span>
 								</div>
+								</c:out>
 							</div>
 						</div>
+						
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="../resources/img/2nd-big-item.jpg" data-lightbox="image-1"><img
 									src="../resources/img/2nd-item.jpg" alt="" id="${res_menu_name}" ></a>
 								<div class="text-content">
-										<h4>${res_menu_name}</h4>
+										<h4>${res_menu_name} </h4>
 									<span>123 &#8361; </span>
 								</div>
 							</div>
@@ -114,51 +149,12 @@
 								</div>
 							</div>
 						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/2nd-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/2nd-item.jpg" alt="" id="${res_menu_name}"></a>
-								<div class="text-content">
-									<h4>${res_menu_name}</h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/1st-item.jpg" alt="" id="${res_menu_name}"></a>
-								<div class="text-content">
-									<h4>${res_menu_name}</h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/2nd-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/2nd-item.jpg" alt=""></a>
-								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/3rd-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/3rd-item.jpg" alt=""></a>
-								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
 								</div>
 							</div>
 						</div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
+		
 	
 
 	<div class="service-content" id="services">
@@ -259,6 +255,8 @@
 <script src="../resources/js/vendor/bootstrap.min.js"></script>
 <script src="../resources/js/plugins.js"></script>
 <script src="../resources/js/main.js"></script>
+
+
 
 
 </body>

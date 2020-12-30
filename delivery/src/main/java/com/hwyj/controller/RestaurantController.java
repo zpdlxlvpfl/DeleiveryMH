@@ -1,6 +1,9 @@
 package com.hwyj.controller;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.annotation.Generated;
 
@@ -47,7 +50,7 @@ public class RestaurantController {
 		
 	}
 	
-	@GetMapping("/menuwrite") 
+	@GetMapping("/menulist") 
 	public void menuwrite() {
 
 	}
@@ -81,6 +84,23 @@ public class RestaurantController {
 		System.out.println(menuvo);
 		rttr.addFlashAttribute(menuvo);
 		return "redirect:/restaurant/reshome";
+	}
+	
+	//@RequestMapping(value = "/get.do") //메뉴 보기
+	@GetMapping("/menuList")
+	@ResponseBody
+	public String menuList (String id) {
+		Map<String, Object> map = new HashMap<String , Object>();
+		ResMenuVO resmenu = new ResMenuVO();
+		map.put("Foodname" , resmenu.getRes_menu_name());
+		map.put("FoodPrice" , resmenu.getRes_menu_price());
+		
+		return null;
+		/*
+		 * restaurantService.menuList(id); log.info(id); System.out.println(id);
+		 * model.addAttribute("menuList", restaurantService.menuList(id));
+		 */
+		
 	}
 	
 
