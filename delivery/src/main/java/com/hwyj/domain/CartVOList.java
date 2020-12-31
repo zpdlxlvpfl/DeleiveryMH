@@ -8,10 +8,10 @@ import lombok.Data;
 @Data
 public class CartVOList {
 	
-	private List<CartVO> cartList;
+	private List<CartVO> list;
 	
 	public CartVOList() {
-		cartList = new ArrayList<CartVO>();
+		list = new ArrayList<>();
 	}
 
 }

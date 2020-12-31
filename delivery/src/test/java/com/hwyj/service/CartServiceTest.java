@@ -69,7 +69,7 @@ public class CartServiceTest {
 		cartVO2.setAmount(1);
 		cartList.add(cartVO2);
 		
-		cartVOList.setCartList(cartList);
+		cartVOList.setList(cartList);
 		
 		log.info("메뉴 몇개 담았지?: "+service.ShoppingCart(cartVOList));
 		
