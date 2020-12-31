@@ -12,7 +12,14 @@ import com.hwyj.domain.ResVO;
 public interface RestaurantService {
 	
 	//식당 메뉴보기 서비스
-	public List<ResMenuVO> menuList(String id);
+	public List<ResMenuVO> menuList();
+	
+	public List<ResVO> getresList();
+	
+	public ResMenuVO getmenu (String menucode);
+	
+	public ResVO getres (String rescode);
+	
 	
 	
 	//식당등록
@@ -20,7 +27,7 @@ public interface RestaurantService {
 	
 	public void insertmenu(ResMenuVO menuvo);
 
-
+	
 	
 
 	//public String saveImage(FileVO vo);

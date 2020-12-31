@@ -6,10 +6,11 @@
 <mapper namespace="com.hwyj.mapper.RestaurantMapper">
 
 	<resultMap type="com.hwyj.domain.ResVO" id="memberMap">
-	<result property="RES_NAME" column="RES_NAME" />
-	<result property="RES_ADDRESS"  column="RES_ADDRESS"/>
-	<result property="RES_TEL" column="RES_TEL" />
-	<result property="RES_MENU_EXPLAN" column="RES_MENU_EXPLAN" />
+	<result property="RES_CODE" column="RES_CODE" />
+	<result property="RES_NAME"  column="RES_NAME"/>
+	<result property="RES_INFO" column="RES_INFO" />
+	<result property="DEL_PRICE" column="DEL_PRICE" />
+	<result property="RES_MENU_PRICE" column="RES_MENU_PRICE" />
 	</resultMap>
 	
 	<resultMap type="com.hwyj.domain.ResMenuVO" id="restMap">
@@ -27,6 +28,15 @@
 	select m_name, res_menu_name, res_menu_explan, res_menu_price from res_menu left outer join member on res_menu.res_code=member.res_code
 	where res_menu.res_code=#{res_code}
 	</select>
+	
+	
+		<select id="get" resultType="com.hwyj.domain.ResVO">
+	<![CDATA[
+		select * from testdb.res where res_code > 0
+	]]>
+	</select>
+	<!--  test -->
+	
 	
 	<!-- 이미지저장 테스트 -->
 	<insert id="saveImage" parameterType="java.util.Map">

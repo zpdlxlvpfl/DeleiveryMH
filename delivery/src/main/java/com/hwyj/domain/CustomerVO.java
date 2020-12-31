@@ -16,6 +16,7 @@ public class CustomerVO {
 	private String email;
 	private String address;
 	private String tel;
+	private Date member_date;
 	
 	private boolean enabled;
 	

@@ -44,14 +44,17 @@
 	
 	<!-- 회원가입 -->
 	<insert id="insertCustomer" parameterType="com.hwyj.domain.CustomerVO"> 
-		INSERT into testdb.member(id, pw, m_name, email, address, tel)
+		INSERT into testdb.member(id, pw, m_name, email, address, tel, member_date )
 		VALUES (#{id}	,
 		 		#{pw}	,
 		 	#{m_name}	, 
 			#{email}	,
 			#{address}	,
-			#{tel})
+			#{tel}		,
+			now())
 	</insert>
+	
+	
 <!-- 	회원가입-권한등록 -->
 	<insert id="insertAuth">
 		INSERT into auth(id, auth) VALUES (#{id},#{auth})

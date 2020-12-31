@@ -42,12 +42,20 @@ public class RestaurantController {
 	//식당 기본페이지
 	@GetMapping("res") //페이지 이름 뭘로하지????
 	public void res(String id, Model model) {
-		model.addAttribute("menuList", restaurantService.menuList(id));
+		model.addAttribute("menuList", restaurantService.menuList());
 	}
 	
 	
 	@GetMapping("/reshome") 
 	public void reshome() {
+		
+	}
+	
+	@GetMapping("/get") 
+	public void get(String RESCODE, String MENUCODE,Model model) {
+		model.addAttribute("restaurant",restaurantService.getmenu(MENUCODE));
+		model.addAttribute("restaurant",restaurantService.getres(RESCODE));
+		
 		
 	}
 	

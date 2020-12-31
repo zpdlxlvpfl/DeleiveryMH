@@ -10,7 +10,9 @@ import com.hwyj.domain.ResVO;
 public interface RestaurantMapper {
 	
 	//식당 메뉴 보기
-	public List<ResMenuVO> readMenu(String id);
+	public List<ResMenuVO> menuList();
+	
+	public List<ResVO> resList();
 	
 	//식당 정보 보기
 	

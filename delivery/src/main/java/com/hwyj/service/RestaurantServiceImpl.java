@@ -21,9 +21,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 	
 	//메뉴보기 서비스
 	@Override
-	public List<ResMenuVO> menuList(String id) {
-		log.info("메뉴보기: "+restaurantMapper.readMenu(id));
-		return restaurantMapper.readMenu(id);
+	public List<ResMenuVO> menuList() {
+		log.info("메뉴보기: "+restaurantMapper.menuList());
+		return restaurantMapper.menuList();
 	}
 	
 
@@ -45,6 +45,30 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public void insertmenu(ResMenuVO menuvo) {
 		restaurantMapper.insertmenu(menuvo);
 		log.info("메장등록@@@@@@@@" + menuvo);
+	}
+
+
+
+	@Override
+	public List<ResVO> getresList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public ResMenuVO getmenu(String menucode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public ResVO getres(String rescode) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

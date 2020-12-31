@@ -20,6 +20,10 @@
 	</resultMap>
 	
 	
+	
+
+	
+	
 <!-- 	멤버정보 상세보기 -->
 	<select id="read" resultType="com.hwyj.domain.CustomerVO"> 
 		select member.id, pw, m_name, enabled, auth from member left outer join auth on member.id=auth.id
