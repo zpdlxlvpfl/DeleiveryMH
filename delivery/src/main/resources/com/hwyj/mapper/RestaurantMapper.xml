@@ -25,8 +25,9 @@
 		
 <!--  메뉴보기 (식당이름, 메뉴이름, 메뉴설명, 메뉴가격) -->
 	<select id="menuList" resultType="com.hwyj.domain.ResMenuVO">	
-	select res_menu_name, res_menu_explan, res_menu_price from res_menu left outer join member on res_menu.res_code=member.res_code
-	where res_menu.res_code=#{res_code}
+	<!-- select res_menu_name, res_menu_explan, res_menu_price from res_menu left outer join member on res_menu.res_code=member.res_code
+	where res_menu.res_code=#{res_code} -->
+	select * from testdb.res_menu where res_menu_code > 0 and res_code >0
 	</select>
 	
 	

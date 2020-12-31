@@ -91,25 +91,23 @@ public class RestaurantController {
 		return "redirect:/restaurant/reshome";
 	}
 
+
+	
 	@GetMapping("/menuList")
-
 	@ResponseBody
-	public String menuList() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		ResMenuVO resmenu = new ResMenuVO();
-		map.put("menucode", resmenu.getRes_menu_code());
-		map.put("resex", resmenu.getRes_menu_explan());
-		map.put("Foodname", resmenu.getRes_menu_name());
-		map.put("FoodPrice", resmenu.getRes_menu_price());
-
-		return null;
+	public Object menuList(@RequestParam Map<String,Object> map,ResMenuVO menuvo) {
+		HashMap<String, Object> hashmap = new HashMap<String, Object>();
+		
+		List list = restaurantService.menuList();
+		hashmap.put("data" , list);
+		hashmap.put("msg" , "test");
+		System.out.println("@@@@@" + hashmap);
+		System.out.println("@@@@@" + menuvo);
+		return hashmap;
 	}
 
-	@GetMapping("/rest2List")
-	public void restLi2st(ResVO resvo, Model model) {
-		model.addAttribute("restList", restaurantService.restList());
-		log.info(resvo);
-	}
+
+
 	
 	@GetMapping("/restList")
 	@ResponseBody
