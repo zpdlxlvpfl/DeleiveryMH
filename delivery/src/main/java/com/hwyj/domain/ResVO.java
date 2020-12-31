@@ -12,5 +12,5 @@ public class ResVO {
 	private String RES_INFO;
 	private String DEL_PRICE;
 	//private String RES_MENU_NAME;
-	//private int RES_MENU_PRICE;
+	private String RES_MENU_PRICE;
 }

@@ -11,20 +11,48 @@
 		<tr>
 			<th>RES_CODE</th>
 			<th>RES_NAME</th>
-			<th>RES_ADDRESS</th>
-			<th>RES_TEL</th>
+			<th>ResInfo</th>
+			<th>MenuPrice</th>
+			<th>DelPrice</th>
 		</tr>
 	</thead>
 	<table>
 	<tbody>
 			<tr class="odd gradeX">
 				<td id="${RES_CODE }" ></td>
-				<td><a href="/board/get?res_code=${RES_CODE}"></a>
-				<td id="${RES_ADDRESS}" />
-				<td id="${RES_TEL}" />
+				<td><a href="restaurant/restList/get?res_code=${RES_CODE}"></a>
+				<td id="${Resname}" />
+				<td id="${ResInfo}" />
+				<td id="${MenuPrice}" />
+				<td id="${DelPrice}" />
 			</tr>
 	</tbody>
 	</table>
+	
+	
+	
+		<script>
+					function restList() {
+						$.ajax({
+							type : "get",
+							url : "/restList",
+							data : {
+								Rescode : "${Rescode}",
+								Resname : "${Resname}",
+								ResInfo : "${ResInfo}",
+								MenuPrice : "${MenuPrice}",
+								DelPrice : "${DelPrice}"
+							},
+							error : function(error) {
+								console.log("error");
+							},
+							success : function(data) {
+								console.log("success");
+
+							}
+						});
+					}
+			</script>
 	
 
 </body>

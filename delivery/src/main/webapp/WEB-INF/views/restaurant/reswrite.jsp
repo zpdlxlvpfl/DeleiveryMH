@@ -113,7 +113,6 @@
 					</form>
 				</div>
 			</div>
-		</div>
 	</div>
 	</div>
 
@@ -179,7 +178,7 @@
 										data : json,
 										success : function(string) {
 											alert('매장 등록 성공');
-											document.location.href="";
+											document.location.href="/restaurant/reshome";
 										},
 										error : function(error) {
 											alert("에러" + error);

@@ -2,13 +2,17 @@ package com.hwyj.service;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hwyj.domain.ResMenuVO;
 
@@ -37,6 +41,24 @@ public class RestaurantServiceTest {
 	}
 	
 	
+	@Test
+	public void menuList () {
+		Map<String, Object> map = new HashMap<String , Object>();
+		ResMenuVO resmenu = new ResMenuVO();
+	try {	map.put("menucode", resmenu.getRes_menu_code());
+		map.put("resex", resmenu.getRes_menu_explan());
+		map.put("Foodname" , resmenu.getRes_menu_name());
+		map.put("FoodPrice" , resmenu.getRes_menu_price());
+		
+		for(String i : map.keySet()){ 
+		    System.out.println("[Key]:" + i + " [Value]:" + map.get(i));
+		} 
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 	
-
+	
+	
+	}
 }

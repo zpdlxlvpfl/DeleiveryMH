@@ -66,14 +66,16 @@
 					<div id="owl-testimonials" class="owl-carousel owl-theme">
 					
 					
-					<script type="text/javascript">
-					function test() {
+					<script>
+					function menuList() {
 						$.ajax({
 							type : "GET",
-							url : "get.do",
+							url : "/menuList",
 							data : {
-								kor : "${Foodname}",
-								us : "${FoodPrice}"
+								menucode : "${menucode}",
+								resex : "${resex}",
+								Foodname : "${Foodname}",
+								FoodPrice : "${FoodPrice}"
 							},
 							error : function(error) {
 								console.log("error");
@@ -87,15 +89,13 @@
 					</script>
 						
 						<div class="item">
-							<c:out value="${menuList}" var="menuList" varStatus="status">
 							<div class="testimonials-item">
 								<a href="resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
 									src="../resources/img/1st-item.jpg" alt=""></a>
 								<div class="text-content">
-										<h4><c:out value="${menuList.res_menu_name}"/>${Foodname }</h4>
-									<span><c:out value="${menuList.res_menu_price}"/> ${FoodPrice }&#8361; </span>
+										<h4>${Foodname }</h4>
+									<span> ${FoodPrice }&#8361; </span>
 								</div>
-								</c:out>
 							</div>
 						</div>
 						
@@ -104,7 +104,7 @@
 								<a href="../resources/img/2nd-big-item.jpg" data-lightbox="image-1"><img
 									src="../resources/img/2nd-item.jpg" alt="" id="${res_menu_name}" ></a>
 								<div class="text-content">
-										<h4>${res_menu_name} </h4>
+										<h4>${Foodname} </h4>
 									<span>123 &#8361; </span>
 								</div>
 							</div>

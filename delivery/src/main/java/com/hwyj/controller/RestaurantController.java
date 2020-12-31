@@ -1,5 +1,6 @@
 package com.hwyj.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -51,7 +52,7 @@ public class RestaurantController {
 	}
 	
 	@GetMapping("/menulist") 
-	public void menuwrite() {
+	public void menulist() {
 
 	}
 	
@@ -60,12 +61,10 @@ public class RestaurantController {
 
 	}
 	
-	@GetMapping("/restList") 
-	public void restList() {
+	@GetMapping("/menuwrite") 
+	public void menuwrite() {
 
 	}
-	
-	
 	
 
 	
@@ -76,6 +75,7 @@ public class RestaurantController {
 		System.out.println(resvo);
 		return "redirect:/restaurant/reshome";
 	}
+	
 	 
 	@GetMapping("/insertmenu") //메뉴 등록 
 	public String insertmenu (ResMenuVO menuvo,RedirectAttributes rttr) {
@@ -86,14 +86,28 @@ public class RestaurantController {
 		return "redirect:/restaurant/reshome";
 	}
 	
-	//@RequestMapping(value = "/get.do") //메뉴 보기
+	
+	/*
+	 * @GetMapping("/rescode")
+	 * 
+	 * @ResponseBody public String rescode () { Map<String, String> map = new
+	 * HashMap<String, String>();
+	 * 
+	 * List<'e'> keys = new ArrayList(map.keySet()); Collections.shuffle(keys); for
+	 * (Object o : keys) { // Access keys/values in a random order map.get(o); }
+	 */
+	
+	
 	@GetMapping("/menuList")
 	@ResponseBody
-	public String menuList (String id) {
+	public String menuList() {
 		Map<String, Object> map = new HashMap<String , Object>();
 		ResMenuVO resmenu = new ResMenuVO();
+		map.put("menucode", resmenu.getRes_menu_code());
+		map.put("resex", resmenu.getRes_menu_explan());
 		map.put("Foodname" , resmenu.getRes_menu_name());
 		map.put("FoodPrice" , resmenu.getRes_menu_price());
+		
 		
 		return null;
 		/*
@@ -101,6 +115,24 @@ public class RestaurantController {
 		 * model.addAttribute("menuList", restaurantService.menuList(id));
 		 */
 		
+	}
+	
+	
+	
+	//@RequestMapping(value = "/restList/get.do") //메뉴 보기
+	@GetMapping("/restList")
+	@ResponseBody
+	public String restList() {
+		Map<String, Object> map = new HashMap<String , Object>();
+		ResVO resvo = new ResVO ( );
+		map.put("Rescode", resvo.getRES_CODE());
+		map.put("Resname", resvo.getRES_NAME());
+		map.put("ResInfo" , resvo.getRES_INFO());
+		map.put("DelPrice" , resvo.getDEL_PRICE());
+		map.put("MenuPrice" , resvo.getRES_MENU_PRICE());
+		
+		
+		return null;
 	}
 	
 

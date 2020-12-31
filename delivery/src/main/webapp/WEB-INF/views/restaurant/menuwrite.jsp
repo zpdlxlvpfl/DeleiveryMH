@@ -182,7 +182,7 @@
 										data : json,
 										success : function(string) {
 											alert('등록 성공');
-											document.location.href="";
+											document.location.href="/restaurant/reshome";
 										},
 										error : function(error) {
 											alert("error.");
