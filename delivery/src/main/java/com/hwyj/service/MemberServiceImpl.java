@@ -28,8 +28,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override //회원가입 +권한등록
 	public int insertCustomer(CustomerVO csVO) {		
 		int a = memberMapper.insertCustomer(csVO);
-		memberMapper.insertAuth(csVO); //(권한등록)
+		int b = memberMapper.insertAuth(csVO); //(권한등록)
+		int c = a+b;
 		System.out.println(a);
+		if(c==2) {
+			return 1;
+		}
 		 return 0;
 	}
 	
