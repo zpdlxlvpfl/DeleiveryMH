@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hwyj.domain.ResMenuVO;
+import com.hwyj.domain.ResVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -34,24 +35,30 @@ public class RestaurantServiceTest {
 	
 	@Test
 	public void testMenuList() {
-		List<ResMenuVO> menuList=service.menuList("restaurant89");
+		List<ResMenuVO> menuList=service.menuList();
 		for(ResMenuVO temp : menuList) {
 			log.info("메뉴: "+temp);
 		}		
 	}
 	
+	@Test
+	public void testresList() {
+		List<ResVO> resList=service.restList();
+		for(ResVO temp : resList) {
+			log.info("res: "+temp);
+		}		
+	}
+	
 	
 	@Test
-	public void menuList () {
+	public void menuList () { //code test
 		Map<String, Object> map = new HashMap<String , Object>();
 		ResMenuVO resmenu = new ResMenuVO();
-	try {	map.put("menucode", resmenu.getRes_menu_code());
-		map.put("resex", resmenu.getRes_menu_explan());
-		map.put("Foodname" , resmenu.getRes_menu_name());
-		map.put("FoodPrice" , resmenu.getRes_menu_price());
+	try {	
+		map.put("menucode", resmenu.getRes_menu_code());
 		
 		for(String i : map.keySet()){ 
-		    System.out.println("[Key]:" + i + " [Value]:" + map.get(i));
+			System.out.println("[Key]:" + i + " [Value]:" + map.get(i));
 		} 
 		} catch (Exception e) {
 			System.out.println(e);

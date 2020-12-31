@@ -25,17 +25,14 @@
 		
 <!--  메뉴보기 (식당이름, 메뉴이름, 메뉴설명, 메뉴가격) -->
 	<select id="menuList" resultType="com.hwyj.domain.ResMenuVO">	
-	select m_name, res_menu_name, res_menu_explan, res_menu_price from res_menu left outer join member on res_menu.res_code=member.res_code
+	select res_menu_name, res_menu_explan, res_menu_price from res_menu left outer join member on res_menu.res_code=member.res_code
 	where res_menu.res_code=#{res_code}
 	</select>
 	
 	
-		<select id="get" resultType="com.hwyj.domain.ResVO">
-	<![CDATA[
+		<select id="restList" resultType="com.hwyj.domain.ResVO">
 		select * from testdb.res where res_code > 0
-	]]>
-	</select>
-	<!--  test -->
+		</select>
 	
 	
 	<!-- 이미지저장 테스트 -->

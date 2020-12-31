@@ -1,5 +1,6 @@
 package com.hwyj.service;
 
+import java.util.HashMap;
 import java.util.List ;
 
 import org.springframework.stereotype.Service;
@@ -21,9 +22,27 @@ public class RestaurantServiceImpl implements RestaurantService {
 	
 	//메뉴보기 서비스
 	@Override
-	public List<ResMenuVO> menuList() {
+	public List<ResMenuVO> menuList( ) {
 		log.info("메뉴보기: "+restaurantMapper.menuList());
 		return restaurantMapper.menuList();
+	}
+	
+
+	@Override
+	public List<ResVO> restList( ){
+		log.info("식당보기: "+restaurantMapper.restList());
+		return restaurantMapper.restList();
+	}
+	
+	
+	
+	
+	
+	
+	@Override
+	public HashMap<String, Object> getresCount() {
+		
+		return restaurantMapper.getresCount();
 	}
 	
 
@@ -49,27 +68,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 
 
-	@Override
-	public List<ResVO> getresList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-
-
-	@Override
-	public ResMenuVO getmenu(String menucode) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public ResVO getres(String rescode) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 	

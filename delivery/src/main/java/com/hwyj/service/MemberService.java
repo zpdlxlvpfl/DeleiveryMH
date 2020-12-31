@@ -1,5 +1,9 @@
 package com.hwyj.service;
 
+import java.util.HashMap;
+
+import org.apache.ibatis.session.SqlSession;
+
 import com.hwyj.domain.CustomerVO;
 
 public interface MemberService {
