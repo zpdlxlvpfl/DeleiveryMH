@@ -116,32 +116,33 @@ public class CommonController {
 		// log .info(auth);
 	}
 
-	@Autowired
-	private MemberService memberservice;
+   @Autowired
+   private MemberService memberservice;
 
-	@GetMapping("/insertCustomer") // ㅎㅗㅣㅇㅜㅓㄴㄱㅏㅇㅣㅂ
-	@ResponseBody
-	public String insertCustomer(Locale locale, CustomerVO csVO, Model model) {
-		log.info("test");
-		System.out.println("InsertCustomer start" + csVO.getId());
-		String check = "";
-
-		check = memberservice.selectCustomer(csVO);
-		System.out.println("result " + check);
-		if (check == "0") {   //패스워드 암호화
-			check = "0";
-		} else {
-			check = "0";
-			PasswordEncoder encode = new BCryptPasswordEncoder();
-			csVO.setPw(encode.encode(csVO.getPw()));
-
-			int check2 = memberservice.insertCustomer(csVO);
-			check = check2 + "";
-
-		}
-		return check + "";
-	}
+   @GetMapping("/insertCustomer") // ㅎㅗㅣㅇㅜㅓㄴㄱㅏㅇㅣㅂ
+   @ResponseBody
+   public String insertCustomer(Locale locale, CustomerVO csVO, Model model) {
+	   log.info("test");
+	   System.out.println("InsertCustomer start" + csVO.getId());
+	   String check = "";
+	
+	   check = memberservice.selectCustomer(csVO);
+	   System.out.println("result " + check);
+//	   if (check == "0") {   //패스워드 암호화
+//		   check = "0";
+//	   } else {
+		   check = "0";
+		   PasswordEncoder encode = new BCryptPasswordEncoder();
+		   csVO.setPw(encode.encode(csVO.getPw()));
+	
+		   int check2 = memberservice.insertCustomer(csVO);
+		   check = check2 + "";
+	
+	   //}
+	   return check + "";
+	   }
 }
+
 	
 
 		
