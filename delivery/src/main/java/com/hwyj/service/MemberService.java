@@ -19,6 +19,13 @@ public interface MemberService {
 	public String selectCustomer(CustomerVO csVO);
 	
 	
+	//아이디 찾기
 	public CustomerVO findId(CustomerVO customerVO);
+	
+	//비밀번호 찾기(이메일,이름,아이디로 해당회원 있는지 확인)
+	public boolean findPw(CustomerVO customerVO);
+	
+	//비밀번호 변경
+	public boolean updatePw(CustomerVO customerVO);
 	
 }

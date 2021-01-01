@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,7 +80,7 @@ public class CommonController {
          EmailVO emailVO = new EmailVO();
          emailVO.setReceiveMail(cusVO.getEmail()); //회원정보에 있는 메일로
          emailVO.setContent(cusVO.getId()); //아이디 보내기
-         emailService.sendEmail(emailVO);   
+         emailService.sendEmail(emailVO, "findId");   
          rttr.addFlashAttribute("result","메일을 발송했습니다. 메일을 확인해주세요."); //메일 발송하면 나오는 메세지
          return "redirect:/findId";
       }else {
@@ -88,7 +89,24 @@ public class CommonController {
       }   
    }
    
+   @GetMapping("/findPw2")
+   public void findPw() {
+	   
+   }
    
+//   @PostMapping("findPw2")
+//   public String findPwPost(@RequestBody CustomerVO customerVO) {
+//	   
+//	   boolean a=false;
+//		if(memberservice.findPw(customerVO)) {
+//			System.out.println("멤버있음!!!");
+//			a=true;
+//		}else {
+//			System.out.println("없는회원!!!!!!!!!!");
+//		}
+//	   System.out.println(a);
+//	   return "/findPw2";
+//   }
 
    @GetMapping("/join") // 가입
    public void join() {

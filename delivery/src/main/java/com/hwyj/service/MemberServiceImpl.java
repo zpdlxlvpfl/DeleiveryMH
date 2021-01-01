@@ -50,6 +50,18 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.findId(customerVO);
 	}
 	
+	@Override //비밀번호 찾기(이메일,이름,아이디로 해당회원 있는지 확인)
+	public boolean findPw(CustomerVO customerVO) {
+		
+		return memberMapper.findPw(customerVO)==1;
+	}
+	
+	@Override //비밀번호 변경
+	public boolean updatePw(CustomerVO customerVO) {
+		
+		return memberMapper.updatePw(customerVO)==1;
+	}
+	
 	
 	@Override
 	public String selectCustomer(CustomerVO csVO) {
@@ -57,7 +69,6 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(csVO);
 		return "";
 	}
-	
 
 	
 	

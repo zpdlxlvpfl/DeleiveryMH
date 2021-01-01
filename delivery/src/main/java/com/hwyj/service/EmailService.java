@@ -4,6 +4,8 @@ import com.hwyj.domain.EmailVO;
 
 public interface EmailService {
 	
-	public void sendEmail(EmailVO emailVO);
+	//이메일로 아이디 or 비밀번호 찾기
+	public boolean sendEmail(EmailVO emailVO, String request);
+
 
 }

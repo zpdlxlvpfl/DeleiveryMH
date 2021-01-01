@@ -44,6 +44,23 @@ public class MemberServiceTest {
 		log.info("아이디 찾기: "+customerVO);
 	}
 	
+	@Test //비밀번호 찾기 서비스 테스트(해당회원 있는지 확인)
+	public void testFindPw() {
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setId("user3");
+		customerVO.setEmail("test@gmail.com");
+		customerVO.setM_name("일반사용자3");
+		log.info("회원있으면 true: "+service.findPw(customerVO));
+	}
+	
+	@Test //비밀번호 변경 서비스 테스트
+	public void testUpdatePw() {
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setId("13aa");
+		customerVO.setPw("tjdrhd");
+		log.info("비번변경 성공? "+service.updatePw(customerVO));
+	}
+	
 	 @Test //회원가입 +권한등록 서비스 테스트
 	 public void testInsertCustomer() {
 		 CustomerVO customerVO = new CustomerVO();
