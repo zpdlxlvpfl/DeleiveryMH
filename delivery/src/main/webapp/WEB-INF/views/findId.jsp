@@ -86,15 +86,7 @@
         <div class="parallax-content baner-content" id="home">
             <div class="container">
                 <div class="first-content">
-                  <font color="red">
-                  <c:out value="${result }" />
-                  </font>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
+
                     <p> <span><em>아이디</em> 찾기</span> </p> <br>
       
 
@@ -102,14 +94,14 @@
 
                     <div class="form-group">
                     	<div style="margin: 0 auto; width: 300px;">
-                        <form id="contact" action="/findId" method="post"> 
+                        <form id="contact" method="post"> 
                             <fieldset>
-                                    <input name="email" class="group" type="email" class="form-control" id="ID" placeholder="이메일을 입력해주세요" style=" font-family:inherit; width:300px; height:40px;">
+                                    <input name="email" class="group" type="email" class="form-control" id="email" placeholder="이메일을 입력해주세요" style=" font-family:inherit; width:300px; height:40px;">
                             </fieldset>
 
 
                             <fieldset>
-                                    <input name="m_name" type="text" class="form-control" id="password" placeholder="이름을 입력해주세요" style=" font-family:inherit; width:300px; height:40px;">
+                                    <input name="m_name" type="text" class="form-control" id="m_name" placeholder="이름을 입력해주세요" style=" font-family:inherit; width:300px; height:40px;">
                             </fieldset>
                            
                             
@@ -117,7 +109,7 @@
                                 
                        
                             
-                                    <p> <button type="submit" id="form-submit" class="btn" style=" font-family:inherit; width:300px; height:50px;">아이디 찾기</button></p>
+                                    <p> <button type="button" id="find" class="btn" style=" font-family:inherit; width:300px; height:50px;">아이디 찾기</button></p>
 
                                 
                                 </form>
@@ -152,11 +144,70 @@
         </footer>
 
 
+<!-- modal -->
+<div id="d_Modal" class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">아이디 찾기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>메일 발송</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="../resources/js/vendor/bootstrap.min.js"></script>
         <script src="../resources/js/plugins.js"></script>
         <script src="../resources/js/main.js"></script>
+        
+        
+<script>
+
+$(document).ready(function(){
+	
+	$("#find").on("click",function(e){
+		e.preventDefault();
+		findId();
+	});
+	
+function findId(){
+		
+		var sendData = { email : $("#email").val(), m_name : $("#m_name").val() };
+		
+		$.ajax({
+			type : "post",
+			url : "/email/findId",
+			data : JSON.stringify(sendData),
+			beforeSend : function(xhr)
+            { xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
+ 			dataType : "text json",
+ 			contentType : "application/json; charset=UTF-8",
+//  			모달창으로 메세지 뜸(메일발송, 메일발송오류, 없는 회원)
+			success : function(result){
+				$(".modal-body").html(result);
+				$("#d_Modal").modal("show");
+			},
+			error : function(request, error){
+				alert(error);
+			}
+		})
+			
+	}	
+	
+});
+
+</script>
+
     </body>
     </html>

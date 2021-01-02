@@ -86,15 +86,7 @@
         <div class="parallax-content baner-content" id="home">
             <div class="container">
                 <div class="first-content">
-                  <font color="red">
-                  <c:out value="${result }" />
-                  </font>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
+
                     <p> <span><em>비밀번호</em> 찾기</span> </p> <br>
       
 
@@ -157,6 +149,27 @@
         </footer>
 
 
+<!-- modal -->
+<div id="d_Modal" class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">비밀번호 찾기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>메일 발송</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
@@ -176,39 +189,29 @@ $(document).ready(function(){
 	
 function findPw(){
 		
-		var sendData = {
-			email : $("#email").val(),
-			m_name : $("#m_name").val(),
-			id : $("#id").val()
-		};
+		var sendData = { email : $("#email").val(), m_name : $("#m_name").val(), id : $("#id").val() };
 		
 		$.ajax({
 			type : "post",
-			url : "/email/findPw2",
+			url : "/email/findPw",
 			data : JSON.stringify(sendData),
 			beforeSend : function(xhr)
             { xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
- 			dataType : "json",
+ 			dataType : "text json",
  			contentType : "application/json; charset=UTF-8",
-			success : function(result, status, xhr){
-				console.log("야야야야ㅑㅇ")
+//  			모달창으로 메세지 뜸(메일발송, 메일발송오류, 없는 회원)
+			success : function(result){
+				$(".modal-body").html(result);
+				$("#d_Modal").modal("show");
 			},
-			error : function(xhr, status, er){
-				console.log("ㅠㅠㅠㅠㅠㅠㅠ")
+			error : function(request, error){
+				alert(error);
 			}
 		})
 			
-	}
-	
-	
-	
+	}	
 	
 });
-	
-	
-
-	
-	
 
 </script>
     </body>
