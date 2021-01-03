@@ -33,13 +33,6 @@ public class RestaurantServiceTest {
 		assertNotNull(service);
 	}
 	
-	@Test
-	public void testMenuList() {
-		List<ResMenuVO> menuList=service.menuList();
-		for(ResMenuVO temp : menuList) {
-			log.info("메뉴: "+temp);
-		}		
-	}
 	
 	@Test
 	public void testresList() {

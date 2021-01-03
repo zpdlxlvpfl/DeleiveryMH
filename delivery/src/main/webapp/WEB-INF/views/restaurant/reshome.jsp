@@ -29,6 +29,8 @@
 	rel="stylesheet">
 
 <script src="../resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+
 </head>
 
 
@@ -38,8 +40,8 @@
 		<ul class="nav flex-column">
 			<li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="login.html"><span>LOGIN</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="join.html"><span>JOIN</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
 		</ul>
 	</div>
@@ -55,7 +57,7 @@
 		<h1><font color="white">Restorent Home TEST</font></h1> 
 		<span><font color="orange">Restorent Home TEST </font></span>
 		
-		
+				
 	
 		<div class="container">
 			
@@ -64,50 +66,16 @@
 				<div class="col-md-12">
 				
 					<div id="owl-testimonials" class="owl-carousel owl-theme">
-					
-				<script src="https://code.jquery.com/jquery-3.2.1.min.js">
-	
-				//$('.RES_CODE').val(RES_CODE);
-			//	$('.res_menu_code').val(res_menu_code);	
-				$('.res_menu_name').val(res_menu_name);
-				$('.res_menu_explan').val(res_menu_explan);	
-				$('.RES_MENU_PRICE').val(RES_MENU_PRICE);
-				
-			$.ajax({
-				type : "GET",
-				url : "/reshome",
-				dataType: "json",
-				contentType: "application/json; charset=utf-8;"
-				data : String
-				{//	RES_CODE : "${RES_CODE}",
-					res_menu_code : "${res_menu_code}",
-					res_menu_name : "${res_menu_name}",
-					res_menu_explan : "${res_menu_explan}",
-					RES_MENU_PRICE : "${RES_MENU_PRICE}"
-				},
-				error : function(error) {
-					console.log("error " + data);
-				},
-				success : function(result) {
-					console.log("success"+JSON.stringify(result.data));
-		            console.log("msg"+result.msg );
-				}
-			 });
-
-				
-				
-		
-	</script>
 						
 						<div class="item">
 							<div class="testimonials-item">
-								<a href="resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
+								<a href="../resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
 									src="../resources/img/1st-item.jpg" alt=""></a>
 									
 								<div class="text-content">
 										<c:forEach items="${menuList}" var="menuList">
-										<h4><c:out value="${res_menu_name}" /></h4>
-									<span><c:out value="${RES_MENU_PRICE}" />&#8361; </span>
+										<h4><c:out value="${res_menu_name}" />${res_menu_name}</h4>
+									<span><c:out value="${RES_MENU_PRICE}" />${RES_MENU_PRICE}&#8361; </span>
 											</c:forEach>
 								</div>
 							
@@ -271,7 +239,48 @@
 <script src="../resources/js/plugins.js"></script>
 <script src="../resources/js/main.js"></script>
 
+<!-- <script>
+	$(document).ready(function() {
+			$.ajax({
+				type : "GET",
+				url : "/restaurant/menuList",
+				dataType: "json",
+				contentType: "application/json; charset=utf-8;"
+				data :  JSON.stringify(jsonData)
+				{	res_code : "${res_code}",
+					res_menu_code : "${res_menu_code}",
+					res_menu_name : "${res_menu_name}",
+					res_menu_explan : "${res_menu_explan}",
+					res_menu_price : "${res_menu_price}"
+				},
+				error : function(error) {
+					console.log("error " + data);
+				},
+				success : function(result) {
+					console.log("success"+JSON.stringify(result.data));
+		            console.log("msg"+result.msg );
+		            var html = "";
+					$j("#item").empty(); //div
+					html += "<table id='menuList';>";
+					
+					var menuList = returnFix.btnsearchFix;
+					$j.each(item , function(idx, val) {
+						
+						html += "<tr> <td>"+val.RES_CODE+"</td>"
+						html += "<td>"+val.res_menu_code+" &#8361;</td></tr>"
+						html += "<tr> <td>"+val.res_menu_name+"</td>"
+						html += "<td>"+val.res_menu_explan+" &#8361;</td></tr>"
+						html += "<tr> <td>"+val.RES_MENU_PRICE+"</td>"
+					});
+					html += "</table>";
+				}
+			 });
+	 };
 
+				
+				
+		
+	</script> -->
 
 
 </body>
