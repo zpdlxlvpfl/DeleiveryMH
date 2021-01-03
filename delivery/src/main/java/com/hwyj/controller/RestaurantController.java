@@ -1,5 +1,7 @@
 package com.hwyj.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +9,9 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Generated;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.protobuf.Service;
 import com.hwyj.domain.CustomerVO;
 import com.hwyj.domain.ResMenuVO;
 import com.hwyj.domain.ResVO;
@@ -49,11 +53,7 @@ public class RestaurantController {
 		model.addAttribute("menuList", restaurantService.menuList());
 	}
 
-	@GetMapping("/reshome")
-	public void reshome() {
-
-	}
-
+	
 	@GetMapping("/get")
 	public void get() {
 
@@ -121,5 +121,18 @@ public class RestaurantController {
 		System.out.println("@@@@@" + resvo);
 		return hashmap;
 	}
+	
+	
+	@RequestMapping(value = "/reshome", method = RequestMethod.GET)
+	public String reshome(HttpServletRequest request,HttpSession session,ResMenuVO menuvo) {
+		String str = "";
+		str = restaurantService.menuList(menuvo.getRes_menu_price());
+		menuvo.setRes_menu_name(request.getParameter("res_menu_name"));
+		System.out.println("@@@" + menuvo);
+		//menuvo.setRes_menu_price(request.getParameter(menuvo.getRes_menu_price()));
+		
+		return menuvo;
+	}
+
 
 }

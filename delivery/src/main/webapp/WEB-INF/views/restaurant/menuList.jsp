@@ -24,7 +24,7 @@
 		<table>
 
 			<tbody>
-				<c:forEach items="${menuList}" var="restList">
+				<c:forEach items="${menuList}" var="menuList">
 					<tr class="odd gradeX">
 						<td><c:out value="${RES_CODE }" /></td>
 						<c:out value="${res_menu_code }" />

@@ -65,37 +65,52 @@
 				
 					<div id="owl-testimonials" class="owl-carousel owl-theme">
 					
-					
-					<script>
-					function menuList() {
-						$.ajax({
-							type : "GET",
-							url : "/menuList",
-							data : {
-								menucode : "${menucode}",
-								resex : "${resex}",
-								Foodname : "${Foodname}",
-								FoodPrice : "${FoodPrice}"
-							},
-							error : function(error) {
-								console.log("error");
-							},
-							success : function(data) {
-								console.log("success");
+				<script src="https://code.jquery.com/jquery-3.2.1.min.js">
+	
+				//$('.RES_CODE').val(RES_CODE);
+			//	$('.res_menu_code').val(res_menu_code);	
+				$('.res_menu_name').val(res_menu_name);
+				$('.res_menu_explan').val(res_menu_explan);	
+				$('.RES_MENU_PRICE').val(RES_MENU_PRICE);
+				
+			$.ajax({
+				type : "GET",
+				url : "/reshome",
+				dataType: "json",
+				contentType: "application/json; charset=utf-8;"
+				data : String
+				{//	RES_CODE : "${RES_CODE}",
+					res_menu_code : "${res_menu_code}",
+					res_menu_name : "${res_menu_name}",
+					res_menu_explan : "${res_menu_explan}",
+					RES_MENU_PRICE : "${RES_MENU_PRICE}"
+				},
+				error : function(error) {
+					console.log("error " + data);
+				},
+				success : function(result) {
+					console.log("success"+JSON.stringify(result.data));
+		            console.log("msg"+result.msg );
+				}
+			 });
 
-							}
-						});
-					}
-					</script>
+				
+				
+		
+	</script>
 						
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
 									src="../resources/img/1st-item.jpg" alt=""></a>
+									
 								<div class="text-content">
-										<h4>${Foodname }</h4>
-									<span> ${FoodPrice }&#8361; </span>
+										<c:forEach items="${menuList}" var="menuList">
+										<h4><c:out value="${res_menu_name}" /></h4>
+									<span><c:out value="${RES_MENU_PRICE}" />&#8361; </span>
+											</c:forEach>
 								</div>
+							
 							</div>
 						</div>
 						
