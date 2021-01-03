@@ -12,8 +12,12 @@ public interface MemberMapper {
 		
 		//아이디 찾기 (이메일과 이름으로)
 		public CustomerVO findId(CustomerVO customerVO);
+		
+		//비밀번호 찾기(이메일,이름,아이디로 해당회원 있는지 찾고 / 임시비밀번호 발급)
+		public int findPw(CustomerVO customerVO);
 			
-					
+		//비밀번호 변경
+		public int updatePw(CustomerVO customerVO);
 		
 	
 		//회원가입

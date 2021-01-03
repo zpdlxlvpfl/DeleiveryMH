@@ -9,6 +9,7 @@ public class EmailVO {
     private String senderMail; //발신메일
     private String receiveMail; //수신메일
     private String subject; //제목
-    private String content; //내용          
+    private String content; //내용     
+    private String id;
 
 }

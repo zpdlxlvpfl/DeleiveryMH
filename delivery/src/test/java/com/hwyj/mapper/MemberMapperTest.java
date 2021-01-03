@@ -43,6 +43,23 @@ public class MemberMapperTest {
 		log.info("아이디찾기: "+customerVO);
 	}
 	
+	@Test //비밀번호 찾기 테스트
+	public void testFindPw() {
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setId("user3");
+		customerVO.setEmail("test@gmail.com");
+		customerVO.setM_name("일반사용자3");
+		log.info("해당회원 있으면 1: "+mapper.findPw(customerVO));
+	}
+	
+	@Test //비밀번호 변경 테스트
+	public void testUpdatePw() {
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setId("13aa");
+		customerVO.setPw("qlqjsqusrud");
+		mapper.updatePw(customerVO);
+	}
+	
 	@Test //회원가입-권한등록 테스트
 	public void testInsertAuth() {
 		CustomerVO customerVO = new CustomerVO();

@@ -1,5 +1,6 @@
 package com.hwyj.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -28,9 +29,19 @@ public class CartServiceImpl implements CartService {
 	public int ShoppingCart(CartVOList cartVOList) {
 			
 		log.info("장바구니 한번에 여러개 담기----------");	
-		List<CartVO> cartList=cartVOList.getCartList();
+		List<CartVO> cartList=cartVOList.getList();
 		
 		return cartMapper.insertCart(cartList);
+	}
+	
+	
+	//장바구니 여러개 담기 테스트중인거2222
+	@Override
+	public int CartTest2(List<CartVO> list) {
+		//List<CartVO> cartVOList = cartVO.getList();
+		
+		cartMapper.insertCart(list);
+		return 0;
 	}
 
 }

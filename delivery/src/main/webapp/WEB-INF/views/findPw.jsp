@@ -87,7 +87,7 @@
             <div class="container">
                 <div class="first-content">
 
-                    <p> <span><em>아이디</em> 찾기</span> </p> <br>
+                    <p> <span><em>비밀번호</em> 찾기</span> </p> <br>
       
 
 
@@ -103,13 +103,18 @@
                             <fieldset>
                                     <input name="m_name" type="text" class="form-control" id="m_name" placeholder="이름을 입력해주세요" style=" font-family:inherit; width:300px; height:40px;">
                             </fieldset>
+                            
+                            <fieldset>
+                                    <input name="id" type="text" class="form-control" id="id" placeholder="아이디를 입력해주세요" style=" font-family:inherit; width:300px; height:40px;">
+                                    
+                            </fieldset>
                            
                             
-                                <input type="hidden" name="${_csrf.parameterName }"value="${_csrf.token }" />
                                 
+                                <input type="hidden" name="${_csrf.parameterName }"value="${_csrf.token }" id="csrf" />
                        
                             
-                                    <p> <button type="button" id="find" class="btn" style=" font-family:inherit; width:300px; height:50px;">아이디 찾기</button></p>
+                                    <p> <button type="button" id="find" class="btn" style=" font-family:inherit; width:300px; height:50px;">비밀번호 찾기</button></p>
 
                                 
                                 </form>
@@ -149,7 +154,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">아이디 찾기</h5>
+        <h5 class="modal-title">비밀번호 찾기</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -165,6 +170,7 @@
 </div>
 
 
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="../resources/js/vendor/bootstrap.min.js"></script>
@@ -178,16 +184,16 @@ $(document).ready(function(){
 	
 	$("#find").on("click",function(e){
 		e.preventDefault();
-		findId();
+		findPw();
 	});
 	
-function findId(){
+function findPw(){
 		
-		var sendData = { email : $("#email").val(), m_name : $("#m_name").val() };
+		var sendData = { email : $("#email").val(), m_name : $("#m_name").val(), id : $("#id").val() };
 		
 		$.ajax({
 			type : "post",
-			url : "/email/findId",
+			url : "/email/findPw",
 			data : JSON.stringify(sendData),
 			beforeSend : function(xhr)
             { xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
@@ -208,6 +214,5 @@ function findId(){
 });
 
 </script>
-
     </body>
     </html>

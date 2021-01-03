@@ -38,6 +38,14 @@
 	<select id="findId" resultType="com.hwyj.domain.CustomerVO"> 
 		select id, email from member where email=#{email} and m_name=#{m_name}
 	</select>
+<!-- 	비밀번호 찾기(이메일,이름,아이디로) -->
+	<select id="findPw" resultType="_int"> 
+		select count(*) from member where email=#{email} and m_name=#{m_name} and id=#{id}
+	</select>
+<!-- 	비밀번호 변경 -->
+	<update id="updatePw">
+  	update member set pw=#{pw} where id=#{id}
+	</update>
 	
 	
 	
