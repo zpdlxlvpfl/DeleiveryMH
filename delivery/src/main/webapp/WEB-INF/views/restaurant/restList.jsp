@@ -9,36 +9,11 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <body>
-	<thead>
-		<tr>
-			<th>RES_CODE</th>
-			<th>RES_NAME</th>
-			<th>RES_INFO</th>
-			<th>RES_MENU_PRICE</th>
-			<th>DEL_PRICE</th>
-		</tr>
-	</thead>
-	<table>
-		<tbody>
-		<c:forEach items="${restList}" var="restList">
-			<tr class="odd gradeX">
-				<td id="${RES_CODE }"></td>
-				<td><a href="restaurant/restList/get?res_code=${RES_CODE}"></a>
-				<td id="${RES_NAME}" />
-				<td id="${RES_INFO}" />
-				<td id="${RES_MENU_PRICE}" />
-				<td id="${DEL_PRICE}" />
-			</tr>
-			</c:forEach>
-		</tbody>
-		
-	</table>
- <button id="btn4">restController</button>
-
-    <div id="result"></div>
+	
 
 
 	<script>
+	$(document).ready(
 		function restList() {
 			$.ajax({
 				type : "get",
@@ -63,6 +38,10 @@
 			});
 		}
 	</script>
+	
+	
+	
+	
 
 
 </body>

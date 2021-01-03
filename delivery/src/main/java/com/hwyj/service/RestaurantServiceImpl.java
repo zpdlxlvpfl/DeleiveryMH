@@ -1,6 +1,6 @@
 package com.hwyj.service;
 
-import java.util.HashMap;
+import java.util.HashMap;  
 import java.util.List ;
 
 import org.springframework.stereotype.Service;
@@ -22,17 +22,26 @@ public class RestaurantServiceImpl implements RestaurantService {
 	
 	//메뉴보기 서비스
 	@Override
-	public List<ResMenuVO> menuList( ) {
-		log.info("메뉴보기: "+restaurantMapper.menuList());
+	public List<String> menuList( )throws Exception {
 		return restaurantMapper.menuList();
 	}
 	
+	public ResMenuVO get(String res_code) {
+		return restaurantMapper.read(res_code);
+	}
 
 	@Override
 	public List<ResVO> restList( ){
 		log.info("식당보기: "+restaurantMapper.restList());
 		return restaurantMapper.restList();
 	}
+	
+	@Override
+	public List<ResMenuVO> getList() {
+		log.info("�۸�� ��������");
+		return restaurantMapper.getList();
+	}
+	
 	
 	
 	

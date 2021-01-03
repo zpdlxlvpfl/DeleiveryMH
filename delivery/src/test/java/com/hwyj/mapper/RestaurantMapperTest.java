@@ -21,13 +21,6 @@ public class RestaurantMapperTest {
 	@Autowired
 	private RestaurantMapper mapper;
 	
-	@Test //메뉴보기 테스트
-	public void testReadMenu(String menucode) {
-		List<ResMenuVO> menu= mapper.menuList();
-		for(ResMenuVO temp:menu) {
-			log.info("메뉴보기: "+temp);
-		}		
-	}
 
 	
 }

@@ -1,6 +1,6 @@
 package com.hwyj.mapper;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -12,7 +12,13 @@ import com.hwyj.domain.ResVO;
 public interface RestaurantMapper {
 	
 	//식당 메뉴 보기
-	public List<ResMenuVO> menuList( );
+	//public List<ResMenuVO> menuList( );
+	
+	public List<ResMenuVO> getList();
+	
+	public List<String> menuList() throws Exception;
+	
+	public ResMenuVO read(String res_code);
 	
 //	public ResMenuVO restget(String menucode);
 	
