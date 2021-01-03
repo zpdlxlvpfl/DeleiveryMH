@@ -11,6 +11,10 @@ public interface MemberService {
 	//내정보 수정
 	public boolean modifyMyInfo(CustomerVO customerVO);
 	
+	//내정보 보기
+	public CustomerVO getMyInfo(String id);
+	
+	
 	// 중복검사 ,회원가입 (+권한등록)
 	public int insertCustomer(CustomerVO csVO);
 	

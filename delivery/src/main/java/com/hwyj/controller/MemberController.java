@@ -1,11 +1,11 @@
 package com.hwyj.controller;
 
-import java.util.Locale;
-
 import javax.inject.Inject;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.CustomerVO;
+import com.hwyj.security.CustomUserDetailsService;
 import com.hwyj.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -38,25 +39,27 @@ public class MemberController {
 	
 	//내정보보기
 	@GetMapping("myInfo") 
-	public void myInfo() {
-		
+	public void myInfo(Authentication authentication, Model model) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal(); //현재 로그인한 유저 정보
+		model.addAttribute("myInfo", memberService.getMyInfo(userDetails.getUsername()));				
 	}
 	
 	//내정보 수정페이지
 	@GetMapping("modifyMyInfo")
-	public void modifyMyInfo() {
-		
+	public void modifyMyInfo(Authentication authentication, Model model) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		model.addAttribute("myInfo", memberService.getMyInfo(userDetails.getUsername()));
 	}
-	
+		
 	//내정보 수정하면 다시 내정보보기 페이지로
 	@PostMapping("modifyMyInfo")
 	public String modifyMyInfo(CustomerVO customerVO, RedirectAttributes rttr) {
+		
 		if(memberService.modifyMyInfo(customerVO)) {
 			rttr.addFlashAttribute("result", "m_success");
 		}	
 		return "redirect:/member/myInfo";
 	}
-	
 	
 
 }

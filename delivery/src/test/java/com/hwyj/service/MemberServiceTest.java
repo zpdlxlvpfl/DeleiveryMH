@@ -27,6 +27,11 @@ public class MemberServiceTest {
 		assertNotNull(service);
 	}
 	
+	@Test //내정보 보기 서비스 테스트
+	public void testGetMyInfo() {
+		log.info("내정보: "+service.getMyInfo("user4"));
+	}
+	
 	@Test //내정보 수정하기 서비스 테스트
 	public void testModifyMyInfo() {
 		CustomerVO customerVO = new CustomerVO();

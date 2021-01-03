@@ -53,7 +53,7 @@
 </style>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>LOGIN</title>
+        <title>비밀번호 찾기</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -160,7 +160,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>메일 발송</p>
+        <p>메일을 발송 중입니다. 창을 닫지 마시고 조금만 기다려주세요.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
@@ -185,6 +185,8 @@ $(document).ready(function(){
 	$("#find").on("click",function(e){
 		e.preventDefault();
 		findPw();
+		$(".modal-body").html("메일을 발송 중입니다. 창을 닫지 마시고 조금만 기다려주세요.");
+		$("#d_Modal").modal("show");
 	});
 	
 function findPw(){
@@ -202,7 +204,6 @@ function findPw(){
 //  			모달창으로 메세지 뜸(메일발송, 메일발송오류, 없는 회원)
 			success : function(result){
 				$(".modal-body").html(result);
-				$("#d_Modal").modal("show");
 			},
 			error : function(request, error){
 				alert(error);

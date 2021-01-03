@@ -10,24 +10,24 @@
 <form name="updatemyInfo">
 	<div class="form-group">
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">아이디</label>
-	    <input name="id" class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.id }"/>' readonly>
+	    <label class="control-label" for="readOnlyInput">#아이디</label>
+	    <input name="id" class="form-control" id="readOnlyInput" type="text" value='<sec:authentication property="principal.CustomerVO.id"/>' readonly>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">이름</label>
-	    <input name="m_name" maxlength="20" class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.m_name }"/>'>
+	    <label class="control-label" for="readOnlyInput">#이름</label>
+	    <input name="m_name" maxlength="20" class="form-control" id="readOnlyInput" type="text" value='<sec:authentication property="principal.CustomerVO.m_name"/>'>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">이메일</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.email }"/>' readonly>
+	    <label class="control-label" for="readOnlyInput">#Email address</label>
+	    <input class="form-control" id="readOnlyInput" type="text" value="#">
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">주소</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.address }"/>' readonly>
+	    <label class="control-label" for="readOnlyInput">#주소</label>
+	    <input class="form-control" id="readOnlyInput" type="text" value="#">
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">전화번호</label>
-	    <input name="tel" class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.tel }"/>'>
+	    <label class="control-label" for="readOnlyInput">#전화번호</label>
+	    <input class="form-control" id="readOnlyInput" type="text" value="#">
 	  </fieldset>
 	  <p></p>
 	  <button type="button" id="m_Info" class="btn btn-warning">수정하기</button>
@@ -47,10 +47,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>수정사항을 저장하시겠습니까?</p>
+        <p>#변경?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" onclick="clickModi(updatemyInfo)">Save Changes</button>
+        <button type="button" class="btn btn-secondary" onclick="clickDel(updatemyInfo)">Save Changes</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -59,7 +59,7 @@
 
 <script>
 
-function clickModi(formName) {
+function clickDel(formName) {
 	formName.action = "/member/modifyMyInfo";
 	formName.method = "post";
 	formName.submit();

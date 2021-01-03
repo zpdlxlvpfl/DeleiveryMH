@@ -16,7 +16,8 @@ public class CartVO {
 	private int res_menu_price;
 	private int sum; //메뉴당 총금액
 	
-	private List<CartVO> list;
+	
+	//private List<CartVO> list;
 	
 
 }
