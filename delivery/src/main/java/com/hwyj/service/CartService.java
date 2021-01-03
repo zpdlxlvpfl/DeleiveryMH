@@ -18,11 +18,11 @@ public interface CartService {
 	//장바구니 보기
 	public List<CartVO> cartList(String id);
 	
-	//장바구니 수량 수정 (메뉴코드로 찾아서)
-	public boolean modifyAmount(String res_menu_code);
+	//장바구니 수량 수정 (아이디랑 메뉴코드로 찾아서)
+	public boolean modifyAmount(CartVO cartVO);
 	
 	//장바구니 메뉴 삭제
-	public boolean removeMenu(String res_menu_code);
+	public boolean removeMenu(int cart_no);
 	
 	//장바구니 전체 삭제
 	public boolean removeCart(String id);

@@ -38,6 +38,11 @@ public class CartMapperTest {
 		}
 	}
 	
+	@Test //장바구니 메뉴 삭제 테스트
+	public void testDeleteMenu() {
+		log.info("메뉴삭제 성공이면 1: "+mapper.deleteMenu(3));
+	}
+	
 //	@Test //장바구니 한번에 여러개 넣기 테스트
 //	public void test() {
 //		List<CartVO> list = new ArrayList<CartVO>();		

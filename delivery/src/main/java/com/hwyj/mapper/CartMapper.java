@@ -18,14 +18,14 @@ public interface CartMapper {
 	//장바구니 목록보기
 	public List<CartVO> cartList(String id);
 	
-	//장바구니 수량 수정 (메뉴코드로 찾아서)
-	public int updateAmount(String res_menu_code);
+	//장바구니 수량 수정 (아이디랑 메뉴코드로 찾아서)
+	public int updateAmount(CartVO cartVO);
 	
 	//장바구니 메뉴 삭제
-	public int removeMenu(String res_menu_code);
+	public int deleteMenu(int cart_no);
 	
 	//장바구니 전체 삭제
-	public int removeCart(String id);
+	public int deleteCart(String id);
 	
 
 }

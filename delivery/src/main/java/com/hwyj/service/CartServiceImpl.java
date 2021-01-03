@@ -19,28 +19,28 @@ public class CartServiceImpl implements CartService {
 	
 	private CartMapper cartMapper;
 
-	@Override //장바구니 담기
+	@Override //장바구니 담기 서비스
 	public boolean ShoppingCart(CartVO cartVO) {
 		log.info("장바구니담기----------");
 		return cartMapper.insertCart(cartVO)==1;
 	}
 
-	@Override //장바구니 보기
+	@Override //장바구니 보기 서비스
 	public List<CartVO> cartList(String id) {
 		log.info("장바구니 보기: "+cartMapper.cartList(id));
 		return cartMapper.cartList(id);
 	}
 
 	@Override
-	public boolean modifyAmount(String res_menu_code) {
+	public boolean modifyAmount(CartVO cartVO) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
-	public boolean removeMenu(String res_menu_code) {
-		// TODO Auto-generated method stub
-		return false;
+	@Override //장바구니 메뉴 삭제 서비스
+	public boolean removeMenu(int cart_no) {
+		
+		return cartMapper.deleteMenu(cart_no)==1;
 	}
 
 	@Override

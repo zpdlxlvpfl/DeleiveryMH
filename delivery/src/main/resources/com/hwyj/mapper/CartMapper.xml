@@ -22,10 +22,15 @@
 
 <!--  장바구니 목록보기 -->
 	<select id="cartList" resultType="com.hwyj.domain.CartVO"> 
-		select res_menu_name, res_menu_price, amount, res_menu_price*amount as sum
+		select cart_no, res_menu_name, res_menu_price, amount, res_menu_price*amount as sum
 		from cart c left outer join res_menu r on c.res_menu_code=r.res_menu_code
 		where id=#{id} order by cart_no desc
 	</select>
+	
+<!-- 	장바구니 메뉴 삭제 -->
+	<delete id="deleteMenu">
+		delete from cart where cart_no=#{cart_no}
+	</delete>
 
 
 </mapper>

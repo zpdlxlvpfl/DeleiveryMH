@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/admin/*")
 @AllArgsConstructor
-//@PreAuthorize("hasAnyRole('ROLE_ADMIN')") //관리자만 들어올 수 있는 페이지 (주석처리 나중에 없애기)
+@PreAuthorize("hasAnyRole('ROLE_ADMIN')") //관리자만 들어올 수 있는 페이지
 public class AdminController {
 	
 	private AdminService adminService;

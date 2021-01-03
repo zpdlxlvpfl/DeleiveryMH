@@ -32,6 +32,10 @@ public class CartController {
 	
 	private CartService cartService;
 	
+//	@GetMapping("myCartAAA")
+//	public void a() {
+//		
+//	}
 	
 	@GetMapping("myCart") //장바구니 페이지
 	public void myCart(Authentication authentication, Model model) {
@@ -58,6 +62,14 @@ public class CartController {
 		}else {
 			return "redirect:/login";
 		}	
+	}
+	
+	@PostMapping("RemoveMenu")
+	public String removeMenu(int cart_no) {
+
+		cartService.removeMenu(cart_no);
+		
+		return "/cart/myCart";
 	}
 
 	

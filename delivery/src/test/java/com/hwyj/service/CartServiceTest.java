@@ -47,6 +47,12 @@ public class CartServiceTest {
 		}
 	}
 	
+	@Test //장바구니 메뉴 삭제 서비스 테스트
+	public void testRemoveMenu() {
+	
+		log.info("장바구니 메뉴 성공? "+service.removeMenu(3));
+	}
+	
 //	@Test //장바구니-메뉴 여러개 한번에 담는 서비스 테스트
 //	public void testShoppingCart() {
 ////		List<CartVO> cartList = new ArrayList<CartVO>();
