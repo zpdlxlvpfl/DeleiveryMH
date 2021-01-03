@@ -7,6 +7,9 @@ public interface MemberMapper {
 		//로그인
 		public CustomerVO login(String id);
 		
+		//내정보 보기
+		public CustomerVO read(String id);
+		
 		//내정보 수정
 		public int update(CustomerVO customerVO);
 		

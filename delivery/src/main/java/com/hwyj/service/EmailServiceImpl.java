@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.hwyj.domain.CustomerVO;
 import com.hwyj.domain.EmailVO;
+import com.hwyj.mapper.MemberMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -21,8 +22,7 @@ public class EmailServiceImpl implements EmailService {
 	
 	
 	private JavaMailSender jmailSender;
-	
-	private MemberService memberService;
+	private MemberMapper memberMapper;
 
 	@Override
 	public boolean sendEmail(EmailVO emailVO, String request) {	
@@ -45,9 +45,9 @@ public class EmailServiceImpl implements EmailService {
 				PasswordEncoder pwencoder=new BCryptPasswordEncoder();
 				CustomerVO customerVO = new CustomerVO();
 				customerVO.setId(emailVO.getId());
-				customerVO.setPw(pwencoder.encode(temporarilyPw)); 
+				customerVO.setPw(pwencoder.encode(temporarilyPw)); //임시 비밀번호 암호화
 				
-				if(memberService.updatePw(customerVO)) { //임시 비밀번호로 변경이 성공하면
+				if(memberMapper.updatePw(customerVO)==1) { //임시 비밀번호로 변경이 성공하면
 					msgHelper.setSubject("고객님의 임시비밀번호를 발급했습니다."); //메일 제목
 					msgHelper.setText("고객님의 임시비밀번호는 \n"+temporarilyPw+
 							" 입니다. \n임시비밀번호로 로그인하시고 비밀번호를 변경하여 사용해주세요."); //메일 내용(임시비밀번호)

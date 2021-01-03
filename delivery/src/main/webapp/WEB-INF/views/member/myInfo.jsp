@@ -10,28 +10,24 @@
 <form action="modifyMyInfo" method="get">
 	<div class="form-group">
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#아이디</label>
-	    <input name="id" class="form-control" id="readOnlyInput" type="text" value='<sec:authentication property="principal.CustomerVO.id"/>' readonly>
+	    <label class="control-label" for="readOnlyInput">아이디</label>
+	    <input name="id" class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.id }"/>' readonly>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#이름</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value='<sec:authentication property="principal.CustomerVO.m_name"/>' readonly>
+	    <label class="control-label" for="readOnlyInput">이름</label>
+	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.m_name }"/>' readonly>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#Email address</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value="#" readonly>
+	    <label class="control-label" for="readOnlyInput">이메일</label>
+	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.email }"/>' readonly>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#주소</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value="#" readonly>
+	    <label class="control-label" for="readOnlyInput">주소</label>
+	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.address }"/>' readonly>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#전화번호</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value="#" readonly>
-	  </fieldset>
-	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#가입날짜</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value="#" readonly>
+	    <label class="control-label" for="readOnlyInput">전화번호</label>
+	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.tel }"/>' readonly>
 	  </fieldset>
 	  <p></p>
 	  <button type="submit" class="btn btn-warning">정보수정</button>

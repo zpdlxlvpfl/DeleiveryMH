@@ -27,26 +27,34 @@ public class CartMapperTest {
 		cartVO.setId("user20");
 		cartVO.setRes_menu_code("res_02B01");
 		cartVO.setAmount(5);
-		log.info("장바구니 성공이면 1: "+mapper.insertCart1(cartVO));
+		log.info("장바구니 성공이면 1: "+mapper.insertCart(cartVO));
 	}
 	
-	@Test //장바구니 한번에 여러개 넣기 테스트
-	public void test() {
-		List<CartVO> list = new ArrayList<CartVO>();		
-		CartVO cartVO1 = new CartVO();
-		CartVO cartVO2 = new CartVO();
-		
-		cartVO1.setId("user11");
-		cartVO1.setRes_menu_code("res_01A01"); //짜장면 7천원짜리 2개
-		cartVO1.setAmount(2);
-		list.add(cartVO1);
-		
-		cartVO2.setId("user11");
-		cartVO2.setRes_menu_code("res_01A02"); //짬뽕 8천원짜리 1개
-		cartVO2.setAmount(1);
-		list.add(cartVO2);		
-		
-		log.info("장바구니 한번에 몇개 넣었을까 : "+mapper.insertCart(list));
+	@Test //장바구니 목록보기 테스트
+	public void testCartList() {
+		List<CartVO> cartList=mapper.cartList("user4");
+		for(CartVO temp : cartList) {
+			log.info("장바구니 목록: "+temp);
+		}
 	}
+	
+//	@Test //장바구니 한번에 여러개 넣기 테스트
+//	public void test() {
+//		List<CartVO> list = new ArrayList<CartVO>();		
+//		CartVO cartVO1 = new CartVO();
+//		CartVO cartVO2 = new CartVO();
+//		
+//		cartVO1.setId("user11");
+//		cartVO1.setRes_menu_code("res_01A01"); //짜장면 7천원짜리 2개
+//		cartVO1.setAmount(2);
+//		list.add(cartVO1);
+//		
+//		cartVO2.setId("user11");
+//		cartVO2.setRes_menu_code("res_01A02"); //짬뽕 8천원짜리 1개
+//		cartVO2.setAmount(1);
+//		list.add(cartVO2);		
+//		
+//		log.info("장바구니 한번에 몇개 넣었을까 : "+mapper.insertCart(list));
+//	}
 
 }

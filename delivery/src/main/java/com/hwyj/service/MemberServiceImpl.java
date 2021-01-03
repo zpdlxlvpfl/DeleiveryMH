@@ -17,13 +17,21 @@ import lombok.extern.log4j.Log4j;
 public class MemberServiceImpl implements MemberService {
 	
 	private MemberMapper memberMapper;
-
+	
+	//내정보 보기 서비스
+	@Override
+	public CustomerVO getMyInfo(String id) {
+		
+		return memberMapper.read(id);
+	}
+	
 	//내정보 수정 서비스
 	@Override
 	public boolean modifyMyInfo(CustomerVO customerVO) {
 		log.info("내정보수정:"+customerVO);
 		return memberMapper.update(customerVO)==1; //수정처리가 정상적으로 되면 1리턴 -> 1==1이면 true
 	}
+	
 
 	@Override //회원가입 +권한등록
 	public int insertCustomer(CustomerVO csVO) {		
@@ -70,8 +78,7 @@ public class MemberServiceImpl implements MemberService {
 		return "";
 	}
 
-	
-	
+
 	
 	
 	/*

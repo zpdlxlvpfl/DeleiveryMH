@@ -26,6 +26,11 @@ public class MemberMapperTest {
 		
 	}
 	
+	@Test //내정보보기
+	public void testGetMyInfo() {
+		log.info("내정보: "+mapper.read("user4"));
+	}
+	
 	@Test //내정보 수정 테스트
 	public void testUpdate() {
 		CustomerVO customerVO = new CustomerVO();
