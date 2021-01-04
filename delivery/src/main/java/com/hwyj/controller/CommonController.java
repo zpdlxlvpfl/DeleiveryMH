@@ -2,6 +2,9 @@ package com.hwyj.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +36,7 @@ import com.hwyj.mapper.MemberMapper;
 import com.hwyj.mapper.RestaurantMapper;
 import com.hwyj.service.EmailService;
 import com.hwyj.service.MemberService;
+import com.hwyj.service.RestaurantService;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -46,6 +51,9 @@ public class CommonController {
    
    @Setter(onMethod_ = @Autowired)
    private EmailService emailService;
+   
+   @Setter(onMethod_ = @Autowired)
+   private RestaurantService restaurantService;
 
    // 로그인 테스트용 나중에 지우기
    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')") // auth가 ROLE_ADMIN이랑 ROLE_MEMBER일때만 페이지 열 수 있음
@@ -113,10 +121,32 @@ public class CommonController {
 
    }
 
-   @GetMapping("/index") // main
-   public void index() {
+	//메뉴목록보기 (템플릿 메인 사진 아래)
+   @RequestMapping(value = "index", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	public String menuList(ModelMap model, ResMenuVO menuvo) throws Exception {
+		HashMap<String, Object> hashMap = new HashMap<>();	//HashMap 인스턴스화
+		List<String> list = new ArrayList<>();				//List 인스턴스화
+		
+		list =  restaurantService.menuList();
+		hashMap.put("HashMapList", list);
+		model.addAttribute("HashMapList", list);
+		
+		System.out.println("model@@@@@@@@@@@@@@@@@@@@@" + model);
+		System.out.println("hashMap@@@@@@@@@@@@@@@@@@@@" + hashMap);
+		return "index";
+	}
+   
+   
+	
+	
+	@GetMapping("/get")
+	public void get(String res_code,String res_menu_code,Model model,ResMenuVO menuvo) {
+		model.addAttribute("res_code",restaurantService.get(res_code));
+		model.addAttribute("menucode",restaurantService.menuread(res_menu_code));
+		System.out.println(model.addAttribute("res",restaurantService.get(res_code)));
+		System.out.println(model.addAttribute("res_menu_code",restaurantService.menuread(res_menu_code)));
+	}
 
-   }
 
    @GetMapping("/maptest") // 현재위치 테스트중
    public void maptest() {
@@ -159,6 +189,8 @@ public class CommonController {
       //}
       return check + "";
       }
+   
+   
 }
 
    

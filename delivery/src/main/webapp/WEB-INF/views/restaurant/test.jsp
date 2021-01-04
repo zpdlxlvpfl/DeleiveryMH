@@ -27,6 +27,7 @@
 				<table width="100%"
 					class="table table-striped table-bordered table-hover" id="test">
 					<thead>
+				
 						<tr>
 							<th>res_code</th>
 							<th>res_menu_code</th>
@@ -37,7 +38,7 @@
 					</thead>
 					<tbody>
 
-						<c:forEach items="${getList}" var="res_code">
+						<c:forEach items="${HashMapList}" var="res_code">
 							<tr class="odd gradeX">
 								<td><c:out value="${res_code.res_code}" /></td>
 								<td><a href="/restaurant/test/get?res_code=${res_code}"><c:out

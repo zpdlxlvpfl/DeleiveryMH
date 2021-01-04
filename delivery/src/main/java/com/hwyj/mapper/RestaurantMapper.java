@@ -14,18 +14,16 @@ public interface RestaurantMapper {
 	//식당 메뉴 보기
 	//public List<ResMenuVO> menuList( );
 	
-	public List<ResMenuVO> getList();
 	
 	public List<String> menuList() throws Exception;
 	
-	public ResMenuVO read(String res_code);
-	
-//	public ResMenuVO restget(String menucode);
+	public ResMenuVO menuread(String menucode);
+
+	public ResVO read(String res_code);
 	
 	//식당 정보 보기
 	
-	
-	public List<ResVO> restList( );
+	public List<String> restList() throws Exception;
 	
 	public HashMap<String, Object> getresCount();
 	

@@ -1,6 +1,6 @@
 package com.hwyj.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+import static  org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,20 +93,8 @@ public class RestaurantController {
 	}
 
 
-	
-	/*@GetMapping("/menuList2")
-	@ResponseBody
-	public Object menuLis2t(@RequestParam Map<String,Object> map,ResMenuVO menuvo) {
-		HashMap<String, Object> hashmap = new HashMap<String, Object>();
-		
-		List list = restaurantService.menuList();
-		hashmap.put("data" , list);
-		hashmap.put("msg" , "test");
-		System.out.println("@@@@@" + hashmap);
-		return hashmap;
-	}*/
-	
-	
+
+	//메뉴목록보기 (템플릿 사진 아래)
     @RequestMapping(value = "menuList", method = RequestMethod.GET, produces ="application/json; charset=utf8")
 	public String menuList(ModelMap model, ResMenuVO menuvo) throws Exception {
 		HashMap<String, Object> hashMap = new HashMap<>();	//HashMap 인스턴스화
@@ -116,41 +104,35 @@ public class RestaurantController {
 		hashMap.put("HashMapList", list);
 		
 		System.out.println(list);
-		model.addAttribute("HashMapList", list);
+		model.addAttribute("MapList", list.get(0));
+		
 		return "/restaurant/menuList";
 	}
     
     
-	@GetMapping("/test")
-	public void getList(ResMenuVO menuvo, Model model) {
-		model.addAttribute("getList",restaurantService.getList());
-		log.info(menuvo);
-		System.out.println(menuvo);
-		System.out.println(model.addAttribute("getList",restaurantService.getList()));
-	}
 	
 	
 	@GetMapping("/get")
-	public void get(String res_code,Model model,ResMenuVO menuvo) {
+	public void get(String res_code,String res_menu_code,Model model,ResMenuVO menuvo) {
 		model.addAttribute("res_code",restaurantService.get(res_code));
+		model.addAttribute("menucode",restaurantService.menuread(res_menu_code));
 		System.out.println(model.addAttribute("res",restaurantService.get(res_code)));
+		System.out.println(model.addAttribute("res_menu_code",restaurantService.menuread(res_menu_code)));
 	}
-	
-	
 
 
-
-	
-	@GetMapping("/restList")
-	@ResponseBody
-	public Object restList(@RequestParam Map<String,Object> map,ResVO resvo) {
-		HashMap<String, Object> hashmap = new HashMap<String, Object>();
+    @RequestMapping(value = "restList", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	public String restList(ModelMap model, ResVO resvo) throws Exception {
+		HashMap<String, Object> hashMap = new HashMap<>();	
+		List<String> list = new ArrayList<>();				
 		
-		List list = restaurantService.restList();
-		hashmap.put("data" , list);
-		hashmap.put("msg" , "test");
-		System.out.println("@@@@@" + hashmap);
-		return hashmap;
+		list =  restaurantService.restList();
+		hashMap.put("HashMapList", list);
+		
+		System.out.println(list);
+		model.addAttribute("HashMapList", list);
+		
+		return "/restaurant/restList";
 	}
 	
 	

@@ -27,17 +27,23 @@
 	<select id="menuList" resultType="map">	
 	<!-- select res_menu_name, res_menu_explan, res_menu_price from res_menu left outer join member on res_menu.res_code=member.res_code
 	where res_menu.res_code=#{res_code} -->
-	select * from testdb.res_menu where res_menu_code > 0 and res_code > 0
+	select res_menu_name,res_menu_price from testdb.res_menu where res_menu_code > 0 and res_code >0
+ 	<!-- select res_menu_name,res_menu_price from res_menu limit 1,10 -->
+	<!-- 일단 한줄씩 -->
 	</select>
 	
 	<select id="read" resultType="com.hwyj.domain.ResMenuVO">
 		select * from testdb.res_menu where res_code=#{res_code}
 	</select>
 	
+	<select id="menuread" resultType="com.hwyj.domain.ResMenuVO">
+		select * from testdb.res_menu where res_menu_code=#{res_menu_code}
+	</select>
+	
 		<select id="getList" resultType="com.hwyj.domain.ResMenuVO">	
 	<!-- select res_menu_name, res_menu_explan, res_menu_price from res_menu left outer join member on res_menu.res_code=member.res_code
 	where res_menu.res_code=#{res_code} -->
-	select * from testdb.res_menu where res_menu_code > 0 and res_code > 0
+		select res_menu_name,res_menu_price from testdb.res_menu where res_menu_code=#{res_menu_code}
 	</select>
 	
 	
