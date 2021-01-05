@@ -2,17 +2,24 @@ package com.hwyj.service;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.ResMenuVO;
 import com.hwyj.domain.ResVO;
@@ -33,14 +40,35 @@ public class RestaurantServiceTest {
 		assertNotNull(service);
 	}
 	
-	
 	@Test
-	public void testresList() {
-		List<ResVO> resList=service.restList();
-		for(ResVO temp : resList) {
-			log.info("res: "+temp);
-		}		
+	public void insertres( )  {
+		ResVO resvo = new ResVO();
+		HttpSession session = null;
+		
+		 Calendar cal = Calendar.getInstance();
+		 int year = cal.get(Calendar.YEAR);
+		 String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		 String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		 String subNum = "";
+		 
+		 for(int i = 1; i <= 6; i ++) {
+		  subNum += (int)(Math.random() * 10);
+		 }
+		 
+		String res_code = ymd + "_" + subNum;
+		resvo.setRES_CODE(res_code);
+		resvo.setRES_NAME("testname");
+		resvo.setRES_INFO("testinfo");
+		resvo.setRES_MENU_PRICE("testdata");
+		resvo.setDEL_PRICE("testdata");
+		service.insertres(resvo);
+		log.info(res_code);
+		System.out.println(resvo);
+		System.out.println(session);
+		
 	}
+	
+	
 	
 	
 	@Test

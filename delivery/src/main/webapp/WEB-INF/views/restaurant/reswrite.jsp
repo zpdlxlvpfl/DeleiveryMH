@@ -67,14 +67,6 @@
 
 						<div style="margin: 0 auto; width: 300px;">
 						
-						
-						<fieldset>
-
-								<input name="RES_CODE" id="RES_CODE" type="number"
-									class="form-control" 
-									placeholder="Restaurant_Code"
-									style="font-family: inherit; width: 300px; height: 40px;">
-							</fieldset> 
 
 							<fieldset>
 
@@ -157,7 +149,6 @@
 					$("#insertres").click(
 							function() {
 								var json = {
-									RES_CODE : $("#RES_CODE").val(),
 									RES_NAME : $("#RES_NAME").val(),
 									RES_INFO : $("#RES_INFO").val(),
 									DEL_PRICE : $("#DEL_PRICE").val(),

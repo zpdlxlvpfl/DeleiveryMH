@@ -59,7 +59,7 @@
 									contentType : "application/json; charset=utf-8;",
 									dataType : "json",
 									data : JSON.stringify({
-										res_code : "res_code",
+										res_menu_code : "res_menu_code",
 										res_menu_code : "res_menu_code",
 										res_menu_name : "res_menu_name",
 										res_menu_explan : "res_menu_explan",
@@ -74,7 +74,7 @@
 												+ JSON.stringify(e.result));
 										console.log("msg" + e.msg);
 
-										$(".res_code").empty();
+										$(".res_menu_code").empty();
 										$(".res_menu_code").empty();
 										$(".res_menu_name").empty();
 										$(".res_menu_explan").empty();
@@ -84,9 +84,9 @@
 												.each(
 														menuList,
 														function(idx, val) {
-															$(".res_code")
+															$(".res_menu_code")
 																	.text(
-																			val.res_code);
+																			val.res_menu_code);
 															$(".res_menu_code")
 																	.text(
 																			val.res_menu_code);
@@ -105,7 +105,7 @@
 															$("#menuList")
 																	.empty(); //div
 															html += "<table id='menuList';>";
-															html += "<tr><th>res_code</th><th>res_menu_code</th><th>res_menu_name</th><th>res_menu_explan</th><th>res_menu_price</th></tr>";
+															html += "<tr><th>res_menu_code</th><th>res_menu_code</th><th>res_menu_name</th><th>res_menu_explan</th><th>res_menu_price</th></tr>";
 
 															var menuList = returnFix.btnsearchFix;
 															$
@@ -115,7 +115,7 @@
 																					idx,
 																					val) {
 
-																				//	html += "<tr> <td>" + res_code + "</td>"
+																				//	html += "<tr> <td>" + res_menu_code + "</td>"
 																				//	html += "<td>" + res_menu_code + "</td>"
 																				html += "<h4>"
 																						+ res_menu_name
@@ -154,15 +154,14 @@
 
 
 
+
+
 	<div class="parallax-content projects-content" id="portfolio">
 
 		<h1>
-			<font color="white">Restorent Home TEST</font>
+			<font color="white">Menu List</font>
 		</h1>
-		<span><font color="orange">Restorent Home TEST </font></span>
-
-
-
+		<span><font color="orange">Menu List </font></span>
 		<div class="container">
 
 			<div class="row">
@@ -170,36 +169,42 @@
 				<div class="col-md-12">
 
 					<div id="owl-testimonials" class="owl-carousel owl-theme">
-
-						<div class="item" id="menuList">
+						<div class="item">
 							<div class="testimonials-item">
 								<a href="../resources/img/1st-big-item.jpg"
 									data-lightbox="image-1"><img
 									src="../resources/img/1st-item.jpg" alt=""></a>
 								<div class="text-content">
-									<c:forEach items="${HashMapList}" var="res_menu_code">
 
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="1"
+										end="1" step="1" varStatus="i">
 										<h4>
-											<c:out value="${res_menu_code.res_menu_name}" />
+											<c:out value=" ${res_menu_code.res_menu_name}">
+											</c:out>
 										</h4>
 										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
-										</span>
+											&#8361;</span>
 									</c:forEach>
+
 								</div>
 							</div>
 						</div>
+
+
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="../resources/img/2nd-big-item.jpg"
 									data-lightbox="image-1"><img
 									src="../resources/img/2nd-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-									<c:forEach items="${HashMapList}" var="res_menu_code">
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="2"
+										end="2" step="1" varStatus="i">
 										<h4>
-											<c:out value="${res_menu_code.res_menu_name}" />
+											<c:out value=" ${res_menu_code.res_menu_name}">
+											</c:out>
 										</h4>
-										<span><c:out value="${res_menu_code.res_menu_price}" />&#8361;
-										</span>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
+											&#8361;</span>
 									</c:forEach>
 								</div>
 							</div>
@@ -210,7 +215,8 @@
 									data-lightbox="image-1"><img
 									src="../resources/img/3rd-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-									<c:forEach items="${HashMapList}" var="res_menu_code">
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="3"
+										end="3" step="1" varStatus="i">
 										<h4>
 											<c:out value="${res_menu_code.res_menu_name}" />
 										</h4>
@@ -224,10 +230,10 @@
 							<div class="testimonials-item">
 								<a href="../resources/img/4th-big-item.jpg"
 									data-lightbox="image-1"><img
-									src="../resources/img/4th-item.jpg" alt=""
-									id="${res_menu_name}"></a>
+									src="../resources/img/4th-item.jpg" alt="" id="$"></a>
 								<div class="text-content">
-									<c:forEach items="${HashMapList}" var="res_menu_code">
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="4"
+										end="4" step="1" varStatus="i">
 										<h4>
 											<c:out value="${res_menu_code.res_menu_name}" />
 										</h4>
@@ -241,10 +247,10 @@
 							<div class="testimonials-item">
 								<a href="../resources/img/5th-big-item.jpg"
 									data-lightbox="image-1"><img
-									src="../resources/img/5th-item.jpg" alt=""
-									id="${res_menu_name}"></a>
+									src="../resources/img/5th-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-									<c:forEach items="${HashMapList}" var="res_menu_code">
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="5"
+										end="5" step="1" varStatus="i">
 										<h4>
 											<c:out value="${res_menu_code.res_menu_name}" />
 										</h4>
@@ -258,10 +264,10 @@
 							<div class="testimonials-item">
 								<a href="../resources/img/6th-big-item.jpg"
 									data-lightbox="image-1"><img
-									src="../resources/img/6th-item.jpg" alt=""
-									id="${res_menu_name}"></a>
+									src="../resources/img/6th-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-									<c:forEach items="${HashMapList}" var="res_menu_code">
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="6"
+										end="6" step="1" varStatus="i">
 										<h4>
 											<c:out value="${res_menu_code.res_menu_name}" />
 										</h4>
@@ -276,6 +282,9 @@
 			</div>
 		</div>
 	</div>
+
+
+
 
 	<div class="service-content" id="services">
 		<div class="container">
@@ -365,9 +374,6 @@
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/plugins.js"></script>
 	<script src="../resources/js/main.js"></script>
-
-
-
 </body>
 </html>
 
