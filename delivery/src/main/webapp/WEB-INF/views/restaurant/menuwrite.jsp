@@ -67,19 +67,6 @@
 					
 						<div style="margin: 0 auto; width: 300px;">
 						
-							<fieldset>
-						
-							<input name="res_code"  type="number" class="form-control"
-								id="res_code" placeholder="res_code"
-								style="font-family: inherit; width: 300px; height: 40px;">
-						</fieldset>
-						
-							<fieldset>
-						
-							<input name="res_menu_code" type="number" class="form-control"
-								id="res_menu_code" placeholder="res_menu_code"
-								style="font-family: inherit; width: 300px; height: 40px;">
-						</fieldset>
 						
 						<fieldset>
 						
@@ -160,8 +147,6 @@
 					$("#insertmenu").click(
 							function() {
 								var json = {
-									res_code : $("#res_code").val(),
-									res_menu_code : $("#res_menu_code").val(),
 									res_menu_name : $("#res_menu_name").val(),
 									res_menu_explan : $("#res_menu_explan").val(),
 									res_menu_price : $("#res_menu_price").val()

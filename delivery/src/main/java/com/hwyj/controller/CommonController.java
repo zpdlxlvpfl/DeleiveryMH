@@ -2,6 +2,7 @@ package com.hwyj.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.CustomerVO;
@@ -122,7 +125,7 @@ public class CommonController {
    }
 
 	//메뉴목록보기 (템플릿 메인 사진 아래)
-   @RequestMapping(value = "index", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+   @RequestMapping(value = "/index", method = RequestMethod.GET, produces ="application/json; charset=utf8")
 	public String menuList(ModelMap model, ResMenuVO menuvo) throws Exception {
 		HashMap<String, Object> hashMap = new HashMap<>();	//HashMap 인스턴스화
 		List<String> list = new ArrayList<>();				//List 인스턴스화
@@ -130,13 +133,13 @@ public class CommonController {
 		list =  restaurantService.menuList();
 		hashMap.put("HashMapList", list);
 		model.addAttribute("HashMapList", list);
-		
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		System.out.println("model@@@@@@@@@@@@@@@@@@@@@" + model);
 		System.out.println("hashMap@@@@@@@@@@@@@@@@@@@@" + hashMap);
 		return "index";
 	}
    
-   
+
 	
 	
 	@GetMapping("/get")
