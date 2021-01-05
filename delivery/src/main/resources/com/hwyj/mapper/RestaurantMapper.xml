@@ -27,13 +27,13 @@
 	<select id="menuList" resultType="map">	
 	<!-- select res_menu_name, res_menu_explan, res_menu_price from res_menu left outer join member on res_menu.res_code=member.res_code
 	where res_menu.res_code=#{res_code} -->
-	select res_menu_name,res_menu_price from testdb.res_menu where res_menu_code  is not null
+	select res_menu_name,res_menu_price,del_price from testdb.res_menu where res_menu_code  is not null
  	<!-- select res_menu_name,res_menu_price from res_menu limit 1,10 -->
 	<!-- 일단 한줄씩 -->
 	</select>
 	
 	<select id="read" resultType="com.hwyj.domain.ResMenuVO">
-		select * from testdb.res_menu where res_code=#{res_code}
+		select * from testdb.res_menu where RES_CODE=#{RES_CODE}
 	</select>
 	
 	<select id="menuread" resultType="com.hwyj.domain.ResMenuVO"> 
@@ -47,8 +47,8 @@
 	</select>
 	
 	
-		<select id="restList" resultType="com.hwyj.domain.ResVO">
-		select * from testdb.res where res_code > 0
+		<select id="restList" resultType="map">
+		select res_name,res_info,RES_CODE from testdb.res where RES_CODE  is not null
 		</select>
 	
 	
@@ -66,22 +66,25 @@
 		#{RES_NAME},
 		#{RES_INFO},
 		#{DEL_PRICE})
+		
 	</insert>
 	
 		<!-- 메뉴 등록 -->
 	<insert id="insertmenu" parameterType="com.hwyj.domain.ResMenuVO">
 		INSERT INTO testdb.res_menu
-		(res_code,
+		(RES_CODE,
 		res_menu_code,
 		res_menu_name,
 		res_menu_explan,
 		res_menu_price)
 		VALUES 
-		(#{res_code},
+		(#{RES_CODE},
 		#{res_menu_code},
 		#{res_menu_name},
 		#{res_menu_explan},
-		#{res_menu_price})
+		#{res_menu_price}) 
+		
+
 	</insert>
 
 </mapper>

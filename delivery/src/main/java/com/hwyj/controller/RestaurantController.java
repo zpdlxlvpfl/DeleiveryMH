@@ -68,7 +68,7 @@ public class RestaurantController {
 
 	}
 
-	@GetMapping("/reshome")
+	@GetMapping("/reshome/get.do")
 	public void reshome() {
 
 	}
@@ -104,10 +104,9 @@ public class RestaurantController {
 	
 
 	@GetMapping("/insertmenu") // 메뉴 등록
-	public String insertmenu(ResMenuVO menuvo, RedirectAttributes rttr) {
+	public String insertmenu(ResMenuVO menuvo, ResVO resvo) {
 		 HttpSession session = null;
 		 
-		
 		 Calendar cal = Calendar.getInstance();
 		 int year = cal.get(Calendar.YEAR);
 		 String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
@@ -119,9 +118,8 @@ public class RestaurantController {
 		 }
 		 
 		String res_menu_code = ymd + "_Menu" + subNum;
-		String res_code = ymd + "_" + subNum;
-		
-		menuvo.setRes_code(res_code);
+		String res_code = resvo.getRES_CODE();
+		menuvo.setRES_CODE(res_code);
 		menuvo.setRes_menu_code(res_menu_code);
 		restaurantService.insertmenu(menuvo);
 		System.out.println(menuvo);
@@ -141,7 +139,7 @@ public class RestaurantController {
 		model.addAttribute("HashMapList", list);
 
 		return "/restaurant/menuList";
-	}
+	} 
 
 	@GetMapping("/get")
 	public void get(String res_code, String res_menu_code, Model model, ResMenuVO menuvo) {
@@ -151,16 +149,17 @@ public class RestaurantController {
 		System.out.println(model.addAttribute("res_menu_code", restaurantService.menuread(res_menu_code)));
 	}
 
+	
 	@RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	public String restList(ModelMap model, ResVO resvo) throws Exception {
 		HashMap<String, Object> hashMap = new HashMap<>();
 		List<String> list = new ArrayList<>();
 
 		list = restaurantService.restList();
-		hashMap.put("HashMapList", list);
+		hashMap.put("RestList", list);
 
-		System.out.println(list);
-		model.addAttribute("HashMapList", list);
+		System.out.println(list+"RestList@@@@@@@@@@@@@");
+		model.addAttribute("RestList", list);
 
 		return "/restaurant/restList";
 	}
