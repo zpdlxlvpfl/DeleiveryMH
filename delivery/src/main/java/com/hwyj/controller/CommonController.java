@@ -140,18 +140,8 @@ public class CommonController {
 	}
    
 
-	
-	
-	@GetMapping("/get")
-	public void get(String res_code,String res_menu_code,Model model,ResMenuVO menuvo) {
-		model.addAttribute("res_code",restaurantService.get(res_code));
-		model.addAttribute("menucode",restaurantService.menuread(res_menu_code));
-		System.out.println(model.addAttribute("res",restaurantService.get(res_code)));
-		System.out.println(model.addAttribute("res_menu_code",restaurantService.menuread(res_menu_code)));
-	}
 
-
-   @GetMapping("/maptest") // 현재위치 테스트중
+   @GetMapping("/maptest") // 현재위치 
    public void maptest() {
 
    }

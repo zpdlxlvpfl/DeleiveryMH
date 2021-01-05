@@ -15,19 +15,14 @@ public interface RestaurantService {
 	//메뉴보기 서비스
 	public List<String> menuList() throws Exception;
 	
-	public ResMenuVO get(String res_code);
+	public ResMenuVO get(String res_menu_code);
 	
 	public ResMenuVO menuread(String menucode);
 	
 	//식당보기 서비스
 	public List<String> restList() throws Exception;
 	
-	public ResVO read(String res_code);
-	
-
-	
-
-	
+	public ResVO read(String RES_CODE)throws Exception;
 	
 	
 	HashMap<String, Object> getresCount();
@@ -45,6 +40,7 @@ public interface RestaurantService {
 	
 	public void insertmenu(ResMenuVO menuvo);
 
+	public void rescodeUpDate();
 	
 	
 

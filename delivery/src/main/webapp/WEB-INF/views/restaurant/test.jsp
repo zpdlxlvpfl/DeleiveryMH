@@ -2,150 +2,203 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@include file="../includes/header.jsp"%>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Rest List</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 
 
 
-
-<div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header">tset</h1>
-	</div>
-	<!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				TSET
-				<button id="regBtn" type="button" class="btn btn-xs pull-right">글쓰기</button>
-			</div>
-			<!-- /.panel-heading -->
-			<div class="panel-body">
-				<table width="100%"
-					class="table table-striped table-bordered table-hover" id="test">
-					<thead>
-				
-						<tr>
-							<th>res_code</th>
-							<th>res_menu_code</th>
-							<th>res_menu_name</th>
-							<th>res_menu_explan</th>
-							<th>res_menu_price</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<c:forEach items="${HashMapList}" var="res_code">
-							<tr class="odd gradeX">
-								<td><c:out value="${res_code.res_code}" /></td>
-								<td><a href="/restaurant/test/get?res_code=${res_code}"><c:out
-											value="${res_code.res_menu_code}" /></a></td>
-								<td><c:out value="${res_code.res_menu_name}" /></td>
-								<td><c:out value="${res_code.res_menu_explan}" /></td>
-								<td><c:out value="${res_code.res_menu_price}" /></td>
-
-							</tr>
-						</c:forEach>
-
-					</tbody>
-				</table>
-				<%-- <c:if test="${pageMaker.prev}">
-                            	 <a href="/board/list?pageNum=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
-                            </c:if>
-                            
-                             <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                            	<a href="/board/list?pageNum=${num}&amount=${pageMaker.cri.amount}">${num}</a>
-                            </c:forEach>
-                            
-                              <c:if test="${pageMaker.next}">
-                             <a href="/board/list?pageNum=${pageMaker.startPage+1}&amount=${pageMaker.cri.amount}">next</a>
-                            </c:if>
-                           	 --%>
-
-				<!-- /.table-responsive -->
-			</div>
-			<!-- /.panel-body -->
-		</div>
-		<!-- /.panel -->
-	</div>
-	<!-- /.col-lg-12 -->
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">처리완료</h4>
-			</div>
-			<div class="modal-body">삭제가 완료되었습니다.</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
+<link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="../resources/css/fontAwesome.css">
+<link rel="stylesheet" href="../resources/css/hero-slider.css">
+<link rel="stylesheet" href="../resources/css/templatemo-main.css">
+<link rel="stylesheet" href="../resources/css/owl-carousel.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../resources/js/vendor/bootstrap.min.js"></script>
+<script src="../resources/js/plugins.js"></script>
+<script src="../resources/js/main.js"></script>
 
 
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
+	rel="stylesheet">
+
+<script
+	src="../resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+	 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 
 
-<!-- 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	type="text/javascript"></script>
+
 <script type="text/javascript">
-	$(document).ready(function() {
-		var result = '${result}'; //result 값을 읽고 get타입으로 보내온
-		var bno = '${bno}';
-		console.log("값찍기" + result + bno); //크롬F12 console 클릭
+	window.jQuery
+			|| document
+					.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
+</script>
 
-		console.log("전" + history.state);
-		checkModal(result);
+<script type="text/javascript">
+	$(document).ready(function restList() {
+		$.ajax({
+			type : "get",
+			url : "/restaurant/test",
+			dataType : "json",
+			data : {
+				RES_CODE : "${RES_CODE}",
+				RES_NAME : "${RES_NAME}",
+				RES_INFO : "${RES_INFO}",
+				DEL_PRICE : "${DEL_PRICE}"
+			},
+			error : function(error) {
+				alert('error' + error);
+				console.log("error " + error);
 
-		history.replaceState({}, null, null);
-		console.log("후" + history.state);
+			},
+			
+			
+			success : function(returndata) {
+				$(".RES_CODE").empty();
+				$(".RES_NAME").empty();
+				$(".RES_INFO").empty();
+				$(".DEL_PRICE").empty();
+	              
+				$.each(returndata.item , function(idx, val) {
+		 			$(".RES_CODE").text(val.RES_CODE);
+					$(".RES_NAME").text(val.RES_NAME);
+					$(".RES_INFO").text(val.RES_INFO); 
+					$(".DEL_PRICE").text(val.DEL_PRICE + "&#8361;");
 
-		//교재>리스트만 요청하거나(result가 빈값('') 이거나 뒤로가기 로 이용해서(history가 있거나) 접근하거나
-		//이때는 모달창을 띄우지 않는다
-
-		//현재>history가 없으면서 result가 있으면 모달창 열자
-
-		function checkModal(result) {
-			if (!(history.state)) { //뒤로 가기가 아닐때
-				if (result == 'modify') {
-					$(".modal-body").html(bno + "번이 정상적으로 수정 되었습니다.");
-					$("#myModal").modal("show");
-				} else if (result == 'remove') {
-					$(".modal-body").html(bno + "번이 정상적으로 삭제 되었습니다.");
-					$("#myModal").modal("show");
-				} else if (result == 'register') { //글번호 (글등록)
-					$(".modal-body").html("게시글 " + bno + "번이 등록되었습니다.");
-					$("#myModal").modal("show");
-				}
+					{
+						var html = "";
+						$c("#item").empty();
+						
+						html +="<div class='col-md-12'><div class='service-item'><h4><a href='/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}'>RES_NAME</a></h4>";
+						html +="<div class='line-dec'></div>";
+						
+						var item = returndata.item;
+						$c.each(service-item, function(idx, val) {
+							
+							html += "<p>"+RES_INFO+"</p>"
+							html += "<p>"+val.DEL_PRICE+"<font color='orange'>&#8361;</font></p>"
+			
+							
+						});
+						html +="</div>";
+						$("#item").append(html);
+					
+						
+					
+					}
+				})
 			}
-		}
+			});
+		});
+</script>
+</head>
+<body>
 
-		$("#regBtn").on("click", function() {
-			self.location = "/restaurant/register";
-		})
-	})
-</script> -->
-
-
-<%@include file="../includes/footer.jsp"%>
-
-
-
-
-
-
-
+	<div class="fixed-side-navbar">
+		<ul class="nav flex-column">
+			<li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
+		</ul>
+	</div>
 
 
 
+
+
+	<div class="parallax-content projects-content" id="portfolio">
+
+		<h1>
+			<font color="white" size="14px">Restaurant List</font>
+		</h1>
+		<span><font color="orange" size="5px">Restaurant List </font></span>
+	</div>
+
+
+	<div class="service-content" id="services">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div id="owl-testimonials" class="owl-carousel owl-theme">
+						<div class="col-md-8">
+							<div class="left-text">
+								<h4>Delivery TEST</h4>
+								<div class="line-dec"></div>
+								<p>
+									Delivery TEST abcdefgsadqasdfaffadac <a rel="nofollow"
+										href="https://templatemo.com"> website</a> whsskwhfflek.
+								</p>
+								<ul>
+									<li>- test test test test test test</li>
+									<li>- test test test test test test</li>
+									<li>- test test test test test test</li>
+									<li>- test test test test test test</li>
+								</ul>
+								<div class="primary-button">
+									<a href="#portfolio">Delivery TEST</a>
+								</div>
+							</div>
+						</div>
+						<div id="item">
+							<div class='col-md-12'>
+								<div class='service-item'>
+									<h4>
+										<a href='/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}'>RES_CODE.res_name</a>
+									</h4>
+									<div class='line-dec'></div>
+									 <p>RES_INFO</p>
+								 <p>Delivery Tips :DEL_PRICE<font color='orange'>&#8361;</font></p>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		
+		
+			<div class="parallax-content contact-content " id="contact-us"></div>
+
+
+
+
+
+			<footer>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="primary-button">
+								<a href="#home">Back To Top</a>
+							</div>
+							<ul>
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-google"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+</body>
+</html>

@@ -19,7 +19,7 @@ public interface RestaurantMapper {
 	
 	public ResMenuVO menuread(String menucode);
 
-	public ResVO read(String res_code);
+	public ResVO read(String RES_CODE)throws Exception;
 	
 	//식당 정보 보기
 	
@@ -38,6 +38,7 @@ public interface RestaurantMapper {
 	
 	public void insertmenu (ResMenuVO menuvo); //메뉴등록
 
+	public void rescodeUpDate();
 	
 
 	

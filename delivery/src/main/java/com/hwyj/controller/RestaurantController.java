@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextConfiguration;
@@ -57,20 +58,36 @@ public class RestaurantController {
 	@GetMapping("res") // 페이지 이름 뭘로하지????
 	public void res(Model model) {
 	}
+	
+	
+	//test 
+	@RequestMapping(value = "test", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public String tset(String RES_CODE,ModelMap model,RedirectAttributes rttr) throws Exception {
+		HashMap<String, Object> hashMap = new HashMap<>();
+		List<String> list = new ArrayList<>();
 
-	@GetMapping("/menulist")
-	public void menulist() {
+		list = restaurantService.restList();
+		hashMap.put("RestList", list);
 
+		System.out.println(list+"RestList@@@@@@@@@@@@@");
+		model.addAttribute("RestList", list);
+		rttr.addFlashAttribute("RES_CODE",restaurantService.read(RES_CODE));
+		return "/restaurant/test";
 	}
+	
+	
+	
+	
+	
 
 	@GetMapping("/reswrite")
 	public void reswrite() {
 
 	}
 
-	@GetMapping("/reshome/get.do")
-	public void reshome() {
-
+	@GetMapping("/reshome")
+	public void reshome(String RES_CODE,Model model,RedirectAttributes rttr) throws Exception {
+		rttr.addAttribute("RES_CODE", restaurantService.read(RES_CODE));
 	}
 
 	@GetMapping("/menuwrite")
@@ -79,8 +96,8 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/insertres") // 매장 등록
-	public String insertres(Locale locale, ResVO resvo) {
-		HttpSession session = null;
+	public String insertres(ResMenuVO menuvo, ResVO resvo,Model model,RedirectAttributes rttr) {
+		
 		
 		 Calendar cal = Calendar.getInstance();
 		 int year = cal.get(Calendar.YEAR);
@@ -92,19 +109,22 @@ public class RestaurantController {
 		  subNum += (int)(Math.random() * 10);
 		 }
 		 
-		String res_code = ymd + "_" + subNum;
-		resvo.setRES_CODE(res_code);;
+		String RES_CODE = ymd + "_" + subNum;
+		resvo.setRES_CODE(RES_CODE);
+		menuvo.setRES_CODE(RES_CODE);
 		restaurantService.insertres(resvo);
-		log.info(res_code);
+		log.info(RES_CODE);
 		System.out.println(resvo);
-		System.out.println(session);
+		rttr.addFlashAttribute("RES_CODE", RES_CODE);
+		rttr.addFlashAttribute("result", "RES_CODE");
+		
 		return "redirect:/restaurant/reshome";
 	}
 
 	
 
 	@GetMapping("/insertmenu") // 메뉴 등록
-	public String insertmenu(ResMenuVO menuvo, ResVO resvo) {
+	public String insertmenu(ResMenuVO menuvo) {
 		 HttpSession session = null;
 		 
 		 Calendar cal = Calendar.getInstance();
@@ -118,49 +138,44 @@ public class RestaurantController {
 		 }
 		 
 		String res_menu_code = ymd + "_Menu" + subNum;
-		String res_code = resvo.getRES_CODE();
-		menuvo.setRES_CODE(res_code);
 		menuvo.setRes_menu_code(res_menu_code);
 		restaurantService.insertmenu(menuvo);
+		restaurantService.rescodeUpDate();
 		System.out.println(menuvo);
 		return "redirect:/restaurant/reshome";
+	
 	}
+	
+	
 
-	// 메뉴목록보기 (템플릿 사진 아래)
+	// 메뉴목록보기 
 	@RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	public String menuList(ModelMap model, ResMenuVO menuvo) throws Exception {
 		HashMap<String, Object> hashMap = new HashMap<>(); // HashMap 인스턴스화
 		List<String> list = new ArrayList<>(); // List 인스턴스화
-
 		list = restaurantService.menuList();
 		hashMap.put("HashMapList", list);
-
 		System.out.println(list);
 		model.addAttribute("HashMapList", list);
 
 		return "/restaurant/menuList";
 	} 
-
-	@GetMapping("/get")
-	public void get(String res_code, String res_menu_code, Model model, ResMenuVO menuvo) {
-		model.addAttribute("res_code", restaurantService.get(res_code));
-		model.addAttribute("menucode", restaurantService.menuread(res_menu_code));
-		System.out.println(model.addAttribute("res", restaurantService.get(res_code)));
-		System.out.println(model.addAttribute("res_menu_code", restaurantService.menuread(res_menu_code)));
-	}
+	
+	
 
 	
 	@RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public String restList(ModelMap model, ResVO resvo) throws Exception {
+	public String restList(String RES_CODE,ModelMap model,RedirectAttributes rttr) throws Exception {
 		HashMap<String, Object> hashMap = new HashMap<>();
 		List<String> list = new ArrayList<>();
 
 		list = restaurantService.restList();
-		hashMap.put("RestList", list);
 
 		System.out.println(list+"RestList@@@@@@@@@@@@@");
 		model.addAttribute("RestList", list);
-
+		hashMap.put("RestList", list);
+		rttr.addAttribute("RES_CODE", restaurantService.read(RES_CODE));
+		
 		return "/restaurant/restList";
 	}
 

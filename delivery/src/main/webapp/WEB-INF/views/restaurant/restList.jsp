@@ -17,7 +17,6 @@
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
 
-
 <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="../resources/css/fontAwesome.css">
 <link rel="stylesheet" href="../resources/css/hero-slider.css">
@@ -90,9 +89,15 @@
 
 	<div class="parallax-content projects-content" id="portfolio">
 
-			<h1> <font color="white" size="14px">Restaurant List</font> </h1>
-		<span><font color="orange" size="5px">Restaurant List </font></span> </div>
-
+			<h1> <font color="white" size="23px">Restaurant List</font> </h1>
+		<span><font color="orange" size="5px">Restaurant List </font></span> <br><br><br><br>
+		<div class="primary-button">
+		<input type="search" style="text-align: left" id ="search" style="width:150px; height:40px;">
+		<button type="button" id="Search" class="btn"
+        style="font-family: inherit; width: 150px; height: 40px; background-color:orange;
+        color: white;" >Search</button>
+		</div> </div>
+	
 
 	<div class="service-content" id="services">
 		<div class="container">
@@ -122,27 +127,32 @@
 						
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="1" end="1" step="1" varStatus="status">
-								<h4><a href="/restaurant/reshome/get?RES_CODE=${RES_CODE.RES_CODE}"><c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
-								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out> &#8361;</p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out> <font color="orange"> &#8361; </font></p>
 								
 							</c:forEach>
 							</div>
 								
 								<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="2" end="2" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out><font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="3" end="3" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out> <font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							</div>
@@ -151,25 +161,31 @@
 						<div class="col-md-12">
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="4" end="4" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out><font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="5" end="5" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out> <font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="6" end="6" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out><font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							</div>
@@ -179,25 +195,31 @@
 						<div class="col-md-12">
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="7" end="7" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out> <font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="8" end="8" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out><font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="9" end="9" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out> <font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							</div>
@@ -208,25 +230,31 @@
 						<div class="col-md-12">
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="10" end="10" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out> <font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="11" end="11" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out><font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="12" end="12" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out><font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							</div>
@@ -234,25 +262,31 @@
 							<div class="col-md-12">
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="13" end="13" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out><font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="14" end="14" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out><font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 						
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="15" end="15" step="1" varStatus="i">
-								<h4><c:out value=" ${RES_CODE.res_name}"> </c:out></h4>
+								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
+								<p>Delivery Tips : <c:out value=" ${RES_CODE.del_price}"></c:out><font color="orange"> &#8361; </font></p>
 							</c:forEach>
 							</div>
 						</div>

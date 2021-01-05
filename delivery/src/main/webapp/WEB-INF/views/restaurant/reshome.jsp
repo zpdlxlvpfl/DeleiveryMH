@@ -30,6 +30,46 @@
 
 <script src="../resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	type="text/javascript"></script>
+
+<script>
+	window.jQuery
+			|| document
+					.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
+</script>
+
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						//	var url = '/restaurant/menuList';
+						$
+								.ajax({
+									url : "/restaurant/reshome",
+									type : "GET",
+									contentType : "application/json; charset=utf-8;",
+									dataType : "json",
+									data : JSON.stringify({
+										res_menu_code : "res_menu_code",
+										res_menu_code : "res_menu_code",
+										res_menu_name : "res_menu_name",
+										res_menu_explan : "res_menu_explan",
+										res_menu_price : "res_menu_price"
+									}),
+									error : function(error) {
+										alert('error' + data);
+										console.log("error " + data);
+
+									},
+									success : function(data) {
+										alert('success' + data);
+										console.log("success" + data);
+									}
+								});
+							});
+
+</script>
 
 </head>
 
@@ -47,51 +87,138 @@
 	</div>
 
 
-	
-		
-		
-		
-	
+
+
+
 	<div class="parallax-content projects-content" id="portfolio">
-	
-		<h1><font color="white">Restorent List</font></h1> 
-		<span><font color="orange">Restorent  List </font></span>
-		
-		<table width="70%"
-					class="table table-striped table-bordered table-hover" id="test">
-					<thead>
-				
-						<tr>
-							<th>res_code</th>
-							<th>res_menu_code</th>
-							<th>res_menu_name</th>
-							<th>res_menu_explan</th>
-							<th>res_menu_price</th>
-						</tr>
-					</thead>
-					<tbody>
 
-						<c:forEach items="${HashMapList}" var="res_code">
-							<tr class="odd gradeX">
-								<td><c:out value="${res_code.res_code}" /></td>
-								<td><a href="/restaurant/test/get?res_code=${res_code}"><c:out
-											value="${res_code.RES_NAME}" /></a></td>
-								<td><c:out value="${res_code.RES_INFO}" /></td>
-								<td><c:out value="${res_code.DEL_PRICE}" /></td>
-								<td><c:out value="${res_code.RES_MENU_PRICE}" /></td>
+		<h1>
+			<font color="white">Menu List</font>
+		</h1>
+		<span><font color="orange">Menu List </font></span>
+		<div class="container">
 
-							</tr>
-						</c:forEach>
+			<div class="row">
 
-					</tbody>
-				</table>
-				
-				
-		
-				
+				<div class="col-md-12">
+
+					<div id="owl-testimonials" class="owl-carousel owl-theme">
+						<div class="item">
+							<div class="testimonials-item">
+								<a href="../resources/img/1st-big-item.jpg"
+									data-lightbox="image-1"><img
+									src="../resources/img/1st-item.jpg" alt=""></a>
+								<div class="text-content">
+
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="1"
+										end="1" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${res_menu_code.res_menu_name}">
+											</c:out>
+										</h4>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
+											&#8361;</span>
+									</c:forEach>
+
+								</div>
+							</div>
+						</div>
+
+
+						<div class="item">
+							<div class="testimonials-item">
+								<a href="../resources/img/2nd-big-item.jpg"
+									data-lightbox="image-1"><img
+									src="../resources/img/2nd-item.jpg" alt="" id=""></a>
+								<div class="text-content">
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="2"
+										end="2" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${res_menu_code.res_menu_name}">
+											</c:out>
+										</h4>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
+											&#8361;</span>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimonials-item">
+								<a href="../resources/img/3rd-big-item.jpg"
+									data-lightbox="image-1"><img
+									src="../resources/img/3rd-item.jpg" alt="" id=""></a>
+								<div class="text-content">
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="3"
+										end="3" step="1" varStatus="i">
+										<h4>
+											<c:out value="${res_menu_code.res_menu_name}" />
+										</h4>
+										<span><c:out value="${res_menu_code.res_menu_price}" />&#8361;
+										</span>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimonials-item">
+								<a href="../resources/img/4th-big-item.jpg"
+									data-lightbox="image-1"><img
+									src="../resources/img/4th-item.jpg" alt="" id="$"></a>
+								<div class="text-content">
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="4"
+										end="4" step="1" varStatus="i">
+										<h4>
+											<c:out value="${res_menu_code.res_menu_name}" />
+										</h4>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>&#8361;
+										</span>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimonials-item">
+								<a href="../resources/img/5th-big-item.jpg"
+									data-lightbox="image-1"><img
+									src="../resources/img/5th-item.jpg" alt="" id=""></a>
+								<div class="text-content">
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="5"
+										end="5" step="1" varStatus="i">
+										<h4>
+											<c:out value="${res_menu_code.res_menu_name}" />
+										</h4>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>&#8361;
+										</span>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimonials-item">
+								<a href="../resources/img/6th-big-item.jpg"
+									data-lightbox="image-1"><img
+									src="../resources/img/6th-item.jpg" alt="" id=""></a>
+								<div class="text-content">
+									<c:forEach items="${HashMapList}" var="res_menu_code" begin="6"
+										end="6" step="1" varStatus="i">
+										<h4>
+											<c:out value="${res_menu_code.res_menu_name}" />
+										</h4>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>&#8361;
+										</span>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
 					</div>
-		
-	
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
 
 	<div class="service-content" id="services">
 		<div class="container">
@@ -150,13 +277,10 @@
 			</div>
 		</div>
 	</div>
-	
-	<div class="parallax-content contact-content " id="contact-us">
-	
-	
-	</div>
 
-	
+	<div class="parallax-content contact-content " id="contact-us"></div>
+
+
 
 
 
@@ -181,60 +305,8 @@
 
 
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
-	</script>
-<script src="../resources/js/vendor/bootstrap.min.js"></script>
-<script src="../resources/js/plugins.js"></script>
-<script src="../resources/js/main.js"></script>
-
-<!-- <script>
-	$(document).ready(function() {
-			$.ajax({
-				type : "GET",
-				url : "/restaurant/menuList",
-				dataType: "json",
-				contentType: "application/json; charset=utf-8;"
-				data :  JSON.stringify(jsonData)
-				{	res_code : "${res_code}",
-					res_menu_code : "${res_menu_code}",
-					res_menu_name : "${res_menu_name}",
-					res_menu_explan : "${res_menu_explan}",
-					res_menu_price : "${res_menu_price}"
-				},
-				error : function(error) {
-					console.log("error " + data);
-				},
-				success : function(result) {
-					console.log("success"+JSON.stringify(result.data));
-		            console.log("msg"+result.msg );
-		            var html = "";
-					$j("#item").empty(); //div
-					html += "<table id='menuList';>";
-					
-					var menuList = returnFix.btnsearchFix;
-					$j.each(item , function(idx, val) {
-						
-						html += "<tr> <td>"+val.RES_CODE+"</td>"
-						html += "<td>"+val.res_menu_code+" &#8361;</td></tr>"
-						html += "<tr> <td>"+val.res_menu_name+"</td>"
-						html += "<td>"+val.res_menu_explan+" &#8361;</td></tr>"
-						html += "<tr> <td>"+val.RES_MENU_PRICE+"</td>"
-					});
-					html += "</table>";
-				}
-			 });
-	 };
-
-				
-				
-		
-	</script> -->
-
-
+	<script src="../resources/js/vendor/bootstrap.min.js"></script>
+	<script src="../resources/js/plugins.js"></script>
+	<script src="../resources/js/main.js"></script>
 </body>
 </html>

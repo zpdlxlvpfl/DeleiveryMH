@@ -2,17 +2,25 @@ package com.hwyj.service;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.awt.MenuComponent;
+import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.ResMenuVO;
 import com.hwyj.domain.ResVO;
@@ -32,6 +40,63 @@ public class RestaurantServiceTest {
 		log.info(service);
 		assertNotNull(service);
 	}
+	
+	@Test
+	public void insertres()  throws Exception{
+	     HttpSession session = null;
+	     ResVO resvo = new ResVO();
+	     ResMenuVO menuvo = new ResMenuVO();
+		
+		 Calendar cal = Calendar.getInstance();
+		 int year = cal.get(Calendar.YEAR);
+		 String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		 String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		 String subNum = "";
+		 
+		 for(int i = 1; i <= 6; i ++) {
+		  subNum += (int)(Math.random() * 10);
+		 }
+		 
+		String res_code = ymd + "_" + subNum;
+		resvo.setRES_CODE(res_code);
+		resvo.setRES_NAME("TESTTESTTEST");
+		resvo.setRES_INFO("testinfo");
+		resvo.setDEL_PRICE("5000");
+		log.info(res_code);
+		System.out.println(resvo);
+		System.out.println(menuvo);
+		
+	}
+	
+	@Test
+	public void insertmenutest( )  throws Exception{
+	     ResMenuVO menuvo = new ResMenuVO();
+	 	 ResVO resvo = new ResVO();
+		 HttpSession session = null;
+		
+		 Calendar cal = Calendar.getInstance();
+		 int year = cal.get(Calendar.YEAR);
+		 String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		 String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		 String subNum = "";
+		 
+		 for(int i = 1; i <= 6; i ++) {
+		  subNum += (int)(Math.random() * 10);
+		 }
+		 
+		
+		 
+		String res_menu_code = ymd + "_Menu" + subNum;
+		String res_code = resvo.getRES_CODE();
+		menuvo.setRES_CODE(res_code);
+		menuvo.setRes_menu_code(res_menu_code);
+		menuvo.setRes_menu_explan("info");
+		menuvo.setRes_menu_name("name");
+		menuvo.setRes_menu_price("123123");
+		service.insertmenu(menuvo);
+		System.out.println(menuvo);
+	}
+	
 	
 	
 	@Test

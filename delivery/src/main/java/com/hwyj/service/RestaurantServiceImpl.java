@@ -43,8 +43,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 	
 	@Override
-	public ResVO read(String res_code) {
-		return restaurantMapper.read(res_code);
+	public ResVO read(String RES_CODE) throws Exception {
+		return restaurantMapper.read(RES_CODE);
 	}
 
 	
@@ -74,6 +74,13 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurantMapper.insertmenu(menuvo);
 		log.info("메장등록@@@@@@@@" + menuvo);
 	}
+	
+	public void rescodeUpDate() {
+		restaurantMapper.rescodeUpDate();
+		System.out.println("@@@@update start@@@@@@");
+		
+	}
+	
 
 
 
