@@ -54,88 +54,41 @@
 	
 	<div class="parallax-content projects-content" id="portfolio">
 	
-		<h1><font color="white">Restorent Home TEST</font></h1> 
-		<span><font color="orange">Restorent Home TEST </font></span>
+		<h1><font color="white">Restorent List</font></h1> 
+		<span><font color="orange">Restorent  List </font></span>
+		
+		<table width="70%"
+					class="table table-striped table-bordered table-hover" id="test">
+					<thead>
+				
+						<tr>
+							<th>res_code</th>
+							<th>res_menu_code</th>
+							<th>res_menu_name</th>
+							<th>res_menu_explan</th>
+							<th>res_menu_price</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<c:forEach items="${HashMapList}" var="res_code">
+							<tr class="odd gradeX">
+								<td><c:out value="${res_code.res_code}" /></td>
+								<td><a href="/restaurant/test/get?res_code=${res_code}"><c:out
+											value="${res_code.RES_NAME}" /></a></td>
+								<td><c:out value="${res_code.RES_INFO}" /></td>
+								<td><c:out value="${res_code.DEL_PRICE}" /></td>
+								<td><c:out value="${res_code.RES_MENU_PRICE}" /></td>
+
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+				
+				
 		
 				
-	
-		<div class="container">
-			
-			<div class="row">
-			
-				<div class="col-md-12">
-				
-					<div id="owl-testimonials" class="owl-carousel owl-theme">
-						
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/1st-item.jpg" alt=""></a>
-									
-								<div class="text-content">
-										<c:forEach items="${menuList}" var="menuList">
-										<h4><c:out value="${res_menu_name}" />${res_menu_name}</h4>
-									<span><c:out value="${RES_MENU_PRICE}" />${RES_MENU_PRICE}&#8361; </span>
-											</c:forEach>
-								</div>
-							
-							</div>
-						</div>
-						
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/2nd-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/2nd-item.jpg" alt="" id="${res_menu_name}" ></a>
-								<div class="text-content">
-										<h4>${Foodname} </h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/3rd-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/3rd-item.jpg" alt="" id="${res_menu_name}"></a>
-								<div class="text-content">
-										<h4>${res_menu_name}</h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/4th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/4th-item.jpg" alt=""  id="${res_menu_name}"></a>
-								<div class="text-content">
-									<h4>${res_menu_name}</h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/5th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/5th-item.jpg" alt="" id="${res_menu_name}"></a>
-								<div class="text-content">
-									<h4>${res_menu_name}</h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/6th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/6th-item.jpg" alt="" id="${res_menu_name}"></a>
-								<div class="text-content">
-									<h4>${res_menu_name}</h4>
-									<span>123 &#8361; </span>
-								</div>
-							</div>
-						</div>
-								</div>
-							</div>
-						</div>
-						</div>
 					</div>
 		
 	

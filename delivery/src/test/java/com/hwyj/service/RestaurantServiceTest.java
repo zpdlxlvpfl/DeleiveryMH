@@ -35,15 +35,6 @@ public class RestaurantServiceTest {
 	
 	
 	@Test
-	public void testresList() {
-		List<ResVO> resList=service.restList();
-		for(ResVO temp : resList) {
-			log.info("res: "+temp);
-		}		
-	}
-	
-	
-	@Test
 	public void menuList () { //code test
 		Map<String, Object> map = new HashMap<String , Object>();
 		ResMenuVO resmenu = new ResMenuVO();

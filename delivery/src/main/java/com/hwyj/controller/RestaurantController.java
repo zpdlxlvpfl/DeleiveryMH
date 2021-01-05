@@ -1,12 +1,15 @@
 package com.hwyj.controller;
 
-import static  org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request; 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.annotation.Generated;
 import javax.servlet.ServletRequest;
@@ -30,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.CustomerVO;
+import com.hwyj.domain.OrderVO;
 import com.hwyj.domain.ResMenuVO;
 import com.hwyj.domain.ResVO;
 import com.hwyj.mapper.MemberMapper;
@@ -54,7 +58,6 @@ public class RestaurantController {
 	public void res(Model model) {
 	}
 
-	
 	@GetMapping("/menulist")
 	public void menulist() {
 
@@ -64,8 +67,8 @@ public class RestaurantController {
 	public void reswrite() {
 
 	}
-	
-	@GetMapping("/reshome")
+
+	@GetMapping("/reshome/get.do")
 	public void reshome() {
 
 	}
@@ -76,82 +79,89 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/insertres") // 매장 등록
-	public String insertres(Locale locale, ResVO resvo, RedirectAttributes rttr) {
+	public String insertres(Locale locale, ResVO resvo) {
+		HttpSession session = null;
+		
+		 Calendar cal = Calendar.getInstance();
+		 int year = cal.get(Calendar.YEAR);
+		 String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		 String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		 String subNum = "";
+		 
+		 for(int i = 1; i <= 6; i ++) {
+		  subNum += (int)(Math.random() * 10);
+		 }
+		 
+		String res_code = ymd + "_" + subNum;
+		resvo.setRES_CODE(res_code);;
 		restaurantService.insertres(resvo);
-		log.info(resvo);
+		log.info(res_code);
 		System.out.println(resvo);
+		System.out.println(session);
 		return "redirect:/restaurant/reshome";
 	}
+
+	
 
 	@GetMapping("/insertmenu") // 메뉴 등록
-	public String insertmenu(ResMenuVO menuvo, RedirectAttributes rttr) {
+	public String insertmenu(ResMenuVO menuvo, ResVO resvo) {
+		 HttpSession session = null;
+		 
+		 Calendar cal = Calendar.getInstance();
+		 int year = cal.get(Calendar.YEAR);
+		 String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		 String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		 String subNum = "";
+		 
+		 for(int i = 1; i <= 6; i ++) {
+		  subNum += (int)(Math.random() * 10);
+		 }
+		 
+		String res_menu_code = ymd + "_Menu" + subNum;
+		String res_code = resvo.getRES_CODE();
+		menuvo.setRES_CODE(res_code);
+		menuvo.setRes_menu_code(res_menu_code);
 		restaurantService.insertmenu(menuvo);
-		log.info(menuvo);
 		System.out.println(menuvo);
-		rttr.addFlashAttribute(menuvo);
 		return "redirect:/restaurant/reshome";
 	}
 
-
-
-	//메뉴목록보기 (템플릿 사진 아래)
-    @RequestMapping(value = "menuList", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	// 메뉴목록보기 (템플릿 사진 아래)
+	@RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	public String menuList(ModelMap model, ResMenuVO menuvo) throws Exception {
-		HashMap<String, Object> hashMap = new HashMap<>();	//HashMap 인스턴스화
-		List<String> list = new ArrayList<>();				//List 인스턴스화
-		
-		list =  restaurantService.menuList();
-		hashMap.put("HashMapList", list);
-		
-		System.out.println(list);
-		model.addAttribute("MapList", list.get(0));
-		
-		return "/restaurant/menuList";
-	}
-    
-    
-	
-	
-	@GetMapping("/get")
-	public void get(String res_code,String res_menu_code,Model model,ResMenuVO menuvo) {
-		model.addAttribute("res_code",restaurantService.get(res_code));
-		model.addAttribute("menucode",restaurantService.menuread(res_menu_code));
-		System.out.println(model.addAttribute("res",restaurantService.get(res_code)));
-		System.out.println(model.addAttribute("res_menu_code",restaurantService.menuread(res_menu_code)));
-	}
+		HashMap<String, Object> hashMap = new HashMap<>(); // HashMap 인스턴스화
+		List<String> list = new ArrayList<>(); // List 인스턴스화
 
-
-    @RequestMapping(value = "restList", method = RequestMethod.GET, produces ="application/json; charset=utf8")
-	public String restList(ModelMap model, ResVO resvo) throws Exception {
-		HashMap<String, Object> hashMap = new HashMap<>();	
-		List<String> list = new ArrayList<>();				
-		
-		list =  restaurantService.restList();
+		list = restaurantService.menuList();
 		hashMap.put("HashMapList", list);
-		
+
 		System.out.println(list);
 		model.addAttribute("HashMapList", list);
-		
+
+		return "/restaurant/menuList";
+	} 
+
+	@GetMapping("/get")
+	public void get(String res_code, String res_menu_code, Model model, ResMenuVO menuvo) {
+		model.addAttribute("res_code", restaurantService.get(res_code));
+		model.addAttribute("menucode", restaurantService.menuread(res_menu_code));
+		System.out.println(model.addAttribute("res", restaurantService.get(res_code)));
+		System.out.println(model.addAttribute("res_menu_code", restaurantService.menuread(res_menu_code)));
+	}
+
+	
+	@RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public String restList(ModelMap model, ResVO resvo) throws Exception {
+		HashMap<String, Object> hashMap = new HashMap<>();
+		List<String> list = new ArrayList<>();
+
+		list = restaurantService.restList();
+		hashMap.put("RestList", list);
+
+		System.out.println(list+"RestList@@@@@@@@@@@@@");
+		model.addAttribute("RestList", list);
+
 		return "/restaurant/restList";
 	}
-	
-	
-	
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public void resauth(HttpServletRequest request,HttpSession session) {
-		HttpSession session1 = request.getSession();
-		ResVO resvo = new ResVO () ;
-		session1.setAttribute("owner",resvo.getRES_CODE());
-		String ownerId = (String)session1.getAttribute("owner");
-		
-		System.out.println("ownerID ::" + ownerId);
-		session1.getId();
-	}
-	
-	
-	
-	
-
 
 }
