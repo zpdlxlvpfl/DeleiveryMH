@@ -47,10 +47,23 @@ public class CartServiceTest {
 		}
 	}
 	
+	@Test //장바구니 수량 수정 서비스 테스트
+	public void testModifyAmount() {
+		CartVO cartVO = new CartVO();
+		cartVO.setAmount(4);
+		cartVO.setCart_no(121);
+		log.info("수량 수정 성공? "+service.modifyAmount(cartVO));
+	}
+	
 	@Test //장바구니 메뉴 삭제 서비스 테스트
 	public void testRemoveMenu() {
 	
 		log.info("장바구니 메뉴 성공? "+service.removeMenu(3));
+	}
+	
+	@Test //장바구니 전체삭제 서비스 테스트
+	public void testRemoveAll() {
+		log.info("장바구니 전체 삭제 성공? "+service.removeAll("user9"));
 	}
 	
 //	@Test //장바구니-메뉴 여러개 한번에 담는 서비스 테스트
