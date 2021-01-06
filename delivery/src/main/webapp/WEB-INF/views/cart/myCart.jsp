@@ -67,26 +67,24 @@
 				</div>
 				<div class="col-md-8">
 					<div class="row">
-					<c:forEach items="${cartList }" var="list" varStatus="status">
-						<div class="col-md-6">
+						<div id="c_list" class="col-md-6">
 							<div class="service-item">
-								<span style="color:white;" class="close" data-id=@item.RecordId>X</span>
-								<h4><c:out value="${list.res_menu_name }" /></h4>
+								<span style="color:white;" class="close">X</span>
+								<h4></h4>
 								<div class="line-dec"></div>
-								<p style="color:grey;"><c:out value="${list.res_menu_price }" />원</p>
-								<p><c:out value="${list.sum }" />원</p>
-								<p><button><b>-</b></button> <c:out value="${list.amount }" />개 <button><b>+</b></button></p>
+								<p style="color:grey;"></p>
+								<p></p>
+								<p></p>
 								<input type="hidden" id="cart_no" name="cart_no" value='<c:out value="${list.cart_no }" />'>
 								<input type="hidden" id="${status.count}" disabled>
 							</div>
-						</div>
-					</c:forEach>		
+						</div>		
 					</div>
 				</div>
 			</div>
 		</div>
-		<div style="color:white;" align="center">
-			<h4>총 주문금액 <b>${sumTotal }원</b></h4>
+		<div id="sumTotal" style="color:white;" align="center">
+			<h4>총 주문금액 <b>${cartList[0].sumTotal }원</b></h4>
 		</div>
 		<br />
 		<div class="primary-button"  align="center">
@@ -202,36 +200,104 @@
 	<script src="../resources/js/main.js"></script>
 
 
+
+
 <script>
 $(document).ready(function(){
 	
 	
-	$(".close").on("click",function(){
+	var cartService=(function() {
+		
+		//장바구니 목록 불러오기
+		function getCartList(callback, error){
+			
+			$.getJSON("/cart/cartList.json",
+				function(data){
+					if(callback){
+						callback(data);
+					}
+				}).fail(function(xhr,status,err){
+				if(error){
+					error();
+				}
+			});
+		}
+		
+		//메뉴 삭제
+		function remove(cart_no, callback, error){
+			$.ajax({
+				type : "delete",
+				url : "/cart/" + cart_no,
+				beforeSend : function(xhr)
+				{ xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
+				success : function(deleteResult, status, xhr){
+					if(callback){
+						callback(deleteResult);
+					}
+				},
+				error : function(xhr, status, er){
+					if(error){
+						error(er);
+					}
+				}
+				
+			});
+		}
+		
+		return {
+			getCartList : getCartList,
+			remove : remove
+		};
+		
+	})();
+	
+	
+
+	
+	
+	
+	
+	var c_list = $("#c_list");
+	var sumTotal = $("#sumTotal");
+	
+	showCartList();
+	
+	function showCartList(){
+		
+		cartService.getCartList(function(cartList){
+			var str="";
+			var sum_str='<div id="sumTotal" style="color:white;" align="center"><h4>총 주문금액 <b>'+cartList[0].sumTotal+'원</b></h4></div>';
+			if(cartList==null || cartList.length==0){
+				c_list.html("");
+				return;
+			}
+			for(var i=0, len=cartList.length||0; i<len; ++i){
+				str+='<div class="service-item">';
+				str+='<span style="color:white;" class="close" id="'+cartList[i].cart_no+'">X</span>';
+				console.log(str);
+				str+='<h4>'+cartList[i].res_menu_name+'</h4>';
+				str+='<div class="line-dec"></div><p style="color:grey;">'+cartList[i].res_menu_price+'원</p>';
+				str+='<p>'+cartList[i].sum +'원</p>';
+				str+='<p><button id="minus"><b>-</b></button>'+cartList[i].amount+'개 <button id="plus"><b>+</b></button></p>';
+				str+='<input type="hidden" id="cart_no" name="cart_no" value="{'+cartList[i].cart_no+'}">';
+				str+='</div></div>';
+			}
+			c_list.html(str);
+			sumTotal.html(sum_str);
+		});
+	}
+	
+	$(document).on("click",".close",function(e){
+		var cart_no= $(this).attr("id");
+		$(this).parent().css("display","none");
+		cartService.remove(cart_no, function(result){
+			showCartList();
+		});
 		
 		
 	});
 	
-function removeMenu(){
-		
-		var sendData = { cart_no : $("#cart_no").val() };
-		
-		$.ajax({
-			type : "post",
-			url : "/cart/RemoveMenu",
-			data : JSON.stringify(sendData),
-			beforeSend : function(xhr)
-            { xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
- 			dataType : "text json",
- 			contentType : "application/json; charset=UTF-8",
-			success : function(result){
-				console.log("성공");
-			},
-			error : function(error){
-				console.log("실패");
-			}
-		})
-			
-	}	
+
 	
 });
 

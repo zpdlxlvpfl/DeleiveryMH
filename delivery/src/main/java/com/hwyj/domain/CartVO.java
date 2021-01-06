@@ -15,7 +15,7 @@ public class CartVO {
 	private int amount; //수량
 	private int res_menu_price;
 	private int sum; //메뉴당 총금액
-	
+	private int sumTotal; //총 주문금액
 	
 	//private List<CartVO> list;
 	
