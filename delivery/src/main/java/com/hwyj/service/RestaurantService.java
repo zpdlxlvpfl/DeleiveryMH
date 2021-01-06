@@ -1,6 +1,6 @@
 package com.hwyj.service;
 
-import java.util.HashMap;    
+import java.util.HashMap;     
 import java.util.List ;
 import java.util.Map;
 
@@ -17,22 +17,15 @@ public interface RestaurantService {
 	
 	public ResMenuVO get(String res_menu_code);
 	
-	public ResMenuVO menuread(String menucode);
 	
 	//식당보기 서비스
 	public List<String> restList() throws Exception;
 	
-	public ResVO read(String RES_CODE)throws Exception;
 	
+	public List<String> read(String RES_CODE);
 	
+	//시갇ㅇ갯수
 	HashMap<String, Object> getresCount();
-	
-	/*
-	 * public ResMenuVO getmenu (String menucode);
-	 * 
-	 * public ResVO getres (String rescode);
-	 */
-	
 	
 	
 	//식당등록
@@ -42,6 +35,13 @@ public interface RestaurantService {
 
 	public void rescodeUpDate();
 	
+	public void UpdateRes(ResVO resvo);
+	
+	public void deleteRes(ResVO resvo);
+	
+	public void UpdateMenu(ResMenuVO menuvo);
+	
+	public void deleteMenu(ResMenuVO menuvo);
 	
 
 }

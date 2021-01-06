@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 import org.springframework.test.context.ContextConfiguration;
@@ -112,9 +113,16 @@ public class RestaurantServiceTest {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	}
+		
+	
+	@Test
+	public void read (String RES_CODE) {
+		service.read(RES_CODE);
+		log.info(RES_CODE);
+		System.out.println(RES_CODE);
+	}
 		
 	
 	
-	
-	}
 }

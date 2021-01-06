@@ -314,6 +314,22 @@
 
       <script src="resources/js/jquery3.3.1.min.js"></script>
       <script src="resources/js/semantic.min.js"></script>
+        <script>
+                           $(function(){
+                                $("input[name='enabled']:checked").click(function(){
+                                   console.log($(this).val())
+                                  if ($(this).is(':checked'))  {
+                                     $.ajax({
+                                        data : data ,
+                                       type : "get",
+                                       url :"/enabled"
+                                  })
+                                  }
+                                });
+                              });
+                        
+                           </script>
+      
       <script>
       $(document).ready(
             function() {

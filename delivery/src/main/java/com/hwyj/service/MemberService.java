@@ -1,10 +1,11 @@
 package com.hwyj.service;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.hwyj.domain.CustomerVO;
+import com.hwyj.domain.OrderVO;
 
 public interface MemberService {
 	
@@ -31,5 +32,6 @@ public interface MemberService {
 	
 	//비밀번호 변경
 	public boolean updatePw(CustomerVO customerVO);
+
 	
 }

@@ -1,6 +1,6 @@
 package com.hwyj.domain;
 
-import java.sql.Date;
+import java.sql.Date;  
 
 import lombok.Data;
 
@@ -13,4 +13,5 @@ public class ResVO {
 	private String DEL_PRICE;
 	//private String RES_MENU_NAME;
 	private String RES_MENU_PRICE;
+	
 }

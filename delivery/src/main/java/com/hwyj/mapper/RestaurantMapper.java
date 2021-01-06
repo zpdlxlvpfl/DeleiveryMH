@@ -19,7 +19,7 @@ public interface RestaurantMapper {
 	
 	public ResMenuVO menuread(String menucode);
 
-	public ResVO read(String RES_CODE)throws Exception;
+	public List<String> read(String RES_CODE) ;
 	
 	//식당 정보 보기
 	
@@ -27,18 +27,29 @@ public interface RestaurantMapper {
 	
 	public HashMap<String, Object> getresCount();
 	
+	public ResVO ResInfo(String RES_CODE);
+	
 	
 	//식당 리뷰 보기
 	
 	//public String saveImage(FileVO vo);
 	
-	public void status (ResVO resvo);
+	public void enable (ResVO resvo);
 	
 	public void insertres (ResVO resvo); // 매장등록
 	
 	public void insertmenu (ResMenuVO menuvo); //메뉴등록
 
 	public void rescodeUpDate();
+	
+	public void UpdateRes (ResVO resvo); 
+	
+	public void deleteRes (ResVO resvo); 
+	
+	public void UpdateMenu (ResMenuVO menuvo);
+	
+	public void deleteMenu (ResMenuVO menuvo);
+	
 	
 
 	

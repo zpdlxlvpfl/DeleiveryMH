@@ -14,50 +14,47 @@
 	</resultMap>
 	
 	<resultMap type="com.hwyj.domain.ResMenuVO" id="menuMap">
-	<result property="RES_CODE" column="RES_NAME" />
-	<result property="m_name"  column="RES_ADDRESS"/>
-	<result property="red_menu_code" column="RES_TEL" />
+	<result property="RES_CODE" column="RES_CODE" />
+	<result property="res_menu_code"  column="res_menu_code"/>
 	<result property="res_menu_name" column="res_menu_name" />
-	<result property="RES_MENU_EXPLAN" column="RES_MENU_EXPLAN" />
+	<result property="res_menu_explan" column="res_menu_explan" />
 	<result property="res_menu_price" column="res_menu_price" />
 	</resultMap>
 	
 		
 <!--  메뉴보기 (식당이름, 메뉴이름, 메뉴설명, 메뉴가격) -->
-	<select id="menuList" resultType="map" parameterType="com.hwyj.domain.ResMenuVO">	
+	<select id="menuList" resultType="map" >	
 	<!-- select res_menu_name, res_menu_explan, res_menu_price from res_menu left outer join member on res_menu.res_code=member.res_code
 	where res_menu.res_code=#{res_code} -->
-	select res_menu_name,res_menu_price from testdb.res_menu where res_menu_code  is not null
- 	<!-- select res_menu_name,res_menu_price from res_menu limit 1,10 -->
-	<!-- 일단 한줄씩 -->
+	SELECT *
+		FROM res
+		right JOIN res_menu ON res.res_code = res_menu.res_menu_code
+		WHERE res.res_code is null AND
+		(res_menu.res_code IS NOT NULL OR res_menu.res_menu_code)
+ 	
 	</select>
 	
-	<!-- 매장등록시 메뉴테이블에 매장코드 추가 -->
-	<update id ="rescodeUpDate" >
-		update testdb.res as a ,(select #{RES_CODE} from
-		testdb.res_menu where #{RES_CODE} is not null)
-		as b set a.RES_CODE = b.#{RES_CODE} where a.RES_CODE=b.#{RES_CODE} 
-		
-	</update>
+	
 	
 	<!-- 매장 리스트 -->
 		<select id="restList" resultType="map">
-		 select res_name,res_info,RES_CODE,del_price 
-		from testdb.res where RES_CODE  is not null 
-		<!-- select testdb.res.RES_CODE, 
-		res_name,
-		res_info, del_price
-		from testdb.res 
-		left outer join testdb.res_menu on testdb.res.RES_CODE=testdb.res_menu.res_code
-		where testdb.res.RES_CODE is not null -->
+		<!-- select res_name,res_info,RES_CODE,del_price 
+		from testdb.res where RES_CODE  is not null -->
+		SELECT res.res_code,res_name,res_info,del_price
+		FROM res
+		left JOIN res_menu ON res.res_code = res_menu.res_menu_code
+		WHERE res.res_code  is not null AND
+		(res_menu.res_code IS NULL OR res_menu.res_menu_code)
+		
 		</select>
 	
-	<select id="read" resultType="com.hwyj.domain.ResMenuVO">
-		 select * from testdb.res_menu where RES_CODE=#{RES_CODE} 
-	<!-- 	select testdb.res.RES_CODE from testdb.res left outer join testdb.res_menu on testdb.res.RES_CODE = testdb.res_menu.res_code
-        where testdb.res.RES_CODE=#{RES_CODE} -->
+ 	<select id="read" resultType="map">
+		select res.res_code, res_menu.res_code 
+	    from res right join res_menu
+	    on res.res_code=res_menu.res_code
+
 	</select>
-	
+	 
 	
 	
 	
@@ -90,6 +87,26 @@
 		
 	</insert>
 	
+		<!-- 수정 -->
+	<update id="UpdateRes">
+	UPDATE testdb.res
+	SET 
+	RES_NAME=#{RES_NAME},
+	RES_INFO=#{RES_INFO},
+	DEL_PRICE=#{DEL_PRICE}
+	WHERE 
+	(RES_CODE=#{RES_CODE})
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteRes">
+		delete from testdb.res where RES_CODE=#{RES_CODE}
+	</delete>
+
+	
+	
+	
+	
 		<!-- 메뉴 등록 -->
 	<insert id="insertmenu" parameterType="com.hwyj.domain.ResMenuVO">
 		INSERT INTO testdb.res_menu
@@ -107,5 +124,23 @@
 		
 
 	</insert>
+	
+			<!-- 수정 -->
+	<update id="UpdateMenu">
+	UPDATE testdb.res_menu
+	SET 
+	res_menu_code=#{res_menu_code},
+	res_menu_explan=#{res_menu_explan},
+	res_menu_price=#{res_menu_price}
+	WHERE 
+	(RES_CODE=#{RES_CODE})
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteMenu">
+		delete from testdb.res_menu where RES_CODE=#{RES_CODE}
+	</delete>
+	
+	
 
 </mapper>

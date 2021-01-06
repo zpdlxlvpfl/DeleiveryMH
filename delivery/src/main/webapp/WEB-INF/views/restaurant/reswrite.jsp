@@ -133,11 +133,15 @@
 
 
 
-	<script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	type="text/javascript"></script>
+
+<script>
 	window.jQuery
 			|| document
-					.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
+					.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
 </script>
+
 
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/plugins.js"></script>
@@ -149,9 +153,10 @@
 					$("#insertres").click(
 							function() {
 								var json = {
+									RES_CODE :  $("#RES_CODE").val(),
 									RES_NAME : $("#RES_NAME").val(),
 									RES_INFO : $("#RES_INFO").val(),
-									DEL_PRICE : $("#DEL_PRICE").val(),
+									DEL_PRICE : $("#DEL_PRICE").val()
 									//RES_DATE : $("#RES_DATE").val()
 								};
 
@@ -164,12 +169,12 @@
 									}
 								}
 									$.ajax({
-										type : "get",
+										type : "GET",
 										url : "/restaurant/insertres",
 										data : json,
 										success : function(string) {
 											alert('매장 등록 성공');
-											document.location.href="/restaurant/reshome";
+											document.location.href="/restaurant/restList";
 										},
 										error : function(error) {
 											alert("에러" + error);

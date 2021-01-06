@@ -1,6 +1,6 @@
 package com.hwyj.mapper;
 
-import com.hwyj.domain.CustomerVO;
+import com.hwyj.domain.CustomerVO; 
 
 public interface MemberMapper {
 	
@@ -21,7 +21,6 @@ public interface MemberMapper {
 			
 		//비밀번호 변경
 		public int updatePw(CustomerVO customerVO);
-		
 	
 		//회원가입
 		public int insertCustomer(CustomerVO csVO);

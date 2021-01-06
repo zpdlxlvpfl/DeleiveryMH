@@ -169,9 +169,6 @@ public class CommonController {
    
       check = memberservice.selectCustomer(csVO);
       System.out.println("result " + check);
-//      if (check == "0") {   //패스워드 암호화
-//         check = "0";
-//      } else {
          check = "0";
          PasswordEncoder encode = new BCryptPasswordEncoder();
          csVO.setPw(encode.encode(csVO.getPw()));
@@ -182,6 +179,14 @@ public class CommonController {
       //}
       return check + "";
       }
+   
+   
+   
+
+	@GetMapping("/enabled")
+	public String enabled (String ID,String RES_ID,Model model) {
+		return "";
+	}
    
    
 }

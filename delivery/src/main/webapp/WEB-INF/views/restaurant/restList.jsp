@@ -47,7 +47,7 @@
 </script>
 
 <script>
-	$(document).ready(function restList() {
+	$(document).ready(function RestList() {
 		$.ajax({
 			type : "get",
 			url : "/restaurant/restList",
@@ -127,7 +127,7 @@
 						
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="1" end="1" step="1" varStatus="status">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -138,7 +138,7 @@
 								
 								<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="2" end="2" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -148,7 +148,7 @@
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="3" end="3" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+							<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -161,7 +161,7 @@
 						<div class="col-md-12">
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="4" end="4" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+							<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -171,7 +171,7 @@
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="5" end="5" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -181,7 +181,7 @@
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="6" end="6" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -195,7 +195,7 @@
 						<div class="col-md-12">
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="7" end="7" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -205,7 +205,7 @@
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="8" end="8" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -215,7 +215,7 @@
 							
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="9" end="9" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -230,7 +230,7 @@
 						<div class="col-md-12">
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="10" end="10" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -240,7 +240,7 @@
 							
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="11" end="11" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -250,7 +250,7 @@
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="12" end="12" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -262,7 +262,7 @@
 							<div class="col-md-12">
 						<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="13" end="13" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -272,7 +272,7 @@
 							
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="14" end="14" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
@@ -282,7 +282,7 @@
 						
 							<div class="service-item">
 								<c:forEach items="${RestList}" var="RES_CODE" begin="15" end="15" step="1" varStatus="i">
-								<h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE.RES_CODE}">
+								<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 								<c:out value=" ${RES_CODE.res_name}"></c:out></a></h4>
 								<div class="line-dec"></div>
 								<p><c:out value=" ${RES_CODE.res_info}"> </c:out></p>
