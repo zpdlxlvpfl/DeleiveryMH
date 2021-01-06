@@ -38,9 +38,23 @@ public class CartMapperTest {
 		}
 	}
 	
+	@Test //장바구니 메뉴 수량 수정
+	public void testUpdateAmount() {
+		CartVO cartVO = new CartVO();
+		cartVO.setAmount(2);
+		cartVO.setCart_no(121);
+		log.info("수량 수정 성공이면 1: "+mapper.updateAmount(cartVO));
+	}
+	
 	@Test //장바구니 메뉴 삭제 테스트
 	public void testDeleteMenu() {
 		log.info("메뉴삭제 성공이면 1: "+mapper.deleteMenu(3));
+	}
+	
+	@Test //장바구니 전체 삭제 테스트
+	public void testDeleteAll() {
+		
+		log.info("장바구니 전체삭제(0이상): "+mapper.deleteAll("user14"));
 	}
 	
 //	@Test //장바구니 한번에 여러개 넣기 테스트

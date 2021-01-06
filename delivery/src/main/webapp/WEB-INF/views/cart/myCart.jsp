@@ -50,18 +50,17 @@
 				<div class="col-md-4">
 				
 					<div class="left-text">
-						<h4>장바구니</h4>
+						<h4><b>장바구니</b></h4>
 						<div class="line-dec"></div>
-						<p>
-							Delivery TEST abcdefgsadqasdfaffadac <a rel="nofollow"
-								href="https://templatemo.com"> website</a> whsskwhfflek.
-						</p>
-						<ul>
-							<li>- test test test test test test</li>
-							<li>- test test test test test test</li>
-							<li>- test test test test test test</li>
-							<li>- test test test test test test</li>
-						</ul>
+						<div id="removeAll" class="primary-button" style="color:#F8F8FF;">
+							<h3><b>전체삭제</b></h3>
+						</div>
+<!-- 						<ul> -->
+<!-- 							<li>- test test test test test test</li> -->
+<!-- 							<li>- test test test test test test</li> -->
+<!-- 							<li>- test test test test test test</li> -->
+<!-- 							<li>- test test test test test test</li> -->
+<!-- 						</ul> -->
 						
 					</div>
 				</div>
@@ -187,6 +186,29 @@
 	</footer>
 
 
+<!-- modal -->
+<div id="d_Modal" class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">장바구니 전체삭제</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>모두 삭제하시겠습니까?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="rAll">확인</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
@@ -203,6 +225,8 @@
 
 
 <script>
+
+
 $(document).ready(function(){
 	
 	
@@ -244,9 +268,30 @@ $(document).ready(function(){
 			});
 		}
 		
+		//장바구니 전체삭제
+		function removeAll(callback, error){
+			$.ajax({
+				type : "delete",
+				url : "/cart/removeAll",
+				beforeSend : function(xhr)
+				{ xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
+				success : function(deleteResult, status, xhr){
+					if(callback){
+						callback(deleteResult);
+					}
+				},
+				error : function(xhr, status, er){
+					if(error){
+						error(er);
+					}
+				}				
+			});
+		}
+		
 		return {
 			getCartList : getCartList,
-			remove : remove
+			remove : remove,
+			removeAll : removeAll
 		};
 		
 	})();
@@ -267,10 +312,10 @@ $(document).ready(function(){
 		cartService.getCartList(function(cartList){
 			var str="";
 			var sum_str='<div id="sumTotal" style="color:white;" align="center"><h4>총 주문금액 <b>'+cartList[0].sumTotal+'원</b></h4></div>';
-			if(cartList==null || cartList.length==0){
-				c_list.html("");
-				return;
-			}
+// 			if(cartList==null || cartList.length==0){
+// 				c_list.html("");
+// 				return;
+// 			}
 			for(var i=0, len=cartList.length||0; i<len; ++i){
 				str+='<div class="service-item">';
 				str+='<span style="color:white;" class="close" id="'+cartList[i].cart_no+'">X</span>';
@@ -278,12 +323,21 @@ $(document).ready(function(){
 				str+='<h4>'+cartList[i].res_menu_name+'</h4>';
 				str+='<div class="line-dec"></div><p style="color:grey;">'+cartList[i].res_menu_price+'원</p>';
 				str+='<p>'+cartList[i].sum +'원</p>';
-				str+='<p><button id="minus"><b>-</b></button>'+cartList[i].amount+'개 <button id="plus"><b>+</b></button></p>';
+				str+='<p id="amount"><button id="minus"><b>-</b></button>'+cartList[i].amount+'개 <button id="plus"><b>+</b></button></p>';
 				str+='<input type="hidden" id="cart_no" name="cart_no" value="{'+cartList[i].cart_no+'}">';
 				str+='</div></div>';
 			}
+			
 			c_list.html(str);
 			sumTotal.html(sum_str);
+			
+			if(cartList[0].res_menu_name==null){
+				c_list.html('<div style="color:white;" align="center"><h4>장바구니가 비어있습니다.</h4></div>');
+			}
+			
+// 			if(cartList==null || emptyCart != null){
+// 				sumTotal.html('<div id="sumTotal" style="color:white;" align="center"><h4>총 주문금액 <b>0원</b></h4></div>');
+// 			}
 		});
 	}
 	
@@ -292,11 +346,21 @@ $(document).ready(function(){
 		$(this).parent().css("display","none");
 		cartService.remove(cart_no, function(result){
 			showCartList();
-		});
-		
-		
+		});				
 	});
 	
+	
+	
+	
+	$(document).on("click","#removeAll",function(e){
+		$("#d_Modal").modal("show");
+		$(document).on("click","#rAll",function(e){
+			$("#d_Modal").modal("hide");
+			cartService.removeAll(function(result){
+				showCartList();
+			});
+		});
+	});
 
 	
 });

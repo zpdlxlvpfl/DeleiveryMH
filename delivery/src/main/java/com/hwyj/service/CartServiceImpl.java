@@ -31,10 +31,10 @@ public class CartServiceImpl implements CartService {
 		return cartMapper.cartList(id);
 	}
 
-	@Override
+	@Override //장바구니 메뉴 수량 수정 서비스
 	public boolean modifyAmount(CartVO cartVO) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return cartMapper.updateAmount(cartVO)==1;
 	}
 
 	@Override //장바구니 메뉴 삭제 서비스
@@ -43,10 +43,10 @@ public class CartServiceImpl implements CartService {
 		return cartMapper.deleteMenu(cart_no)==1;
 	}
 
-	@Override
-	public boolean removeCart(String id) {
-		// TODO Auto-generated method stub
-		return false;
+	@Override //장바구니 전체삭제 서비스
+	public boolean removeAll(String id) {
+		
+		return cartMapper.deleteAll(id)>=1; //삭제된게 1개 이상이면 true
 	}
 
 //	@Override //장바구니 (메뉴 한번에 여러개 넣는 서비스)
