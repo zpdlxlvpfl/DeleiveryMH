@@ -6,6 +6,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hwyj.domain.CartVO;
 import com.hwyj.domain.CustomerVO;
 import com.hwyj.security.CustomUserDetailsService;
 import com.hwyj.service.MemberService;
@@ -59,6 +62,32 @@ public class MemberController {
 			rttr.addFlashAttribute("result", "m_success");
 		}	
 		return "redirect:/member/myInfo";
+	}
+	
+	//비밀번호 체크 페이지
+	@GetMapping("checkPw")
+	public void checkPw() {
+		
+	}
+	@PostMapping("checkPw")
+	public String checkPw(Authentication authentication, String pw, RedirectAttributes rttr) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal(); //현재 로그인한 유저 정보
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setId(userDetails.getUsername());
+		customerVO.setPw(pw);
+		if(memberService.checkPw(customerVO)) {
+			rttr.addFlashAttribute("result", "c_success");
+			return "changePw";
+		}else {
+			rttr.addFlashAttribute("result", "fail");
+		}
+		return "checkPw";
+	}
+	
+	//비밀번호 변경 페이지
+	@GetMapping("changePw")
+	public void changePw() {
+		
 	}
 	
 

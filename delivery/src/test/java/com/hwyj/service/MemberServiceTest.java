@@ -66,6 +66,14 @@ public class MemberServiceTest {
 		log.info("비번변경 성공? "+service.updatePw(customerVO));
 	}
 	
+	@Test //비밀번호 체크 서비스 테스트
+	public void testCheckPw() {
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setId("admin91");
+		customerVO.setPw("pw91");
+		log.info("비밀번호 체크 성공? "+service.checkPw(customerVO));
+	}
+	
 	 @Test //회원가입 +권한등록 서비스 테스트
 	 public void testInsertCustomer() {
 		 CustomerVO customerVO = new CustomerVO();

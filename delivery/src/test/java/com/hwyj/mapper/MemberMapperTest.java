@@ -3,6 +3,8 @@ package com.hwyj.mapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -63,6 +65,13 @@ public class MemberMapperTest {
 		customerVO.setId("13aa");
 		customerVO.setPw("qlqjsqusrud");
 		mapper.updatePw(customerVO);
+	}
+	
+	@Test //비밀번호 체크 테스트
+	public void testCheckPw() {
+		PasswordEncoder pwencoder=new BCryptPasswordEncoder();
+		log.info("비밀번호 체크: "+pwencoder.matches("pw91", mapper.checkPw("admin91")));
+		
 	}
 	
 	@Test //회원가입-권한등록 테스트

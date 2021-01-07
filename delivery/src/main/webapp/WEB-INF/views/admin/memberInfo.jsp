@@ -6,40 +6,51 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
+<div class="container">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-6">
+            <h2>회원정보</h2>
+            <p class="lead">#####</p>
+          </div>
+          <div class="col-lg-4 col-md-5 col-sm-6">
+          </div>
+        </div>
+      </div>
 
 <form name="removeMember">
 	<div class="form-group">
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#아이디</label>
+	    <label class="control-label" for="readOnlyInput">아이디</label>
 	    <input name="id" class="form-control" id="readOnlyInput" type="text" value='<c:out value="${memberInfo.id }"/>' readonly>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#이름</label>
+	    <label class="control-label" for="readOnlyInput">이름</label>
 	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${memberInfo.m_name }"/>' readonly>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#Email address</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value="#" readonly>
+	    <label class="control-label" for="readOnlyInput">이메일</label>
+	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${memberInfo.email }"/>' readonly>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#주소</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value="#" readonly>
+	    <label class="control-label" for="readOnlyInput">주소</label>
+	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${memberInfo.address }"/>' readonly>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#전화번호</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value="#" readonly>
+	    <label class="control-label" for="readOnlyInput">전화번호</label>
+	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${memberInfo.tel }"/>' readonly>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#가입날짜</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value="#" readonly>
+	    <label class="control-label" for="readOnlyInput">가입날짜</label>
+	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${memberInfo.member_date }"/>' readonly>
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">#권한</label>
+	    <label class="control-label" for="readOnlyInput">권한</label>
 	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${memberInfo.auth }"/>' readonly>
 	  </fieldset>
 	  <p></p>
 	  <button type="button" id="d_member" class="btn btn-outline-danger">회원삭제</button>
-	  <button type="button" id="mList" class="btn btn-outline-info">#목록보기</button>
+	  <button type="button" id="mList" class="btn btn-outline-info">목록보기</button>
 	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</div>
 </form>

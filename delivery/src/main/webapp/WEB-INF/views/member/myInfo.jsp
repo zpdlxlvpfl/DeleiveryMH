@@ -6,6 +6,17 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
+<div class="container">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-6">
+            <h2>회원정보</h2>
+            <p class="lead">#####</p>
+          </div>
+          <div class="col-lg-4 col-md-5 col-sm-6">
+          </div>
+        </div>
+      </div>
 
 <form action="modifyMyInfo" method="get">
 	<div class="form-group">
@@ -31,7 +42,7 @@
 	  </fieldset>
 	  <p></p>
 	  <button type="submit" class="btn btn-warning">정보수정</button>
-	  <button type="button" id="mList" class="btn btn-info">#####</button>
+	  <button type="button" id="changePw" onclick="location.href='checkPw'" class="btn btn-info">비밀번호 변경</button>
 	
 	</div>
 </form>

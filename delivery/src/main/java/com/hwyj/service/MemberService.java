@@ -32,6 +32,9 @@ public interface MemberService {
 	
 	//비밀번호 변경
 	public boolean updatePw(CustomerVO customerVO);
+	
+	//비밀번호 체크 (아이디, 비번????)
+	public boolean checkPw(CustomerVO customerVO);
 
 	
 }

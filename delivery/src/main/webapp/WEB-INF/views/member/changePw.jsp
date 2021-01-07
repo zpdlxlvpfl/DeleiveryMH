@@ -10,14 +10,14 @@
       <div class="page-header" id="banner">
         <div class="row">
           <div class="col-lg-8 col-md-7 col-sm-6">
-            <h2>회원정보 수정</h2>
+            <h2>비밀번호 변경</h2>
             <p class="lead">#####</p>
           </div>
           <div class="col-lg-4 col-md-5 col-sm-6">
           </div>
         </div>
       </div>
-
+      
 <form name="updatemyInfo">
 	<div class="form-group">
 	  <fieldset>
@@ -42,7 +42,7 @@
 	  </fieldset>
 	  <p></p>
 	  <button type="button" id="m_Info" class="btn btn-warning">수정하기</button>
-	  <button type="button" id="myInfo" class="btn btn-info">취소</button>
+	  <button type="button" id="myInfo" class="btn btn-info">#취소</button>
 	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</div>
 </form>
@@ -61,8 +61,8 @@
         <p>수정사항을 저장하시겠습니까?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" onclick="clickModi(updatemyInfo)">저장</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-secondary" onclick="clickModi(updatemyInfo)">Save Changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

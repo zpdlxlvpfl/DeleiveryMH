@@ -21,6 +21,9 @@ public interface MemberMapper {
 			
 		//비밀번호 변경
 		public int updatePw(CustomerVO customerVO);
+		
+		//비밀번호 체크
+		public String checkPw(String id);
 	
 		//회원가입
 		public int insertCustomer(CustomerVO csVO);

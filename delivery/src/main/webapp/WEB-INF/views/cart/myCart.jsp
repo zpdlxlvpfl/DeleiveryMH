@@ -73,7 +73,7 @@
 								<div class="line-dec"></div>
 								<p style="color:grey;"></p>
 								<p></p>
-								<p></p>
+								<div></div>
 								<input type="hidden" id="cart_no" name="cart_no" value='<c:out value="${list.cart_no }" />'>
 								<input type="hidden" id="${status.count}" disabled>
 							</div>
@@ -247,6 +247,26 @@ $(document).ready(function(){
 			});
 		}
 		
+		//장바구니 메뉴 수량 수정
+		function modify(amount, callback, error){
+			$.ajax({
+				type : "put",
+				url : "/cart/" + amount.cart_no,
+				data : JSON.stringify(amount),
+				contentType : "application/json; charset=utf-8",
+				success : function(result, status, xhr){
+					if(callback){
+						callback(result);
+					}
+				},
+				error : function(xhr, status, er){
+					if(error){
+						error(er);
+					}
+				}
+			});			
+		}
+		
 		//메뉴 삭제
 		function remove(cart_no, callback, error){
 			$.ajax({
@@ -290,6 +310,7 @@ $(document).ready(function(){
 		
 		return {
 			getCartList : getCartList,
+			modify : modify,
 			remove : remove,
 			removeAll : removeAll
 		};
@@ -323,7 +344,7 @@ $(document).ready(function(){
 				str+='<h4>'+cartList[i].res_menu_name+'</h4>';
 				str+='<div class="line-dec"></div><p style="color:grey;">'+cartList[i].res_menu_price+'원</p>';
 				str+='<p>'+cartList[i].sum +'원</p>';
-				str+='<p id="amount"><button id="minus"><b>-</b></button>'+cartList[i].amount+'개 <button id="plus"><b>+</b></button></p>';
+				str+='<div id="'+cartList[i].amount+'"><button id="minus"><b>-</b></button>'+cartList[i].amount+'개 <button id="plus"><b>+</b></button></div>';
 				str+='<input type="hidden" id="cart_no" name="cart_no" value="{'+cartList[i].cart_no+'}">';
 				str+='</div></div>';
 			}
@@ -341,17 +362,39 @@ $(document).ready(function(){
 		});
 	}
 	
+	
+	
+	
+	//메뉴 수량 수정 클릭
+	$(document).on("click","#plus",function(e){
+		var amount = $(this).parent().attr("id");
+		amount=parseInt(amount);
+		amount+=1;
+		//amount 값 +1 한걸 다시 id 값에 넣어야 계속 +1 가능한가???? id값에 다시 넣는 법 고민
+		console.log(amount);
+	});
+// 	$(document).on("click","#minus",function(e){
+	
+// 		amount-=1;
+// 		console.log(amount);
+// 	});
+	
+	
+	
+	
+	
+	
+	
+	//메뉴 삭제 클릭
 	$(document).on("click",".close",function(e){
 		var cart_no= $(this).attr("id");
 		$(this).parent().css("display","none");
 		cartService.remove(cart_no, function(result){
 			showCartList();
 		});				
-	});
+	});	
 	
-	
-	
-	
+	//전체삭제 클릭
 	$(document).on("click","#removeAll",function(e){
 		$("#d_Modal").modal("show");
 		$(document).on("click","#rAll",function(e){

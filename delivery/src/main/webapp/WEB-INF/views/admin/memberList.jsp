@@ -5,17 +5,29 @@
 <%@include file="../includes/header.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
+<div class="container">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-6">
+            <h2>관리자페이지</h2>
+            <p class="lead">#####</p>
+          </div>
+          <div class="col-lg-4 col-md-5 col-sm-6">
+          </div>
+        </div>
+      </div>
+
       <!-- Tables
       ================================================== -->
       <div class="bs-docs-section">
         <div class="row">
           <div class="col-lg-12">
             <div class="page-header">
-              <h1 id="tables">#회원목록</h1>
+              <h2 id="tables">회원목록</h2>
             </div>
  
 			 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-			  <button type="button" class="btn btn-info">#권한</button>
+			  <button type="button" class="btn btn-info">권한</button>
 			  <div class="btn-group" role="group">
 			    <button id="btnGroupDrop3" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 			    <div class="dropdown-menu" aria-labelledby="btnGroupDrop3">
@@ -30,12 +42,12 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">#아이디</th>
-                    <th scope="col">#이름</th>
-                    <th scope="col">#주소</th>
-                    <th scope="col">#이메일</th>
-                    <th scope="col">#전화번호</th>
-                    <th scope="col">#권한</th>
+                    <th scope="col">아이디</th>
+                    <th scope="col">이름</th>
+                    <th scope="col">주소</th>
+                    <th scope="col">이메일</th>
+                    <th scope="col">전화번호</th>
+                    <th scope="col">권한</th>
                   </tr>
                 </thead>
                 <c:forEach items="${memberList }" var="member">
@@ -56,25 +68,25 @@
       </div>
  
  
- <!-- modal -->
-<div id="d_Modal" class="modal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">회원삭제</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p><c:out value="${deleteId }"/> 회원을 삭제했습니다.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">#확인?</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!--   modal  -->
+<!-- <div id="d_Modal" class="modal"> -->
+<!--   <div class="modal-dialog" role="document"> -->
+<!--     <div class="modal-content"> -->
+<!--       <div class="modal-header"> -->
+<!--         <h5 class="modal-title">회원삭제</h5> -->
+<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+<!--           <span aria-hidden="true">&times;</span> -->
+<!--         </button> -->
+<!--       </div> -->
+<!--       <div class="modal-body"> -->
+<%--         <p><c:out value="${deleteId }"/> 회원을 삭제했습니다.</p> --%>
+<!--       </div> -->
+<!--       <div class="modal-footer"> -->
+<!--         <button type="button" class="btn btn-primary" data-dismiss="modal">#확인?</button> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
 
       
 <script>

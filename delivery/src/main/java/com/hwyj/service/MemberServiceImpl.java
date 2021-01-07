@@ -2,6 +2,8 @@ package com.hwyj.service;
 
 
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;  
 
 import com.hwyj.domain.CustomerVO;
@@ -69,6 +71,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.updatePw(customerVO)==1;
 	}
 	
+	@Override //비밀번호 체크
+	public boolean checkPw(CustomerVO customerVO) {
+		customerVO.getPw(); //회원이 입력한 패스워드
+		PasswordEncoder pwencoder=new BCryptPasswordEncoder();	
+		return pwencoder.matches(customerVO.getPw(), memberMapper.checkPw(customerVO.getId()));
+	}
 	
 	@Override
 	public String selectCustomer(CustomerVO csVO) {
@@ -76,9 +84,6 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(csVO);
 		return "";
 	}
-	
-
-
 
 	
 	
