@@ -33,11 +33,12 @@
         <ul class="nav flex-column">
             <li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
             <li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="login.html"><span>LOGIN</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="logout"><span>Logout</span></a></li>
             <li class="nav-item"><a class="nav-link" href="join.html"><span>JOIN</span></a></li>
             <li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
         </ul>
     </div>
+
 
 
 <div class="parallax-content baner-content" id="home">

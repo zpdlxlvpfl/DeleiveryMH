@@ -56,7 +56,6 @@
 
 var RestList = $("#RestList")
 
-
 function restList(){
 	
 	restaurantService.restList(function(restList){

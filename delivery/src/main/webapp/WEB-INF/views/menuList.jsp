@@ -38,12 +38,12 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	type="text/javascript"></script>
 
-<script type="text/javascript">
-		window.jQuery
-				|| document
-						.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
-	</script>
-	
+<script>
+	window.jQuery
+			|| document
+					.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
+</script>
+
 
 </head>
 
@@ -285,11 +285,9 @@
 	</footer>
 
 	<script type="text/javascript">
-	var RES_CODE = $("#RES_CODE")
-	var menuList= $("#menuList")
 		$(document).ready(function(menuList) {
 			$.ajax({
-				url : "/restaurant/menuList?RES_CODE="+ RES_CODE,
+				url : "/restaurant/menuList",
 				type : "GET",
 				contentType : "application/json; charset=utf-8;",
 				dataType : "json",

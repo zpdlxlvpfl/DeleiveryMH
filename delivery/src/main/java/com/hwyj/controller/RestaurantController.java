@@ -18,6 +18,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,6 +41,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.AuthVO;
+import com.hwyj.domain.CartVO;
 import com.hwyj.domain.CustomerVO;
 import com.hwyj.domain.OrderVO;
 import com.hwyj.domain.ResMenuVO;
@@ -45,6 +49,7 @@ import com.hwyj.domain.ResVO;
 import com.hwyj.mapper.MemberMapper;
 import com.hwyj.mapper.RestaurantMapper;
 import com.hwyj.service.RestaurantService;
+import com.mysql.cj.Session;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -55,6 +60,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/restaurant/*")
 @AllArgsConstructor
 @PreAuthorize("hasAnyRole('ROLE_RES')")
+
 public class RestaurantController {
 
 	@Autowired
@@ -66,18 +72,24 @@ public class RestaurantController {
 	}
 	
 	
-	//test 
-	@RequestMapping(value = "test", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public String tset(String RES_CODE,ModelMap model,RedirectAttributes rttr) throws Exception {
-		HashMap<String, Object> hashMap = new HashMap<>();
-		List<String> list = new ArrayList<>();
-
-		list = restaurantService.restList();
-		hashMap.put("RestList", list);
-
+	
+	
+	@GetMapping(value="/test", produces= { MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public String test(ModelMap model,String RES_CODE) throws Exception{
+		List<ResVO> list = restaurantService.restList();
 		System.out.println(list+"RestList@@@@@@@@@@@@@");
 		model.addAttribute("RestList", list);
-		return "/restaurant/test";
+		restaurantService.read(RES_CODE);
+		
+			for(ResVO temp : list) {
+				System.out.println(list);
+		}
+			return "/restaurant/test";
+	}
+	
+	@GetMapping("/ResInfo")
+	public void ResInfo() {
+		
 	}
 	
 	
@@ -93,13 +105,23 @@ public class RestaurantController {
 	@GetMapping("/reshome")
 	public void reshome(String RES_CODE,Model model,HttpSession session, RedirectAttributes rttr) throws Exception {
 		ResVO vo = new ResVO ();
-		AuthVO authVO = new AuthVO();
+		
+		rttr.getFlashAttributes(); 
+	    List<ResMenuVO> list = new ArrayList<>();	
+		list =  restaurantService.menuList();
+		
+		model.addAttribute("menuList",list);
+		System.out.println(list);
+		restaurantService.read(RES_CODE);
+		
 	}
 
 	@GetMapping("/menuwrite")
 	public void menuwrite() {
 
 	}
+	
+	
 
 	
 	// 매장 등록
@@ -121,23 +143,24 @@ public class RestaurantController {
 		restaurantService.insertres(resvo);
 		log.info(RES_CODE);
 		System.out.println(resvo);
-		rttr.addAttribute("insertres");
-		//session.setAttribute("RES_CODE",resvo.getRES_CODE());
-		return "redirect:/restaurant/insertmenu";
+		//rttr.addAttribute("insertres");
+		session.setAttribute("RES_CODE",resvo.getRES_CODE());
+		System.out.println(session);
+		return "redirect:/restaurant/reshome";
 	}
 
 	
 
 	 // 메뉴 등록
 	@RequestMapping(value = "insertmenu", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public String insertmenu(ResMenuVO menuvo,RedirectAttributes rttr) {
+	public String insertmenu(ResMenuVO menuvo,HttpSession session,RedirectAttributes rttr) {
 		// HttpSession session = null;
 		// String RES_CODE = (String)session.getAttribute("RES_CODE");
 		 rttr.getFlashAttributes();
-
+		 String RES_ROLE = (String)session.getAttribute("RES_ROLE");
 		 ResVO vo = new ResVO();
 		 
-		 String RES_CODE = vo.getRES_CODE();
+		 String RES_CODE =  (String)session.getAttribute("RES_CODE");
 		 
 		 Calendar cal = Calendar.getInstance();
 		 int year = cal.get(Calendar.YEAR);
@@ -155,6 +178,7 @@ public class RestaurantController {
 		
 		restaurantService.insertmenu(menuvo);
 		System.out.println(menuvo);
+		System.out.println(session+"RESROLE@@@@@@@@@@@@\n"+RES_ROLE);
 		
 		return "redirect:/restaurant/reshome";
 	
@@ -164,41 +188,70 @@ public class RestaurantController {
 
 	// 메뉴목록보기 
 	  @RequestMapping(value = "menuList", method = RequestMethod.GET, produces ="application/json; charset=utf8")
-		public String menuList(String RES_CODE,ModelMap model, ResMenuVO menuvo,RedirectAttributes rttr) throws Exception {
-		    //HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-		  //  HttpSession session = null;
-		    //String RES = (String)session.getAttribute("RES_CODE");
-		    rttr.getFlashAttributes(); 
-		    List<String> list = new ArrayList<>();	
+		public List<ResMenuVO> menuList(ModelMap model, ResMenuVO menuvo,RedirectAttributes rttr,String RES_CODE )throws Exception {
+		    HttpSession session = null;
+		 //   RES_CODE =  (String)session.getAttribute("RES_CODE");
+		    //rttr.getFlashAttributes(); 
+		    List<ResMenuVO> list = new ArrayList<>();	
 			list =  restaurantService.menuList();
+			
 			model.addAttribute("menuList",list);
-			restaurantService.read(RES_CODE);
-			//rttr.addAttribute("RES_CODE", RES_CODE);
-			return "/restaurant/menuList";
+			System.out.println(list + "LIST@@@@@@@@@@@@@@@@@@@");
+			System.err.println(RES_CODE + "RES_CODE@@@@@@@@@@@");
+			
+			
+			return list;
+			//return "/restaurant/menuList";
 		}
 	
 	
 
 	
 	  @RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-		public String restList(String RES_CODE,ModelMap model,RedirectAttributes rttr) throws Exception {
-		 // HttpSession session = null;
-		 // String RES = (String)session.getAttribute("RES_CODE");
+		public List<ResVO> restList(ModelMap model,RedirectAttributes rttr,HttpSession session, String RES_CODE) throws Exception {
+		    ResVO vo = new ResVO();
 		    rttr.getFlashAttributes(); 
-		    List<String> list = new ArrayList<>();
+		    List<ResVO> list = new ArrayList<>();
+		    
 			list = restaurantService.restList();
 			System.out.println(list+"RestList@@@@@@@@@@@@@");
 			model.addAttribute("RestList", list);
+			restaurantService.read(RES_CODE);
+			
+			System.out.println("=======list====" + list);
 			//rttr.addAttribute("RES_CODE", RES_CODE);
-			return "/restaurant/restList";
+			return list;
 		}
 	  
 	
-	@RequestMapping(value = "ResInfo", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public void ResInfo(Authentication auth,Model model) {
-		
-		UserDetails resdetails = (UserDetails)auth.getPrincipal();
-		model.addAttribute("ResInfo",restaurantService.read(resdetails.getUsername()));
-}
+	@RequestMapping(value = "ResInfo", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public void ResInfo(Authentication auth,Model model,String RES_CODE,RedirectAttributes rttr) {
+		rttr.getFlashAttributes(); 
+		ResVO resvo = new ResVO ( );
+		model.addAttribute("ResInfo",restaurantService.ResInfo(resvo));
+		System.out.println(resvo);
+	
+	}
+	
+	
+	@GetMapping("/UpdateRes")
+	public void UpdateRes() {
+
+	}
+	
+	@GetMapping("/UpdateMenu")
+	public void UpdateMenu() {
+
+	}
+	
+	@GetMapping("/deleteMenu")
+	public void deleteMenu() {
+
+	}
+	
+	@GetMapping("/deleteRes")
+	public void deleteRes() {
+
+	}
 }
 

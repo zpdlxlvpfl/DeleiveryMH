@@ -123,6 +123,14 @@ public class RestaurantServiceTest {
 		System.out.println(RES_CODE);
 	}
 		
+	@Test
+	public void ResInfo () {
+		ResVO resvo = new ResVO();
+		service.ResInfo(resvo);
+		log.info("@@@@@@@@@@@@ " + resvo);
+		System.out.println(resvo);
+	}
+		
 	
 	
 }

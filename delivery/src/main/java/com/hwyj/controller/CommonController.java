@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -138,6 +139,41 @@ public class CommonController {
 		System.out.println("hashMap@@@@@@@@@@@@@@@@@@@@" + hashMap);
 		return "index";
 	}
+   
+   @RequestMapping(value = "menuList", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+ 		public String menuList(ModelMap model, ResMenuVO menuvo,RedirectAttributes rttr,String RES_CODE )throws Exception {
+ 		    //HttpSession session = null;
+ 		  //  RES_CODE =  (String)session.getAttribute("RES_CODE");
+ 		    rttr.getFlashAttributes(); 
+ 		    List<String> list = new ArrayList<>();	
+ 			list =  restaurantService.menuList();
+ 			
+ 			model.addAttribute("menuList",list);
+ 			System.out.println(list + "LIST@@@@@@@@@@@@@@@@@@@");
+ 			System.err.println(RES_CODE + "RES_CODE@@@@@@@@@@@");
+ 			
+ 			return "/menuList";
+ 		}
+ 	
+ 	
+
+ 	
+ 	  @RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+ 		public List<ResVO> restList(ModelMap model,RedirectAttributes rttr,HttpSession session, String RES_CODE) throws Exception {
+ 		    ResVO vo = new ResVO();
+ 		    rttr.getFlashAttributes(); 
+ 		    List<ResVO> list = new ArrayList<>();
+ 		    
+ 			list = restaurantService.restList();
+ 			System.out.println(list+"RestList@@@@@@@@@@@@@");
+ 			model.addAttribute("RestList", list);
+ 			restaurantService.read(RES_CODE);
+ 			
+ 			System.out.println("=======list====" + list);
+ 			//rttr.addAttribute("RES_CODE", RES_CODE);
+ 			return list;
+ 		}
+   
    
 
 

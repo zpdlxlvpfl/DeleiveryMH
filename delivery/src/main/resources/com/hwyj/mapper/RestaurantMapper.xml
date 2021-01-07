@@ -23,28 +23,39 @@
 	
 		
 <!--  메뉴보기 (식당이름, 메뉴이름, 메뉴설명, 메뉴가격) -->
-	<select id="menuList" resultType="map" >	
-	<!-- select res_menu_name, res_menu_explan, res_menu_price from res_menu left outer join member on res_menu.res_code=member.res_code
-	where res_menu.res_code=#{res_code} -->
-	SELECT *
-		FROM res
-		right JOIN res_menu ON res.res_code = res_menu.res_menu_code
-		WHERE res.res_code is null AND
-		(res_menu.res_code IS NOT NULL OR res_menu.res_menu_code)
- 	
+	<select id="menuList"  parameterType="map" resultType="com.hwyj.domain.ResMenuVO">	
+		 SELECT res_menu.res_code,
+ 			   res_menu.res_menu_code,
+			   res_menu.res_menu_name,
+               res_menu.res_menu_explan,
+               res_menu.res_menu_price
+		FROM testdb.res_menu
+		left JOIN res ON res_menu.res_menu_code = res.res_code
+		WHERE res_menu.res_code is not null AND
+		(res.res_code IS  NULL)  
+		
+		<!-- SELECT 
+		res_menu.res_code,
+		res_menu.res_menu_name,
+		res_menu.res_menu_explan,
+		res_menu.res_menu_price
+		FROM res_menu 
+		left JOIN res
+		ON res_menu.res_menu_code=res.res_code
+		WHERE res.res_code is null AND 
+		(res_menu.res_code IS NULL OR res_menu.res_code=#{res_code}); -->
 	</select>
 	
 	
+
 	
 	<!-- 매장 리스트 -->
-		<select id="restList" resultType="map">
-		<!-- select res_name,res_info,RES_CODE,del_price 
-		from testdb.res where RES_CODE  is not null -->
-		SELECT res.res_code,res_name,res_info,del_price
+		<select id="restList" parameterType="map" resultType="com.hwyj.domain.ResVO">
+		SELECT *
 		FROM res
 		left JOIN res_menu ON res.res_code = res_menu.res_menu_code
-		WHERE res.res_code  is not null AND
-		(res_menu.res_code IS NULL OR res_menu.res_menu_code)
+		WHERE res.res_code is not null AND
+		(res.res_name IS not NULL OR res.res_code) 
 		
 		</select>
 	
@@ -52,7 +63,6 @@
 		select res.res_code, res_menu.res_code 
 	    from res right join res_menu
 	    on res.res_code=res_menu.res_code
-
 	</select>
 	 
 	
@@ -140,6 +150,15 @@
 	<delete id="deleteMenu">
 		delete from testdb.res_menu where RES_CODE=#{RES_CODE}
 	</delete>
+	
+	<select id="ResInfo" resultType="com.hwyj.domain.ResVO" >
+	    SELECT *
+		FROM res
+		right JOIN auth ON res.res_code = auth.auth
+        left join member on member.id = auth.id
+		WHERE res.res_code is null AND
+		(auth.auth=#{auth} IS not NULL OR res.res_code)
+	</select>
 	
 	
 

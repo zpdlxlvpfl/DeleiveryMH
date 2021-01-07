@@ -88,21 +88,19 @@
 									<a href="../resources/img/1st-big-item.jpg"
 										data-lightbox="image-1"><img
 										src="../resources/img/1st-item.jpg" alt=""></a>
-									<c:forEach items="${menuList}" var="res_code" varStatus="i">
+										<c:forEach items="${menuList}" var="res_menu_code" begin="1"
+										end="1" step="1" varStatus="i">
 										<h4>
-											<c:out value=" ${res_code.res_menu_name}">
+											<c:out value=" ${res_menu_code.res_menu_name}">
 											</c:out>
 										</h4>
-									</c:forEach>
 										<div class="line-dec"></div>
-										<c:forEach items="${menuList}" var="res_menu_name" varStatus="i">
 										<p>
-											<c:out value=" ${res_code.res_menu_explan}" />
+											<c:out value=" ${res_menu_code.res_menu_explan}" />
 										</p>
-										</c:forEach>
-										<span><c:out value="${res_code.res_menu_price}"></c:out>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
 											&#8361;</span>
-		
+										</c:forEach>
 									
 									<div class="primary-button">
 										<a href="cart">cart</a>
@@ -287,10 +285,10 @@
 	</footer>
 
 	<script type="text/javascript">
-		$(document).ready(function(menuList) {
+		$(document).ready(function(reshome) {
 			//	var url = '/restaurant/menuList';
 			$.ajax({
-				url : "/restaurant/menuList",
+				url : "/restaurant/reshome",
 				type : "GET",
 				contentType : "application/json; charset=utf-8;",
 				dataType : "json",

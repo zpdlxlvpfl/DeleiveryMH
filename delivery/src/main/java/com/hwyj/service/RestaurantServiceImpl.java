@@ -22,7 +22,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	
 	//메뉴보기 서비스
 	@Override
-	public List<String> menuList( )throws Exception {
+	public List<ResMenuVO> menuList( )throws Exception {
 		return restaurantMapper.menuList();
 	}
 	
@@ -37,9 +37,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 	
 	//식당보기 서비스
 	@Override
-	public List<String> restList( )throws Exception {
+	public List<ResVO> restList( )throws Exception {
 		log.info("식당보기: "+restaurantMapper.restList());
 		return restaurantMapper.restList();
+		
 	}
 	
 	@Override
@@ -83,6 +84,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 		
 	}
 	
+	@Override
+	public ResVO ResInfo(ResVO resvo) {
+		return restaurantMapper.ResInfo();
+	}
 	
 	
 	@Override

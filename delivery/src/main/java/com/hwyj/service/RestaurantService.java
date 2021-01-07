@@ -13,20 +13,22 @@ import com.hwyj.domain.ResVO;
 public interface RestaurantService {
 	
 	//메뉴보기 서비스
-	public List<String> menuList() throws Exception;
+	public List<ResMenuVO> menuList() throws Exception;
 	
 	public ResMenuVO get(String res_menu_code);
 	
 	
 	//식당보기 서비스
-	public List<String> restList() throws Exception;
+	public List<ResVO> restList() throws Exception;
 	
 	
+	//public List<String> restList() throws Exception;
 	public List<String> read(String RES_CODE);
 	
 	//시갇ㅇ갯수
 	HashMap<String, Object> getresCount();
 	
+	public ResVO ResInfo(ResVO resvo);
 	
 	//식당등록
 	public void insertres(ResVO resvo);
