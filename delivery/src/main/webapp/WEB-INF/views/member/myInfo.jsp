@@ -42,7 +42,7 @@
 	  </fieldset>
 	  <p></p>
 	  <button type="submit" class="btn btn-warning">정보수정</button>
-	  <button type="button" id="changePw" onclick="location.href='checkPw'" class="btn btn-info">비밀번호 변경</button>
+	  <button type="button" id="changePw" onclick="location.href='changePw'" class="btn btn-info">비밀번호 변경</button>
 	
 	</div>
 </form>

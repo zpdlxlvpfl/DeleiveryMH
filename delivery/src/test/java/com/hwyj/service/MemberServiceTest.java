@@ -61,8 +61,8 @@ public class MemberServiceTest {
 	@Test //비밀번호 변경 서비스 테스트
 	public void testUpdatePw() {
 		CustomerVO customerVO = new CustomerVO();
-		customerVO.setId("13aa");
-		customerVO.setPw("tjdrhd");
+		customerVO.setId("user39");
+		customerVO.setPw("abc123");
 		log.info("비번변경 성공? "+service.updatePw(customerVO));
 	}
 	

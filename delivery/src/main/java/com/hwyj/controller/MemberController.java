@@ -64,31 +64,46 @@ public class MemberController {
 		return "redirect:/member/myInfo";
 	}
 	
-	//비밀번호 체크 페이지
-	@GetMapping("checkPw")
-	public void checkPw() {
-		
-	}
-	@PostMapping("checkPw")
-	public String checkPw(Authentication authentication, String pw, RedirectAttributes rttr) {
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal(); //현재 로그인한 유저 정보
-		CustomerVO customerVO = new CustomerVO();
-		customerVO.setId(userDetails.getUsername());
-		customerVO.setPw(pw);
-		if(memberService.checkPw(customerVO)) {
-			rttr.addFlashAttribute("result", "c_success");
-			return "changePw";
-		}else {
-			rttr.addFlashAttribute("result", "fail");
-		}
-		return "checkPw";
-	}
-	
 	//비밀번호 변경 페이지
 	@GetMapping("changePw")
 	public void changePw() {
 		
 	}
+	@PostMapping("changePw")
+	public String changePw(Authentication authentication, CustomerVO customerVO, String newPw, RedirectAttributes rttr) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal(); //현재 로그인한 유저 정보
+		
+		customerVO.setId(userDetails.getUsername()); //아이디
+		//customerVO.getPw(); //기존 비밀번호
+		//CustomerVO customerVO = new CustomerVO();		
+		//customerVO.setPw(pw);
+		if(memberService.checkPw(customerVO)) { //입력한 비밀번호가 맞으면
+			customerVO.setPw(newPw); //새로 입력한 비밀번호로 셋팅
+			if(memberService.updatePw(customerVO)) { //비밀번호 변경 성공하면 성공 메세제 띄우기
+				rttr.addFlashAttribute("result", "비밀번호가 변경되었습니다.");
+			}else {
+				rttr.addFlashAttribute("result", "비밀번호 변경 실패");
+			}		
+		}else { //틀리면 실패 메세지 띄우기
+			rttr.addFlashAttribute("result", "현재 비밀번호가 맞지 않습니다. 다시 확인해주세요. ");
+		}
+		
+		return "redirect:/member/changePw";
+	}
+	
+
+//	@PostMapping("changePw")
+//	public String changePw(Authentication authentication, CustomerVO customeVO, RedirectAttributes rttr) {
+//		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//		CustomerVO customerVO = new CustomerVO();
+//		customerVO.setId(userDetails.getUsername());
+//		if(memberService.updatePw(customerVO)) {
+//			rttr.addFlashAttribute("result", "change_success");
+//		}else {
+//			
+//		}
+//		return "changePw";
+//	}
 	
 
 }

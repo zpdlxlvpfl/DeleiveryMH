@@ -11,58 +11,52 @@
         <div class="row">
           <div class="col-lg-8 col-md-7 col-sm-6">
             <h2>비밀번호 변경</h2>
-            <p class="lead">#####</p>
+            <p class="lead"><font color="red"><c:out value="${result}" /></font></p>
           </div>
           <div class="col-lg-4 col-md-5 col-sm-6">
           </div>
         </div>
       </div>
-      
-<form name="updatemyInfo">
+ 
+
+<form name="changePw">
 	<div class="form-group">
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">아이디</label>
-	    <input name="id" class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.id }"/>' readonly>
+	    <label class="control-label" for="readOnlyInput">현재 비밀번호</label>
+	    <input name="pw" maxlength="20" class="form-control" id="pw" type="password">
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">이름</label>
-	    <input name="m_name" maxlength="20" class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.m_name }"/>'>
+	    <label class="control-label" for="readOnlyInput">새로운 비밀번호</label>
+	    <input name="newPw" maxlength="20" class="form-control" id="newPw" type="password">
 	  </fieldset>
 	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">이메일</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.email }"/>' readonly>
-	  </fieldset>
-	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">주소</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.address }"/>' readonly>
-	  </fieldset>
-	  <fieldset>
-	    <label class="control-label" for="readOnlyInput">전화번호</label>
-	    <input name="tel" class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.tel }"/>'>
+	    <label class="control-label" for="readOnlyInput">새로운 비밀번호 확인</label>
+	    <input maxlength="20" class="form-control" id="check" type="password">
 	  </fieldset>
 	  <p></p>
-	  <button type="button" id="m_Info" class="btn btn-warning">수정하기</button>
-	  <button type="button" id="myInfo" class="btn btn-info">#취소</button>
-	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	  <button type="button" id="change" class="btn btn-warning">변경</button>
+	  <button type="button" id="cancel" class="btn btn-info">취소</button>
+	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	</div>
 </form>
 
+
 <!-- modal -->
-<div id="m_Modal" class="modal">
+<div id="c_Modal" class="modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">내정보수정</h5>
+        <h5 class="modal-title">비밀번호 변경</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>수정사항을 저장하시겠습니까?</p>
+        <p>비밀번호를 변경하시겠습니까?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" onclick="clickModi(updatemyInfo)">Save Changes</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+<!--         <button type="button" class="btn btn-secondary" id="update">변경</button> -->
+<!--         <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button> -->
       </div>
     </div>
   </div>
@@ -70,20 +64,40 @@
 
 <script>
 
-function clickModi(formName) {
-	formName.action = "/member/modifyMyInfo";
-	formName.method = "post";
-	formName.submit();
-}
 
-$("#m_Info").on("click", function(){
-	$("#m_Modal").modal("show");
+$(document).ready(function(){	
+	
+	function clickChange(formName) {
+		formName.action = "/member/changePw";
+		formName.method = "post";
+		formName.submit();
+	}
+	
+
+	$("#change").on("click", function(){
+		if($("#newPw").val()==$("#check").val()){
+			$(".modal-body").html("비밀번호를 변경하시겠습니까?");
+			$(".modal-footer").html('<button type="button" class="btn btn-secondary" id="update">변경</button><button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>');
+			$("#c_Modal").modal("show");					
+		}else{
+			$(".modal-body").html("비밀번호가 일치하지 않습니다.");
+			$(".modal-footer").html('<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>');
+			$("#c_Modal").modal("show");
+		}	
+	});
+	
+	$(document).on("click","#update",function(e){
+		clickChange(changePw);
+	});
+	
+	
+	
+	
+	$("#cancel").on("click", function(){ //취소누르면 내정보로 이동
+		self.location="/member/myInfo";
+	});	
 });
 
-
-$("#myInfo").on("click", function(){ //취소누르면 내정보로 이동
-	self.location="/member/myInfo";
-});
 	
 </script>
 

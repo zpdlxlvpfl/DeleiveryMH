@@ -67,14 +67,16 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override //비밀번호 변경
 	public boolean updatePw(CustomerVO customerVO) {
-		
+		PasswordEncoder pwencoder=new BCryptPasswordEncoder();
+		//회원이 새로 입력한 비밀번호를 가져와서 암호화한 후 다시 비밀번호 셋팅
+		customerVO.setPw(pwencoder.encode(customerVO.getPw()));
 		return memberMapper.updatePw(customerVO)==1;
 	}
 	
 	@Override //비밀번호 체크
 	public boolean checkPw(CustomerVO customerVO) {
-		customerVO.getPw(); //회원이 입력한 패스워드
 		PasswordEncoder pwencoder=new BCryptPasswordEncoder();	
+		//회원이 입력한 비밀번호와 회원 id로 검색해서 나온 비밀번호 비교
 		return pwencoder.matches(customerVO.getPw(), memberMapper.checkPw(customerVO.getId()));
 	}
 	
