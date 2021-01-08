@@ -39,5 +39,10 @@ public class AdminMapperTest {
 	public void testDeleteMember() {
 		log.info("멤버 삭제 확인: "+mapper.deleteMember("user95"));
 	}
+	
+	@Test //멤버 검색 테스트
+	public void testSearch() {
+		log.info("멤버: "+mapper.search("restaurant"));
+	}
 
 }

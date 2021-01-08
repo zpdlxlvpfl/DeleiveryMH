@@ -39,6 +39,11 @@ public class CartServiceTest {
 		log.info("장바구니 담기 성공? "+service.ShoppingCart(cartVO));
 	}
 	
+	@Test //장바구니 가게 비교 서비스 테스트
+	public void testCompare() {
+		log.info("매장 코드: "+service.compare("res_02A01"));
+	}
+	
 	@Test //장바구니 보기 서비스 테스트
 	public void testCartList() {
 		List<CartVO> cartList=service.cartList("user4");

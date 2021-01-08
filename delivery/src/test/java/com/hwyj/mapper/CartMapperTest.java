@@ -30,6 +30,19 @@ public class CartMapperTest {
 		log.info("장바구니 성공이면 1: "+mapper.insertCart(cartVO));
 	}
 	
+	@Test //장바구니 가게 비교 테스트
+	public void testCompare() {
+		log.info("매장코드는? "+mapper.compare("res_02A02"));
+	}
+	
+	@Test //넣었던 메뉴와 똑같은 메뉴를 담으려고 할 때 수량 합쳐주기
+	public void testSumAmount() {
+		CartVO cartVO = new CartVO();
+		cartVO.setCart_no(128);
+		cartVO.setSumAmount(6);
+		mapper.sumAmount(cartVO);
+	}
+	
 	@Test //장바구니 목록보기 테스트
 	public void testCartList() {
 		List<CartVO> cartList=mapper.cartList("user4");

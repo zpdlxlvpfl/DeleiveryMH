@@ -38,4 +38,11 @@ public class AdminServiceImpl implements AdminService {
 		return adminMapper.deleteMember(id)==1; //삭제처리가 정상적으로 되면 1리턴 -> 1==1이면 true
 	}
 
+	//멤버 아이디 검색
+	@Override
+	public List<CustomerVO> search(String keyword) {
+		
+		return adminMapper.search(keyword);
+	}
+
 }

@@ -46,5 +46,14 @@ public class AdminController {
 		}		
 		return "redirect:/admin/memberList?auth="+url; //삭제되는 멤버의 권한이 들어간 멤버리스트 가기
 	}
+	
+	//멤버 아이디 검색
+	@GetMapping("search")
+	public String searchResults(String keyword, Model model) {
+		
+		model.addAttribute("search", adminService.search(keyword));
+		
+		return "/admin/searchResults"; //검색 결과 페이지
+	}
 
 }

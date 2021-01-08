@@ -10,6 +10,9 @@
 		<result property="id" column="id" />
 		<result property="pw" column="pw" />
 		<result property="m_name" column="m_name" />
+		<result property="email" column="email" />
+		<result property="tel" column="tel" />
+		<result property="auth" column="auth" />
 		<collection property="authList" resultMap="authMap">
 		</collection>
 	</resultMap>
@@ -19,10 +22,7 @@
 		<result property="auth" column="auth" />
 	</resultMap>
 	
-	
-	
 
-	
 	
 <!-- 	멤버정보 상세보기 -->
 	<select id="read" resultType="com.hwyj.domain.CustomerVO"> 
@@ -33,7 +33,7 @@
 	
 <!-- 	멤버 목록보기 (auth별로 보기) -->
 	<select id="getMemberList" resultMap="memberMap"> 
-		select member.id, m_name, auth from member left outer join auth on member.id=auth.id
+		select member.id, m_name, email, tel, auth from member left outer join auth on member.id=auth.id
 		where auth=#{auth}
 	</select>
 	
@@ -41,6 +41,11 @@
 	<delete id="deleteMember">
 		delete from member where id=#{id}
 	</delete>
-
+	
+<!-- 	멤버 아이디 검색 -->
+	<select id="search" resultMap="memberMap"> 
+		select m.id, m_name, email, tel, auth from member m left outer join auth a on m.id=a.id
+		where m.id like concat('%',#{keyword},'%')
+	</select>
 
 </mapper>

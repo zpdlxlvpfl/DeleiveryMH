@@ -7,8 +7,14 @@ import com.hwyj.domain.CartVOList;
 
 public interface CartMapper {
 	
-	//장바구니 넣기
+	//장바구니 담기
 	public int insertCart(CartVO cartVO);
+	
+	//장바구니 담을 때 이미 장바구니에 있는 메뉴의 가게와 같은 가게인지 확인
+	public String compare(String res_menu_code);
+	
+	//넣었던 메뉴와 똑같은 메뉴를 담으려고 할 때 수량 합쳐주기
+	public int sumAmount(CartVO cartVO);
 	
 //	//장바구니 넣기 (메뉴 여러개)
 //	public int insertCart(List<CartVO> cartVOList);

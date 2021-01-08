@@ -49,5 +49,10 @@ public class AdminServiceTest {
 		service.deleteMember("user59");
 		log.info("멤버삭제 성공여부: "+service.deleteMember("user41")); //true or false
 	}
+	
+	@Test //멤버 검색 테스트
+	public void testSearch() {
+		log.info("멤버: "+service.search("restaurant"));
+	}
 
 }

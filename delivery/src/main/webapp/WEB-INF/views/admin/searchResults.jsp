@@ -57,7 +57,7 @@
                     <th scope="col">권한</th>
                   </tr>
                 </thead>
-                <c:forEach items="${memberList }" var="member">
+                <c:forEach items="${search }" var="member">
                 <tbody>
                   <tr class="table-light">
                     <th scope="row"><a href="/admin/memberInfo?id=${member.id }"><c:out value="${member.id }" /></a></th>
@@ -74,49 +74,20 @@
       </div>
  
  
-<!--   modal  -->
-<!-- <div id="d_Modal" class="modal"> -->
-<!--   <div class="modal-dialog" role="document"> -->
-<!--     <div class="modal-content"> -->
-<!--       <div class="modal-header"> -->
-<!--         <h5 class="modal-title">회원삭제</h5> -->
-<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-<!--           <span aria-hidden="true">&times;</span> -->
-<!--         </button> -->
-<!--       </div> -->
-<!--       <div class="modal-body"> -->
-<%--         <p><c:out value="${deleteId }"/> 회원을 삭제했습니다.</p> --%>
-<!--       </div> -->
-<!--       <div class="modal-footer"> -->
-<!--         <button type="button" class="btn btn-primary" data-dismiss="modal">#확인?</button> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--   </div> -->
-<!-- </div> -->
-
       
 <script>
 
 
 //첫줄만 바뀌는거 고치기!
-$(document).ready(function(){
-	 var auth=$("#authT").val();
+$(document).ready(function(){ 
+	 var auth='<c:out value="${member.auth}" />';
 	 if(auth == "ROLE_MEMBER"){
-	  $("#authT").text("일반회원");		 
+	  $("#authT").html("일반회원");		 
 	 }else if(auth == "ROLE_RES"){
-	  $("#authT").text("매장");
+	  $("#authT").html("매장");
 	 }else{
-	  $("#authT").text("관리자");
+	  $("#authT").html("관리자");
 	 }
-	
-// 	 var auth='<c:out value="${member.auth}" />';
-// 	 if(auth == "ROLE_MEMBER"){
-// 	  $("#authT").html("일반회원");		 
-// 	 }else if(auth == "ROLE_RES"){
-// 	  $("#authT").html("매장");
-// 	 }else{
-// 	  $("#authT").html("관리자");
-// 	 }
  	  
 });  
   

@@ -16,6 +16,9 @@ public interface AdminMapper {
 	//멤버 삭제 (member 테이블, auth 테이블 둘 다 삭제됨)
 	public int deleteMember(String id);
 	
+	//멤버 아이디 검색
+	public List<CustomerVO> search(String keyword);
+	
 	
 
 }

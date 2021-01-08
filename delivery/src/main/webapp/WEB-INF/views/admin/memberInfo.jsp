@@ -94,7 +94,7 @@ $("#mList").on("click", function(){ //목록보기 누르면 멤버리스트로 
 });
 
 
-	
+
 </script>
 
 

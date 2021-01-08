@@ -14,5 +14,8 @@ public interface AdminService {
 	
 	//멤버 삭제하기
 	public boolean deleteMember(String id);
+	
+	//멤버 아이디 검색
+	public List<CustomerVO> search(String keyword);
 
 }
