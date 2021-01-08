@@ -254,6 +254,8 @@ $(document).ready(function(){
 				url : "/cart/" + amount.cart_no,
 				data : JSON.stringify(amount),
 				contentType : "application/json; charset=utf-8",
+				beforeSend : function(xhr)
+				{ xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
 				success : function(result, status, xhr){
 					if(callback){
 						callback(result);
@@ -320,9 +322,7 @@ $(document).ready(function(){
 	
 
 	
-	
-	
-	
+	//장바구니 목록보기
 	var c_list = $("#c_list");
 	var sumTotal = $("#sumTotal");
 	
@@ -344,7 +344,7 @@ $(document).ready(function(){
 				str+='<h4>'+cartList[i].res_menu_name+'</h4>';
 				str+='<div class="line-dec"></div><p style="color:grey;">'+cartList[i].res_menu_price+'원</p>';
 				str+='<p>'+cartList[i].sum +'원</p>';
-				str+='<div id="'+cartList[i].amount+'"><button id="minus"><b>-</b></button>'+cartList[i].amount+'개 <button id="plus"><b>+</b></button></div>';
+				str+='<div id="'+cartList[i].cart_no+'"><button id="minus"><b>-</b></button> '+cartList[i].amount+'개 <button id="plus"><b>+</b></button></div>';
 				str+='<input type="hidden" id="cart_no" name="cart_no" value="{'+cartList[i].cart_no+'}">';
 				str+='</div></div>';
 			}
@@ -366,24 +366,37 @@ $(document).ready(function(){
 	
 	
 	//메뉴 수량 수정 클릭
-	$(document).on("click","#plus",function(e){
-		var amount = $(this).parent().attr("id");
+	$(document).on("click","#plus",function(e){ // + 플러스 버튼 눌렀을 때
+		e.preventDefault();
+ 		var amount = $(this).parent().text().slice(2, -3); //-,+와 '개' 글자제거
 		amount=parseInt(amount);
 		amount+=1;
-		//amount 값 +1 한걸 다시 id 값에 넣어야 계속 +1 가능한가???? id값에 다시 넣는 법 고민
+		if(amount>20){
+ 			alert("최대 수량입니다.");
+ 			amount=20;
+ 		}
+		var amount = { cart_no:$(this).parent().attr("id"), amount:amount };	
 		console.log(amount);
+  		cartService.modify(amount,function(result){
+ 			showCartList();
+ 		});						
 	});
-// 	$(document).on("click","#minus",function(e){
-	
-// 		amount-=1;
-// 		console.log(amount);
-// 	});
-	
-	
-	
-	
-	
-	
+ 	$(document).on("click","#minus",function(e){ // - 마이너스 버튼 눌렀을 때
+ 		e.preventDefault();
+		var amount = $(this).parent().text().slice(2, -3); //-,+와 '개' 글자제거
+ 		amount=parseInt(amount);
+ 		amount-=1;
+ 		if(amount<1){
+ 			alert("최소 수량입니다.");
+ 			amount=1;
+ 		}
+ 		var amount = { cart_no:$(this).parent().attr("id"), amount:amount };		
+		console.log(amount);
+		cartService.modify(amount,function(result){
+ 			showCartList();
+ 		});
+ 	});
+		
 	
 	//메뉴 삭제 클릭
 	$(document).on("click",".close",function(e){
