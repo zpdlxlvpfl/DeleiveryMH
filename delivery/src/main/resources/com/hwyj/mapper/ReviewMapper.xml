@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="com.hwyj.mapper.ReviewMapper">
+
+<!-- 	리뷰 등록 -->
+	<insert id="insertReview">
+		insert into review (id, res_code, content, rate) values(#{id}, #{res_code}, #{content}, #{rate})
+	</insert>
+	
+<!-- 	매장 리뷰 목록 불러오기 -->
+	<select id="getReviewList" resultType="com.hwyj.domain.ReviewVO"> 
+		select review_no, m_name, r.id, r.res_code, content, review_date, rate from review r inner join member m on r.id=m.id
+		where r.res_code=#{res_code}
+	</select>
+	
+<!-- 	매장 평균별점 (아직 리뷰등록 안된 매장이면 0리턴) -->
+	<select id="getRate" resultType="_double"> 
+		select ifnull(avg(rate),0) from review where res_code=#{res_code}
+	</select>
+
+
+
+</mapper>
