@@ -24,7 +24,7 @@ public interface CartMapper {
 	//장바구니 목록보기
 	public List<CartVO> cartList(String id);
 	
-	//장바구니 메뉴 수량 수정(cart_no으로 찾고 amount값 넣기)     //(아이디랑 메뉴코드로 찾아서)//
+	//장바구니 메뉴 수량 수정(cart_no으로 찾고 amount값 넣기)
 	public int updateAmount(CartVO cartVO);
 	
 	//장바구니 메뉴 삭제
