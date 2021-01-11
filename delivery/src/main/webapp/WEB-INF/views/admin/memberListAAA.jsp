@@ -33,9 +33,9 @@
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">권한</a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/admin/memberList?pageNum=1&amount=10&auth=ROLE_MEMBER">일반회원</a>
-                        <a class="dropdown-item" href="/admin/memberList?pageNum=1&amount=10&auth=ROLE_RES">매장</a>
-                        <a class="dropdown-item" href="/admin/memberList?pageNum=1&amount=10&auth=ROLE_ADMIN">관리자</a>
+                        <a class="dropdown-item" href="/admin/memberList?auth=ROLE_MEMBER">일반회원</a>
+                        <a class="dropdown-item" href="/admin/memberList?auth=ROLE_RES">매장</a>
+                        <a class="dropdown-item" href="/admin/memberList?auth=ROLE_ADMIN">관리자</a>
                       </div>
                     </li>
                   </ul>
@@ -68,22 +68,7 @@
                   </tr> 
                   </c:forEach>                     
                 </tbody>
-              </table> 
-                  
-
-              <c:if test="${pageMaker.prev }">
-              	<a href="/admin/memberList?pageNum=${pageMaker.startPage-1}&amount=${pageMaker.criteria.amount}&auth=${pageMaker.criteria.auth}">pre</a>
-              </c:if>
-              
-              <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-              	<a href="/admin/memberList?pageNum=${num}&amount=${pageMaker.criteria.amount}&auth=${pageMaker.criteria.auth}">${num}</a>
-     			</c:forEach>
-              
-              <c:if test="${pageMaker.next }">
-              	<a href="/admin/memberList?pageNum=${pageMaker.endPage+1}&amount=${pageMaker.criteria.amount}&auth=${pageMaker.criteria.auth}">next</a>
-              </c:if>
-              
-                    
+              </table>       
           </div>
         </div>
       </div>
