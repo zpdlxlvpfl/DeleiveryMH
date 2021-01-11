@@ -5,6 +5,9 @@
   
 <mapper namespace="com.hwyj.mapper.CartMapper">
 
+
+
+
 <!-- 	장바구니 담기 -->
 	<insert id="insertCart">
 		insert into cart (id, res_menu_code, amount) values(#{id}, #{res_menu_code}, #{amount})
@@ -51,5 +54,28 @@
 		delete from cart where id=#{id}
 	</delete>
 
+
+	<select id="menuList"    resultType="map">	
+		 SELECT res_menu.res_code,
+ 			   res_menu.res_menu_code,
+			   res_menu.res_menu_name,
+               res_menu.res_menu_explan,
+               res_menu.res_menu_price
+		FROM testdb.res_menu
+		left JOIN res ON res_menu.res_menu_code = res.res_code
+		WHERE res_menu.res_code is not null AND
+		(res.res_code IS  NULL)  
+		
+		<!-- SELECT 
+		res_menu.res_code,
+		res_menu.res_menu_name,
+		res_menu.res_menu_explan,
+		res_menu.res_menu_price
+		FROM res_menu 
+		left JOIN res
+		ON res_menu.res_menu_code=res.res_code
+		WHERE res.res_code is null AND 
+		(res_menu.res_code IS NULL OR res_menu.res_code=#{res_code}); -->
+	</select>
 
 </mapper>

@@ -24,6 +24,8 @@
 	
 	
 	
+	
+	
 	<!-- <select id="ResInfo" resultType="AllMap" >
 		SELECT *
 		FROM res
@@ -72,10 +74,11 @@
 		
 		</select>
 	
- 	<select id="read" resultType="map">
-		select res.res_code, res_menu.res_code 
+ 	<select id="read" resultType="com.hwyj.domain.ResVO">
+ 		select * from res where res_code=#{res_code}
+		<!-- select res.res_code, res_menu.res_code 
 	    from res right join res_menu
-	    on res.res_code=res_menu.res_code
+	    on res.res_code=res_menu.res_code -->
 	</select>
 	 
 	

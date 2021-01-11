@@ -44,11 +44,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 	
 	@Override
-	public List<String> read(String RES_CODE)  {
+	public void read (String RES_CODE) {
 		
-		return restaurantMapper.read(RES_CODE);
 	}
-
 	
 	@Override
 	public HashMap<String, Object> getresCount() {
@@ -85,7 +83,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 	
 	@Override
-	public List<String> ResInfo() throws Exception{
+	public List<ResVO> ResInfo() throws Exception {
+		log.info(restaurantMapper.ResInfo());
 		return restaurantMapper.ResInfo();
 	}
 	

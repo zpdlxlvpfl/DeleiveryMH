@@ -93,78 +93,103 @@
 
 
 
+	
+	
+	
 	<div class="parallax-content projects-content" id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="owl-testimonials" class="owl-carousel owl-theme">
+
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<div id="owl-testimonials" class="owl-carousel owl-theme">
+					
+						
+
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="../resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
 									src="../resources/img/1st-item.jpg" alt=""></a>
 								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
+								
+										<c:forEach items="${HashMapList}" var="res_menu_code" begin="1" end="1" step="1" varStatus="i">
+										<h4> <c:out value=" ${res_menu_code.res_menu_name}"> </c:out></h4>
+									<span><c:out value="${res_menu_code.res_menu_price}"></c:out> &#8361;</span>
+									</c:forEach>
+									
 								</div>
 							</div>
 						</div>
+				
+
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="../resources/img/2nd-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/2nd-item.jpg" alt=""></a>
+									src="../resources/img/2nd-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
+										<c:forEach items="${HashMapList}" var="res_menu_code" begin="2" end="2" step="1" varStatus="i">
+										<h4> <c:out value=" ${res_menu_code.res_menu_name}"> </c:out></h4>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out> &#8361;</span>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="../resources/img/3rd-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/3rd-item.jpg" alt=""></a>
+									src="../resources/img/3rd-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
+										<c:forEach items="${HashMapList}" var="res_menu_code" begin="3" end="3" step="1" varStatus="i">
+										<h4> <c:out value="${res_menu_code.res_menu_name}" /> </h4>
+										<span><c:out value="${res_menu_code.res_menu_price}" />&#8361; </span>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="../resources/img/4th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/4th-item.jpg" alt=""></a>
+									src="../resources/img/4th-item.jpg" alt="" id="$"></a>
 								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
+										<c:forEach items="${HashMapList}" var="res_menu_code" begin="4" end="4" step="1" varStatus="i">
+										<h4> <c:out value="${res_menu_code.res_menu_name}" /> </h4>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>&#8361; </span>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="../resources/img/5th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/5th-item.jpg" alt=""></a>
+									src="../resources/img/5th-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
+										<c:forEach items="${HashMapList}" var="res_menu_code" begin="5" end="5" step="1" varStatus="i">
+										<h4> <c:out value="${res_menu_code.res_menu_name}" /> </h4>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>&#8361; </span>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="../resources/img/6th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/6th-item.jpg" alt=""></a>
+									src="../resources/img/6th-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-									<h4>foodname</h4>
-									<span>123 &#8361; </span>
+										<c:forEach items="${HashMapList}" var="res_menu_code" begin="6" end="6" step="1" varStatus="i">
+											<h4> <c:out value="${res_menu_code.res_menu_name}" /> </h4>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>&#8361; </span>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-	
-
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<footer>
 		<div class="container">
@@ -207,6 +232,34 @@
   </div>
 </div>
 
+
+<!-- 
+	<script type="text/javascript">
+	var RES_CODE = $("#RES_CODE")
+	var HashMapList= $("#HashMapList")
+		$(document).ready(function(HashMapList) {
+			$.ajax({
+				url : "/restaurant/HashMapList?RES_CODE="+ RES_CODE,
+				type : "GET",
+				contentType : "application/json; charset=utf-8;",
+				dataType : "json",
+				data : JSON.stringify({
+					RES_CODE : "RES_CODE",
+					res_menu_name : "res_menu_name",
+					res_menu_explan : "res_menu_explan",
+					res_menu_price : "res_menu_price"
+				}),
+				error : function(error) {
+					console.log("error " + data);
+
+				},
+				success : function(data) {
+					alert('success' + data);
+					console.log("success" + data);
+				}
+			});
+		});
+	</script> -->
 
 
 <!-- 
@@ -421,9 +474,6 @@ $(document).ready(function(){
 	
 });
 
-
 </script>
-
-
 </body>
 </html>

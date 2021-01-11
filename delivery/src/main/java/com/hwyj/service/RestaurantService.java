@@ -22,8 +22,7 @@ public interface RestaurantService {
 	public List<ResVO> restList() throws Exception;
 	
 	
-	//public List<String> restList() throws Exception;
-	public List<String> read(String RES_CODE);
+	public void read(String RES_CODE);
 	
 	//시갇ㅇ갯수
 	public HashMap<String, Object> getresCount();
@@ -44,7 +43,7 @@ public interface RestaurantService {
 	
 	public void deleteMenu(ResMenuVO menuvo);
 
-	public List<String> ResInfo()throws Exception;
+	public List<ResVO> ResInfo()throws Exception;
 	
 
 }

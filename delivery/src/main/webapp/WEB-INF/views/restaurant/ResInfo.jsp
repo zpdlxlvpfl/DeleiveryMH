@@ -83,24 +83,25 @@
 
 					<div class="parallax-content contact-content " id="contact-us">
 						<div id ="list">
-						<input type="hidden" id="list" name="list" value='<c:out value="${list.RES_CODE }" />'>
+						<input type="hidden" id="list" name="list" value='<c:out value="${RES_CODE.RES_CODE }" />'>
 						<input type="hidden" id="${status.count}" disabled>
 						<table class="table table-striped table-bordered table-hover">
 							
 							<thead>
 								<tr>
+									<th>RES_CODE</th>
 									<th>RES NAME</th>
 									<th>RES_INFO</th>
 									<th>DEL_PRICE</th>
 								</tr>
 							</thead>
 							
-								<c:forEach items="${list}" var="list">
+								<c:forEach items="${ResInfo}" var="RES_CODE">
 									<tr class="odd gradeX">
-										<td>${list.RES_CODE }</td>
-										<td>${list.res_name }</td>
-										<td>${list.res_info }</td>
-										<td>${list.del_price }</td>
+										<td>${RES_CODE.RES_CODE }</td>
+										<td>${RES_CODE.res_name }</td>
+										<td>${RES_CODE.res_info }</td>
+										<td>${RES_CODE.del_price }</td>
 									</tr>
 								</c:forEach>
 						</table>
@@ -143,20 +144,18 @@
 <script type="text/javascript">
 	var ResInfo = $("#ResInfo");
 	var list = $("#list");
-	var RES_CODE = $("#RES_CODE");
 
 	$(document).ready(function(list) {
 		$.ajax({
 			url : "/restaurant/ResInfo",
-			type : "GET",
-			contentType : "application/json; charset=utf-8;",
-			dataType : "text",
-			data : JSON.stringify({
-				RES_CODE : "RES_CODE",
-				RES_NAME : "res_name",
-				RES_INFO : "res_info",
-				DEL_PRICE : "del_price"
-			}),
+			type : "get",
+			dataType : "json",
+			data : {
+				RES_CODE : "${RES_CODE}",
+				res_name : "${res_name}",
+				res_info : "${res_info}",
+				del_price : "${del_price}"
+			},
 			error : function(data, list) {
 				console.log("error " + data + list);
 			},
@@ -164,11 +163,12 @@
 				alert('success' + data);
 				console.log("success" + data + list);
 				var html = "";
-				for(var i=0, len=list.length||0; i<len; i++){		
-							html += "<td>"+list.RES_CODE+"</td>"
-							html += "<td>"+list.res_name+"</td>"
-							html += "<td>"+list.res_info+"</td>"
-							html += "<td>"+list.del_price+"</td>"
+				for(var i=0, len=ResInfo.length||0; i<len; i++){		
+							html += "<tr><th>"+RES_CODE+"</th><th>"+RES NAME+"</th><th>"+RES_INFO+"</th><th>"+DEL_PRICE+"</th></tr>";
+							html += "<td>"+RES_CODE.RES_CODE+"</td>";
+							html += "<td>"+RES_CODE.res_name+"</td>";
+							html += "<td>"+RES_CODE.res_info+"</td>";
+							html += "<td>"+RES_CODE.del_price+"</td>";
 							console.log(html);
 						}
 				ResInfo.html(list);
@@ -177,3 +177,25 @@
 	});
 </script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
