@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.awt.MenuComponent;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -19,10 +20,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hwyj.domain.AuthVO;
 import com.hwyj.domain.ResMenuVO;
 import com.hwyj.domain.ResVO;
 
@@ -123,12 +128,12 @@ public class RestaurantServiceTest {
 		System.out.println(RES_CODE);
 	}
 		
+
 	@Test
-	public void ResInfo () {
-		ResVO resvo = new ResVO();
-		service.ResInfo(resvo);
-		log.info("@@@@@@@@@@@@ " + resvo);
-		System.out.println(resvo);
+	public void ResInfo() {
+		HashMap<String, Object> list =new HashMap<String, Object>();
+		list = service.ResInfo();
+		System.out.println("@@@@@@HASH@@@@@@@@@"+list);
 	}
 		
 	

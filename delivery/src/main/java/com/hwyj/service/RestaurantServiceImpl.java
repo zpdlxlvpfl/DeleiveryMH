@@ -85,7 +85,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 	
 	@Override
-	public ResVO ResInfo(ResVO resvo) {
+	public List<String> ResInfo() throws Exception{
 		return restaurantMapper.ResInfo();
 	}
 	

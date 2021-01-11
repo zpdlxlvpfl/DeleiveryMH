@@ -1,5 +1,8 @@
 package com.hwyj.mapper;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,8 +11,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.OrderVO;
+import com.hwyj.service.AllListDaoImpl;
 import com.hwyj.service.OrderService;
 
 import lombok.extern.log4j.Log4j;
@@ -17,32 +23,24 @@ import lombok.extern.log4j.Log4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
-public class OrderMapperTest {
+public class AllListMapperTest {
 	@Autowired
-	private OrderMapper orderMapper;
+	private AllListDaoImpl dao;
 	
-	@Test 
-	public void OrderList() {
-		OrderVO orderVO = new OrderVO();
-		log.info("START"+ orderMapper.OrderList(orderVO));
-		}
+	@Test //서비스객체 테스트
+	public void testExist() {
+		log.info(dao);
+		assertNotNull(dao);
+	}
 	
-	
-	
-	@Test 
-	public void insertOrder() {
-		OrderVO orderVO = new OrderVO();
-		orderMapper.insertOrder(orderVO);
+
+	@Test
+	public void TestResInfo() {
+		dao resInfo = new dao();
+		HashMap<String, Object> ResInfoList = new HashMap<String, Object>();
+		System.out.println("@@@@@@HASH@@@@@@@@@"+ResInfoList);
+	}
 		
-		orderVO.setOrder_no("2");
-		orderVO.setRes_code("test");
-		orderVO.setRes_menu_code("test");
-		orderVO.setRes_menu_acount("test");
-		orderVO.setDel_id("test");
-		orderVO.setId("test");
-		orderVO.setOrder_count(1);
-		System.out.println(orderVO);
-		}
 	
 	
 	

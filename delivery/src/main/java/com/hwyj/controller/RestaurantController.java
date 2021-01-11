@@ -48,6 +48,7 @@ import com.hwyj.domain.ResMenuVO;
 import com.hwyj.domain.ResVO;
 import com.hwyj.mapper.MemberMapper;
 import com.hwyj.mapper.RestaurantMapper;
+import com.hwyj.service.AllListDao;
 import com.hwyj.service.RestaurantService;
 import com.mysql.cj.Session;
 
@@ -223,13 +224,22 @@ public class RestaurantController {
 			return list;
 		}
 	  
-	
-	@RequestMapping(value = "ResInfo", method = RequestMethod.POST, produces = "application/json; charset=utf8")
-	public void ResInfo(Authentication auth,Model model,String RES_CODE,RedirectAttributes rttr) {
+	  
+	@RequestMapping(value = "/ResInfo", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public String list(Model model,String RES_CODE,RedirectAttributes rttr) throws Exception {
 		rttr.getFlashAttributes(); 
-		ResVO resvo = new ResVO ( );
-		model.addAttribute("ResInfo",restaurantService.ResInfo(resvo));
-		System.out.println(resvo);
+		HashMap<String, Object> list = new HashMap<String, Object>();
+		UtilController util = new UtilController();
+		list.put("list", restaurantService.ResInfo());
+		
+		model.addAttribute("list",list);
+		
+		//model.addAttribute("HashList",HashList);
+		System.out.println("@@@@@@list@@@@@@@@@"+list);
+		String callback=util.getJsonCallBackString("", list);
+		System.out.println("callback::"+callback);
+		
+		return callback;
 	
 	}
 	
@@ -238,6 +248,7 @@ public class RestaurantController {
 	public void UpdateRes() {
 
 	}
+	
 	
 	@GetMapping("/UpdateMenu")
 	public void UpdateMenu() {

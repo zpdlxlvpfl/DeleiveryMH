@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <html>
 <head>
@@ -39,40 +41,7 @@
 			|| document
 					.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
 </script>
-<script type="text/javascript">
-var ResInfo = $("#ResInfo");
-	$(document)
-			.ready(
-					function(ResInfo) {
-						$.ajax({
-									url : "/restaurant/ResInfo",
-									beforeSend : function(xhr)
-									{ xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
-									type : "POST",
-									contentType : "application/json; charset=utf-8;",
-									dataType : "json",
-									data : JSON.stringify({
-										RES_CODE : "RES_CODE",
-										ID : "ID",
-										EMail : "EMail",
-										M_NAME : "M_NAME",
-										TEL : "TEL",
-										ADDRESS : "ADDRESS",
-										MEMBER_DATE : "MEMBER_DATE"
-									}),
-									error : function(error,xhr) {
-										alert('error' + data);
-										console.log("error " + data);
 
-									},
-									success : function(data,xhr) {
-										alert('success' + data);
-										console.log("success" + data);
-									}
-								});
-							});
-
-</script>
 
 
 </head>
@@ -85,12 +54,12 @@ var ResInfo = $("#ResInfo");
 	<div class="parallax-content projects-content" id="portfolio">
 
 		<h1>
-			<font color="white" size="15px";>Restaurant Info</font>
+			<font color="white" size="15px">Restaurant Info</font>
 		</h1>
-		<span><font color="orange" size="5px";>Restaurant Info </font></span>
+		<span><font color="orange" size="5px">Restaurant Info </font></span>
 
 	</div>
-	
+
 	<div class="fixed-side-navbar">
 		<ul class="nav flex-column">
 			<li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
@@ -105,40 +74,42 @@ var ResInfo = $("#ResInfo");
 
 
 
-			
-			
-			
-			
-	<div class="parallax-content contact-content " id="contact-us">
- <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">RES NAME :</th>
-                     <th scope="col">OWNER NAME :</th>
-                    <th scope="col">RES ADDR :</th>
-                    <th scope="col">OWNER Email :</th>
-                    <th scope="col">RES TEL : </th>
-                     <th scope="col">RES DATE : </th>
-                   </tr>
-                </thead>
-                <c:forEach items="${ResInfo }" var="RES_CODE">
-                <tbody>
-                  <tr class="table-light">
-                    <th scope="row">
-                    <c:out value="${RES_CODE.RES_CODE }" /></th>
-                    <td><c:out value="${RES_CODE.RES_NAME }" /></td>
-                     <td><c:out value="${RES_CODE.M_NAME }" /></td>
-                    <td><c:out value="${RES_CODE.RES_ADDRESS }" /></td>
-                    <td><c:out value="${RES_CODE.RES_Email }" /></td>
-                    <td><c:out value="${RES_CODE.RES_TEL}" /> </td>
-                    <td id="ResInfo"><c:out value="${ResInfo }" /></td>
-                  </tr> 
-                  </c:forEach>                     
-                </tbody>
-              </table>       
-          
 
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+
+					<div class="parallax-content contact-content " id="contact-us">
+						<div id ="list">
+						<input type="hidden" id="list" name="list" value='<c:out value="${list.RES_CODE }" />'>
+						<input type="hidden" id="${status.count}" disabled>
+						<table class="table table-striped table-bordered table-hover">
+							
+							<thead>
+								<tr>
+									<th>RES NAME</th>
+									<th>RES_INFO</th>
+									<th>DEL_PRICE</th>
+								</tr>
+							</thead>
+							
+								<c:forEach items="${list}" var="list">
+									<tr class="odd gradeX">
+										<td>${list.RES_CODE }</td>
+										<td>${list.res_name }</td>
+										<td>${list.res_info }</td>
+										<td>${list.del_price }</td>
+									</tr>
+								</c:forEach>
+						</table>
 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<footer>
@@ -165,5 +136,44 @@ var ResInfo = $("#ResInfo");
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/plugins.js"></script>
 	<script src="../resources/js/main.js"></script>
+
+
+
 </body>
+<script type="text/javascript">
+	var ResInfo = $("#ResInfo");
+	var list = $("#list");
+	var RES_CODE = $("#RES_CODE");
+
+	$(document).ready(function(list) {
+		$.ajax({
+			url : "/restaurant/ResInfo",
+			type : "GET",
+			contentType : "application/json; charset=utf-8;",
+			dataType : "text",
+			data : JSON.stringify({
+				RES_CODE : "RES_CODE",
+				RES_NAME : "res_name",
+				RES_INFO : "res_info",
+				DEL_PRICE : "del_price"
+			}),
+			error : function(data, list) {
+				console.log("error " + data + list);
+			},
+			success : function(data, list) {
+				alert('success' + data);
+				console.log("success" + data + list);
+				var html = "";
+				for(var i=0, len=list.length||0; i<len; i++){		
+							html += "<td>"+list.RES_CODE+"</td>"
+							html += "<td>"+list.res_name+"</td>"
+							html += "<td>"+list.res_info+"</td>"
+							html += "<td>"+list.del_price+"</td>"
+							console.log(html);
+						}
+				ResInfo.html(list);
+			}
+		});
+	});
+</script>
 </html>

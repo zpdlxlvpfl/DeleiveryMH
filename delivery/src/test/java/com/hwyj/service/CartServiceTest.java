@@ -41,7 +41,6 @@ public class CartServiceTest {
 	
 	@Test //장바구니 가게 비교 서비스 테스트
 	public void testCompare() {
-		log.info("매장 코드: "+service.compare("res_02A01"));
 	}
 	
 	@Test //장바구니 보기 서비스 테스트

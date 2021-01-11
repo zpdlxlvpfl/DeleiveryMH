@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwyj.service.AllListDao">
+
+
+	<resultMap type="hashmap" id="AllMap">
+		<id property="id" column="id" />
+		<result property="id" column="id" />
+		<result property="pw" column="pw" />
+		<result property="m_name" column="m_name" />
+		<result property="email" column="email" />
+		<result property="tel" column="tel" />
+		<result property="auth" column="auth" />
+		<result property="id" column="id" />
+		<result property="RES_CODE" column="RES_CODE" />
+		<result property="RES_NAME" column="RES_NAME" />
+		<result property="RES_INFO" column="RES_INFO" />
+		<result property="DEL_PRICE" column="DEL_PRICE" />
+		<result property="RES_MENU_PRICE" column="RES_MENU_PRICE" />
+		<result property="RES_CODE" column="RES_CODE" />
+		<result property="res_menu_code" column="res_menu_code" />
+		<result property="res_menu_name" column="res_menu_name" />
+		<result property="res_menu_explan" column="res_menu_explan" />
+		<result property="res_menu_price" column="res_menu_price" />
+		<collection property="authList" resultMap="authMap">
+		</collection>
+	</resultMap>
+
+	<select id="selectAllRow" resultType="HashMap">
+		SELECT *
+		FROM res
+		right JOIN auth ON res.res_code = auth.auth
+		left join member on member.id = auth.id
+		WHERE res.res_code is null AND
+		(auth.auth=#{auth} IS not NULL OR res.res_code)
+	</select>
+
+</mapper>
+	

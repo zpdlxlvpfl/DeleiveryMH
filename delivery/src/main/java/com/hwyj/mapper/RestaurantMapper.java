@@ -1,6 +1,6 @@
 package com.hwyj.mapper;
 
-import java.util.HashMap; 
+import java.util.HashMap;  
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -27,7 +27,7 @@ public interface RestaurantMapper {
 	
 	public HashMap<String, Object> getresCount();
 	
-	public ResVO ResInfo();
+	public List<String> ResInfo() throws Exception;
 	
 	
 	//식당 리뷰 보기

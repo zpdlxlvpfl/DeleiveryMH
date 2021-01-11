@@ -1,6 +1,6 @@
 package com.hwyj.service;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotNull; 
 
 import java.util.List;
 

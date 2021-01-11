@@ -76,7 +76,8 @@ function restList(){
 			},
 			success : function(data) {
 				console.log("data " + data+RestList);
-				var html = "";
+				var html = '';
+				
 				for(var i=0, len=RestList.length||0; i<len; i++){				
 					html += '<div class="service-RestList"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='+RES_CODE.RES_CODE+'}"+'RES_CODE.RES_NAME'+ </a></h4>';
 					html += '<div class="line-dec"></div>';

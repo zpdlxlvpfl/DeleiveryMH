@@ -129,7 +129,7 @@ public class CommonController {
    @RequestMapping(value = "/index", method = RequestMethod.GET, produces ="application/json; charset=utf8")
 	public String menuList(ModelMap model, ResMenuVO menuvo) throws Exception {
 		HashMap<String, Object> hashMap = new HashMap<>();	//HashMap 인스턴스화
-		List<String> list = new ArrayList<>();				//List 인스턴스화
+		List<ResMenuVO> list = new ArrayList<>();				//List 인스턴스화
 		
 		list =  restaurantService.menuList();
 		hashMap.put("HashMapList", list);
@@ -145,7 +145,7 @@ public class CommonController {
  		    //HttpSession session = null;
  		  //  RES_CODE =  (String)session.getAttribute("RES_CODE");
  		    rttr.getFlashAttributes(); 
- 		    List<String> list = new ArrayList<>();	
+ 		    List<ResMenuVO> list = new ArrayList<>();	
  			list =  restaurantService.menuList();
  			
  			model.addAttribute("menuList",list);
