@@ -42,6 +42,10 @@ public class CartController {
 	private RestaurantService restaurantService;
 
 	
+	@GetMapping("myCart")
+	public void myCart() {
+		
+	}
 	/*
 	 * @GetMapping("myCart") // 장바구니 페이지 public void myCart(Authentication
 	 * authentication, Model model) {
@@ -49,19 +53,19 @@ public class CartController {
 	 * }
 	 */
 
-	  @RequestMapping(value = "/myCart", method = RequestMethod.GET, produces ="application/json; charset=utf8")
-		public void menuList(ModelMap model,Authentication authentication, ResMenuVO menuvo) throws Exception {
-			HashMap<String, Object> hashMap = new HashMap<>();	//HashMap 인스턴스화
-			List<ResMenuVO> list = new ArrayList<>();				//List 인스턴스화
-			
-			list =  restaurantService.menuList();
-			hashMap.put("HashMapList", list);
-			model.addAttribute("HashMapList", list);
-			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-			System.out.println("model@@@@@@@@@@@@@@@@@@@@@" + model);
-			System.out.println("hashMap@@@@@@@@@@@@@@@@@@@@" + hashMap);
-		//	return "myCart";
-		}
+//	  @RequestMapping(value = "/myCart", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+//		public void menuList(ModelMap model,Authentication authentication, ResMenuVO menuvo) throws Exception {
+//			HashMap<String, Object> hashMap = new HashMap<>();	//HashMap 인스턴스화
+//			List<ResMenuVO> list = new ArrayList<>();				//List 인스턴스화
+//			
+//			list =  restaurantService.menuList();
+//			hashMap.put("HashMapList", list);
+//			model.addAttribute("HashMapList", list);
+//			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+//			System.out.println("model@@@@@@@@@@@@@@@@@@@@@" + model);
+//			System.out.println("hashMap@@@@@@@@@@@@@@@@@@@@" + hashMap);
+//		//	return "myCart";
+//		}
 	
 
 	@GetMapping("cartTest")
