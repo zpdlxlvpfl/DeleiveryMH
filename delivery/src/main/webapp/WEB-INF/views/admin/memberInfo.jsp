@@ -89,8 +89,9 @@ $("#d_member").on("click", function(){
 	$("#d_Modal").modal("show");
 });
 
-$("#mList").on("click", function(){ //목록보기 누르면 멤버리스트로 이동
-	self.location="/admin/memberList?auth=<c:out value="${memberInfo.auth}"/>";
+$("#mList").on("click", function(){ 
+	history.back(); //목록보기 누르면 이전으로
+	//self.location="/admin/memberList?auth=<c:out value="${memberInfo.auth}"/>"; //목록보기 누르면 멤버리스트로 이동
 });
 
 

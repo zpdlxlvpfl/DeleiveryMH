@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.hwyj.domain.Criteria;
 import com.hwyj.domain.CustomerVO;
 import com.hwyj.mapper.AdminMapper;
 
@@ -16,13 +17,28 @@ import lombok.extern.log4j.Log4j;
 public class AdminServiceImpl implements AdminService {
 	
 	private AdminMapper adminMapper;
-
-	//멤버 목록 보기 서비스
+	
+	
+	//전체회원수 구하기
 	@Override
-	public List<CustomerVO> getMemberList(String auth) {
-		log.info("멤버 목록 보기: "+adminMapper.getMemberList(auth));
-		return adminMapper.getMemberList(auth);
+	public int getTotal(Criteria criteria) {
+		
+		return adminMapper.getTotalCount(criteria);
 	}
+	
+	//권한별로 멤버 목록 보기 (관리자 페이지에서) + 페이징처리
+	@Override
+	public List<CustomerVO> getMemberList(Criteria criteria) {
+		
+		return adminMapper.getMemberList(criteria);
+	}
+
+//	//멤버 목록 보기 서비스
+//	@Override
+//	public List<CustomerVO> getMemberList(String auth) {
+//		log.info("멤버 목록 보기: "+adminMapper.getMemberList(auth));
+//		return adminMapper.getMemberList(auth);
+//	}
 		
 	//멤버정보 상세보기 서비스
 	@Override
@@ -44,5 +60,6 @@ public class AdminServiceImpl implements AdminService {
 		
 		return adminMapper.search(keyword);
 	}
+
 
 }

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hwyj.domain.Criteria;
 import com.hwyj.domain.CustomerVO;
+import com.hwyj.domain.PageDTO;
 import com.hwyj.service.AdminService;
 
 import lombok.AllArgsConstructor;
@@ -22,13 +24,24 @@ import lombok.extern.log4j.Log4j;
 public class AdminController {
 	
 	private AdminService adminService;
+	
+	
+	@GetMapping("/memberList") //멤버 리스트 보는 페이지 (+페이징 처리)
+	public void memberList(Criteria criteria, Model model) {
 		
-	@GetMapping("/memberList") //멤버 리스트 보는 페이지
-	public void memberList(String auth, Model model) {
 		//#memberList 열때 기본을 멤버로 열고 매장,관리자는 나중에 따로 선택해서 여는걸로 만들기
-		model.addAttribute("memberList", adminService.getMemberList(auth));
-		model.addAttribute("auth", auth);
+		model.addAttribute("memberList", adminService.getMemberList(criteria));
+		
+		int total=adminService.getTotal(criteria);		
+		model.addAttribute("pageMaker", new PageDTO(criteria, total));
 	}
+		
+//	@GetMapping("/memberList") //멤버 리스트 보는 페이지
+//	public void memberList(String auth, Model model) {
+//		//#memberList 열때 기본을 멤버로 열고 매장,관리자는 나중에 따로 선택해서 여는걸로 만들기
+//		model.addAttribute("memberList", adminService.getMemberList(auth));
+//		model.addAttribute("auth", auth);
+//	}
 	
 	//멤버정보 상세보기 페이지
 	@GetMapping("/memberInfo") 
