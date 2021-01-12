@@ -217,9 +217,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">장바구니 전체삭제</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div class="modal-body">
         <p>모두 삭제하시겠습니까?</p>
@@ -385,7 +382,8 @@ $(document).ready(function(){
 		
 		cartService.getCartList(function(cartList){
 			var str="";
-			var sum_str='<div id="sumTotal" style="color:white;" align="center"><h4>총 주문금액 <b><span id="AAA">'+cartList[0].sumTotal+'</span>원</b></h4></div>';
+			var sum_str='<div id="sumTotal" style="color:white;" align="center"><h4>총 주문금액 <b><span id="AAA">'
+			+numberWithCommas(cartList[0].sumTotal)+'</span>원</b></h4></div>';
 // 			if(cartList==null || cartList.length==0){
 // 				c_list.html("");
 // 				return;
@@ -395,8 +393,8 @@ $(document).ready(function(){
 				str+='<span style="color:white;" class="close" id="'+cartList[i].cart_no+'">X</span>';
 				console.log(str);
 				str+='<h4>'+cartList[i].res_menu_name+'</h4>';
-				str+='<div class="line-dec"></div><p style="color:grey;">'+cartList[i].res_menu_price+'원</p>';
-				str+='<p>'+cartList[i].sum +'원</p>';
+				str+='<div class="line-dec"></div><p style="color:grey;">'+numberWithCommas(cartList[i].res_menu_price)+'원</p>';
+				str+='<p>'+numberWithCommas(cartList[i].sum) +'원</p>';
 				str+='<div id="'+cartList[i].cart_no+'"><button id="minus"><b>-</b></button> '+cartList[i].amount+'개 <button id="plus"><b>+</b></button></div>';
 				str+='<input type="hidden" id="cart_no" name="cart_no" value="{'+cartList[i].cart_no+'}">';
 				str+='</div></div>';
@@ -412,12 +410,12 @@ $(document).ready(function(){
 // 			if(cartList==null || emptyCart != null){
 // 				sumTotal.html('<div id="sumTotal" style="color:white;" align="center"><h4>총 주문금액 <b>0원</b></h4></div>');
 // 			}
+			
 		});
 	}
 	
 	
-	
-	
+		
 	//메뉴 수량 수정 클릭
 	$(document).on("click","#plus",function(e){ // + 플러스 버튼 눌렀을 때
 		e.preventDefault();
@@ -472,6 +470,10 @@ $(document).ready(function(){
 	});
 	
 	
+	//금액 콤마 찍기
+	function numberWithCommas(num) {
+	    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 
 	
 });
