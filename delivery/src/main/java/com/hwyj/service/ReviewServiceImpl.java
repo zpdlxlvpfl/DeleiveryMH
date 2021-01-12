@@ -23,6 +23,18 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return reviewMapper.insertReview(reviewVO)==1;
 	}
+	
+	@Override //리뷰 수정
+	public boolean modifyReview(ReviewVO reviewVO) {
+		
+		return reviewMapper.updateReview(reviewVO)==1;
+	}
+
+	@Override //리뷰 삭제
+	public boolean removeReview(ReviewVO reviewVO) {
+		
+		return reviewMapper.deleteReview(reviewVO)==1;
+	}
  
 	@Override //매장 리뷰 목록
 	public List<ReviewVO> getReviewList(String res_code) {
@@ -37,5 +49,7 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return form.format(reviewMapper.getRate(res_code));
 	}
+
+	
 
 }

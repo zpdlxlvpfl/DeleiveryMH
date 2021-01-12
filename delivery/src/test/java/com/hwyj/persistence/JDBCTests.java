@@ -13,8 +13,8 @@ import lombok.extern.log4j.Log4j;
 public class JDBCTests {
 	static {
 		try {
-			//Class.forName("com.mysql.cj.jdbc.Driver");
-			Class.forName("org.mariadb.jdbc.Driver"); //mariadb
+			Class.forName("com.mysql.cj.jdbc.Driver"); //MySQL
+			//Class.forName("org.mariadb.jdbc.Driver"); //Mariadb
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -26,8 +26,8 @@ public class JDBCTests {
 	public void testConnectionMySQL() {
 		
 		try (Connection con =
-			 DriverManager.getConnection("jdbc:log4jdbc:mariadb://192.168.0.36:3306/testdb",
-					 "delivery","1234")) {
+			 DriverManager.getConnection("jdbc:log4jdbc:mysql://127.0.0.1:3307/testdb?characterEncoding=UTF-8&amp;serverTimezone=Asia/Seoul",
+					 "java","java")) {
 			log.info(con);
 		} catch (Exception e) {
 			fail(e.getMessage());
