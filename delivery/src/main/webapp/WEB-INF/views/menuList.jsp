@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <%@page import="java.util.List"%>
 <%@page import="org.springframework.web.bind.annotation.SessionAttribute"%>
-<%@page import="com.mysql.cj.xdevapi.Session"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

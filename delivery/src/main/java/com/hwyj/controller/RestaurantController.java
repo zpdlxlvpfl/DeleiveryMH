@@ -1,6 +1,6 @@
 package com.hwyj.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+import static  org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -50,7 +50,6 @@ import com.hwyj.mapper.MemberMapper;
 import com.hwyj.mapper.RestaurantMapper;
 import com.hwyj.service.AllListDao;
 import com.hwyj.service.RestaurantService;
-import com.mysql.cj.Session;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -171,6 +170,7 @@ public class RestaurantController {
 		return "redirect:/restaurant/reshome";
 
 	}
+
 
 	// 메뉴목록보기
 	@RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
