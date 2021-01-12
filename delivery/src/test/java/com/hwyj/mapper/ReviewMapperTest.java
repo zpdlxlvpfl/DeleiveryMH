@@ -24,12 +24,30 @@ public class ReviewMapperTest {
 	public void testInsertReview() {
 		
 		ReviewVO reviewVO = new ReviewVO();
-		reviewVO.setId("user4");
-		reviewVO.setRes_code("res03");
-		reviewVO.setContent("불고기버거가 좀 짭니다");
-		reviewVO.setRate(3);
+		reviewVO.setId("user0");
+		reviewVO.setRes_code("res_01");
+		reviewVO.setContent("맛있어요");
+		reviewVO.setRate(5);
 		
 		log.info("리뷰 등록 "+mapper.insertReview(reviewVO));
+	}
+	
+	@Test //리뷰 수정 테스트
+	public void testUpdateReview() {
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setId("user0");
+		reviewVO.setReview_no(6);
+		reviewVO.setContent("그럭저럭 괜찮아요");
+		reviewVO.setRate(3);
+		mapper.updateReview(reviewVO);
+	}
+	
+	@Test //리뷰 삭제 테스트
+	public void testDeleteReview() {
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setId("user4");
+		reviewVO.setReview_no(4);
+		mapper.deleteReview(reviewVO);
 	}
 	
 	@Test //매장 리뷰 목록 불러오기

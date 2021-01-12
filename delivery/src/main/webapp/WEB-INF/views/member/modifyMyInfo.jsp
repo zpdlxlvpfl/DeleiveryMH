@@ -26,7 +26,7 @@
 	  </fieldset>
 	  <fieldset>
 	    <label class="control-label" for="readOnlyInput">이름</label>
-	    <input name="m_name" maxlength="20" class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.m_name }"/>'>
+	    <input id="m_name" name="m_name" maxlength="20" class="form-control" type="text" value='<c:out value="${myInfo.m_name }"/>'>
 	  </fieldset>
 	  <fieldset>
 	    <label class="control-label" for="readOnlyInput">이메일</label>
@@ -38,7 +38,7 @@
 	  </fieldset>
 	  <fieldset>
 	    <label class="control-label" for="readOnlyInput">전화번호</label>
-	    <input name="tel" class="form-control" id="readOnlyInput" type="text" value='<c:out value="${myInfo.tel }"/>'>
+	    <input id="tel" name="tel" class="form-control" type="text" value='<c:out value="${myInfo.tel }"/>'>
 	  </fieldset>
 	  <p></p>
 	  <button type="button" id="m_Info" class="btn btn-warning">수정하기</button>
@@ -77,7 +77,14 @@ function clickModi(formName) {
 }
 
 $("#m_Info").on("click", function(){
-	$("#m_Modal").modal("show");
+	var m_name = $("#m_name").val();
+	var tel = $("#tel").val();
+	if(m_name=="" || tel==""){
+		alert("정보를 입력해주세요");
+	}else{
+		$("#m_Modal").modal("show");
+	}
+	
 });
 
 

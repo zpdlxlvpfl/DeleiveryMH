@@ -10,6 +10,16 @@
 		insert into review (id, res_code, content, rate) values(#{id}, #{res_code}, #{content}, #{rate})
 	</insert>
 	
+<!-- 	리뷰 수정 -->
+	<update id="updateReview">
+  		update review set content=#{content}, rate=#{rate}, review_date=now() where review_no=#{review_no} and id=#{id}
+	</update>
+
+<!-- 	리뷰 삭제 -->
+	<delete id="deleteReview">
+		delete from review where review_no=#{review_no} and id=#{id}
+	</delete>
+	
 <!-- 	매장 리뷰 목록 불러오기 -->
 	<select id="getReviewList" resultType="com.hwyj.domain.ReviewVO"> 
 		select review_no, m_name, r.id, r.res_code, content, review_date, rate from review r inner join member m on r.id=m.id

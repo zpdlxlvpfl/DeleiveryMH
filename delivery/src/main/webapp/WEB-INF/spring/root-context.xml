@@ -14,9 +14,13 @@
 		<property name="driverClassName"
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl"
-			value="jdbc:log4jdbc:mariadb://192.168.0.36:3306/testdb"></property>
-		<property name="username" value="delivery"></property>
-		<property name="password" value="1234"></property>
+			value="jdbc:log4jdbc:mysql://127.0.0.1:3307/testdb?characterEncoding=UTF-8&amp;serverTimezone=Asia/Seoul"></property>
+		<property name="username" value="java"></property>
+		<property name="password" value="java"></property>
+<!-- 		<property name="jdbcUrl" -->
+<!-- 			value="jdbc:log4jdbc:mariadb://192.168.0.36:3306/testdb"></property> -->
+<!-- 		<property name="username" value="delivery"></property> -->
+<!-- 		<property name="password" value="1234"></property> -->
 
 	</bean>
 

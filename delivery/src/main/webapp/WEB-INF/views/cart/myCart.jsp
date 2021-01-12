@@ -385,7 +385,7 @@ $(document).ready(function(){
 		
 		cartService.getCartList(function(cartList){
 			var str="";
-			var sum_str='<div id="sumTotal" style="color:white;" align="center"><h4>총 주문금액 <b>'+cartList[0].sumTotal+'원</b></h4></div>';
+			var sum_str='<div id="sumTotal" style="color:white;" align="center"><h4>총 주문금액 <b><span id="AAA">'+cartList[0].sumTotal+'</span>원</b></h4></div>';
 // 			if(cartList==null || cartList.length==0){
 // 				c_list.html("");
 // 				return;
@@ -470,6 +470,8 @@ $(document).ready(function(){
 			});
 		});
 	});
+	
+	
 
 	
 });
