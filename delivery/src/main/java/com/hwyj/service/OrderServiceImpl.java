@@ -1,5 +1,8 @@
 package com.hwyj.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +21,22 @@ public class OrderServiceImpl  implements OrderService {
 	@Autowired
 	private OrderMapper OrderMapper;
 	
-	@Override
-	public String OrderList(OrderVO orderVO) {
-		OrderMapper.OrderList(orderVO);
-		System.out.println(orderVO);
-		return "";
-	}
 	
 	@Override
-	public String insertOrder(OrderVO orderVO) {
-		String str = OrderMapper.insertOrder(orderVO);
+	public  List<OrderVO> OrderList(OrderVO orderVO) {
+		List<OrderVO> list = new ArrayList<OrderVO>();
+		list = OrderMapper.OrderList(orderVO);
 		System.out.println(orderVO);
-		return str;
+		return list;
+	}
+	
+	
+	@Override
+	public  List<OrderVO>  insertOrder(OrderVO orderVO) {
+		List<OrderVO> list = new ArrayList<OrderVO>();
+		list = OrderMapper.insertOrder(orderVO);
+		System.out.println(orderVO);
+		return list;
 	}
 	
 	

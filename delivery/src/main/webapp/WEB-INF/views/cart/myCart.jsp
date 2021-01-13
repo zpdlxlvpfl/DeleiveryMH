@@ -42,7 +42,7 @@
 	</div>
 
 
-
+	
 
 	<div class="service-content" id="services">
 		<div class="container">
@@ -82,13 +82,14 @@
 				</div>
 			</div>
 		</div>
+		<form action="orderList" id ="orderList">
 		<div id="sumTotal" style="color:white;" align="center">
 			<h4>총 주문금액 <b>${cartList[0].sumTotal }원</b></h4>
 		</div>
 		<br />
-		<div class="primary-button"  align="center">
-			<a href="#">주문하기</a>
-		</div>
+		<div class="primary-button"  align="center" id ="insertOrder">
+			<a href="/order/insertOrder">주문하기</a>
+		</div></form>
 	</div>
 
 
@@ -479,5 +480,41 @@ $(document).ready(function(){
 });
 
 </script>
+
+
+<script>
+		$(document).ready(
+				function() {
+					$("#insertOrder").click(
+							function() {
+								var json = {
+										order_no : $("#order_no").val(),
+										cart_no: $("#cart_no").val(),
+										id : $("#id").val(),
+										res_code: $("#res_code").val(),
+										res_menu_code: $("#res_menu_code").val(),
+										res_menu_name : $("#res_menu_name").val(),
+										res_menu_acount: $("#res_menu_acount").val(),
+										order_date: $("#order_date").val(),
+										order_count: $("#order_count").val(),
+										amount: $("#amount").val()
+								};
+
+									$.ajax({
+										type : "get",
+										url : "/order/insertOrder",
+										data : json,
+										success : function(string) {
+											alert('주문 성공');
+											document.location.href="/order/orderList";
+										},
+										error : function(error) {
+											alert("error.");
+										}
+									});
+							});
+				});
+	</script>
+	
 </body>
 </html>

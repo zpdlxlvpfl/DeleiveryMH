@@ -15,15 +15,20 @@
 		<result property="order_count" column="order_count" />
 	</resultMap>
 	
-	<select id="OrderList" resultType="com.hwyj.domain.OrderVO">
-			select * from testdb.order
+	<select id="OrderList" resultType="HashMap">
+			SELECT * 
+			from testdb.order 
+			right join cart on cart.id=order.id 
+			right join res_menu on res_menu.res_menu_code=cart.res_menu_code
+			where testdb.order.id=#{id}
 	</select>
 
 
 
 	<insert id="insertOrder"  parameterType="com.hwyj.domain.OrderVO">
-		 INSERT INTO testdb.order
-		(order_no,res_code,res_menu_code,res_menu_price,res_menu_acount,del_id,id,order_date,order_count)
+		<!--  INSERT INTO testdb.order
+		(order_no,res_code,res_menu_code,res_menu_price,
+		res_menu_acount,del_id,id,order_date,order_count)
 		VALUES 
 		(#{order_no},
 		#{res_code},
@@ -33,7 +38,10 @@
 		#{del_id},
 		#{id},
 		now(),
-		#{order_count})
+		#{order_count}) -->
+		
+		insert into testdb.order   (id,res_menu_code,order_count)
+		select id,res_menu_code,amount from cart where res_menu_code is not null
 		
 	</insert>
 	

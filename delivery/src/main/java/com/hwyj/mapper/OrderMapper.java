@@ -1,5 +1,7 @@
 package com.hwyj.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hwyj.domain.OrderVO;
@@ -9,8 +11,9 @@ import com.hwyj.domain.OrderVO;
 public interface OrderMapper {
 	
 	//주문내역
-	public String OrderList(OrderVO orderVO);
+	public List<OrderVO> OrderList(OrderVO orderVO);
 	
-	public String insertOrder(OrderVO orderVO);
+	public List<OrderVO> insertOrder(OrderVO orderVO);
+
 
 }

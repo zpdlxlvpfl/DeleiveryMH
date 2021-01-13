@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hwyj.domain.CartVO;
 import com.hwyj.domain.CartVOList;
+import com.hwyj.domain.OrderVO;
 
 public interface CartService {
 	
@@ -26,5 +27,6 @@ public interface CartService {
 	
 	//장바구니 전체 삭제
 	public boolean removeAll(String id);
+
 
 }

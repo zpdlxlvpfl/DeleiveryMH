@@ -3,6 +3,8 @@ package com.hwyj.controller;
 import java.util.ArrayList; 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +34,7 @@ public class CartRestController {
 	
 	//장바구니페이지 (목록)
 	@GetMapping(value="/cartList", produces= { MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<List<CartVO>> getCartList(Authentication authentication){
+	public ResponseEntity<List<CartVO>> getCartList(HttpSession session,Authentication authentication){
 		
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		List<CartVO> cartList = cartService.cartList(userDetails.getUsername());
@@ -49,6 +51,7 @@ public class CartRestController {
 			cart.setSumTotal(0);
 			emptyCart.add(cart);
 		}
+		session.setAttribute("cartList", cartService.cartList(userDetails.getUsername()));
 				
 		return cartList.size()!=0 ? new ResponseEntity<>(cartList, HttpStatus.OK)
 								: new ResponseEntity<>(emptyCart, HttpStatus.OK);
