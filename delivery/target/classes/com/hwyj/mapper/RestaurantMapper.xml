@@ -38,8 +38,8 @@
 	
 		
 <!--  메뉴보기 (식당이름, 메뉴이름, 메뉴설명, 메뉴가격) -->
-	<select id="menuList"  parameterType="map" resultType="com.hwyj.domain.ResMenuVO">	
-		 SELECT res_menu.res_code,
+	<select id="menuList"  parameterType="map" resultType="String">	
+	<!--   SELECT res_menu.res_code,
  			   res_menu.res_menu_code,
 			   res_menu.res_menu_name,
                res_menu.res_menu_explan,
@@ -47,45 +47,46 @@
 		FROM testdb.res_menu
 		left JOIN res ON res_menu.res_menu_code = res.res_code
 		WHERE res_menu.res_code is not null AND
-		(res.res_code IS  NULL)  
+		(res.res_code IS  NULL)  -->
+		 SELECT res_menu.res_code,
+ 			   res_menu.res_menu_code,
+			   res_menu.res_menu_name,
+               res_menu.res_menu_explan,
+               res_menu.res_menu_price
+		FROM testdb.res_menu
+		right JOIN res ON res_menu.res_code = res.res_code
+		WHERE res_menu.res_code=#{res_code}
 		
-		<!-- SELECT 
-		res_menu.res_code,
-		res_menu.res_menu_name,
-		res_menu.res_menu_explan,
-		res_menu.res_menu_price
-		FROM res_menu 
-		left JOIN res
-		ON res_menu.res_menu_code=res.res_code
-		WHERE res.res_code is null AND 
-		(res_menu.res_code IS NULL OR res_menu.res_code=#{res_code}); -->
+		
 	</select>
 	
 	
-
-	
 	<!-- 매장 리스트 -->
-		<select id="restList" parameterType="map" resultType="com.hwyj.domain.ResVO">
-		SELECT *
+		<select id="restList" parameterType="String" resultType="com.hwyj.domain.ResVO">
+		 SELECT 
+        res.res_code,
+        res.res_name,
+        res.res_info,
+        res.del_price
 		FROM res
-		left JOIN res_menu ON res.res_code = res_menu.res_menu_code
+		left JOIN res_menu ON res.res_code = res_menu.res_code
 		WHERE res.res_code is not null AND
-		(res.res_name IS not NULL OR res.res_code) 
+		(res_menu.res_code IS not NULL)
+		group by res.res_name,res_menu.res_code
 		
 		</select>
 	
  	<select id="read" resultType="com.hwyj.domain.ResVO">
- 		select * from res where res_code=#{res_code}
-		<!-- select res.res_code, res_menu.res_code 
-	    from res right join res_menu
-	    on res.res_code=res_menu.res_code -->
 	</select>
 	 
 	
-	
-	
-	<select id="menuread" resultType="com.hwyj.domain.ResMenuVO"> 
-		select * from testdb.res_menu where res_menu_code=#{res_menu_code}
+	<select id="menuread" parameterType="map" resultType="com.hwyj.domain.ResMenuVO">	
+		    select  res_code 
+		 	        res_menu_code,
+			 	    res_menu_name,
+               		res_menu_explan,
+              		res_menu_price
+			from res_menu where res_code=#{res_code}
 	</select>
 	
 		<select id="getList" resultType="com.hwyj.domain.ResMenuVO">	

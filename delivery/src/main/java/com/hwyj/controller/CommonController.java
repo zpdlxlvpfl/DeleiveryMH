@@ -50,41 +50,41 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class CommonController {
 
-   @Setter(onMethod_ = @Autowired)
-   private PasswordEncoder pwencoder;
-   
-   @Setter(onMethod_ = @Autowired)
-   private EmailService emailService;
-   
-   @Setter(onMethod_ = @Autowired)
-   private RestaurantService restaurantService;
+	@Setter(onMethod_ = @Autowired)
+	private PasswordEncoder pwencoder;
 
-   // 로그인 테스트용 나중에 지우기
-   @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')") // auth가 ROLE_ADMIN이랑 ROLE_MEMBER일때만 페이지 열 수 있음
-   @GetMapping("/test/securityTest") // 이 주소 요청하면 아래 /login 페이지 열림
-   public void securityTest() {
+	@Setter(onMethod_ = @Autowired)
+	private EmailService emailService;
 
-   }
+	@Setter(onMethod_ = @Autowired)
+	private RestaurantService restaurantService;
 
-   @GetMapping("/login") // 로그인 페이지
-   public void login(String error, Model model) {
-      log.info("에러: "+error);
-      if(error != null) { //로그인실패
-         model.addAttribute("error", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
-      }
+	// 로그인 테스트용 나중에 지우기
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')") // auth가 ROLE_ADMIN이랑 ROLE_MEMBER일때만 페이지 열 수 있음
+	@GetMapping("/test/securityTest") // 이 주소 요청하면 아래 /login 페이지 열림
+	public void securityTest() {
 
-   }
+	}
 
-   @PostMapping("/logout") // 로그아웃 버튼 누르면 로그아웃 되고 로그인페이지로 이동
-   public String logout() {
-      return "redirect:/login";
-   }
-   
-   @GetMapping("findId") //아이디 찾기
-   public void findId() {
-      
-   }
-   
+	@GetMapping("/login") // 로그인 페이지
+	public void login(String error, Model model) {
+		log.info("에러: " + error);
+		if (error != null) { // 로그인실패
+			model.addAttribute("error", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+		}
+
+	}
+
+	@PostMapping("/logout") // 로그아웃 버튼 누르면 로그아웃 되고 로그인페이지로 이동
+	public String logout() {
+		return "redirect:/login";
+	}
+
+	@GetMapping("findId") // 아이디 찾기
+	public void findId() {
+
+	}
+
 //   @PostMapping("findId")
 //   public String findIdSuccess(CustomerVO customerVO, RedirectAttributes rttr) {
 //      CustomerVO cusVO=memberservice.findId(customerVO); //아이디 찾기(아이디, 이메일)
@@ -100,12 +100,12 @@ public class CommonController {
 //         return "redirect:/findId";
 //      }   
 //   }
-   
-   @GetMapping("/findPw")
-   public void findPw() {
-	   
-   }
-   
+
+	@GetMapping("/findPw")
+	public void findPw() {
+
+	}
+
 //   @PostMapping("findPw2")
 //   public String findPwPost(@RequestBody CustomerVO customerVO) {
 //	   
@@ -120,113 +120,101 @@ public class CommonController {
 //	   return "/findPw2";
 //   }
 
-   @GetMapping("/join") // 가입
-   public void join() {
+	@GetMapping("/join") // 가입
+	public void join() {
 
-   }
+	}
 
-	//메뉴목록보기 (템플릿 메인 사진 아래)
-   @RequestMapping(value = "/index", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	// 메뉴목록보기 (템플릿 메인 사진 아래)
+	@RequestMapping(value = "/index", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	public String menuList(ModelMap model, ResMenuVO menuvo) throws Exception {
-		HashMap<String, Object> hashMap = new HashMap<>();	//HashMap 인스턴스화
-		List<ResMenuVO> list = new ArrayList<>();				//List 인스턴스화
-		
-		list =  restaurantService.menuList();
+		HashMap<String, Object> hashMap = new HashMap<>(); // HashMap 인스턴스화
+		List<ResMenuVO> list = new ArrayList<>(); // List 인스턴스화
+
+		list = restaurantService.menuList();
 		hashMap.put("HashMapList", list);
 		model.addAttribute("HashMapList", list);
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+				.getRequest();
 		System.out.println("model@@@@@@@@@@@@@@@@@@@@@" + model);
 		System.out.println("hashMap@@@@@@@@@@@@@@@@@@@@" + hashMap);
 		return "index";
 	}
-   
-   @RequestMapping(value = "menuList", method = RequestMethod.GET, produces ="application/json; charset=utf8")
- 		public String menuList(ModelMap model, ResMenuVO menuvo,RedirectAttributes rttr,String RES_CODE )throws Exception {
- 		    //HttpSession session = null;
- 		  //  RES_CODE =  (String)session.getAttribute("RES_CODE");
- 		    rttr.getFlashAttributes(); 
- 		    List<ResMenuVO> list = new ArrayList<>();	
- 			list =  restaurantService.menuList();
- 			
- 			model.addAttribute("menuList",list);
- 			System.out.println(list + "LIST@@@@@@@@@@@@@@@@@@@");
- 			System.err.println(RES_CODE + "RES_CODE@@@@@@@@@@@");
- 			
- 			return "/menuList";
- 		}
- 	
- 	
 
- 	
- 	  @RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
- 		public List<ResVO> restList(ModelMap model,RedirectAttributes rttr,HttpSession session, String RES_CODE) throws Exception {
- 		    ResVO vo = new ResVO();
- 		    rttr.getFlashAttributes(); 
- 		    List<ResVO> list = new ArrayList<>();
- 		    
- 			list = restaurantService.restList();
- 			System.out.println(list+"RestList@@@@@@@@@@@@@");
- 			model.addAttribute("RestList", list);
- 			restaurantService.read(RES_CODE);
- 			
- 			System.out.println("=======list====" + list);
- 			//rttr.addAttribute("RES_CODE", RES_CODE);
- 			return list;
- 		}
-   
-   
+	@RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public String menuList(ModelMap model, ResMenuVO menuvo, RedirectAttributes rttr, String RES_CODE)
+			throws Exception {
+		// HttpSession session = null;
+		// RES_CODE = (String)session.getAttribute("RES_CODE");
+		rttr.getFlashAttributes();
+		List<ResMenuVO> list = new ArrayList<>();
+		list = restaurantService.menuList();
 
+		model.addAttribute("menuList", list);
+		System.out.println(list + "LIST@@@@@@@@@@@@@@@@@@@");
+		System.err.println(RES_CODE + "RES_CODE@@@@@@@@@@@");
 
-   @GetMapping("/maptest") // 현재위치 
-   public void maptest() {
+		return "/menuList";
+	}
 
-   }
+	@RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public List<ResVO> restList(ModelMap model, RedirectAttributes rttr, HttpSession session, String RES_CODE)
+			throws Exception {
+		ResVO vo = new ResVO();
+		rttr.getFlashAttributes();
+		RES_CODE = (String) session.getAttribute("RES_CODE");
+		List<ResVO> restList = new ArrayList<>();
+		restList = restaurantService.restList();
+		System.out.println(restList + "RestList@@@@@@@@@@@@@");
+		model.addAttribute("restList", restList);
+		restaurantService.read(RES_CODE);
+		System.out.println("=======list====" + restList);
+		// rttr.addAttribute("RES_CODE", RES_CODE);
+		return restList;
+	}
 
-   @GetMapping("/foodmaptest") // 음식점 마커
-   public void foodmaptest() {
+	@GetMapping("/maptest") // 현재위치
+	public void maptest() {
 
-   }
+	}
 
-   @GetMapping("/accessError") // 403페이지 (접근제한) //accessError.jsp 수정 해야됨//
-   public void accessDenied(Authentication auth) {
+	@GetMapping("/foodmaptest") // 음식점 마커
+	public void foodmaptest() {
 
-      // log .info(auth);
-   }
+	}
 
-   @Autowired
-   private MemberService memberservice;
+	@GetMapping("/accessError") // 403페이지 (접근제한) //accessError.jsp 수정 해야됨//
+	public void accessDenied(Authentication auth) {
 
-   @GetMapping("/insertCustomer") // ㅎㅗㅣㅇㅜㅓㄴㄱㅏㅇㅣㅂ
-   @ResponseBody
-   public String insertCustomer(Locale locale, CustomerVO csVO, Model model) {
-      log.info("test");
-      System.out.println("InsertCustomer start" + csVO.getId());
-      String check = "";
-   
-      check = memberservice.selectCustomer(csVO);
-      System.out.println("result " + check);
-         check = "0";
-         PasswordEncoder encode = new BCryptPasswordEncoder();
-         csVO.setPw(encode.encode(csVO.getPw()));
-   
-         int check2 = memberservice.insertCustomer(csVO);
-         check = check2 + "";
-   
-      //}
-      return check + "";
-      }
-   
-   
-   
+		// log .info(auth);
+	}
+
+	@Autowired
+	private MemberService memberservice;
+
+	@GetMapping("/insertCustomer") // ㅎㅗㅣㅇㅜㅓㄴㄱㅏㅇㅣㅂ
+	@ResponseBody
+	public String insertCustomer(Locale locale, CustomerVO csVO, Model model) {
+		log.info("test");
+		System.out.println("InsertCustomer start" + csVO.getId());
+		String check = "";
+
+		check = memberservice.selectCustomer(csVO);
+		System.out.println("result " + check);
+		check = "0";
+		PasswordEncoder encode = new BCryptPasswordEncoder();
+		csVO.setPw(encode.encode(csVO.getPw()));
+
+		int check2 = memberservice.insertCustomer(csVO);
+		check = check2 + "";
+
+		// }
+		return check + "";
+	}
 
 	@GetMapping("/enabled")
-	public String enabled (String ID,String RES_ID,Model model) {
+	public String enabled(String ID, String RES_ID, Model model) {
 		return "";
 	}
-   
-   
+
 }
-
-   
-
-      

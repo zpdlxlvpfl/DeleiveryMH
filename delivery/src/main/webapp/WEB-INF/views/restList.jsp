@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,12 +36,12 @@
 
 <script
 	src="../resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-	<script type="text/javascript">
-		window.jQuery
-				|| document
-						.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
-	</script>
-	
+<script type="text/javascript">
+	window.jQuery
+			|| document
+					.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
+</script>
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	type="text/javascript"></script>
 
@@ -51,53 +51,76 @@
 					.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
 </script> -->
 
-						
+
 <script>
+	var restList = $("#restList");
+	var html = '';
+	function restList() {
+		var i = 0;
 
-var RestList = $("#RestList")
+		restaurantService
+				.restList(function(restList) {
+					$
+							.ajax({
+								type : "get",
+								url : "/restList",
+								dataType : "json",
+								data : {
+									RES_CODE : "${RES_CODE}",
+									RES_NAME : "${RES_NAME}",
+									RES_INFO : "${RES_INFO}",
+									DEL_PRICE : "${DEL_PRICE}"
+								},
+								error : function(data) {
+									alert("error" + restList);
+									console.log("error" + data + restList);
+								},
+								success : function(data) {
+									alert("data" + data + html);
+									console.log("data " + data + html);
+									for (i = 0, len = restList.length || 0; i < len; i++) {
+										html += '<div class="col-md-12"><div class="service-item"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='
+												+ RES_CODE.RES_CODE + '}"+'
+										RES_CODE.RES_NAME
+										'+ </a></h4>';
+										html += '<div class="line-dec">'
+												+ RES_CODE.RES_INFO + '</div>';
+										html += '<p>' + RES_CODE.RES_INFO
+												+ '</p>';
+										html += '<p>'
+												+ RES_CODE.DEL_PRICE
+												+ '<font color="orange">&#8361;</font></div>';
 
-function restList(){
-	
-	restaurantService.restList(function(restList){
-		$.ajax({
-			type : "get",
-			url : "/restaurant/restList",
-			dataType : "json",
-			data : {
-				RES_CODE : "${RES_CODE}",
-				RES_NAME : "${RES_NAME}",
-				RES_INFO : "${RES_INFO}",
-				DEL_PRICE : "${DEL_PRICE}"
-			},
-			error : function(error) {
-				alert("error" + error);
-				console.log("error" + error +RestList);
-			},
-			success : function(data) {
-				console.log("data " + data+RestList);
-				var html = "";
-				for(var i=0, len=RestList.length||0; i<len; i++){				
-					html += '<div class="service-RestList"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='+RES_CODE.RES_CODE+'}"+'RES_CODE.RES_NAME'+ </a></h4>';
-					html += '<div class="line-dec"></div>';
-					html += '<p>'+RES_CODE.RES_INFO+'</p>';
-					html += '<p>'+RES_CODE.DEL_PRICE+'<font color="orange">&#8361;</font></div>';
-					console.log(html);
-					html += '<div class="service-RestList"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='+RES_CODE.RES_CODE+'}"+'RES_CODE.RES_NAME'+ </a></h4>';
-					html += '<div class="line-dec"></div>';
-					html += '<p>'+RES_CODE.RES_INFO+'</p>';
-					html += '<p>'+RES_CODE.DEL_PRICE+'<font color="orange">&#8361;</font></div>';
-					
-					html += '<div class="service-RestList"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='+RES_CODE.RES_CODE+'}"+'RES_CODE.RES_NAME'+ </a></h4>';
-					html += '<div class="line-dec"></div>';
-					html += '<p>'+RES_CODE.RES_INFO+'</p>';
-					html += '<p>'+RES_CODE.DEL_PRICE+'<font color="orange">&#8361;</font></div>';
-				}
-				ResList.html(str);
-			}
-		});
-	});
-};
+										html += '<div class="service-item"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='
+												+ RES_CODE.RES_CODE + '}"+'
+										RES_CODE.RES_NAME
+										'+ </a></h4>';
+										html += '<div class="line-dec">'
+												+ RES_CODE.RES_INFO + '</div>';
+										html += '<p>' + RES_CODE.RES_INFO
+												+ '</p>';
+										html += '<p>'
+												+ RES_CODE.DEL_PRICE
+												+ '<font color="orange">&#8361;</font></div>';
 
+										html += '<div class="service-item"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='
+												+ RES_CODE.RES_CODE + '}"+'
+										RES_CODE.RES_NAME
+										'+ </a></h4>';
+										html += '<div class="line-dec">'
+												+ RES_CODE.RES_INFO + '</div>';
+										html += '<p>' + RES_CODE.RES_INFO
+												+ '</p>';
+										html += '<p>'
+												+ RES_CODE.DEL_PRICE
+												+ '<font color="orange">&#8361;</font></div></div>';
+
+									}
+
+								}
+							});
+				});
+	};
 </script>
 
 </head>
@@ -105,11 +128,11 @@ function restList(){
 
 	<div class="fixed-side-navbar">
 		<ul class="nav flex-column">
-			<li class="nav-RestList"><a class="nav-link" href="index"><span>Delivery</span></a></li>
-			<li class="nav-RestList"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
-			<li class="nav-RestList"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
-			<li class="nav-RestList"><a class="nav-link" href="join"><span>JOIN</span></a></li>
-			<li class="nav-RestList"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="index"><span>Delivery</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="join"><span>JOIN</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
 		</ul>
 	</div>
 
@@ -124,6 +147,8 @@ function restList(){
 		</h1>
 		<span><font color="orange" size="5px">Restaurant List </font></span>
 	</div>
+
+
 
 
 	<div class="service-content" id="services">
@@ -152,64 +177,93 @@ function restList(){
 								</div>
 							</div>
 						</div>
-						
-						
-						
-						<div id="RestList"> 
+
+
+
+							<c:forEach items="${restList}" var="RES_CODE">
 							
-							<c:forEach items="${RestList}" var="RES_CODE">
-							<div class="col-md-8">
-								<div class="service-item">
-							<div class="left-text">
 							
-							<input type="hidden" id="RES_CODE" name="RES_CODE" value='<c:out value="${RES_CODE.RES_CODE }" />'>
-							<input type="hidden" id="${status.count}" disabled>
-			              	     	<h4><a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
-			              	     	${RES_CODE.RES_NAME }</a></h4>
-								<div class="line-dec">${RES_CODE.RES_INFO }</div>
-								<p>Delivery Tips : ${RES_CODE.DEL_PRICE }<font color="orange"> &#8361; </font></p>
+								<div class="col-md-12">
+									<div class="service-item">
+										<input type="hidden" id="RES_CODE" name="RES_CODE"
+											value='<c:out value="${RES_CODE.RES_CODE }" />'> <input
+											type="hidden" id="${status.count}" disabled>
+										<h4>
+											<a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
+												${RES_CODE.RES_NAME }</a>
+										</h4>
+										<div class="line-dec">
+											<p>${RES_CODE.RES_INFO }</p>
+										</div>
+										Delivery Tips : ${RES_CODE.DEL_PRICE }<font color="orange">
+											&#8361; </font>
+									</div>
+
+
+									<div class="service-item">
+										<input type="hidden" id="RES_CODE" name="RES_CODE"
+											value='<c:out value="${RES_CODE.RES_CODE }" />'> <input
+											type="hidden" id="${status.count}" disabled>
+										<h4>
+											<a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
+												${RES_CODE.RES_NAME }</a>
+										</h4>
+										<div class="line-dec">
+											<p>${RES_CODE.RES_INFO }</p>
+										</div>
+										Delivery Tips : ${RES_CODE.DEL_PRICE }<font color="orange">
+											&#8361; </font>
+									</div>
+
+
+									<div class="service-item">
+										<input type="hidden" id="RES_CODE" name="RES_CODE"
+											value='<c:out value="${RES_CODE.RES_CODE }" />'> <input
+											type="hidden" id="${status.count}" disabled>
+										<h4>
+											<a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
+												${RES_CODE.RES_NAME }</a>
+										</h4>
+										<div class="line-dec">
+											<p>${RES_CODE.RES_INFO }</p>
+										</div>
+										Delivery Tips : ${RES_CODE.DEL_PRICE }<font color="orange">
+											&#8361; </font>
+									</div>
 								</div>
-								</div>
-								</div>
-								</c:forEach>
-							</div>
-			
-						</div>		
-			
-					</div>
-			</div>
-			
-			</div>
-			
-		</div>
-							   
-							
+							</c:forEach>
 
-		
-		
-			<div class="parallax-content contact-content " id="contact-us"></div>
-
-
-
-
-
-			<footer>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="primary-button">
-								<a href="#home">Back To Top</a>
-							</div>
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="#"><i class="fa fa-google"></i></a></li>
-								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-							</ul>
 						</div>
 					</div>
 				</div>
-			</footer>
+			</div>
+		</div>
+
+
+
+	<div class="parallax-content contact-content " id="contact-us"></div>
+
+
+
+
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="primary-button">
+						<a href="#home">Back To Top</a>
+					</div>
+					<ul>
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+						<li><a href="#"><i class="fa fa-google"></i></a></li>
+						<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

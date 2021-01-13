@@ -32,6 +32,8 @@ public class AdminControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build(); //MockMvc 객체 생성
 	}
 	
+
+	
 	@Test //멤버 목록보는 페이지 테스트
 	public void testMembertList() throws Exception {
 		log.info("멤버목록보기: "+mockMvc.perform(MockMvcRequestBuilders.get("/admin/memberList").param("auth", "ROLE_RES"))

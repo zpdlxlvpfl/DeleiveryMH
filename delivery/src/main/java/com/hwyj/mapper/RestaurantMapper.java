@@ -17,7 +17,9 @@ public interface RestaurantMapper {
 	
 	public List<ResMenuVO> menuList() throws Exception;
 	
-	public ResMenuVO menuread(String menucode);
+	public List<ResMenuVO> mymenuList()throws Exception;
+	
+	public List<ResMenuVO> menuread(String RES_CODE);
 
 	public void read(String RES_CODE) ;
 	
@@ -49,6 +51,10 @@ public interface RestaurantMapper {
 	public void UpdateMenu (ResMenuVO menuvo);
 	
 	public void deleteMenu (ResMenuVO menuvo);
+	
+	public ResMenuVO get(String res_code);
+
+	
 	
 	;
 	

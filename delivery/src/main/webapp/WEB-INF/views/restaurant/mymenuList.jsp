@@ -5,6 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <html>
 <head>
@@ -85,17 +87,17 @@
 							<div class="testimonials-item">
 								<div class="service-item">
 									<img src="../resources/img/1st-item.jpg" alt="">
-										<c:forEach items="${menuList}" var="RES_CODE" begin="1"
+										<c:forEach items="${mymenuList}" var="res_menu_code" begin="1"
 										end="1" step="1" varStatus="i">
 										<h4>
-											<c:out value=" ${RES_CODE.res_menu_name}">
+											<c:out value=" ${res_menu_code.res_menu_name}">
 											</c:out>
 										</h4>
 										<div class="line-dec"></div>
 										<p>
-											<c:out value=" ${RES_CODE.res_menu_explan}" />
+											<c:out value=" ${res_menu_code.res_menu_explan}" />
 										</p>
-										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
 											&#8361;</span>
 										</c:forEach>
 									
@@ -112,17 +114,17 @@
 							<div class="testimonials-item">
 								<div class="service-item">
 									<img src="../resources/img/2nd-item.jpg" alt="" id="">
-									<c:forEach items="${menuList}" var="RES_CODE" begin="2"
+									<c:forEach items="${mymenuList}" var="res_menu_code" begin="2"
 										end="2" step="1" varStatus="i">
 										<h4>
-											<c:out value=" ${RES_CODE.res_menu_name}">
+											<c:out value=" ${res_menu_code.res_menu_name}">
 											</c:out>
 										</h4>
 										<div class="line-dec"></div>
 										<p>
-											<c:out value=" ${RES_CODE.res_menu_explan}" />
+											<c:out value=" ${res_menu_code.res_menu_explan}" />
 										</p>
-										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
 											&#8361;</span>
 									</c:forEach>
 									<div class="primary-button">
@@ -138,17 +140,17 @@
 							<div class="testimonials-item">
 								<div class="service-item">
 									<img src="../resources/img/3rd-item.jpg" alt="" id="">
-									<c:forEach items="${menuList}" var="RES_CODE" begin="3"
+									<c:forEach items="${mymenuList}" var="res_menu_code" begin="3"
 										end="3" step="1" varStatus="i">
 										<h4>
-											<c:out value=" ${RES_CODE.res_menu_name}">
+											<c:out value=" ${res_menu_code.res_menu_name}">
 											</c:out>
 										</h4>
 										<div class="line-dec"></div>
 										<p>
-											<c:out value=" ${RES_CODE.res_menu_explan}" />
+											<c:out value=" ${res_menu_code.res_menu_explan}" />
 										</p>
-										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
 											&#8361;</span>
 									</c:forEach>
 									<div class="primary-button">
@@ -164,17 +166,17 @@
 							<div class="testimonials-item">
 								<div class="service-item">
 									<img src="../resources/img/4th-item.jpg" alt="">
-									<c:forEach items="${menuList}" var="RES_CODE" begin="4"
+									<c:forEach items="${mymenuList}" var="res_menu_code" begin="4"
 										end="4" step="1" varStatus="i">
 										<h4>
-											<c:out value=" ${RES_CODE.res_menu_name}">
+											<c:out value=" ${res_menu_code.res_menu_name}">
 											</c:out>
 										</h4>
 										<div class="line-dec"></div>
 										<p>
-											<c:out value=" ${RES_CODE.res_menu_explan}" />
+											<c:out value=" ${res_menu_code.res_menu_explan}" />
 										</p>
-										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
 											&#8361;</span>
 									</c:forEach>
 									<div class="primary-button">
@@ -190,18 +192,18 @@
 						<div class="left-text">
 							<div class="testimonials-item">
 								<div class="service-item">
-									<<img src="../resources/img/5th-item.jpg" alt="" id="">
-									<c:forEach items="${menuList}" var="RES_CODE" begin="5"
+									<img src="../resources/img/5th-item.jpg" alt="" id="">
+									<c:forEach items="${mymenuList}" var="res_menu_code" begin="5"
 										end="5" step="1" varStatus="i">
 										<h4>
-											<c:out value=" ${RES_CODE.res_menu_name}">
+											<c:out value=" ${res_menu_code.res_menu_name}">
 											</c:out>
 										</h4>
 										<div class="line-dec"></div>
 										<p>
-											<c:out value=" ${RES_CODE.res_menu_explan}" />
+											<c:out value=" ${res_menu_code.res_menu_explan}" />
 										</p>
-										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
 											&#8361;</span>
 									</c:forEach>
 									<div class="primary-button">
@@ -217,17 +219,17 @@
 							<div class="testimonials-item">
 								<div class="service-item">
 								<img src="../resources/img/6th-item.jpg" alt="" id="">
-									<c:forEach items="${menuList}" var="RES_CODE" begin="6"
+									<c:forEach items="${mymenuList}" var="res_menu_code" begin="6"
 										end="6" step="1" varStatus="i">
 										<h4>
-											<c:out value=" ${RES_CODE.res_menu_name}">
+											<c:out value=" ${res_menu_code.res_menu_name}">
 											</c:out>
 										</h4>
 										<div class="line-dec"></div>
 										<p>
-											<c:out value=" ${RES_CODE.res_menu_explan}" />
+											<c:out value=" ${res_menu_code.res_menu_explan}" />
 										</p>
-										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
 											&#8361;</span>
 									</c:forEach>
 									<div class="primary-button">
@@ -272,20 +274,28 @@
 	</footer>
 
 	<script type="text/javascript">
-		$(document).ready(function(menuList) {
+	
+	var res_code = $("#res_code")
+	var res_menu_code = $("#res_menu_code")
+	var mymenuList= $("#mymenuList")
+	
+		function mymenuList() {
+
+		restaurantService.mymenuList(function(mymenuList) {
 			$.ajax({
-				url : "/restaurant/menuList",
+				url : "restaurant/mymenuList?menuread="+res_code,
 				type : "GET",
 				contentType : "application/json; charset=utf-8;",
 				dataType : "json",
-				data : JSON.stringify({
-					RES_CODE : "RES_CODE",
-					res_menu_name : "res_menu_name",
-					res_menu_explan : "res_menu_explan",
-					res_menu_price : "res_menu_price"
-				}),
+				data : {
+					res_code : "${res_code}",
+					res_menu_code : "${res_menu_code}",
+					res_menu_name : "${res_menu_name}",
+					res_menu_explan :"${res_menu_explan}",
+					res_menu_price : "${res_menu_price}"
+				},
 				error : function(error) {
-					console.log("error " + data);
+					console.log("error " + error);
 
 				},
 				success : function(data) {
@@ -294,6 +304,7 @@
 				}
 			});
 		});
+	};
 	</script>
 
 

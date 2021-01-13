@@ -25,13 +25,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public List<ResMenuVO> menuList( )throws Exception {
 		return restaurantMapper.menuList();
 	}
-	
-	public ResMenuVO get(String res_code) {
-		return restaurantMapper.menuread(res_code);
+	@Override
+	public ResMenuVO get(String res_menu_code) {
+		return restaurantMapper.get(res_menu_code);
 	}
 	
-	public ResMenuVO menuread(String menucode) {
-		return restaurantMapper.menuread(menucode);
+	
+	@Override
+	public List<ResMenuVO> menuread(String RES_CODE) {
+		return restaurantMapper.menuread(RES_CODE);
 	}
 
 	
@@ -45,7 +47,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 	
 	@Override
 	public void read (String RES_CODE) {
-		
 	}
 	
 	@Override

@@ -1,6 +1,6 @@
 package com.hwyj.controller;
 
-import static  org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -94,18 +94,32 @@ public class RestaurantController {
 
 	}
 
+	/*
+	 * @GetMapping("menuread") public String menuread(ModelMap model, String
+	 * RES_CODE, RedirectAttributes rttr) { rttr.getFlashAttributes();
+	 * HashMap<String, Object> hashlist = new HashMap<String, Object>();
+	 * List<ResMenuVO> list = new ArrayList<>(); list =
+	 * restaurantService.menuread(RES_CODE); hashlist.put("RES_CODE", RES_CODE);
+	 * hashlist.put("list", list); model.addAttribute("RES_CODE",
+	 * restaurantService.menuread(RES_CODE)); model.addAttribute("list", list);
+	 * model.addAttribute("hashlist", hashlist); System.out.println(model +
+	 * "@@@@@@@model@@@@@"); System.out.println(list + "@@@@@@@list@@@@@");
+	 * System.out.println(hashlist + "@@@@@@@hashlist@@@@@");
+	 * 
+	 * return "/restaurant/menuread?RES_CODE=" + RES_CODE; }
+	 */
+
 	@GetMapping("/reshome")
-	public void reshome(String RES_CODE, Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
-		ResVO vo = new ResVO();
-
+	public void reshome(String RES_CODE, ModelMap model, HttpSession session, RedirectAttributes rttr)
+			throws Exception {
 		rttr.getFlashAttributes();
-		List<ResMenuVO> list = new ArrayList<>();
-		list = restaurantService.menuList();
+	}
 
-		model.addAttribute("menuList", list);
-		System.out.println(list);
-		restaurantService.read(RES_CODE);
-
+	@RequestMapping(value = "/menuread", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public String menuread(ModelMap model, String res_code,ResMenuVO menuvo, RedirectAttributes rttr) throws Exception {
+		rttr.getFlashAttributes();
+		restaurantService.menuread(res_code);
+		return res_code;
 	}
 
 	@GetMapping("/menuwrite")
@@ -171,54 +185,54 @@ public class RestaurantController {
 
 	}
 
-
-	// 메뉴목록보기
 	@RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	public List<ResMenuVO> menuList(ModelMap model, ResMenuVO menuvo, RedirectAttributes rttr, String RES_CODE)
 			throws Exception {
-		HttpSession session = null;
+		// HttpSession session = null;
 		// RES_CODE = (String)session.getAttribute("RES_CODE");
-		// rttr.getFlashAttributes();
-		List<ResMenuVO> list = new ArrayList<>();
-		list = restaurantService.menuList();
-
-		model.addAttribute("menuList", list);
-		System.out.println(list + "LIST@@@@@@@@@@@@@@@@@@@");
-		System.err.println(RES_CODE + "RES_CODE@@@@@@@@@@@");
-
-		return list;
-		// return "/restaurant/menuList";
+		rttr.getFlashAttributes();
+		UtilController util = new UtilController();
+		
+		List<ResMenuVO> menuList = new ArrayList<>();
+		menuList = restaurantService.menuList();
+		menuList = restaurantService.menuread(RES_CODE);
+		model.addAttribute("menuList", menuList);
+		restaurantService.menuread(RES_CODE);
+		System.out.println(menuList + "LIST@@@@@@@@@@@@@@@@@@@");
+		return menuList;
+		// return "restaurant/menuList";
 	}
 
 	@RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public List<ResVO> restList(ModelMap model, RedirectAttributes rttr, HttpSession session, String RES_CODE)
+	public List<ResVO> restList(ModelMap model, RedirectAttributes rttr, HttpSession session, String res_code)
 			throws Exception {
 		ResVO vo = new ResVO();
 		rttr.getFlashAttributes();
-		List<ResVO> list = new ArrayList<>();
+		res_code = (String) session.getAttribute("RES_CODE");
+		List<ResVO> restList = new ArrayList<>();
+		restList = restaurantService.restList();
+		System.out.println(restList + "RestList@@@@@@@@@@@@@");
+		model.addAttribute("restList", restList);
+		restaurantService.read(res_code);
+		model.addAttribute("RES_CODE", restaurantService.menuread(res_code));
+		System.out.println("=======list====" + restList);
+		rttr.addAttribute("RES_CODE", res_code);
 
-		list = restaurantService.restList();
-		System.out.println(list + "RestList@@@@@@@@@@@@@");
-		model.addAttribute("RestList", list);
-		restaurantService.read(RES_CODE);
-
-		System.out.println("=======list====" + list);
-		// rttr.addAttribute("RES_CODE", RES_CODE);
-		return list;
+		return restList;
 	}
 
 	@RequestMapping(value = "ResInfo", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	public List<ResVO> ResInfo(Model model, String RES_CODE, RedirectAttributes rttr) throws Exception {
 		rttr.getFlashAttributes();
 		HashMap<String, Object> hashlist = new HashMap<String, Object>();
-		
+
 		List<ResVO> list = new ArrayList<>();
 		UtilController util = new UtilController();
 		hashlist.put("hashlist", restaurantService.ResInfo());
 		list = restaurantService.ResInfo();
-		//model.addAttribute("RES_CODE",RES_CODE);
+		// model.addAttribute("RES_CODE",RES_CODE);
 		model.addAttribute("ResInfo", list); // model.addAttribute("HashList",HashList);
-		System.out.println("@@@@@@ResInfo@@@@@@@@@" + list); 
+		System.out.println("@@@@@@ResInfo@@@@@@@@@" + list);
 		System.out.println("@@@@@@hashlist ResInfo@@@@@@@@@" + hashlist);
 		String callback = util.getJsonCallBackString("", list);
 		System.out.println("callback::" + callback);

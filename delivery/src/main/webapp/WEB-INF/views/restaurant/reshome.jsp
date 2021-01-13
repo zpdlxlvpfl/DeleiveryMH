@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <%@page import="java.util.List"%>
 <%@page import="org.springframework.web.bind.annotation.SessionAttribute"%>
-<%@page import="com.mysql.cj.xdevapi.Session"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -85,162 +84,18 @@
 						<div class="left-text">
 							<div class="testimonials-item">
 								<div class="service-item">
-									<a href="../resources/img/1st-big-item.jpg"
-										data-lightbox="image-1"><img
-										src="../resources/img/1st-item.jpg" alt=""></a>
-										<c:forEach items="${menuList}" var="res_menu_code" begin="1"
-										end="1" step="1" varStatus="i">
-										<h4>
-											<c:out value=" ${res_menu_code.res_menu_name}">
-											</c:out>
-										</h4>
-										<div class="line-dec"></div>
-										<p>
-											<c:out value=" ${res_menu_code.res_menu_explan}" />
-										</p>
-										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
-											&#8361;</span>
-										</c:forEach>
-									
-									<div class="primary-button">
-										<a href="cart">cart</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-8">
-						<div class="left-text">
-							<div class="testimonials-item">
-								<div class="service-item">
-									<a href="../resources/img/2nd-big-item.jpg"
-										data-lightbox="image-1"><img
-										src="../resources/img/2nd-item.jpg" alt="" id=""></a>
-									<c:forEach items="${menuList}" var="res_menu_code" begin="2"
-										end="2" step="1" varStatus="i">
-										<h4>
-											<c:out value=" ${res_menu_code.res_menu_name}">
-											</c:out>
-										</h4>
-										<div class="line-dec"></div>
-										<p>
-											<c:out value=" ${res_menu_code.res_menu_explan}" />
-										</p>
-										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
-											&#8361;</span>
-									</c:forEach>
-									<div class="primary-button">
-										<a href="cart">cart</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-8">
-						<div class="left-text">
-							<div class="testimonials-item">
-								<div class="service-item">
-									<a href="../resources/img/3rd-big-item.jpg"
-										data-lightbox="image-1"><img
-										src="../resources/img/3rd-item.jpg" alt="" id=""></a>
-									<c:forEach items="${menuList}" var="res_menu_code" begin="3"
-										end="3" step="1" varStatus="i">
-										<h4>
-											<c:out value=" ${res_menu_code.res_menu_name}">
-											</c:out>
-										</h4>
-										<div class="line-dec"></div>
-										<p>
-											<c:out value=" ${res_menu_code.res_menu_explan}" />
-										</p>
-										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
-											&#8361;</span>
-									</c:forEach>
-									<div class="primary-button">
-										<a href="cart">cart</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-8">
-						<div class="left-text">
-							<div class="testimonials-item">
-								<div class="service-item">
-									<a href="../resources/img/4th-big-item.jpg"
-										data-lightbox="image-1"><img
-										src="../resources/img/4th-item.jpg" alt=""></a>
-									<c:forEach items="${menuList}" var="res_menu_code" begin="4"
-										end="4" step="1" varStatus="i">
-										<h4>
-											<c:out value=" ${res_menu_code.res_menu_name}">
-											</c:out>
-										</h4>
-										<div class="line-dec"></div>
-										<p>
-											<c:out value=" ${res_menu_code.res_menu_explan}" />
-										</p>
-										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
-											&#8361;</span>
-									</c:forEach>
-									<div class="primary-button">
-										<a href="cart">cart</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="col-md-8">
-						<div class="left-text">
-							<div class="testimonials-item">
-								<div class="service-item">
-									<a href="../resources/img/5th-big-item.jpg"
-										data-lightbox="image-1"><img
-										src="../resources/img/5th-item.jpg" alt="" id=""></a>
-									<c:forEach items="${menuList}" var="res_menu_code" begin="5"
-										end="5" step="1" varStatus="i">
-										<h4>
-											<c:out value=" ${res_menu_code.res_menu_name}">
-											</c:out>
-										</h4>
-										<div class="line-dec"></div>
-										<p>
-											<c:out value=" ${res_menu_code.res_menu_explan}" />
-										</p>
-										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
-											&#8361;</span>
-									</c:forEach>
-									<div class="primary-button">
-										<a href="cart">cart</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-8">
-						<div class="left-text">
-							<div class="service-item">
-								<div class="testimonials-item">
-									<a href="../resources/img/6th-big-item.jpg"
-										data-lightbox="image-1"><img
-										src="../resources/img/6th-item.jpg" alt="" id=""></a>
-									<c:forEach items="${menuList}" var="res_menu_code" begin="6"
+								<img src="../resources/img/6th-item.jpg" alt="" id="">
+									<c:forEach items="${list}" var="RES_CODE" begin="6"
 										end="6" step="1" varStatus="i">
 										<h4>
-											<c:out value=" ${res_menu_code.res_menu_name}">
+											<c:out value=" ${RES_CODE.res_menu_name}">
 											</c:out>
 										</h4>
 										<div class="line-dec"></div>
 										<p>
-											<c:out value=" ${res_menu_code.res_menu_explan}" />
+											<c:out value=" ${RES_CODE.res_menu_explan}" />
 										</p>
-										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>
+										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
 									</c:forEach>
 									<div class="primary-button">
@@ -250,10 +105,12 @@
 							</div>
 						</div>
 
-					</div>
+					
+					
 				</div>
 			</div>
-
+	
+				</div>
 		</div>
 	</div>
 
@@ -285,30 +142,37 @@
 	</footer>
 
 	<script type="text/javascript">
-		$(document).ready(function(reshome) {
-			//	var url = '/restaurant/menuList';
-			$.ajax({
-				url : "/restaurant/reshome",
+	var RES_CODE = $(RES_CODE);
+	var res_menu_code = $(res_menu_code);
+	var list = $(list);
+	
+	function menuread() {
+
+		restaurantService.menuread(function(menuread) {
+				$.ajax({
+				url : "restaurant/menuread?RES_CODE="+RES_CODE,
 				type : "GET",
 				contentType : "application/json; charset=utf-8;",
 				dataType : "json",
-				data : JSON.stringify({
-					res_menu_code : "res_menu_code",
-					res_menu_name : "res_menu_name",
-					res_menu_explan : "res_menu_explan",
-					res_menu_price : "res_menu_price"
-				}),
+				data : {
+					RES_CODE : "${RES_CODE}",
+					res_menu_code : "${res_menu_code}",
+					res_menu_name : "${res_menu_name}",
+					res_menu_explan : "${res_menu_explan}",
+					res_menu_price : "${res_menu_price}"
+				},
 				error : function(error) {
-					alert('error' + data);
 					console.log("error " + data);
 
 				},
 				success : function(data) {
 					alert('success' + data);
 					console.log("success" + data);
-				}
+					return RES_CODE;
+				} 
 			});
 		});
+	}
 	</script>
 
 

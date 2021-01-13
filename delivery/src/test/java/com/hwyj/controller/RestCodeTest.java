@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.hwyj.domain.OrderVO;
 import com.hwyj.domain.ResMenuVO;
 import com.hwyj.domain.ResVO;
 import com.hwyj.service.RestaurantService;
