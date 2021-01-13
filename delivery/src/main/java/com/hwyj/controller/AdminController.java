@@ -1,5 +1,8 @@
 package com.hwyj.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +49,11 @@ public class AdminController {
 	//멤버정보 상세보기 페이지
 	@GetMapping("/memberInfo") 
 	public void memberInfo(String id, Model model) {
-		model.addAttribute("memberInfo", adminService.getMemberInfo(id));
+		SimpleDateFormat format= new SimpleDateFormat("yyyy년 MM월 dd일"); //날짜포맷
+		CustomerVO customerVO = adminService.getMemberInfo(id);
+		
+		model.addAttribute("memberInfo", customerVO);
+		model.addAttribute("member_date", format.format(customerVO.getMember_date()));//회원가입 날짜 포맷을 바꿈
 	}
 	
 	//멤버 삭제

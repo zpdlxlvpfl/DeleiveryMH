@@ -31,8 +31,6 @@ public class MemberController {
 	
 	private MemberService memberService;
 	
-	@Inject
-	
 	
 	//마이페이지
 	@GetMapping("myPage")
@@ -74,9 +72,7 @@ public class MemberController {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal(); //현재 로그인한 유저 정보
 		
 		customerVO.setId(userDetails.getUsername()); //아이디
-		//customerVO.getPw(); //기존 비밀번호
-		//CustomerVO customerVO = new CustomerVO();		
-		//customerVO.setPw(pw);
+
 		if(memberService.checkPw(customerVO)) { //입력한 비밀번호가 맞으면
 			customerVO.setPw(newPw); //새로 입력한 비밀번호로 셋팅
 			if(memberService.updatePw(customerVO)) { //비밀번호 변경 성공하면 성공 메세제 띄우기
@@ -85,25 +81,34 @@ public class MemberController {
 				rttr.addFlashAttribute("result", "비밀번호 변경 실패");
 			}		
 		}else { //틀리면 실패 메세지 띄우기
-			rttr.addFlashAttribute("result", "현재 비밀번호가 맞지 않습니다. 다시 확인해주세요. ");
+			rttr.addFlashAttribute("result", "현재 비밀번호가 일치하지 않습니다. 다시 확인해주세요. ");
 		}
 		
 		return "redirect:/member/changePw";
 	}
 	
-
-//	@PostMapping("changePw")
-//	public String changePw(Authentication authentication, CustomerVO customeVO, RedirectAttributes rttr) {
-//		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//		CustomerVO customerVO = new CustomerVO();
-//		customerVO.setId(userDetails.getUsername());
-//		if(memberService.updatePw(customerVO)) {
-//			rttr.addFlashAttribute("result", "change_success");
-//		}else {
-//			
-//		}
-//		return "changePw";
-//	}
+	//회원탈퇴 페이지
+	@GetMapping("withdrawal")
+	public void withdrawal() {
+		
+	}
+	@PostMapping("withdrawal")
+	public String withdrawal(Authentication authentication, String pw, RedirectAttributes rttr) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setId(userDetails.getUsername()); //로그인한 사용자 id
+		customerVO.setPw(pw); //비밀번호 체크용으로 입력한 비밀번호
+		if(memberService.checkPw(customerVO)) { //비밀번호 체크해서 맞으면
+			memberService.withdrawal(userDetails.getUsername()); //회원탈퇴 진행
+			rttr.addFlashAttribute("error", "회원탈퇴가 완료되었습니다.");
+			return "redirect:/login";
+		}else { //비밀번호 체크 틀렸을 경우
+			rttr.addFlashAttribute("result", "비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+			return "redirect:/member/withdrawal";
+		}		
+	}
 	
+
+
 
 }

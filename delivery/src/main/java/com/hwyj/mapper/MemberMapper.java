@@ -24,6 +24,9 @@ public interface MemberMapper {
 	
 	//비밀번호 체크
 	public String checkPw(String id);
+	
+	//회원탈퇴
+	public int withdrawal(String id); 
 
 	//회원가입
 	public int insertCustomer(CustomerVO csVO);

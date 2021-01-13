@@ -98,25 +98,17 @@
                             <fieldset>
                                     <input name="email" class="group" type="email" class="form-control" id="email" placeholder="이메일을 입력해주세요" style=" font-family:inherit; width:300px; height:40px;">
                             </fieldset>
-
-
                             <fieldset>
                                     <input name="m_name" type="text" class="form-control" id="m_name" placeholder="이름을 입력해주세요" style=" font-family:inherit; width:300px; height:40px;">
                             </fieldset>
                             
                             <fieldset>
                                     <input name="id" type="text" class="form-control" id="id" placeholder="아이디를 입력해주세요" style=" font-family:inherit; width:300px; height:40px;">
-                                    
-                            </fieldset>
-                           
-                            
+                            </fieldset>                                               
                                 
                                 <input type="hidden" name="${_csrf.parameterName }"value="${_csrf.token }" id="csrf" />
-                       
-                            
-                                    <p> <button type="button" id="find" class="btn" style=" font-family:inherit; width:300px; height:50px;">비밀번호 찾기</button></p>
-
-                                
+                                                  
+                                    <p> <button type="button" id="find" class="btn" style=" font-family:inherit; width:300px; height:50px;">비밀번호 찾기</button></p>                                
                                 </form>
                     </div>
                     </div>
@@ -145,7 +137,6 @@
         </div>
 
         </div>
-        </div>
         </footer>
 
 
@@ -155,9 +146,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">비밀번호 찾기</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div class="modal-body">
         <p>메일을 발송 중입니다. 창을 닫지 마시고 조금만 기다려주세요.</p>

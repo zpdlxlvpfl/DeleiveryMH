@@ -33,8 +33,11 @@ public interface MemberService {
 	//비밀번호 변경
 	public boolean updatePw(CustomerVO customerVO);
 	
-	//비밀번호 체크 (아이디, 비번????)
+	//비밀번호 체크 (아이디로 비번 찾아서)
 	public boolean checkPw(CustomerVO customerVO);
+	
+	//회원 탈퇴
+	public boolean withdrawal(String id);
 
 	
 }

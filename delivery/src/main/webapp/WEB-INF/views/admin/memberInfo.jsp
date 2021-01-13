@@ -42,11 +42,11 @@
 	  </fieldset>
 	  <fieldset>
 	    <label class="control-label" for="readOnlyInput">가입날짜</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${memberInfo.member_date }"/>' readonly>
+	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${member_date }"/>' readonly>
 	  </fieldset>
 	  <fieldset>
 	    <label class="control-label" for="readOnlyInput">권한</label>
-	    <input class="form-control" id="readOnlyInput" type="text" value='<c:out value="${memberInfo.auth }"/>' readonly>
+	    <input class="form-control" id="auth" type="text" value='<c:out value="${memberInfo.auth }"/>' readonly>
 	  </fieldset>
 	  <p></p>
 	  <button type="button" id="d_member" class="btn btn-outline-danger">회원삭제</button>
@@ -93,6 +93,14 @@ $("#mList").on("click", function(){
 	history.back(); //목록보기 누르면 이전으로
 	//self.location="/admin/memberList?auth=<c:out value="${memberInfo.auth}"/>"; //목록보기 누르면 멤버리스트로 이동
 });
+
+if($("#auth").val()=="ROLE_MEMBER"){
+	$("#auth").val("일반회원");
+}else if($("#auth").val()=="ROLE_RES"){
+	$("#auth").val("매장");
+}else{
+	$("#auth").val("관리자");
+}
 
 
 

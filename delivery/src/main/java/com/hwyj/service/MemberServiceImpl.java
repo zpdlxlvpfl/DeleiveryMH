@@ -80,6 +80,12 @@ public class MemberServiceImpl implements MemberService {
 		return pwencoder.matches(customerVO.getPw(), memberMapper.checkPw(customerVO.getId()));
 	}
 	
+	@Override //회원 탈퇴 서비스
+	public boolean withdrawal(String id) {
+		
+		return memberMapper.withdrawal(id)==1;
+	}
+	
 	@Override
 	public String selectCustomer(CustomerVO csVO) {
 		memberMapper.selectCustomer(csVO);
