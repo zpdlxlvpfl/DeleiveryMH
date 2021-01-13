@@ -98,7 +98,7 @@ if($("#auth").val()=="ROLE_MEMBER"){
 	$("#auth").val("일반회원");
 }else if($("#auth").val()=="ROLE_RES"){
 	$("#auth").val("매장");
-}else{
+}else if($("#auth").val()=="ROLE_ADMIN"){
 	$("#auth").val("관리자");
 }
 

@@ -64,7 +64,20 @@
                     <td><c:out value="${member.m_name }" /></td>
                     <td><c:out value="${member.email }" /></td>
                     <td><c:out value="${member.tel }" /></td>
-                    <td id="authT"><c:out value="${member.auth }" /></td>
+                    <td>
+                    <c:set var="auth" value="${member.auth }"/>
+                    <c:choose>
+                    <c:when test="${auth eq 'ROLE_MEMBER'}">
+        				일반회원
+    				</c:when>
+                    <c:when test="${auth eq 'ROLE_RES'}">
+        				매장
+    				</c:when>
+    				<c:when test="${auth eq 'ROLE_ADMIN'}">
+    					관리자
+    				</c:when>
+					</c:choose>                  
+                    </td>
                   </tr> 
                   </c:forEach>                     
                 </tbody>
@@ -72,26 +85,6 @@
           </div>
         </div>
       </div>
- 
- 
-      
-<script>
-
-
-//첫줄만 바뀌는거 고치기!
-$(document).ready(function(){ 
-	 var auth='<c:out value="${member.auth}" />';
-	 if(auth == "ROLE_MEMBER"){
-	  $("#authT").html("일반회원");		 
-	 }else if(auth == "ROLE_RES"){
-	  $("#authT").html("매장");
-	 }else{
-	  $("#authT").html("관리자");
-	 }
- 	  
-});  
-  
-</script>
   
   
 <%@include file="../includes/footer.jsp" %>
