@@ -84,34 +84,6 @@
 						<div class="left-text">
 							<div class="testimonials-item">
 								<div class="service-item">
-									<img src="../resources/img/0st-item.jpg" alt="">
-										<c:forEach items="${menuList}" var="RES_CODE" begin="0"
-										end="0" step="1" varStatus="i">
-										<h4>
-											<c:out value=" ${RES_CODE.res_menu_name}">
-											</c:out>
-										</h4>
-										<div class="line-dec"></div>
-										<p>
-											<c:out value=" ${RES_CODE.res_menu_explan}" />
-										</p>
-										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
-											&#8361;</span>
-										</c:forEach>
-									
-									<div class="primary-button">
-										<a href="cart">cart</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					
-					<div class="col-md-8">
-						<div class="left-text">
-							<div class="testimonials-item">
-								<div class="service-item">
 									<img src="../resources/img/1st-item.jpg" alt="">
 										<c:forEach items="${menuList}" var="RES_CODE" begin="1"
 										end="1" step="1" varStatus="i">
@@ -218,7 +190,7 @@
 						<div class="left-text">
 							<div class="testimonials-item">
 								<div class="service-item">
-									<img src="../resources/img/5th-item.jpg" alt="" id="">
+									<<img src="../resources/img/5th-item.jpg" alt="" id="">
 									<c:forEach items="${menuList}" var="RES_CODE" begin="5"
 										end="5" step="1" varStatus="i">
 										<h4>
@@ -274,34 +246,7 @@
 
 
 
-	<div class="parallax-content contact-content" id="contact-us">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6"> 
-					<div class="contact-form">
-						<div class="row">
-							<form id="contact" action="" method="post">
-								<div id="reviewF" class="row" >							
-									<div id="m_name" class="col-md-12" style="color:white;">
-										사용자
-									</div>
-									<div id="rate" class="col-md-12" style="color:white;">
-										별점
-									</div>
-									<div class="col-md-12">
-										<fieldset>
-											<textarea name="message" rows="3" cols="40" class="form-control"
-												id="content"></textarea>
-										</fieldset>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="parallax-content contact-content " id="contact-us"></div>
 
 
 
@@ -327,24 +272,18 @@
 	</footer>
 
 	<script type="text/javascript">
-	var RES_CODE = $(RES_CODE);
-	var res_menu_code = $(res_menu_code);
-	
-	function menuList() {
-
-		restaurantService.menuList(function(menuList) {
-				$.ajax({
+		$(document).ready(function(menuList) {
+			$.ajax({
 				url : "/restaurant/menuList",
 				type : "GET",
 				contentType : "application/json; charset=utf-8;",
 				dataType : "json",
-				data : {
-					RES_CODE : "${RES_CODE}",
-					res_menu_code : "${res_menu_code}",
-					res_menu_name : "${res_menu_name}",
-					res_menu_explan : "${res_menu_explan}",
-					res_menu_price : "${res_menu_price}"
-				},
+				data : JSON.stringify({
+					RES_CODE : "RES_CODE",
+					res_menu_name : "res_menu_name",
+					res_menu_explan : "res_menu_explan",
+					res_menu_price : "res_menu_price"
+				}),
 				error : function(error) {
 					console.log("error " + data);
 
@@ -355,68 +294,11 @@
 				}
 			});
 		});
-	}
 	</script>
 
 
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/plugins.js"></script>
 	<script src="../resources/js/main.js"></script>
-	
-	
-<script>
-//리뷰 관련
-$(document).ready(function(){
-	
-	var reviewService=(function() {
-		
-		function getList(param, callback, error){
-			
-			var res_code=param.res_code;
-			console.log("뭐임"+res_code);
-			$.getJSON("/review/reviewList/" + res_code + ".json",
-				function(data){
-					if(callback){
-						callback(data);
-					}			
-				}).fail(function(xhr, status, err){
-			  if(error){
-				error();
-			  }
-			});		
-		}
-		
-		
-		return{
-			getList : getList
-		};
-		
-	})();
-	
-	
-	var res_codeValue = "res_01";
-	var reviewF=$("#reviewF");
-	
-	showList();
-	
-	function showList(){
-		
-		reviewService.getList({res_code:res_codeValue}, function(reviewList){
-			var str="";
-			for(var i=0, len=reviewList.length || 0; i<len; ++i){
-				str+='<div id="m_name" class="col-md-12" style="color:white;">'+reviewList[i].m_name+'</div>';
-				str+='<div id="rate" class="col-md-12" style="color:white;">'+reviewList[i].rate+'</div>';
-				str+='<div class="col-md-12"><fieldset><textarea name="message" rows="3" cols="40" class="form-control"id="content">'+
-				reviewList[i].content+'</textarea></fieldset></div></div>';
-			}
-			
-			reviewF.html(str);
-		});
-	}
-	
-
-
-});
-</script>
 </body>
 </html>

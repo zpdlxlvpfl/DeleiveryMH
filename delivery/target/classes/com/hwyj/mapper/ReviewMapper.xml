@@ -23,7 +23,7 @@
 <!-- 	매장 리뷰 목록 불러오기 -->
 	<select id="getReviewList" resultType="com.hwyj.domain.ReviewVO"> 
 		select review_no, m_name, r.id, r.res_code, content, review_date, rate from review r inner join member m on r.id=m.id
-		where r.res_code=#{res_code}
+		where r.res_code=#{res_code} order by review_date desc
 	</select>
 	
 <!-- 	매장 평균별점 (아직 리뷰등록 안된 매장이면 0리턴) -->
