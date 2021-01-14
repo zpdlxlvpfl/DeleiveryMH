@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -274,13 +274,19 @@
 
 
 
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.username" var="user_id" />
+	<input type="hidden" id="user_id" value="${user_id }">
+</sec:authorize>
+
+
 	<div class="parallax-content contact-content" id="contact-us">
-		<div class="container">
+		<div class="container" id="AAA">
 			<div class="row">
 				<div class="col-md-6"> 
 					<div class="contact-form">
-						<div class="row">
-							<form id="contact" action="" method="post">
+						<div class="row">							
 								<div id="reviewF" class="row" >							
 									<div id="m_name" class="col-md-12" style="color:white;">
 										사용자
@@ -295,15 +301,12 @@
 										</fieldset>
 									</div>
 								</div>
-							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
 
 
 
@@ -325,6 +328,26 @@
 			</div>
 		</div>
 	</footer>
+
+
+<!-- modal -->
+<div id="d_Modal" class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">리뷰</h5>
+      </div>
+      <div class="modal-body">
+        <p>리뷰를 삭제하시겠습니까?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="ok">확인</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 	<script type="text/javascript">
 	var RES_CODE = $(RES_CODE);
@@ -370,9 +393,9 @@ $(document).ready(function(){
 	
 	var reviewService=(function() {
 		
-		function getList(param, callback, error){
-			
-			var res_code=param.res_code;
+		//리뷰보기
+		function getList(res_code, callback, error){			
+			//var res_code=param.res_code;
 			console.log("뭐임"+res_code);
 			$.getJSON("/review/reviewList/" + res_code + ".json",
 				function(data){
@@ -386,9 +409,54 @@ $(document).ready(function(){
 			});		
 		}
 		
+		//리뷰 삭제
+		function remove(review_no, callback, error){		
+			$.ajax({
+				type : "delete",
+				url : "/review/" + review_no,
+				beforeSend : function(xhr)
+				{ xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
+				success : function(deleteResult, status, xhr){
+					if(callback){
+						callback(deleteResult);
+					}
+				},
+				error : function(xhr, status, er){
+					if(error){
+						error(er);
+					}
+				}
+				
+			});
+		}
+		
+		//리뷰 수정
+		function modify(review, callback, error){
+			$.ajax({
+				type : "put",
+				url : "/review/" + review.review_no,
+				data : JSON.stringify(review),
+				contentType : "application/json; charset=utf-8",
+				beforeSend : function(xhr)
+				{ xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
+				success : function(result, status, xhr){
+					if(callback){
+						callback(result);
+					}
+				},
+				error : function(xhr, status, er){
+					if(error){
+						error(er);
+					}
+				}
+			});			
+		}
+		
 		
 		return{
-			getList : getList
+			getList : getList,
+			remove : remove,
+			modify : modify
 		};
 		
 	})();
@@ -396,25 +464,76 @@ $(document).ready(function(){
 	
 	var res_codeValue = "res_01";
 	var reviewF=$("#reviewF");
+	console.log("뭐냐고"+reviewF);
+	console.log("어디가게"+res_codeValue);
+	showList(res_codeValue);
 	
-	showList();
-	
-	function showList(){
+	function showList(res_code){
 		
-		reviewService.getList({res_code:res_codeValue}, function(reviewList){
+		reviewService.getList(res_code, function(reviewList){
 			var str="";
 			for(var i=0, len=reviewList.length || 0; i<len; ++i){
+				
+				var review_id=reviewList[i].id;
+
 				str+='<div id="m_name" class="col-md-12" style="color:white;">'+reviewList[i].m_name+'</div>';
-				str+='<div id="rate" class="col-md-12" style="color:white;">'+reviewList[i].rate+'</div>';
-				str+='<div class="col-md-12"><fieldset><textarea name="message" rows="3" cols="40" class="form-control"id="content">'+
-				reviewList[i].content+'</textarea></fieldset></div></div>';
+				str+='<div id="rate" class="col-md-12" style="color:yellow;">별점 '+reviewList[i].rate+'</div>';
+				str+='<div id="A'+reviewList[i].review_no+'" class="col-md-12"><fieldset id="B"><textarea name="content" rows="3" cols="40" class="form-control" id="content" readonly>'+
+				reviewList[i].content+'</textarea></fieldset><br /></div>';
+				//해당 리뷰를 쓴 아이디와 로그인한 회원의 아이디가 같으면 수정, 삭제 버튼 보이게하기
+				if(review_id==$("#user_id").val()){
+					str+='<button id="'+reviewList[i].review_no+'" class="update">수정</button>'+
+					'<button id="'+reviewList[i].review_no+'" class="delete">삭제</button>';
+				}
+				str+='</div>';
+			}
+			if(reviewList.length==0){ //리뷰가 없으면
+				str='<div class="col-md-12" style="color:white;">리뷰가 아직 없습니다.</div>';
 			}
 			
 			reviewF.html(str);
+				
 		});
 	}
 	
-
+	//리뷰 삭제 버튼 클릭(삭제할건지 묻는 모달창 띄우기)
+	$(document).on("click",".delete",function(e){
+		var review_no= $(this).attr("id");
+		$("#d_Modal").modal("show");
+		$(document).on("click","#ok",function(e){
+			$("#d_Modal").modal("hide");
+			reviewService.remove(review_no, function(result){
+				showList(res_codeValue);
+			});
+		});			
+	});
+	//리뷰 수정 버튼 클릭
+	$(document).on("click",".update",function(e){
+		e.preventDefault();
+		
+		console.log("아이디값 1111"+$(this).attr("class"));
+		console.log("아이디값 2222"+$(this).next().attr("class"));
+		//리뷰 내용 수정할 수 있게 readonly false
+		$(this).prev().children().children().attr("readonly",false);
+		
+		$(this).text("확인").attr("class","modifyOk");
+		console.log("아이디값 바뀌었나??3333"+$(this).attr("class"));
+		$(this).next().text("취소").attr("class","cancel");
+		console.log("아이디값 바뀌었나4444??"+$(this).next().attr("class"));
+		
+		//???????????????????????????????????????
+		//var review = { review_no:$(this).attr("id"), review:$(this).prev().children().children().text() };
+		$(document).on("click",".modifyOk",function(e){
+			reviewService.modify(review, function(result){
+				$("#d_Modal").modal("hide");
+ 				showList(res_codeValue);
+ 			});			
+		});
+		$(document).on("click",".cancel",function(e){			
+ 			showList(res_codeValue);		
+		});
+		
+	});
 
 });
 </script>
