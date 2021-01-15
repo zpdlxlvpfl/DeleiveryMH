@@ -33,7 +33,10 @@ public class ReviewController {
 	
 	//리뷰 등록
 	@PostMapping(value="/register", consumes = "application/json", produces = { MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> registerReview(@RequestBody ReviewVO reviewVO){
+	public ResponseEntity<String> registerReview(@RequestBody ReviewVO reviewVO, Authentication authentication){
+		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		reviewVO.setId(userDetails.getUsername()); //로그인한 사용자 아이디
 		
 		boolean register=reviewService.registerReview(reviewVO);
 		
@@ -71,15 +74,9 @@ public class ReviewController {
 	public ResponseEntity<List<ReviewVO>> getReviewList(@PathVariable("res_code") String res_code){
 		
 		List<ReviewVO> reviewList=reviewService.getReviewList(res_code);
-				
+
 		return new ResponseEntity<>(reviewList, HttpStatus.OK);
 	}
-	
-	//매장 평균 별점
-	@GetMapping(value="/rate/{res_code}", produces= { MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<String> getRate(@PathVariable("res_code") String res_code){
-		
-		return new ResponseEntity<>(reviewService.getRate(res_code), HttpStatus.OK);
-	}
+
 
 }

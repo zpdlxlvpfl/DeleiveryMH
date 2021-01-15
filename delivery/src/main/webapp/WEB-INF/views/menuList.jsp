@@ -285,9 +285,10 @@
 		<div class="container" id="AAA">
 			<div class="row">
 				<div class="col-md-6"> 
-					<div class="contact-form">
-						<div class="row">							
-								<div id="reviewF" class="row" >							
+					<div id="reviewF" class="contact-form">
+					<p style="color:yellow;"><em>평균 별점</em></p>
+						<div class="row">						
+								<div class="row" >							
 									<div id="m_name" class="col-md-12" style="color:white;">
 										사용자
 									</div>
@@ -304,6 +305,42 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				<div class="col-md-6">
+					<div class="map">
+							<form id="contact">
+								<div class="row">
+								<div style="color:white; text-align:text-align:justify;"><h4><b>리뷰등록</b></h4></div>
+									<div class="col-md-12" style="float:right;">
+										
+											<select name="rate" id="rRate" style="color:#FFA62F; float:right;">
+											  <option value="5" selected="selected">★★★★★</option>
+											  <option value="4">★★★★</option>
+											  <option value="3">★★★</option>
+											  <option value="2">★★</option>
+											  <option value="1">★</option>
+											</select>
+										
+									</div>
+							
+									<div class="col-md-12">
+										
+											<textarea name="content" rows="6" class="form-control"
+												id="rContent" required=""></textarea>
+										
+									</div>
+									<div class="col-md-12">
+										<fieldset>
+											<button type="button" id="register" class="btn">리뷰등록</button>
+										</fieldset>
+									</div>
+								</div>
+							</form>
+						
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -342,7 +379,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="ok">확인</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="CModal">취소</button>
       </div>
     </div>
   </div>
@@ -452,11 +489,33 @@ $(document).ready(function(){
 			});			
 		}
 		
+		//리뷰 등록
+		function insert(review, callback, error){
+			$.ajax({
+				type : "post",
+				url : "/review/register",
+				data : JSON.stringify(review),
+				contentType : "application/json; charset=utf-8",
+				beforeSend : function(xhr)
+				{ xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
+				success : function(result, status, xhr){
+					if(callback){
+						callback(result);
+					}
+				},
+				error : function(xhr, status, er){
+					if(error){
+						error(er);
+					}
+				}
+			})
+		}
 		
 		return{
 			getList : getList,
 			remove : remove,
-			modify : modify
+			modify : modify,
+			insert : insert
 		};
 		
 	})();
@@ -467,32 +526,34 @@ $(document).ready(function(){
 	console.log("뭐냐고"+reviewF);
 	console.log("어디가게"+res_codeValue);
 	showList(res_codeValue);
-	
+	//리뷰 목록 불러오기
 	function showList(res_code){
 		
 		reviewService.getList(res_code, function(reviewList){
 			var str="";
-			for(var i=0, len=reviewList.length || 0; i<len; ++i){
-				
-				var review_id=reviewList[i].id;
-
-				str+='<div id="m_name" class="col-md-12" style="color:white;">'+reviewList[i].m_name+'</div>';
-				str+='<div id="rate" class="col-md-12" style="color:yellow;">별점 '+reviewList[i].rate+'</div>';
-				str+='<div id="A'+reviewList[i].review_no+'" class="col-md-12"><fieldset id="B"><textarea name="content" rows="3" cols="40" class="form-control" id="content" readonly>'+
-				reviewList[i].content+'</textarea></fieldset><br /></div>';
-				//해당 리뷰를 쓴 아이디와 로그인한 회원의 아이디가 같으면 수정, 삭제 버튼 보이게하기
-				if(review_id==$("#user_id").val()){
-					str+='<button id="'+reviewList[i].review_no+'" class="update">수정</button>'+
-					'<button id="'+reviewList[i].review_no+'" class="delete">삭제</button>';
-				}
-				str+='</div>';
-			}
-			if(reviewList.length==0){ //리뷰가 없으면
-				str='<div class="col-md-12" style="color:white;">리뷰가 아직 없습니다.</div>';
-			}
 			
-			reviewF.html(str);
-				
+			if(reviewList.length!=0){ //리뷰목록이 있으면
+				str='<p style="color:#FFA62F;"><em>평균 별점&nbsp;&nbsp;</em><b>'+reviewList[0].avgRate+'</b></p><div class="row"><div class="row">';
+				for(var i=0, len=reviewList.length || 0; i<len; ++i){
+					
+					var review_id=reviewList[i].id;
+
+					str+='<div id="m_name" class="col-md-12" style="color:white;">'+reviewList[i].m_name+' <h6><em>작성일 : '+reviewList[i].s_date+'</em></h6></div>';
+					str+='<div id="rate" class="col-md-12" style="color:#FFA62F;">별점 '+reviewList[i].s_rate+'</div>';
+					str+='<div id="A'+reviewList[i].review_no+'" class="col-md-12"><fieldset id="B"><textarea name="content" rows="3" cols="40" class="form-control" id="content" readonly>'+
+					reviewList[i].content+'</textarea></fieldset><br /></div>';
+					//해당 리뷰를 쓴 아이디와 로그인한 회원의 아이디가 같으면 수정, 삭제 버튼 보이게하기
+					if(review_id==$("#user_id").val()){
+						str+='<button style="float:right;" id="'+reviewList[i].review_no+'" class="update">수정</button>'+
+						'<button style="float:right;" id="'+reviewList[i].review_no+'" class="delete">삭제</button>';
+					}
+				}
+			}else{ //리뷰가 없으면
+				str='<div class="row"><div class="row"><div class="col-md-12" style="color:white;">리뷰가 아직 없습니다.</div>';
+			}
+
+			str+='</div></div></div>';
+			reviewF.html(str);			
 		});
 	}
 	
@@ -505,34 +566,59 @@ $(document).ready(function(){
 			reviewService.remove(review_no, function(result){
 				showList(res_codeValue);
 			});
-		});			
+		});
+		$(document).on("click","#CModal",function(e){
+			review_no=0;
+			showList(res_codeValue);
+		});
 	});
+	
 	//리뷰 수정 버튼 클릭
 	$(document).on("click",".update",function(e){
 		e.preventDefault();
-		
-		console.log("아이디값 1111"+$(this).attr("class"));
-		console.log("아이디값 2222"+$(this).next().attr("class"));
 		//리뷰 내용 수정할 수 있게 readonly false
 		$(this).prev().children().children().attr("readonly",false);
-		
-		$(this).text("확인").attr("class","modifyOk");
-		console.log("아이디값 바뀌었나??3333"+$(this).attr("class"));
+		//버튼 텍스트랑 class 값 바꾸기
+		$(this).text("확인").attr("class","modifyOk");		
 		$(this).next().text("취소").attr("class","cancel");
-		console.log("아이디값 바뀌었나4444??"+$(this).next().attr("class"));
-		
-		//???????????????????????????????????????
-		//var review = { review_no:$(this).attr("id"), review:$(this).prev().children().children().text() };
+		//별점 부분(1~5점)
+		$(this).prev().prev().html('<select name="rate" id="rRate" style="color:#FFA62F; float:right;">'+
+		'<option value="5" selected="selected">★★★★★</option><option value="4">★★★★</option>'+
+		'<option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select>');
+			
+		//확인 버튼 누르면 리뷰 수정되고 다시 리뷰목록 불러오기
 		$(document).on("click",".modifyOk",function(e){
+			//리뷰번호, 내용, 별점
+			var review = { review_no:$(this).attr("id"), content:$(this).prev().children().children().val(), rate:$(this).prev().prev().children().val() };
 			reviewService.modify(review, function(result){
 				$("#d_Modal").modal("hide");
  				showList(res_codeValue);
  			});			
 		});
+		// 취소 버튼
 		$(document).on("click",".cancel",function(e){			
  			showList(res_codeValue);		
 		});
 		
+	});
+	
+	//리뷰등록 버튼 클릭
+	$(document).on("click","#register",function(e){
+		$(".modal-body").html("리뷰를 등록하시겠습니까?");
+		$("#d_Modal").modal("show");
+		
+		$(document).on("click","#ok",function(e){
+			$("#d_Modal").modal("hide");
+			var review = {
+					res_code : res_codeValue,
+					content : $("#rContent").val(),
+					rate : $("#rRate").val()
+			};
+			reviewService.insert(review, function(){
+				showList(res_codeValue);
+			});
+		});
+						
 	});
 
 });

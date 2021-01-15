@@ -54,9 +54,6 @@ public class CommonController {
 	private PasswordEncoder pwencoder;
 
 	@Setter(onMethod_ = @Autowired)
-	private EmailService emailService;
-
-	@Setter(onMethod_ = @Autowired)
 	private RestaurantService restaurantService;
 
 	// 로그인 테스트용 나중에 지우기
@@ -85,40 +82,11 @@ public class CommonController {
 
 	}
 
-//   @PostMapping("findId")
-//   public String findIdSuccess(CustomerVO customerVO, RedirectAttributes rttr) {
-//      CustomerVO cusVO=memberservice.findId(customerVO); //아이디 찾기(아이디, 이메일)
-//      if(cusVO!=null) { //해당 회원이 있으면
-//         EmailVO emailVO = new EmailVO();
-//         emailVO.setReceiveMail(cusVO.getEmail()); //회원정보에 있는 메일로
-//         emailVO.setContent(cusVO.getId()); //아이디 보내기
-//         emailService.sendEmail(emailVO, "findId");   
-//         rttr.addFlashAttribute("result","메일을 발송했습니다. 메일을 확인해주세요."); //메일 발송하면 나오는 메세지
-//         return "redirect:/findId";
-//      }else {
-//         rttr.addFlashAttribute("result","회원정보를 찾을 수 없습니다."); //회원 정보가 없으면 나오는 메세지
-//         return "redirect:/findId";
-//      }   
-//   }
-
 	@GetMapping("/findPw")
 	public void findPw() {
 
 	}
 
-//   @PostMapping("findPw2")
-//   public String findPwPost(@RequestBody CustomerVO customerVO) {
-//	   
-//	   boolean a=false;
-//		if(memberservice.findPw(customerVO)) {
-//			System.out.println("멤버있음!!!");
-//			a=true;
-//		}else {
-//			System.out.println("없는회원!!!!!!!!!!");
-//		}
-//	   System.out.println(a);
-//	   return "/findPw2";
-//   }
 
 	@GetMapping("/join") // 가입
 	public void join() {

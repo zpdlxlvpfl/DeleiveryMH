@@ -14,5 +14,19 @@ public class ReviewVO {
 	private String content; //리뷰 내용
 	private Date review_date; //리뷰쓴날짜
 	private double rate; //별점
-	private double avgRate; //평균별점
+	private String avgRate; //평균별점
+	
+	private String s_rate; //별모양
+	private String s_date;
+	
+	//리뷰 점수에 따라 별모양 찍히는 메소드
+	public void setS_Rate(int rate) {		
+		this.s_rate="";
+		for(int i=1; i<=rate; ++i) {
+			this.s_rate+="★";
+		}	
+	}
+	
+	
+	
 }

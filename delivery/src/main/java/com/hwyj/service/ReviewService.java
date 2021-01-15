@@ -15,10 +15,8 @@ public interface ReviewService {
 	//리뷰 삭제 (review_no이랑 id로)
 	public boolean removeReview(ReviewVO reviewVO);
 	
-	//매장 리뷰 목록 불러오기
+	//매장 리뷰 목록 불러오기 + 평균별점
 	public List<ReviewVO> getReviewList(String res_code);
 	
-	//매장 평균별점
-	public String getRate(String res_code);
 
 }

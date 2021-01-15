@@ -40,10 +40,10 @@ public class ReviewServiceTest {
 		}
 	}
 	
-	@Test //매장 평균별점
-	public void testGetRate() {
-		
-		log.info("평균 별점은? "+service.getRate("res01"));
-	}
+//	@Test //매장 평균별점
+//	public void testGetRate() {
+//		
+//		log.info("평균 별점은? "+service.getRate("res01"));
+//	}
 
 }
