@@ -20,7 +20,7 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	private ReviewMapper reviewMapper;
 
-	@Override //리뷰 등록
+	@Override //리뷰 등록 (주문내역 있는 id만 가능)
 	public boolean registerReview(ReviewVO reviewVO) {
 		
 		return reviewMapper.insertReview(reviewVO)==1;

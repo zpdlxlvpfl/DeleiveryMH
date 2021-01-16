@@ -311,7 +311,7 @@
 					<div class="map">
 							<form id="contact">
 								<div class="row">
-								<div style="color:white; text-align:text-align:justify;"><h4><b>리뷰등록</b></h4></div>
+								<div style="color:white; text-align:text-align:justify;"><h4><b>&nbsp;&nbsp;&nbsp;&nbsp;리뷰등록</b></h4></div>
 									<div class="col-md-12" style="float:right;">
 										
 											<select name="rate" id="rRate" style="color:#FFA62F; float:right;">
@@ -327,7 +327,7 @@
 									<div class="col-md-12">
 										
 											<textarea name="content" rows="6" class="form-control"
-												id="rContent" required=""></textarea>
+												id="rContent" maxlength="200" required=""></textarea>
 										
 									</div>
 									<div class="col-md-12">
@@ -504,8 +504,9 @@ $(document).ready(function(){
 					}
 				},
 				error : function(xhr, status, er){
+					alert("주문내역이 있어야만 리뷰등록이 가능합니다.");
 					if(error){
-						error(er);
+						error(er);					
 					}
 				}
 			})
@@ -537,15 +538,15 @@ $(document).ready(function(){
 				for(var i=0, len=reviewList.length || 0; i<len; ++i){
 					
 					var review_id=reviewList[i].id;
-
-					str+='<div id="m_name" class="col-md-12" style="color:white;">'+reviewList[i].m_name+' <h6><em>작성일 : '+reviewList[i].s_date+'</em></h6></div>';
+					
+					str+='<div id="m_name" class="col-md-12" style="color:white;">'+reviewList[i].m_name+' <h6><em style="color:#F0FFF0;">작성일 : '+reviewList[i].s_date+'</em></h6></div>';
 					str+='<div id="rate" class="col-md-12" style="color:#FFA62F;">별점 '+reviewList[i].s_rate+'</div>';
-					str+='<div id="A'+reviewList[i].review_no+'" class="col-md-12"><fieldset id="B"><textarea name="content" rows="3" cols="40" class="form-control" id="content" readonly>'+
-					reviewList[i].content+'</textarea></fieldset><br /></div>';
+					str+='<div id="A'+reviewList[i].review_no+'" class="col-md-12"><fieldset id="B"><textarea maxlength="200" name="content" rows="3" cols="40" class="form-control" id="content" readonly>'+
+					reviewList[i].content+'</textarea></fieldset></div>';
 					//해당 리뷰를 쓴 아이디와 로그인한 회원의 아이디가 같으면 수정, 삭제 버튼 보이게하기
 					if(review_id==$("#user_id").val()){
-						str+='<button style="float:right;" id="'+reviewList[i].review_no+'" class="update">수정</button>'+
-						'<button style="float:right;" id="'+reviewList[i].review_no+'" class="delete">삭제</button>';
+						str+='&nbsp;&nbsp;&nbsp;&nbsp;<p style="cursor:pointer; color:white;" id="'+reviewList[i].review_no+'" class="update">수정</p>&nbsp;&nbsp;'+
+						'<p style="cursor:pointer; color:white;" id="'+reviewList[i].review_no+'" class="delete">삭제</p>';
 					}
 				}
 			}else{ //리뷰가 없으면
@@ -604,22 +605,24 @@ $(document).ready(function(){
 	
 	//리뷰등록 버튼 클릭
 	$(document).on("click","#register",function(e){
-		$(".modal-body").html("리뷰를 등록하시겠습니까?");
-		$("#d_Modal").modal("show");
 		
-		$(document).on("click","#ok",function(e){
-			$("#d_Modal").modal("hide");
+		if($("#user_id").val()!=undefined){ //로그인한 상태일 때만 등록 가능
+			
 			var review = {
 					res_code : res_codeValue,
 					content : $("#rContent").val(),
 					rate : $("#rRate").val()
 			};
+			
 			reviewService.insert(review, function(){
 				showList(res_codeValue);
 			});
-		});
-						
+			$("#rContent").val("");			
+		}else{ //로그인하지 않고 리뷰등록 눌렀을 때 경고창 띄우기
+			alert("로그인 후 리뷰를 등록할 수 있습니다.");	
+		}		
 	});
+	
 
 });
 </script>

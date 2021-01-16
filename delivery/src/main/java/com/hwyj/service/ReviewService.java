@@ -6,7 +6,7 @@ import com.hwyj.domain.ReviewVO;
 
 public interface ReviewService {
 	
-	//리뷰 등록
+	//리뷰 등록 (주문내역 있는 id만 가능)
 	public boolean registerReview(ReviewVO reviewVO);
 	
 	//리뷰 수정 (review_no이랑 id로)

@@ -24,9 +24,9 @@ public class ReviewServiceTest {
 	@Test //리뷰 등록 서비스 테스트
 	public void testInsertReview() {
 		ReviewVO reviewVO = new ReviewVO();
-		reviewVO.setId("user4");
-		reviewVO.setRes_code("res01");
-		reviewVO.setContent("이번에는 음식이 뜨겁게 와서 맛있게 먹었어요");
+		reviewVO.setId("user15");
+		reviewVO.setRes_code("res_01");
+		reviewVO.setContent("콜라가 시원함");
 		reviewVO.setRate(5);
 		
 		log.info("리뷰등록: "+service.registerReview(reviewVO));

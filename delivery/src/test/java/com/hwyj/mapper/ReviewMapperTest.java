@@ -24,9 +24,9 @@ public class ReviewMapperTest {
 	public void testInsertReview() {
 		
 		ReviewVO reviewVO = new ReviewVO();
-		reviewVO.setId("user0");
-		reviewVO.setRes_code("res_01");
-		reviewVO.setContent("맛있어요");
+		reviewVO.setId("user30");
+		reviewVO.setRes_code("res_02");
+		reviewVO.setContent("피클이 맛있어요");
 		reviewVO.setRate(5);
 		
 		log.info("리뷰 등록 "+mapper.insertReview(reviewVO));
