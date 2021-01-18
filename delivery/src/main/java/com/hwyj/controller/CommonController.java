@@ -93,40 +93,51 @@ public class CommonController {
 
 	}
 
-	// 메뉴목록보기 (템플릿 메인 사진 아래)
-	@RequestMapping(value = "/index", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public String menuList(ModelMap model, ResMenuVO menuvo) throws Exception {
-		HashMap<String, Object> hashMap = new HashMap<>(); // HashMap 인스턴스화
-		List<ResMenuVO> list = new ArrayList<>(); // List 인스턴스화
-
-		list = restaurantService.menuList();
-		hashMap.put("HashMapList", list);
-		model.addAttribute("HashMapList", list);
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-				.getRequest();
-		System.out.println("model@@@@@@@@@@@@@@@@@@@@@" + model);
-		System.out.println("hashMap@@@@@@@@@@@@@@@@@@@@" + hashMap);
-		return "index";
-	}
-
-	@RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public String menuList(ModelMap model, ResMenuVO menuvo, RedirectAttributes rttr, String RES_CODE)
-			throws Exception {
-		// HttpSession session = null;
-		// RES_CODE = (String)session.getAttribute("RES_CODE");
-		rttr.getFlashAttributes();
-		List<ResMenuVO> list = new ArrayList<>();
-		list = restaurantService.menuList();
-
-		model.addAttribute("menuList", list);
-		System.out.println(list + "LIST@@@@@@@@@@@@@@@@@@@");
-		System.err.println(RES_CODE + "RES_CODE@@@@@@@@@@@");
-
-		return "/menuList";
-	}
+	//메뉴목록보기 (템플릿 메인 사진 아래)
+	   @RequestMapping(value = "index", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+		public String menuList(ModelMap model, ResMenuVO menuvo) throws Exception {
+			HashMap<String, Object> HashMapList = new HashMap<>();	//HashMap 인스턴스화
+			List<ResMenuVO> list = new ArrayList<>();				//List 인스턴스화
+			
+			list =  restaurantService.menuList();
+			HashMapList.put("HashMapList", list);
+			model.addAttribute("HashMapList", list);
+			
+			System.out.println("model@@@@@@@@@@@@@@@@@@@@@" + model);
+			System.out.println("hashMap@@@@@@@@@@@@@@@@@@@@" + HashMapList);
+			return "index";
+		}
+	   
+	   @RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+		public String menuList(ModelMap model, ResMenuVO menuvo, RedirectAttributes rttr, String RES_CODE)
+				throws Exception {
+			// HttpSession session = null;
+			// RES_CODE = (String)session.getAttribute("RES_CODE");
+			rttr.getFlashAttributes();
+			UtilController util = new UtilController();
+			HashMap<String, Object> HashMapList = new HashMap<>();
+			List<ResMenuVO> menuList = new ArrayList<>();
+			menuList = restaurantService.menuList();
+			menuList = restaurantService.menuread(RES_CODE);
+			HashMapList.put("HashMapList", menuList);
+			model.addAttribute("menuList", menuList);
+			model.addAttribute("HashMapList", HashMapList);
+			restaurantService.menuread(RES_CODE);
+			System.out.println(menuList + "LIST@@@@@@@@@@@@@@@@@@@");
+			return "menuList";
+	   }
+		
+		
+		@GetMapping("/get")
+		public void get(String res_code,String res_menu_code,Model model,ResMenuVO menuvo) {
+			model.addAttribute("res_code",restaurantService.get(res_code));
+			model.addAttribute("menucode",restaurantService.menuread(res_menu_code));
+			System.out.println(model.addAttribute("res",restaurantService.get(res_code)));
+			System.out.println(model.addAttribute("res_menu_code",restaurantService.menuread(res_menu_code)));
+		}
 
 	@RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public List<ResVO> restList(ModelMap model, RedirectAttributes rttr, HttpSession session, String RES_CODE)
+	public String restList(ModelMap model, RedirectAttributes rttr, HttpSession session, String RES_CODE)
 			throws Exception {
 		ResVO vo = new ResVO();
 		rttr.getFlashAttributes();
@@ -138,7 +149,7 @@ public class CommonController {
 		restaurantService.read(RES_CODE);
 		System.out.println("=======list====" + restList);
 		// rttr.addAttribute("RES_CODE", RES_CODE);
-		return restList;
+		return "restList";
 	}
 
 	@GetMapping("/maptest") // 현재위치

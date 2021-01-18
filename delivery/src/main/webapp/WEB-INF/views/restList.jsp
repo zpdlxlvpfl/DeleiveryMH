@@ -51,7 +51,7 @@
 					.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
 </script> -->
 
-
+<!-- 
 <script>
 	var restList = $("#restList");
 	var html = '';
@@ -121,7 +121,7 @@
 							});
 				});
 	};
-</script>
+</script> -->
 
 </head>
 <body>
@@ -189,7 +189,7 @@
 											value='<c:out value="${RES_CODE.RES_CODE }" />'> <input
 											type="hidden" id="${status.count}" disabled>
 										<h4>
-											<a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
+											<a href="/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 												${RES_CODE.RES_NAME }</a>
 										</h4>
 										<div class="line-dec">
@@ -205,7 +205,7 @@
 											value='<c:out value="${RES_CODE.RES_CODE }" />'> <input
 											type="hidden" id="${status.count}" disabled>
 										<h4>
-											<a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
+											<a href="/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 												${RES_CODE.RES_NAME }</a>
 										</h4>
 										<div class="line-dec">
@@ -221,7 +221,7 @@
 											value='<c:out value="${RES_CODE.RES_CODE }" />'> <input
 											type="hidden" id="${status.count}" disabled>
 										<h4>
-											<a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
+											<a href="/menuList?RES_CODE=${RES_CODE.RES_CODE}">
 												${RES_CODE.RES_NAME }</a>
 										</h4>
 										<div class="line-dec">

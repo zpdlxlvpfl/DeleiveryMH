@@ -192,11 +192,13 @@ public class RestaurantController {
 		// RES_CODE = (String)session.getAttribute("RES_CODE");
 		rttr.getFlashAttributes();
 		UtilController util = new UtilController();
-		
+		HashMap<String, Object> HashMapList = new HashMap<>();
 		List<ResMenuVO> menuList = new ArrayList<>();
 		menuList = restaurantService.menuList();
 		menuList = restaurantService.menuread(RES_CODE);
+		HashMapList.put("HashMapList", menuList);
 		model.addAttribute("menuList", menuList);
+		model.addAttribute("HashMapList", HashMapList);
 		restaurantService.menuread(RES_CODE);
 		System.out.println(menuList + "LIST@@@@@@@@@@@@@@@@@@@");
 		return menuList;

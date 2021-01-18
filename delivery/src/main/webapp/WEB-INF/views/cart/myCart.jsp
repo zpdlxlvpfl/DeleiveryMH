@@ -82,115 +82,18 @@
 				</div>
 			</div>
 		</div>
-		<form action="orderList" id ="orderList">
 		<div id="sumTotal" style="color:white;" align="center">
 			<h4>총 주문금액 <b>${cartList[0].sumTotal }원</b></h4>
 		</div>
 		<br />
 		<div class="primary-button"  align="center" id ="insertOrder">
-			<a href="/order/insertOrder">주문하기</a>
-		</div></form>
-	</div>
-
-
-
-	
-	
-	
-	<div class="parallax-content projects-content" id="portfolio">
-
-
-		<div class="container">
-
-			<div class="row">
-
-				<div class="col-md-12">
-
-					<div id="owl-testimonials" class="owl-carousel owl-theme">
-					
-						
-
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/1st-item.jpg" alt=""></a>
-								<div class="text-content">
-								
-										<c:forEach items="${HashMapList}" var="res_menu_code" begin="1" end="1" step="1" varStatus="i">
-										<h4> <c:out value=" ${res_menu_code.res_menu_name}"> </c:out></h4>
-									<span><c:out value="${res_menu_code.res_menu_price}"></c:out> &#8361;</span>
-									</c:forEach>
-									
-								</div>
-							</div>
-						</div>
-				
-
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/2nd-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/2nd-item.jpg" alt="" id=""></a>
-								<div class="text-content">
-										<c:forEach items="${HashMapList}" var="res_menu_code" begin="2" end="2" step="1" varStatus="i">
-										<h4> <c:out value=" ${res_menu_code.res_menu_name}"> </c:out></h4>
-										<span><c:out value="${res_menu_code.res_menu_price}"></c:out> &#8361;</span>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/3rd-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/3rd-item.jpg" alt="" id=""></a>
-								<div class="text-content">
-										<c:forEach items="${HashMapList}" var="res_menu_code" begin="3" end="3" step="1" varStatus="i">
-										<h4> <c:out value="${res_menu_code.res_menu_name}" /> </h4>
-										<span><c:out value="${res_menu_code.res_menu_price}" />&#8361; </span>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/4th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/4th-item.jpg" alt="" id="$"></a>
-								<div class="text-content">
-										<c:forEach items="${HashMapList}" var="res_menu_code" begin="4" end="4" step="1" varStatus="i">
-										<h4> <c:out value="${res_menu_code.res_menu_name}" /> </h4>
-										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>&#8361; </span>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/5th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/5th-item.jpg" alt="" id=""></a>
-								<div class="text-content">
-										<c:forEach items="${HashMapList}" var="res_menu_code" begin="5" end="5" step="1" varStatus="i">
-										<h4> <c:out value="${res_menu_code.res_menu_name}" /> </h4>
-										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>&#8361; </span>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonials-item">
-								<a href="../resources/img/6th-big-item.jpg" data-lightbox="image-1"><img
-									src="../resources/img/6th-item.jpg" alt="" id=""></a>
-								<div class="text-content">
-										<c:forEach items="${HashMapList}" var="res_menu_code" begin="6" end="6" step="1" varStatus="i">
-											<h4> <c:out value="${res_menu_code.res_menu_name}" /> </h4>
-										<span><c:out value="${res_menu_code.res_menu_price}"></c:out>&#8361; </span>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<a id="insertOrder" href="/order/insertOrder">주문하기</a>
 		</div>
 	</div>
+
+
+	
+	
 
 	<footer>
 		<div class="container">
@@ -481,40 +384,35 @@ $(document).ready(function(){
 
 </script>
 
+<script >
+var id = $(id);
+$(document).ready(
+		function() {
+			$("#insertOrder").click(
+					function() {
+	var json = {
+			order_no : "${order_no}",
+				id : "${id}"
+			};
+			
+		$.ajax({
+			type : "get",
+			url : "/order/insertOrder",
+			data : json,
+			success : function(string) {
+				alert('주문 성공');
+				document.location.href = "/order/insertOrder";
+			},
+			error : function(error) {
+				alert("error.");
+			}
+		});
 
-<script>
-		$(document).ready(
-				function() {
-					$("#insertOrder").click(
-							function() {
-								var json = {
-										order_no : $("#order_no").val(),
-										cart_no: $("#cart_no").val(),
-										id : $("#id").val(),
-										res_code: $("#res_code").val(),
-										res_menu_code: $("#res_menu_code").val(),
-										res_menu_name : $("#res_menu_name").val(),
-										res_menu_acount: $("#res_menu_acount").val(),
-										order_date: $("#order_date").val(),
-										order_count: $("#order_count").val(),
-										amount: $("#amount").val()
-								};
+	});
+});
 
-									$.ajax({
-										type : "get",
-										url : "/order/insertOrder",
-										data : json,
-										success : function(string) {
-											alert('주문 성공');
-											document.location.href="/order/orderList";
-										},
-										error : function(error) {
-											alert("error.");
-										}
-									});
-							});
-				});
-	</script>
+</script>
+
 	
 </body>
 </html>

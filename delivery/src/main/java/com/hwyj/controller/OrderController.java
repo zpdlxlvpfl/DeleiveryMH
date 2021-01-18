@@ -66,14 +66,14 @@ public class OrderController {
 		
 		String order_no =  "ODRER_NUM" + ymd + "_" + subNum;
 		HashMapList.put("order_no", order_no);
-		HashMapList.put("id",userDetails.getUsername());
-		HashMapList.put("cartList" , cartList);
-		model.addAttribute("HashMapList", HashMapList);
+		HashMapList.put("HashMapList",userDetails.getUsername());
+		HashMapList.put("HashMapList" , cartList);
+		model.addAttribute("HashMapList", cartList);
 		model.addAttribute("cartList", cartList);
 		System.out.println("=====cartList======\n" + cartList);
 		System.out.println("======HashMapList=====\n" +HashMapList);
 		
-		return "redirect:/order/orderList";
+		return "/order/insertOrder";
 	}
 	
 	@RequestMapping(value = "orderList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
