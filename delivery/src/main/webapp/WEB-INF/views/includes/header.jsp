@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="kr">
 
@@ -38,8 +39,12 @@
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">#더보기 <span class="caret"></span></a>
               <form name="Logout" action="/logout" method="post">
               <div class="dropdown-menu" aria-labelledby="download">
+              <sec:authorize access="hasRole('ROLE_MEMBER')">
                 <a class="dropdown-item" rel="noopener" href="/cart/myCart">장바구니</a>
+              </sec:authorize>
+              <sec:authorize access="hasRole('ROLE_MEMBER')">
                 <a class="dropdown-item" href="#">주문내역</a>
+              </sec:authorize>
                 <a class="dropdown-item" href="#" onclick="javascript:document.Logout.submit();">로그아웃</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/member/withdrawal">회원탈퇴</a>

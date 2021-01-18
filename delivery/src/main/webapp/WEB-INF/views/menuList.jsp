@@ -97,10 +97,13 @@
 										</p>
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
+											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="rRes_cdoe" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
+											<input type="text" value='<c:out value="${RES_CODE.RES_CODE}"/>'>
 										</c:forEach>
 									
 									<div class="primary-button">
-										<a href="cart">cart</a>
+										<a class="btn" id="cartClick" >cart</a>
 									</div>
 								</div>
 							</div>
@@ -425,15 +428,56 @@
 	
 	
 <script>
-//리뷰 관련
+//리뷰 관련 + 장바구니 담기
 $(document).ready(function(){
+	//장바구니
+	var cartService=(function(){
+		//장바구니 담기
+		function put(menu, callback, error){
+			$.ajax({
+				type : "post",
+				url : "/cart/insert",
+				data : JSON.stringify(menu),
+				beforeSend : function(xhr)
+				{ xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
+				contentType : "application/json; charset=utf-8",
+				success : function(result, status, xhr){
+					if(callback){
+						callback(result);
+					}
+				},
+				error : function(xhr, status, er){
+					if(error){
+						error(er);
+					}
+				}
+			})
+		}
+		return {
+			put : put
+		}
+	})();
 	
+
+	$(document).on("click","#cartClick",function(){	
+		console.log("ddd"+$(this).parent().attr("#amount").val());
+		var res_menu_codea="res_01A01";
+		var menu={ res_code:$("#rRes_cdoe").val() ,res_menu_code:res_menu_codea , amount:$(this).parent().attr("#amount").val() };
+		console.log("ddd"+$(this).parent().attr("#amount").val());
+		cartService.put(menu,function(result){
+			alert("담기 성공");			
+		});
+		$(this).parent().attr("#amount").val(0)
+		
+	});
+	
+	
+	//리뷰
 	var reviewService=(function() {
 		
 		//리뷰보기
 		function getList(res_code, callback, error){			
-			//var res_code=param.res_code;
-			console.log("뭐임"+res_code);
+			
 			$.getJSON("/review/reviewList/" + res_code + ".json",
 				function(data){
 					if(callback){
@@ -524,7 +568,6 @@ $(document).ready(function(){
 	
 	var res_codeValue = "res_01";
 	var reviewF=$("#reviewF");
-	console.log("뭐냐고"+reviewF);
 	console.log("어디가게"+res_codeValue);
 	showList(res_codeValue);
 	//리뷰 목록 불러오기
