@@ -71,17 +71,6 @@ public class CartServiceImpl implements CartService {
 		return cartMapper.deleteAll(id)>=1; //삭제된게 1개 이상이면 true
 	}
 
-
-//	@Override //장바구니 (메뉴 한번에 여러개 넣는 서비스)
-//	public int ShoppingCart(CartVOList cartVOList) {
-//			
-//		log.info("장바구니 한번에 여러개 담기----------");	
-//		List<CartVO> cartList=cartVOList.getList();
-//		
-//		return cartMapper.insertCart(cartList);
-//	}
-	
-	
 	
 
 }

@@ -34,7 +34,7 @@ public class CartRestController {
 	
 	private CartService cartService;
 	
-	// 메뉴 페이지에서 res_code랑 res_menu_code랑 amount값 가져와야함(cartVO에 담아서)
+	
 	//장바구니 담기(이미 다른 매장의 메뉴가 담겨있을 경우에는 담지 못함 + 동일한 메뉴코드를 담으려고 하면 수량을 합쳐줌)
 	@PostMapping(value="/insert", consumes = "application/json", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> registerReview(@RequestBody CartVO cartVO, Authentication authentication){
@@ -46,7 +46,7 @@ public class CartRestController {
 		boolean insert=cartService.ShoppingCart(cartVO);
 		
 		return insert==true ? new ResponseEntity<>("success", HttpStatus.OK)
-							: new ResponseEntity<>("장바구니에는 같은 가게의 메뉴만 담을 수 있습니다. 장바구니를 비워주세요",HttpStatus.INTERNAL_SERVER_ERROR);
+							: new ResponseEntity<>("f",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	//장바구니페이지 (목록)
