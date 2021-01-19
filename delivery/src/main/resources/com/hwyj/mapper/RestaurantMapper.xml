@@ -81,7 +81,7 @@
 	 
 	
 	<select id="menuread" parameterType="map" resultType="com.hwyj.domain.ResMenuVO">	
-		    select  res_code 
+		    select  res_code, 
 		 	        res_menu_code,
 			 	    res_menu_name,
                		res_menu_explan,

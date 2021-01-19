@@ -112,9 +112,11 @@
                                             margin-left:-170px;
                                             width:15px; height:15px"
                                        value="save">&nbsp; <font color="gray">ID/PW saved.</font>
+                                       
                                 <input type="hidden" name="${_csrf.parameterName }"value="${_csrf.token }" />
                             </fieldset>
-                            
+                            <a href="/findId" style="color:white; text-decoration:none;">아이디 찾기</a> | <a href="/findPw" style="color:white; text-decoration:none;">비밀번호 찾기</a>
+                          <p></p>
                                     <p> <button type="submit" id="form-submit" class="btn" style=" font-family:inherit; width:300px; height:50px;">LOGIN</button></p>
 
                                     <p> <button type="button" onclick="location.href='join'" class="btn" style=" font-family:inherit; width:300px; height:50px;">JOIN</button> </p>

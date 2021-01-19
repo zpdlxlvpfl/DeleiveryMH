@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>#회사이름?</title>
+    <title>#배달웹서비스</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../resources/docs/4/minty/bootstrap.css">
     <link rel="stylesheet" href="../resources/docs/_assets/css/custom.min.css">
@@ -23,7 +23,7 @@
   <body>
   <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div class="container">
-        <a href="../" class="navbar-brand">#회사이름</a>
+        <a href="../" class="navbar-brand">#배달웹서비스</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,12 +31,9 @@
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link" href="/">Main</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/member/myPage">MyPage</a>
-            </li>           
+            </li>          
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">#더보기 <span class="caret"></span></a>
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">더보기 <span class="caret"></span></a>
               <form name="Logout" action="/logout" method="post">
               <div class="dropdown-menu" aria-labelledby="download">
               <sec:authorize access="hasRole('ROLE_MEMBER')">
