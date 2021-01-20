@@ -14,9 +14,9 @@
 	</insert>
 	
 <!-- 	장바구니 담을 때 같은 가게인지 확인 -->
-	<select id="compare" resultType="string"> 
-		select res_code from res_menu where res_menu_code=#{res_menu_code}
-	</select>
+<!-- 	<select id="compare" resultType="string">  -->
+<!-- 		select res_code from res_menu where res_menu_code=#{res_menu_code} -->
+<!-- 	</select> -->
 	
 <!-- 	이미 담겨있는 메뉴를 또 담으려고 할 때(수량 합쳐주기) -->
 	<update id="sumAmount">
