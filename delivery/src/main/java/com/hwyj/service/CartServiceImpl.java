@@ -25,10 +25,10 @@ public class CartServiceImpl implements CartService {
 
 		List<CartVO> cartList=cartMapper.cartList(cartVO.getId());
 		
-		if(cartList.size()!=0) { //회원의 장바구니에 메뉴가 이미 있으면		
-			//장바구니 메뉴의 메뉴코드로 검색해서 얻은 매장코드와 담으려는 메뉴의 매장코드 값이랑 비교해서 같으면 insertCart
-			if(cartVO.getRes_code().equals(cartMapper.compare(cartList.get(0).getRes_menu_code()))){
-				
+		if(cartList.size()!=0) { //회원의 장바구니에 메뉴가 이미 있으면
+			System.out.println("장바구니에 있는 레스코드: "+cartList.get(0).getRes_code());
+			//장바구니에 있는 매장코드와 담으려는 매장코드 비교해서 같으면
+			if(cartList.get(0).getRes_code().equals(cartVO.getRes_code())){
 				for(CartVO temp : cartList) { //매장코드가 일치하지만 이미 장바구니에 있는 메뉴를 또 담으려고 하면
 					if(temp.getRes_menu_code().equals(cartVO.getRes_menu_code())) {
 						int sumAmount = temp.getAmount()+cartVO.getAmount(); //수량을 꺼내서 추가된 수량 더하고
@@ -38,13 +38,34 @@ public class CartServiceImpl implements CartService {
 					}
 				}
 				return cartMapper.insertCart(cartVO)==1; //장바구니 담고 true 리턴
-				
-			}else { //매장코드 비교 결과 다르면 insert하지 않고 false 리턴
+			}else { //매장코드 비교결과 다르면
 				return false;
 			}
+			
 		}else { //장바구니가 비어있으면
 			return cartMapper.insertCart(cartVO)==1; //장바구니 담고 true 리턴
-		}	
+		}		
+			
+			
+//			//장바구니 메뉴의 메뉴코드로 검색해서 얻은 매장코드와 담으려는 메뉴의 매장코드 값이랑 비교해서 같으면 insertCart
+//			if(cartVO.getRes_code().equals(cartMapper.compare(cartList.get(0).getRes_menu_code()))){
+//				
+//				for(CartVO temp : cartList) { //매장코드가 일치하지만 이미 장바구니에 있는 메뉴를 또 담으려고 하면
+//					if(temp.getRes_menu_code().equals(cartVO.getRes_menu_code())) {
+//						int sumAmount = temp.getAmount()+cartVO.getAmount(); //수량을 꺼내서 추가된 수량 더하고
+//						cartVO.setSumAmount(sumAmount);
+//						cartVO.setCart_no(temp.getCart_no());
+//						return cartMapper.sumAmount(cartVO)==1; //insertCart(insert) 아니고 sumAmount(update) 실행
+//					}
+//				}
+//				return cartMapper.insertCart(cartVO)==1; //장바구니 담고 true 리턴
+//				
+//			}else { //매장코드 비교 결과 다르면 insert하지 않고 false 리턴
+//				return false;
+//			}
+//		}else { //장바구니가 비어있으면
+//			return cartMapper.insertCart(cartVO)==1; //장바구니 담고 true 리턴
+//		}	
 	}
 
 	@Override //장바구니 보기 서비스

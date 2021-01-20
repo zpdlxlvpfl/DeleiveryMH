@@ -25,9 +25,9 @@
 
 <!--  장바구니 목록보기 -->
 	<select id="cartList" resultType="com.hwyj.domain.CartVO"> 
-		select cart_no, c.res_menu_code, res_menu_name, res_menu_price, amount, res_menu_price*amount as sum
+		select res_code, cart_no, c.res_menu_code, res_menu_name, res_menu_price, amount, res_menu_price*amount as sum
 		from cart c left outer join res_menu r on c.res_menu_code=r.res_menu_code
-		where id=#{id} order by cart_no desc
+		where id=#{id} and payment='N' order by cart_no desc;
 	</select>
 	
 <!-- 	장바구니 메뉴 수량 수정 -->
@@ -42,7 +42,7 @@
 	
 <!-- 	장바구니 전체삭제 -->
 	<delete id="deleteAll">
-		delete from cart where id=#{id}
+		delete from cart where id=#{id} and payment='N'
 	</delete>
 
 
