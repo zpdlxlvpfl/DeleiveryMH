@@ -93,20 +93,7 @@ public class CommonController {
 
 	}
 
-	//메뉴목록보기 (템플릿 메인 사진 아래)
-	   @RequestMapping(value = "index", method = RequestMethod.GET, produces ="application/json; charset=utf8")
-		public String menuList(ModelMap model, ResMenuVO menuvo) throws Exception {
-			HashMap<String, Object> HashMapList = new HashMap<>();	//HashMap 인스턴스화
-			List<ResMenuVO> list = new ArrayList<>();				//List 인스턴스화
-			
-			list =  restaurantService.menuList();
-			HashMapList.put("HashMapList", list);
-			model.addAttribute("HashMapList", list);
-			
-			System.out.println("model@@@@@@@@@@@@@@@@@@@@@" + model);
-			System.out.println("hashMap@@@@@@@@@@@@@@@@@@@@" + HashMapList);
-			return "index";
-		}
+	
 	   
 	   @RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 		public String menuList(ModelMap model, ResMenuVO menuvo, RedirectAttributes rttr, String RES_CODE)
@@ -126,7 +113,25 @@ public class CommonController {
 			System.out.println(menuList + "LIST@@@@@@@@@@@@@@@@@@@");
 			return "menuList";
 	   }
-		
+	   
+	 //메뉴목록보기 (템플릿 메인 사진 아래)
+	   @RequestMapping(value = "index", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+		public String menuList(ModelMap model, ResMenuVO menuvo) throws Exception {
+			HashMap<String, Object> HashMapList = new HashMap<>();	//HashMap 인스턴스화
+			List<ResMenuVO> menuList = new ArrayList<>();				//List 인스턴스화
+			
+			menuList =  restaurantService.menuList();
+			HashMapList.get("menuList");
+			HashMapList.put("menuList", menuList);
+			HashMapList.put("HashMapList", HashMapList);
+			model.addAttribute("menuList", menuList);
+			model.addAttribute("HashMapList", HashMapList);
+			
+			System.out.println("model@@@@@@@@@@@@@@@@@@@@@" + model);
+			System.out.println("hashMap@@@@@@@@@@@@@@@@@@@@" + HashMapList);
+			System.out.println("menuList@@@@@@@@@@@@@@@@@@@@" + menuList);
+			return "index";
+		}
 		
 		@GetMapping("/get")
 		public void get(String res_code,String res_menu_code,Model model,ResMenuVO menuvo) {

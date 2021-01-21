@@ -76,12 +76,14 @@
 		
 		</select>
 	
- 	<select id="read" resultType="com.hwyj.domain.ResVO">
+ 	<select id="read" resultType="com.hwyj.domain.ResMenuVO">
+ 	select res_code,res_menu_code,res_menu_name,res_menu_price,res_menu_explan
+	from res_menu where res_menu_code=#{res_menu_code}
 	</select>
 	 
 	
 	<select id="menuread" parameterType="map" resultType="com.hwyj.domain.ResMenuVO">	
-		    select  res_code 
+		    select  res_code ,
 		 	        res_menu_code,
 			 	    res_menu_name,
                		res_menu_explan,
@@ -136,7 +138,9 @@
 		FROM res
 	</select>
 	
-	
+	<select id="userorder">
+	select * from cart where payment=#{Y}, cart_no=#{cart_no}
+	</select>
 	
 		<!-- 메뉴 등록 -->
 	<insert id="insertmenu" parameterType="com.hwyj.domain.ResMenuVO">
@@ -168,8 +172,8 @@
 	</update>
 	
 	<!-- 삭제 -->
-	<delete id="deleteMenu">
-		delete from testdb.res_menu where RES_CODE=#{RES_CODE}
+	<delete id="deleteMenu" parameterType="com.hwyj.domain.ResMenuVO">
+		DELETE FROM testdb.res_menu WHERE (res_menu_code=#{res_menu_code})
 	</delete>
 	
 

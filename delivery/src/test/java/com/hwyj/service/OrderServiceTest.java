@@ -63,7 +63,6 @@ public class OrderServiceTest {
 		orderVO.setRes_menu_acount("9");
 		orderVO.setRes_menu_price("9");
 		log.info(orderVO);
-		log.info("@@@@@@@@@@@" + service.insertOrder(orderVO));
 		
 		}
 	
@@ -73,7 +72,6 @@ public class OrderServiceTest {
 		OrderVO vo = new OrderVO ( );
 		vo.setId("user4");
 		HashMap<String, Object> hashMapList = new HashMap<String, Object>();
-		hashMapList.put("hashMapList", service.OrderList(vo));
 		System.out.printf("====hash=====",hashMapList);
 	
 	}

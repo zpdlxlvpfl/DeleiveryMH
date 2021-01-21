@@ -35,7 +35,7 @@ public class CartRestController {
 	//장바구니페이지 (목록)
 	@GetMapping(value="/cartList", produces= { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<List<CartVO>> getCartList(HttpSession session,Authentication authentication){
-		
+		CartVO cart = new CartVO();
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		List<CartVO> cartList = cartService.cartList(userDetails.getUsername());
 		List<CartVO> emptyCart = new ArrayList<>();
@@ -47,12 +47,12 @@ public class CartRestController {
 			}	
 			cartList.get(0).setSumTotal(sumTotal);
 		}else { 						//메뉴 다 삭제해서 없으면
-			CartVO cart = new CartVO();	
+			cart = new CartVO();	
 			cart.setSumTotal(0);
 			emptyCart.add(cart);
 		}
 		session.setAttribute("cartList", cartService.cartList(userDetails.getUsername()));
-				
+		session.setAttribute("cart_no", cart.getCart_no());
 		return cartList.size()!=0 ? new ResponseEntity<>(cartList, HttpStatus.OK)
 								: new ResponseEntity<>(emptyCart, HttpStatus.OK);
 	}

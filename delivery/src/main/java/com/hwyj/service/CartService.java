@@ -27,6 +27,10 @@ public interface CartService {
 	
 	//장바구니 전체 삭제
 	public boolean removeAll(String id);
+	
+	public List<String> getList(String id);
+	
+	public boolean updateOrder(CartVO cartVO);
 
 
 }

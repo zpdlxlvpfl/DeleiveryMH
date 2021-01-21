@@ -16,6 +16,7 @@ public class CartVO {
 	private int res_menu_price;
 	private int sum; //메뉴당 총금액
 	private int sumTotal; //총 주문금액
+	private String Payment;
 	
 	private String res_code; //매장코드
 	private int sumAmount; //수량 합칠 때

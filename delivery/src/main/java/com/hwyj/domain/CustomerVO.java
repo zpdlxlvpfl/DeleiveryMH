@@ -11,6 +11,7 @@ import lombok.Data;
 public class CustomerVO {
 
 	private	String id;
+	private	String res_code;
 	private String m_name;
 	private String pw;
 	private String email;

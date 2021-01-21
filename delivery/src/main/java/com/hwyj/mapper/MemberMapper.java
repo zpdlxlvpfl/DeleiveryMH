@@ -38,6 +38,9 @@ public interface MemberMapper {
 	
 	//아이디 중복체크
 	public String selectCustomer(CustomerVO csVO);
+	
+	public int	updateowner(CustomerVO customerVO); //레스추가시 레스코드추가
+
 
 
 

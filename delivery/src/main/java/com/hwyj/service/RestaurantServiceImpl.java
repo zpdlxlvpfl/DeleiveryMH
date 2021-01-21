@@ -46,7 +46,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 	
 	@Override
-	public void read (String RES_CODE) {
+	public ResMenuVO read (String res_menu_code) {
+		return restaurantMapper.read(res_menu_code);
 	}
 	
 	@Override
@@ -102,16 +103,21 @@ public class RestaurantServiceImpl implements RestaurantService {
 		
 	}
 	
-	
 	@Override
-	public void UpdateMenu(ResMenuVO menuvo) {
-		restaurantMapper.UpdateMenu(menuvo);
+	public List<String> userorder () {
+		return restaurantMapper.userorder();
 	}
 	
 	
 	@Override
-	public void deleteMenu (ResMenuVO menuvo) {
-		restaurantMapper.deleteMenu(menuvo);
+	public boolean UpdateMenu(ResMenuVO menuvo) {
+		return restaurantMapper.UpdateMenu(menuvo)==1 ;
+	}
+	
+	
+	@Override
+	public boolean deleteMenu (ResMenuVO menuvo ) {
+		return restaurantMapper.deleteMenu(menuvo)==1;
 	}
 	
 

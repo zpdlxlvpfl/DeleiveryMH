@@ -46,6 +46,14 @@ public class MemberServiceImpl implements MemberService {
 		 return 0;
 	}
 	
+	
+	@Override
+	
+	public boolean updateowner(CustomerVO customerVO) {
+	
+		return memberMapper.updateowner(customerVO)==1;
+	}
+	
 	@Override
 	public String enabled(CustomerVO csVO) {
 		String a = memberMapper.enabled(csVO);

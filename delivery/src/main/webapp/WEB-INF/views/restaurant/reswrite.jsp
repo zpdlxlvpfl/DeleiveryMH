@@ -174,7 +174,7 @@
 										data : json,
 										success : function(string) {
 											alert('매장 등록 성공');
-											document.location.href="/restaurant/restList";
+											document.location.href="/restaurant/menuwrite";
 										},
 										error : function(error) {
 											alert("에러" + error);

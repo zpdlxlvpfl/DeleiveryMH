@@ -172,7 +172,7 @@
 										data : json,
 										success : function(string) {
 											alert('등록 성공');
-											document.location.href="/restaurant/reshome";
+											document.location.href="/restaurant/restList";
 										},
 										error : function(error) {
 											alert("error.");

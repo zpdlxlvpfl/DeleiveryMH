@@ -5,45 +5,80 @@
 
 <mapper namespace="com.hwyj.mapper.OrderMapper">
 
-	<resultMap type="com.hwyj.domain.OrderVO" id="orderMap">
-		<result property="order_no" column="order_no" />
-		<result property="res_code" column="res_code" />
-		<result property="res_menu_code" column="res_menu_code" />
-		<result property="res_menu_price" column="res_menu_price" />
-		<result property="res_menu_acount" column="res_menu_acount" />
-		<result property="order_date" column="order_date" />
-		<result property="order_count" column="order_count" />
-	</resultMap>
-	
-	<select id="OrderList" resultType="HashMap">
-			SELECT * 
-			from testdb.order 
-			right join cart on cart.id=order.id 
-			right join res_menu on res_menu.res_menu_code=cart.res_menu_code
-			where testdb.order.id=#{id}
+
+	<select id="orderList" resultType="java.util.HashMap"
+		parameterType="com.hwyj.domain.OrderVO">
+		select testdb.order.order_no,
+		testdb.order.id,
+		testdb.order.res_menu_code,
+		testdb.order.res_code,
+		testdb.res_menu.res_menu_price*testdb.order.order_count as sum,
+		testdb.res_menu.res_menu_name,
+		testdb.res.res_name,
+		testdb.res.del_price,
+		testdb.member.m_name,
+		testdb.member.address,
+		testdb.member.tel
+		from testdb.order
+
+		right outer join testdb.res_menu on
+		testdb.order.res_menu_code=testdb.res_menu.res_menu_code
+
+		right outer join testdb.res on
+		testdb.order.res_code=testdb.res.res_code
+
+		right outer join testdb.member on
+		testdb.order.id=testdb.member.id
+		where testdb.order.order_no=#{order_no}
 	</select>
 
 
 
-	<insert id="insertOrder"  parameterType="com.hwyj.domain.OrderVO">
-		<!--  INSERT INTO testdb.order
-		(order_no,res_code,res_menu_code,res_menu_price,
-		res_menu_acount,del_id,id,order_date,order_count)
-		VALUES 
-		(#{order_no},
-		#{res_code},
-		#{res_menu_code},
-		#{res_menu_price},
-		#{res_menu_acount},
-		#{del_id},
+	<update id="updateOrder">
+		update cart set payment='y' where id=#{id};
+	</update>
+
+	<update id="updateOrderResCode">
+		update testdb.order o,
+		res r,
+		res_menu m
+		set
+		o.res_code= m.res_code
+		where o.order_no=#{order_no}
+		and m.res_menu_code=#{res_menu_code}
+	</update>
+
+	<insert id="insertOrder">
+		<!-- insert into testdb.order( order_no, id, res_menu_code, res_code, order_date 
+			) VALUES (#{order_no}, #{id}, #{res_menu_code}, #{res_code}, now() ) -->
+			 INSERT into testdb.order(order_no,id, res_code, res_menu_code, amount)
+			  VALUES (#{order_no},#{id},(select distinct res_code 
+ 				from res_menu where res_menu_code=#{res_menu_code}),#{res_menu_code},#{amount})
+
+		<!-- insert IGNORE into testdb.order(order_no,id,
+		res_menu_code,order_count)
+		select
+		#{cart_no},
 		#{id},
-		now(),
-		#{order_count}) -->
-		
-		insert into testdb.order   (id,res_menu_code,order_count)
-		select id,res_menu_code,amount from cart where res_menu_code is not null
-		
+		#{res_menu_code},
+		#{amount}
+		from cart
+		where cart_no=#{cart_no}
+		order by cart_no=#{cart_no} desc -->
 	</insert>
-	
-	
-	</mapper>
+
+	<select id="read" resultType="com.hwyj.domain.OrderVO">
+		select order_no from testdb.order
+		where order_no=#{order_no}
+	</select>
+
+
+	<!-- <insert id="insertOrder" parameterType="com.hwyj.domain.OrderVO"> insert 
+		into testdb.order(order_no, id, res_menu_code,order_count,res_code, order_date) 
+		select cart.id, cart.res_menu_code, amount, res.res_code, testdb.order.order_date 
+		from cart , res, testdb.order left outer join testdb.res as r on testdb.order.res_code=r.res_code 
+		where testdb.cart.id=#{id} </insert> -->
+
+
+
+</mapper>

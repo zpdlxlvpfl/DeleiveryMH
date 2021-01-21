@@ -13,6 +13,7 @@
 		insert into cart (id, res_menu_code, amount) values(#{id}, #{res_menu_code}, #{amount})
 	</insert>
 	
+	
 <!-- 	장바구니 담을 때 같은 가게인지 확인 -->
 	<select id="compare" resultType="string"> 
 		select res_code from res_menu where res_menu_code=#{res_menu_code}
@@ -39,6 +40,13 @@
 		where id=#{id} order by cart_no desc
 	</select>
 	
+	
+	<update id="updateOrder">
+		update cart set payment=#{payment} where id=#{id}
+	</update>
+	
+	
+	
 <!-- 	장바구니 메뉴 수량 수정 -->
 	<update id="updateAmount">
   		update cart set amount=#{amount} where cart_no=#{cart_no}
@@ -55,27 +63,28 @@
 	</delete>
 
 
-	<select id="menuList"    resultType="map">	
-		 SELECT res_menu.res_code,
- 			   res_menu.res_menu_code,
-			   res_menu.res_menu_name,
-               res_menu.res_menu_explan,
-               res_menu.res_menu_price
-		FROM testdb.res_menu
-		left JOIN res ON res_menu.res_menu_code = res.res_code
-		WHERE res_menu.res_code is not null AND
-		(res.res_code IS  NULL)  
+	<select id="getList"  resultType="HashMap">	
+		select 
+		cart_no,
+		c.id,
+		menu1.res_menu_code,
+		menu1.res_menu_price*c.amount as sum,
+		menu1.res_code,
+        menu1.res_menu_name,
+     
+		member.m_name,
+		member.address,
+		member.tel
+		from testdb.cart as c
+
+		left outer join testdb.res_menu as menu1 on
+		c.res_menu_code=menu1.res_menu_code
+
 		
-		<!-- SELECT 
-		res_menu.res_code,
-		res_menu.res_menu_name,
-		res_menu.res_menu_explan,
-		res_menu.res_menu_price
-		FROM res_menu 
-		left JOIN res
-		ON res_menu.res_menu_code=res.res_code
-		WHERE res.res_code is null AND 
-		(res_menu.res_code IS NULL OR res_menu.res_code=#{res_code}); -->
+		left outer join testdb.member on
+		c.id=testdb.member.id
+        
+		where c.id=#{id}
 	</select>
 
 </mapper>

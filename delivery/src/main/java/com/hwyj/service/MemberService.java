@@ -15,7 +15,7 @@ public interface MemberService {
 	//내정보 보기
 	public CustomerVO getMyInfo(String id);
 	
-	
+
 	// 중복검사 ,회원가입 (+권한등록)
 	public int insertCustomer(CustomerVO csVO);
 	
@@ -23,6 +23,7 @@ public interface MemberService {
 	
 	public String selectCustomer(CustomerVO csVO);
 	
+	public boolean 	updateowner(CustomerVO customerVO); //레스추가시 레스코드추가
 	
 	//아이디 찾기
 	public CustomerVO findId(CustomerVO customerVO);

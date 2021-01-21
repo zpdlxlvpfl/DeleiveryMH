@@ -21,7 +21,7 @@ public interface RestaurantMapper {
 	
 	public List<ResMenuVO> menuread(String RES_CODE);
 
-	public void read(String RES_CODE) ;
+	public ResMenuVO read(String res_menu_code) ;
 	
 	//식당 정보 보기
 	
@@ -31,6 +31,9 @@ public interface RestaurantMapper {
 	
 	public List<ResVO> ResInfo() throws Exception;
 	
+	//주문정보
+	
+	public List<String> userorder ();
 	
 	//식당 리뷰 보기
 	
@@ -48,15 +51,14 @@ public interface RestaurantMapper {
 	
 	public void deleteRes (ResVO resvo); 
 	
-	public void UpdateMenu (ResMenuVO menuvo);
+	public int UpdateMenu (ResMenuVO menuvo);
 	
-	public void deleteMenu (ResMenuVO menuvo);
+	public int deleteMenu (ResMenuVO menuvo);
 	
 	public ResMenuVO get(String res_code);
 
 	
 	
-	;
 	
 	
 

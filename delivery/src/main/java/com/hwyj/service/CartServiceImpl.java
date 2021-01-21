@@ -70,6 +70,18 @@ public class CartServiceImpl implements CartService {
 		
 		return cartMapper.deleteAll(id)>=1; //삭제된게 1개 이상이면 true
 	}
+	
+	public List<String> getList(String id){
+		
+		return cartMapper.getList(id);
+	}
+	
+	public boolean updateOrder (CartVO cartVO) {
+		CartVO vo = new CartVO();
+		String payment = "y";
+		vo.setPayment(payment);
+		return cartMapper.updateOrder(cartVO)==1;
+	}
 
 
 //	@Override //장바구니 (메뉴 한번에 여러개 넣는 서비스)

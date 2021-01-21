@@ -33,5 +33,8 @@ public interface CartMapper {
 	//장바구니 전체 삭제
 	public int deleteAll(String id);
 	
+	public List<String> getList(String id);
+	
+	public int updateOrder(CartVO cartVO);
 
 }

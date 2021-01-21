@@ -34,9 +34,14 @@
 	</select>
 	
 <!-- 	내정보 수정 -->
-	<update id="update">
+	<update id="update">   
   		update member set m_name=#{m_name}, tel=#{tel} where id=#{id} <!-- 나중에 테이블 컬럼 추가되면 여기도 추가해야됨 -->
-	</update>
+	</update>	
+	
+	<update id="updateowner">   
+  		update member set res_code=#{res_code} where id=#{id}
+	</update>	
+	
 	
 	
 <!-- 	아이디 찾기 (이메일,이름으로) -->
