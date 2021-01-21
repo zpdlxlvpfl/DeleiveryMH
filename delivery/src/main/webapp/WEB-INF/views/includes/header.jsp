@@ -42,6 +42,10 @@
               <sec:authorize access="hasRole('ROLE_MEMBER')">
                 <a class="dropdown-item" href="#">주문내역</a>
               </sec:authorize>
+              <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <a class="dropdown-item" href="/admin/memberList?pageNum=1&amount=10&auth=ROLE_MEMBER">회원목록</a>
+                <div class="dropdown-divider"></div>
+              </sec:authorize>
               	<a class="dropdown-item" href="/member/myInfo">회원정보</a>
                 <a class="dropdown-item" href="#" onclick="javascript:document.Logout.submit();">로그아웃</a>
                 <div class="dropdown-divider"></div>

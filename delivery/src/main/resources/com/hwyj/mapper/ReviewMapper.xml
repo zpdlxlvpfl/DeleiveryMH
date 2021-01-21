@@ -11,7 +11,7 @@
 <!-- (cart 테이블에서 해당 매장 주문내역 있는 아이디만 가능)-->
 		insert into review (id, res_code, content, rate) select #{id}, #{res_code}, #{content}, #{rate}
 		from dual where exists(select id from cart c left outer join res_menu r on c.res_menu_code=r.res_menu_code
-		where res_code=#{res_code} and id=#{id} and payment='y')
+		where res_code=#{res_code} and id=#{id} and payment='Y')
 	</insert>
 	
 <!-- 	리뷰 수정 -->

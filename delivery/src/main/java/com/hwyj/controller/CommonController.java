@@ -55,13 +55,7 @@ public class CommonController {
 
 	@Setter(onMethod_ = @Autowired)
 	private RestaurantService restaurantService;
-
-	// 로그인 테스트용 나중에 지우기
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')") // auth가 ROLE_ADMIN이랑 ROLE_MEMBER일때만 페이지 열 수 있음
-	@GetMapping("/test/securityTest") // 이 주소 요청하면 아래 /login 페이지 열림
-	public void securityTest() {
-
-	}
+	
 
 	@GetMapping("/login") // 로그인 페이지
 	public void login(String error, Model model) {
@@ -77,12 +71,12 @@ public class CommonController {
 		return "redirect:/login";
 	}
 
-	@GetMapping("findId") // 아이디 찾기
+	@GetMapping("findId") //아이디 찾기 페이지
 	public void findId() {
 
 	}
 
-	@GetMapping("/findPw")
+	@GetMapping("/findPw") //비번 찾기 페이지
 	public void findPw() {
 
 	}
@@ -162,10 +156,10 @@ public class CommonController {
 
 	}
 
-	@GetMapping("/accessError") // 403페이지 (접근제한) //accessError.jsp 수정 해야됨//
-	public void accessDenied(Authentication auth) {
+	@GetMapping("/accessError") // 403페이지 (접근제한)
+	public String accessDenied(Authentication auth) {
 
-		// log .info(auth);
+		return "/exception/error403";
 	}
 
 	@Autowired

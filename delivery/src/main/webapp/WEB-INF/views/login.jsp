@@ -102,9 +102,11 @@
                             <fieldset>
                                     <input name="password" type="password" class="form-control" id="password" placeholder="PASSWORD" style=" font-family:inherit; width:300px; height:40px;">
                             </fieldset>
-                            <font color="red">
+                            
+                            <div style="color:white; text-shadow: 1px 1px 5px #000;">
 							<h3><c:out value="${error }" /></h3>
-							</font>
+							</div>
+							
                             <fieldset>
 
                                 <input type="checkbox" name="remember-me"
