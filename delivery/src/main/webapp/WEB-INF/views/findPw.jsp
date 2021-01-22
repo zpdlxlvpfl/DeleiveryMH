@@ -107,14 +107,15 @@
                             </fieldset>                                               
                                 
                                 <input type="hidden" name="${_csrf.parameterName }"value="${_csrf.token }" id="csrf" />
-                                                  
+                                        <a href="/findId" style="color:white; text-decoration:none; text-shadow: 1px 1px 5px #000;">아이디 찾기</a>   
+                                        <p></p>      
                                     <p> <button type="button" id="find" class="btn" style=" font-family:inherit; width:300px; height:50px;">비밀번호 찾기</button></p>                                
                                 </form>
                     </div>
                     </div>
                 </div>
             </div>
-			
+		</div>	
 
 
 
@@ -133,11 +134,9 @@
                                 <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                             </ul>
                         </div>
-                </div>
-        </div>
-
-        </div>
-        </footer>
+                	</div>
+        		</div>
+     		</footer>
 
 
 <!-- modal -->

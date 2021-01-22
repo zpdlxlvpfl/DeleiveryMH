@@ -15,29 +15,20 @@
 	
 	
 <!-- 	장바구니 담을 때 같은 가게인지 확인 -->
-	<select id="compare" resultType="string"> 
-		select res_code from res_menu where res_menu_code=#{res_menu_code}
-	</select>
+<!-- 	<select id="compare" resultType="string">  -->
+<!-- 		select res_code from res_menu where res_menu_code=#{res_menu_code} -->
+<!-- 	</select> -->
 	
 <!-- 	이미 담겨있는 메뉴를 또 담으려고 할 때(수량 합쳐주기) -->
 	<update id="sumAmount">
 	update cart set amount=#{sumAmount} where cart_no=#{cart_no}
 	</update>
-	
-<!--  	장바구니 담기(메뉴 여러개) -->
-<!-- 	<insert id="insertCart" parameterType="java.util.List"> -->
-<!-- 		insert into cart (id, res_menu_code, amount) values -->
-<!-- 		<foreach collection="list" item="item" separator=","> -->
-<!-- 			(#{item.id}, #{item.res_menu_code}, #{item.amount}) -->
-<!-- 		</foreach> -->
-<!-- 	</insert> -->
-
 
 <!--  장바구니 목록보기 -->
 	<select id="cartList" resultType="com.hwyj.domain.CartVO"> 
-		select cart_no, c.res_menu_code, res_menu_name, res_menu_price, amount, res_menu_price*amount as sum
+		select res_code, cart_no, c.res_menu_code, res_menu_name, res_menu_price, amount, res_menu_price*amount as sum
 		from cart c left outer join res_menu r on c.res_menu_code=r.res_menu_code
-		where id=#{id} order by cart_no desc
+		where id=#{id} and payment='N' order by cart_no desc;
 	</select>
 	
 	
@@ -59,7 +50,7 @@
 	
 <!-- 	장바구니 전체삭제 -->
 	<delete id="deleteAll">
-		delete from cart where id=#{id}
+		delete from cart where id=#{id} and payment='N'
 	</delete>
 
 

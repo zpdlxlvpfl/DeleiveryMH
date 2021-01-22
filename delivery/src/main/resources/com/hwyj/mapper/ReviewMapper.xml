@@ -8,10 +8,10 @@
 <!-- 	리뷰 등록(주문내역 -->
 	<insert id="insertReview">
 <!-- 		insert into review (id, res_code, content, rate) values(#{id}, #{res_code}, #{content}, #{rate}) -->
-
-<!-- from cart 나중에 주문내역 테이블로 바꾸기 + where id 뒤에 and res_code=#{res_code} 추가해서 해당 매장 주문내역 있어야 insert 가능하게-->
+<!-- (cart 테이블에서 해당 매장 주문내역 있는 아이디만 가능)-->
 		insert into review (id, res_code, content, rate) select #{id}, #{res_code}, #{content}, #{rate}
-		from dual where exists(select id from cart where id=#{id})
+		from dual where exists(select id from cart c left outer join res_menu r on c.res_menu_code=r.res_menu_code
+		where res_code=#{res_code} and id=#{id} and payment='Y')
 	</insert>
 	
 <!-- 	리뷰 수정 -->

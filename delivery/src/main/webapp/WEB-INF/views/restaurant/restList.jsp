@@ -111,48 +111,40 @@
 						</div>
 
 
-					
-						<c:forEach items="${restList}" var="RES_CODE"  varStatus="loop">
-						<div class="col-md-12" id="res">
-						
-						
-						
-								<div class="service-item" id="res">
-								<c:set var="nextVal" value="${restList[loop.count]}"/>
-									<input type="hidden" id="RES_CODE" name="RES_CODE"
-										value='<c:out value="${RES_CODE.RES_CODE }" />'>
 
-									<h4>
-										<a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
-											${RES_CODE.RES_NAME }</a>
-									</h4>
-									<div class="line-dec">
-										<p>${RES_CODE.RES_INFO }</p>
-									</div>
-									Delivery Tips : ${RES_CODE.DEL_PRICE }<font color="orange">
-										&#8361; </font> </div>
-										
-										
-										
-						
-							
-								<div class="service-item" id="res">
-									<h4>
-										<a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
-											${RES_CODE.RES_NAME }</a>
-									</h4>
-									<div class="line-dec">
-										<p>${RES_CODE.RES_INFO }</p>
-									</div>
-									Delivery Tips : ${RES_CODE.DEL_PRICE }<font color="orange">
-										&#8361; </font> </div></div>
-										
-										</c:forEach>
-										</div> 
+
+						<div class="col-md-12" id="res">
+
+							<c:set var="i" value="0" />
+						  <c:set var="j" value="3" />
+							<c:forEach items="${restList}" var="RES_CODE">
+									<div class="service-item" id="res">
+										<c:if test="${i%j == 0 }">
+										<input type="hidden" id="RES_CODE" name="RES_CODE"
+											value='<c:out value="${RES_CODE.RES_CODE }" />'>
+										<h4>
+											<a href="/restaurant/menuList?RES_CODE=${RES_CODE.RES_CODE}">
+												${RES_CODE.RES_NAME }</a>
+										</h4>
+										<div class="line-dec">
+											<p>${RES_CODE.RES_INFO }</p>
+										</div>
+										Delivery Tips : ${RES_CODE.DEL_PRICE }<font color="orange">
+											&#8361; </font>
+											<c:if test="${i%j == j-3 }">
+								</c:if>
+								</c:if>
+								<c:set var="i" value="${i+3}" /> 
 						</div>
+						</c:forEach>
 					</div>
+
+
 				</div>
 			</div>
+		</div>
+	</div>
+	</div>
 
 	<div class="parallax-content contact-content " id="contact-us"></div>
 

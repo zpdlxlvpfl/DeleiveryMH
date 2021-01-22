@@ -48,10 +48,10 @@
 
 
 <body>
-
+<form name="Logout" action="/logout" method="post">
 	<div class="fixed-side-navbar">
 		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="/"><span>Delivery</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
 			<sec:authorize access="isAnonymous()">
 				<li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
@@ -60,12 +60,22 @@
 				<li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li>
 			</sec:authorize>
 			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
+			<sec:authorize access="isAuthenticated()">
+				<li class="nav-item"><a class="nav-link"
+					href="/member/myInfo"><span>MYPAGE</span></a></li>
+			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<li class="nav-item"><a class="nav-link"
-					href="/admin/memberList?pageNum=1&amount=10&auth=ROLE_MEMBER"><span>#관리자페이지</span></a></li>
+					href="/admin/memberList?pageNum=1&amount=10&auth=ROLE_MEMBER"><span>ADMINPAGE</span></a></li>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<li class="nav-item"><a class="nav-link"
+					href="#" onclick="javascript:document.Logout.submit();"><span>LOGOUT</span></a></li>
 			</sec:authorize>
 		</ul>
 	</div>
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" /> 
+</form>
 
 	<div class="parallax-content baner-content" id="home">
 		<div class="container">

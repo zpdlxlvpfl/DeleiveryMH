@@ -60,7 +60,6 @@ public class OrderServiceTest {
 		service.insertOrder(orderVO);
 		orderVO.setDel_id("9");
 	
-		orderVO.setRes_menu_acount("9");
 		orderVO.setRes_menu_price("9");
 		log.info(orderVO);
 		

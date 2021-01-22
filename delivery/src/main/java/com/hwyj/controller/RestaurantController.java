@@ -55,6 +55,7 @@ import com.hwyj.mapper.RestaurantMapper;
 import com.hwyj.service.AllListDao;
 import com.hwyj.service.MemberService;
 import com.hwyj.service.RestaurantService;
+import com.mysql.cj.xdevapi.Result;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -235,9 +236,9 @@ public class RestaurantController {
 		rttr.getFlashAttributes();
 		List<ResVO> restList = new ArrayList<>();
 		restList = restaurantService.restList();
+
 		System.out.println(restList + "RestList@@@@@@@@@@@@@");
 		model.addAttribute("restList", restList);
-		restaurantService.read(res_code);
 		model.addAttribute("RES_CODE", restaurantService.menuread(res_code));
 		System.out.println("=======list====" + restList);
 		session.setAttribute("RES_CODE", res_code);
@@ -287,45 +288,40 @@ public class RestaurantController {
 	public ResMenuVO UpdateMenu(ResMenuVO menuvo, String res_code, ModelMap model, String res_menu_code,
 			RedirectAttributes rttr) {
 		rttr.getFlashAttributes();
-		ResMenuVO menuread = restaurantService.read(res_code);
-		System.out.println(menuvo.getRes_menu_code());
+		ResMenuVO read = restaurantService.read(menuvo.getRes_menu_code());
 		restaurantService.UpdateMenu(menuvo);
 
 		if (restaurantService.UpdateMenu(menuvo))
 			rttr.addFlashAttribute("res_menu_code", menuvo);
-		System.out.println(menuvo);
-		System.out.println(restaurantService.UpdateMenu(menuvo));
-		System.out.println(restaurantService.read(res_code));
-		System.out.println("================\n" + res_code + menuread);
 
-		return menuread;
-	} 
-		
-		
-	
-		
+		System.out.println("업뎃 read" + restaurantService.read(menuvo.getRes_menu_code()));
+		System.out.println("================\n" + res_menu_code + read + res_code);
+		System.out.println("update@@@" + restaurantService.UpdateMenu(menuvo));
+
+		return read;
+	}
 
 	@RequestMapping(value = "/deleteMenu", method = RequestMethod.GET)
-	public String deleteMenu(ResMenuVO menuvo, String res_menu_code, ModelMap model, String RES_CODE,
-			RedirectAttributes rttr) throws Exception {
+	@ResponseBody
+	public ResMenuVO deleteMenu(@RequestParam(value = "res_menu_code", required = false) String res_menu_code,
+			String RES_CODE, RedirectAttributes rttr, Model model, ResMenuVO menuvo) throws Exception {
 		rttr.getFlashAttributes();
-		res_menu_code = menuvo.getRes_menu_code();
-		RES_CODE = menuvo.getRES_CODE();
-		restaurantService.menuread(RES_CODE);
+		ResMenuVO read = restaurantService.read(menuvo.getRes_menu_code());
+		read.setRES_CODE(menuvo.getRES_CODE());
 		restaurantService.deleteMenu(menuvo);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("res_menu_code", res_menu_code);
-		map.put("RES_CODE", RES_CODE);
-
 		if (restaurantService.deleteMenu(menuvo))
-			rttr.addFlashAttribute("res_menu_code", map);
-		System.out.println(menuvo);
-		System.out.println(restaurantService.deleteMenu(menuvo));
-		System.out.println("RES_CODE" + RES_CODE + menuvo.getRES_CODE());
+			rttr.addFlashAttribute("res_menu_code", menuvo);
+		model.addAttribute("delete", menuvo);
 
-		return "redirect:/restaurant/menuList?RES_CODE=" + RES_CODE;
+		System.out.println("================\n" + res_menu_code + read + RES_CODE);
+
+		System.out.println(read);
+		System.out.println(restaurantService.deleteMenu(menuvo));
+	
+		return read;
 
 	}
+
 
 	@GetMapping("/deleteRes")
 	public void deleteRes() {
@@ -335,11 +331,12 @@ public class RestaurantController {
 	@RequestMapping(value = "menu_pop_up", method = RequestMethod.GET)
 	public String user_pop_up(@RequestParam("res_menu_code") String res_menu_code, Model model) {
 
-		ResMenuVO vo = restaurantService.read(res_menu_code);
-		model.addAttribute("vo", vo);
+		ResMenuVO menuvo = restaurantService.read(res_menu_code);
+		model.addAttribute("RES_CODE", menuvo);
+		System.out.println("@@@@@@@@@model@@@@@@@@" + model);
+		System.out.println("팝업" + restaurantService.read(res_menu_code));
 
 		return "restaurant/menu_pop_up";
 	}
 
-	
 }

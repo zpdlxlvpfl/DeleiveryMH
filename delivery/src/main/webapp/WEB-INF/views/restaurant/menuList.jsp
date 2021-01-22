@@ -34,9 +34,9 @@
 
 <script
 	src="../resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-	type="text/javascript"></script>
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 <script>
 	window.jQuery
@@ -47,11 +47,11 @@
 <script type="text/javascript">
 	var RES_CODE = $(RES_CODE);
 	var res_menu_code = $(res_menu_code);
-	
+
 	function menuList() {
 
 		restaurantService.menuList(function(menuList) {
-				$.ajax({
+			$.ajax({
 				url : "/restaurant/menuList",
 				type : "GET",
 				contentType : "application/json; charset=utf-8;",
@@ -75,46 +75,28 @@
 			});
 		});
 	}
-		
-		
-		function callFunction() {
 
-			restaurantService.deleteMenu(function(deleteMenu) {
-					$.ajax({
-					type : "GET",
-					contentType : "application/json; charset=utf-8;",
-					dataType : "json",
-					data : {
-						RES_CODE : "${RES_CODE}",
-						res_menu_code : "${res_menu_code}"
-					
-					},
-					url : "/restaurant/deleteMenu?res_menu_code="+res_menu_code
-					error : function(error) {
-						console.log("error " + data);
-					},
-					success : function(data) {
-						alert('success' + data);
-						console.log("success" + data);
-						   document.location.href="/restaurant/menuList?RES_CODE="+RES_CODE
-				});
-			});
+	function deleteMenu(res_menu_code) {
+		var is = confirm("Are you sure you want to delete this?");
+		var RES_CODE = $(RES_CODE);
+		var res_menu_code = $(res_menu_code);
+		success : function e(data) {
+		if (is) {
+			alert("RES_CODE=" + RES_CODE);
+			window.location.reload();
+			return true;
+		} else {
+			return false;
 		}
+		}
+
 	}
-		
-	    function updateMenu(res_menu_code){
-	        window.open(
-	            "/restaurant/menu_pop_up?res_menu_code="+res_menu_code,
-	            "user_pop_up_frame",
-	            "width=500, height = 500"
-	        );
-	    }
 
-	    
-	   
-
-
-	</script>
+	function updateMenu(res_menu_code) {
+		window.open("/restaurant/menu_pop_up?res_menu_code=" + res_menu_code,
+				"user_pop_up_frame", "width=500, height = 500");
+	}
+</script>
 
 </head>
 
@@ -160,30 +142,25 @@
 									<c:forEach items="${menuList}" var="RES_CODE" begin="0" end="0"
 										step="1" varStatus="i">
 										<input type="hidden" id="RES_CODE" name="RES_CODE"
-											value='<c:out value="${RES_CODE.res_menu_code }" />'>
-										
-										<h4 id=res_menu_name>
+											value='<c:out value="${RES_CODE.RES_CODE }" />'>
+
+										<h4 id="res_menu_name">
 											<c:out value=" ${RES_CODE.res_menu_name}">
 											</c:out>
 										</h4>
 										<div class="line-dec"></div>
-										<p id=res_menu_explan>
+										<p id="res_menu_explan">
 											<c:out value=" ${RES_CODE.res_menu_explan}" />
 										</p>
-										<span id=res_menu_price><c:out
+										<span id="res_menu_price"><c:out
 												value="${RES_CODE.res_menu_price}"></c:out> &#8361;</span>
 										<div class="primary-button">
 
-
-
-											<%-- <a id ="updateMenu" href="/restaurant/menu_pop_up?res_menu_code=${RES_CODE.res_menu_code}" 
-												onclick="return confirm('Are you sure you want to delete this ?');"> --%>
-
 											<a
 												href="javascript:window.open('/restaurant/menu_pop_up?res_menu_code=${RES_CODE.res_menu_code}',updateMenu,'width=500,height=500');"
-												id="updateMenu"> Update </a> <a
+												id="updateMenu" onclick="updateMenu"> Update </a> <a
 												href="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
-												onclick="return confirm('Are you sure you want to delete this ?');">
+												onclick="if(!confirm('Are you sure you want to delete this ?')){return false;};">
 												Delete</a>
 										</div>
 									</c:forEach>
@@ -202,6 +179,8 @@
 									<img src="../resources/img/1st-item.jpg" alt="">
 									<c:forEach items="${menuList}" var="RES_CODE" begin="1" end="1"
 										step="1" varStatus="i">
+										<input type="hidden" id="RES_CODE" name="RES_CODE"
+											value='<c:out value="${RES_CODE.RES_CODE }" />'>
 										<h4>
 											<c:out value=" ${RES_CODE.res_menu_name}">
 											</c:out>
@@ -215,7 +194,18 @@
 									</c:forEach>
 
 									<div class="primary-button">
-										<a href="cart">Update</a>&nbsp; &nbsp; <a href="cart">Delete</a>
+										<form id="deleteMenu"
+											action="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+											name="deleteMenu" method="get">
+
+											<a
+												href="javascript:window.open('/restaurant/menu_pop_up?res_menu_code=${RES_CODE.res_menu_code}',updateMenu,'width=500,height=500');"
+												id="updateMenu" onclick="updateMenu"> Update </a> <a
+												href="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+												onclick="if(!confirm('Are you sure you want to delete this ?')){return false;};">
+												Delete</a>
+
+										</form>
 									</div>
 								</div>
 							</div>
@@ -229,6 +219,8 @@
 									<img src="../resources/img/2nd-item.jpg" alt="" id="">
 									<c:forEach items="${menuList}" var="RES_CODE" begin="2" end="2"
 										step="1" varStatus="i">
+										<input type="hidden" id="RES_CODE" name="RES_CODE"
+											value='<c:out value="${RES_CODE.RES_CODE }" />'>
 
 										<h4>
 											<c:out value=" ${RES_CODE.res_menu_name}">
@@ -242,7 +234,18 @@
 											&#8361;</span>
 									</c:forEach>
 									<div class="primary-button">
-										<a href="cart">Update</a>&nbsp; &nbsp; <a href="cart">Delete</a>
+										<form id="deleteMenu"
+											action="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+											name="deleteMenu" method="get">
+
+											<a
+												href="javascript:window.open('/restaurant/menu_pop_up?res_menu_code=${RES_CODE.res_menu_code}',updateMenu,'width=500,height=500');"
+												id="updateMenu" onclick="updateMenu"> Update </a> <a
+												href="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+												onclick="return confirm('Are you sure you want to delete this ?');">
+												Delete</a>
+
+										</form>
 									</div>
 								</div>
 							</div>
@@ -256,6 +259,8 @@
 									<img src="../resources/img/3rd-item.jpg" alt="" id="">
 									<c:forEach items="${menuList}" var="RES_CODE" begin="3" end="3"
 										step="1" varStatus="i">
+										<input type="hidden" id="RES_CODE" name="RES_CODE"
+											value='<c:out value="${RES_CODE.RES_CODE }" />'>
 										<h4>
 											<c:out value=" ${RES_CODE.res_menu_name}">
 											</c:out>
@@ -268,7 +273,18 @@
 											&#8361;</span>
 									</c:forEach>
 									<div class="primary-button">
-										<a href="cart">Update</a>&nbsp; &nbsp; <a href="cart">Delete</a>
+										<form id="deleteMenu"
+											action="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+											name="deleteMenu" method="get">
+
+											<a
+												href="javascript:window.open('/restaurant/menu_pop_up?res_menu_code=${RES_CODE.res_menu_code}',updateMenu,'width=500,height=500');"
+												id="updateMenu" onclick="updateMenu"> Update </a> <a
+												href="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+												onclick="return confirm('Are you sure you want to delete this ?');">
+												Delete</a>
+
+										</form>
 									</div>
 								</div>
 							</div>
@@ -282,6 +298,8 @@
 									<img src="../resources/img/4th-item.jpg" alt="">
 									<c:forEach items="${menuList}" var="RES_CODE" begin="4" end="4"
 										step="1" varStatus="i">
+										<input type="hidden" id="RES_CODE" name="RES_CODE"
+											value='<c:out value="${RES_CODE.RES_CODE }" />'>
 										<h4>
 											<c:out value=" ${RES_CODE.res_menu_name}">
 											</c:out>
@@ -294,7 +312,18 @@
 											&#8361;</span>
 									</c:forEach>
 									<div class="primary-button">
-										<a href="cart">Update</a>&nbsp; &nbsp; <a href="cart">Delete</a>
+										<form id="deleteMenu"
+											action="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+											name="deleteMenu" method="get">
+
+											<a
+												href="javascript:window.open('/restaurant/menu_pop_up?res_menu_code=${RES_CODE.res_menu_code}',updateMenu,'width=500,height=500');"
+												id="updateMenu" onclick="updateMenu"> Update </a> <a
+												href="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+												onclick="return confirm('Are you sure you want to delete this ?');">
+												Delete</a>
+
+										</form>
 									</div>
 								</div>
 							</div>
@@ -309,6 +338,8 @@
 									<img src="../resources/img/5th-item.jpg" alt="" id="">
 									<c:forEach items="${menuList}" var="RES_CODE" begin="5" end="5"
 										step="1" varStatus="i">
+										<input type="hidden" id="RES_CODE" name="RES_CODE"
+											value='<c:out value="${RES_CODE.RES_CODE }" />'>
 										<h4>
 											<c:out value=" ${RES_CODE.res_menu_name}">
 											</c:out>
@@ -321,7 +352,18 @@
 											&#8361;</span>
 									</c:forEach>
 									<div class="primary-button">
-										<a href="cart">Update</a>&nbsp; &nbsp; <a href="cart">Delete</a>
+										<form id="deleteMenu"
+											action="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+											name="deleteMenu" method="get">
+
+											<a
+												href="javascript:window.open('/restaurant/menu_pop_up?res_menu_code=${RES_CODE.res_menu_code}',updateMenu,'width=500,height=500');"
+												id="updateMenu" onclick="updateMenu"> Update </a> <a
+												href="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+												onclick="return confirm('Are you sure you want to delete this ?');">
+												Delete</a>
+
+										</form>
 									</div>
 								</div>
 							</div>
@@ -335,6 +377,8 @@
 									<img src="../resources/img/6th-item.jpg" alt="" id="">
 									<c:forEach items="${menuList}" var="RES_CODE" begin="6" end="6"
 										step="1" varStatus="i">
+										<input type="hidden" id="RES_CODE" name="RES_CODE"
+											value='<c:out value="${RES_CODE.RES_CODE }" />'>
 										<h4>
 											<c:out value=" ${RES_CODE.res_menu_name}">
 											</c:out>
@@ -347,7 +391,19 @@
 											&#8361;</span>
 									</c:forEach>
 									<div class="primary-button">
-										<a href="cart">Update</a>&nbsp; &nbsp; <a href="cart">Delete</a>
+
+										<form id="deleteMenu"
+											action="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+											name="deleteMenu" method="get">
+
+											<a
+												href="javascript:window.open('/restaurant/menu_pop_up?res_menu_code=${RES_CODE.res_menu_code}',updateMenu,'width=500,height=500');"
+												id="updateMenu" onclick="updateMenu"> Update </a> <a
+												href="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
+												onclick="return confirm('Are you sure you want to delete this ?');">
+												Delete</a>
+
+										</form>
 									</div>
 								</div>
 							</div>

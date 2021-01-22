@@ -11,11 +11,6 @@ public interface CartService {
 	//장바구니 담기(이미 다른 매장의 메뉴가 담겨있을 경우에는 담지 못한다 + 동일한 메뉴코드를 담으려고 하면 수량을 합쳐준다)
 	public boolean ShoppingCart(CartVO cartVO);
 	
-//	//장바구니 넣기(한번에 메뉴 여러개) - 메뉴 종류 몇개 담았는지 리턴??? <-이거 필요없을 것 같으면 나중에 void로 변경
-//	public int ShoppingCart(CartVOList cartVOList);
-	
-	
-	
 	//장바구니 보기
 	public List<CartVO> cartList(String id);
 	

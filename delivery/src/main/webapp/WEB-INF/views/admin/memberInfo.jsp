@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../includes/header.jsp" %>
-
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <div class="container">
@@ -11,7 +10,6 @@
         <div class="row">
           <div class="col-lg-8 col-md-7 col-sm-6">
             <h2>회원정보</h2>
-            <p class="lead">#####</p>
           </div>
           <div class="col-lg-4 col-md-5 col-sm-6">
           </div>

@@ -97,10 +97,14 @@
 										</p>
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
+											<input type="hidden" value='<c:out value="${RES_CODE.RES_CODE}"/>'>
 										</c:forEach>
 									
 									<div class="primary-button">
-										<a href="cart">cart</a>
+										<a class="btn" id="cartClick">cart</a>
 									</div>
 								</div>
 							</div>
@@ -125,10 +129,13 @@
 										</p>
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 										</c:forEach>
 									
 									<div class="primary-button">
-										<a href="cart">cart</a>
+										<a class="btn" id="cartClick">cart</a>
 									</div>
 								</div>
 							</div>
@@ -152,9 +159,12 @@
 										</p>
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 									</c:forEach>
 									<div class="primary-button">
-										<a href="cart">cart</a>
+										<a class="btn" id="cartClick">cart</a>
 									</div>
 								</div>
 							</div>
@@ -178,9 +188,12 @@
 										</p>
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 									</c:forEach>
 									<div class="primary-button">
-										<a href="cart">cart</a>
+										<a class="btn" id="cartClick">cart</a>
 									</div>
 								</div>
 							</div>
@@ -204,9 +217,12 @@
 										</p>
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 									</c:forEach>
 									<div class="primary-button">
-										<a href="cart">cart</a>
+										<a class="btn" id="cartClick">cart</a>
 									</div>
 								</div>
 							</div>
@@ -231,9 +247,12 @@
 										</p>
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 									</c:forEach>
 									<div class="primary-button">
-										<a href="cart">cart</a>
+										<a class="btn" id="cartClick">cart</a>
 									</div>
 								</div>
 							</div>
@@ -257,9 +276,12 @@
 										</p>
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 									</c:forEach>
 									<div class="primary-button">
-										<a href="cart">cart</a>
+										<a class="btn" id="cartClick">cart</a>
 									</div>
 								</div>
 							</div>
@@ -425,15 +447,61 @@
 	
 	
 <script>
-//리뷰 관련
+//리뷰 관련 + 장바구니 담기
 $(document).ready(function(){
+	//~~~장바구니~~~
+	var cartService=(function(){
+		//장바구니 담기
+		function put(menu, callback, error){
+			$.ajax({
+				type : "post",
+				url : "/cart/insert",
+				data : JSON.stringify(menu),
+				beforeSend : function(xhr)
+				{ xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}"); },
+				contentType : "application/json; charset=utf-8",
+				success : function(result, status, xhr){
+					alert("장바구니에 메뉴를 추가했습니다.");
+					if(callback){
+						callback(result);
+					}
+				},
+				error : function(xhr, status, er){	
+					alert("장바구니에는 같은 가게의 메뉴만 담을 수 있습니다. 장바구니를 비워주세요");
+					if(error){
+						error(er);
+					}
+				}
+			})
+		}
+		return {
+			put : put
+		}
+	})();
 	
+
+	$(document).on("click","#cartClick",function(){
+		
+		if($("#user_id").val()!=undefined){ //로그인한 상태일 때만 장바구니 담기 가능				
+			var menu={ res_code:res_codeValue,
+					   res_menu_code:$(this).parent().parent().find("#rRes_menu_code").val(),
+					   amount:$(this).parent().parent().find("#amount").val() };
+		
+			cartService.put(menu,function(result){
+				
+			});	
+		}else{ //로그인하지 않고 cart 눌렀을 때 경고창 띄우기
+			alert("로그인 후 장바구니를 담을 수 있습니다.");	
+		}			
+	});
+	
+	
+	//~~~리뷰~~~
 	var reviewService=(function() {
 		
 		//리뷰보기
 		function getList(res_code, callback, error){			
-			//var res_code=param.res_code;
-			console.log("뭐임"+res_code);
+			
 			$.getJSON("/review/reviewList/" + res_code + ".json",
 				function(data){
 					if(callback){
@@ -522,9 +590,8 @@ $(document).ready(function(){
 	})();
 	
 	
-	var res_codeValue = "res_01";
+	var res_codeValue = "${menuList[0].RES_CODE}";
 	var reviewF=$("#reviewF");
-	console.log("뭐냐고"+reviewF);
 	console.log("어디가게"+res_codeValue);
 	showList(res_codeValue);
 	//리뷰 목록 불러오기

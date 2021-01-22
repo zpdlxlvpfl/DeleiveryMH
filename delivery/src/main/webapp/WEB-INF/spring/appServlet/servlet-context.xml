@@ -32,6 +32,8 @@
 
 	<context:component-scan
 		base-package="com.hwyj.controller" />
+		<context:component-scan
+		base-package="com.hwyj.exception" />
 
 	<security:global-method-security
 		pre-post-annotations="enabled" secured-annotations="enabled" />

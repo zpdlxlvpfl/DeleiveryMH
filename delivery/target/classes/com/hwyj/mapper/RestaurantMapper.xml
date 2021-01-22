@@ -77,8 +77,10 @@
 		</select>
 	
  	<select id="read" resultType="com.hwyj.domain.ResMenuVO">
- 	select res_code,res_menu_code,res_menu_name,res_menu_price,res_menu_explan
-	from res_menu where res_menu_code=#{res_menu_code}
+ 	select res_menu.res_code,res_menu_code,res_menu_name,res_menu_price,res_menu_explan
+	from res_menu 
+	right outer join res on res.res_code=res_menu.res_code 
+	where res_menu_code=#{res_menu_code}
 	</select>
 	 
 	
@@ -161,14 +163,14 @@
 	</insert>
 	
 			<!-- 수정 -->
-	<update id="UpdateMenu">
+	<update id="UpdateMenu" parameterType="com.hwyj.domain.ResMenuVO">
 	UPDATE testdb.res_menu
 	SET 
-	res_menu_code=#{res_menu_code},
+	res_menu_name=#{res_menu_name},
 	res_menu_explan=#{res_menu_explan},
 	res_menu_price=#{res_menu_price}
 	WHERE 
-	(RES_CODE=#{RES_CODE})
+	(res_menu_code=#{res_menu_code})
 	</update>
 	
 	<!-- 삭제 -->

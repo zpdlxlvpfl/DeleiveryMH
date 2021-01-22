@@ -47,56 +47,62 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	type="text/javascript"></script>
 	
-	
-	
+	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 
+</head>
 
 
 <body>
+
+
 <div class="parallax-content contact-content " id="contact-us">
 <div class="contact-form">
                <div class="form-group">
                
                <div style="margin: 0 auto; width: 300px;">
     	<form id = "frm" method="get">
-        <label> <font color="white"> food Name : </font> </label><input name = "res_menu_name" type = "text" value = "${vo.res_menu_code}">
-        <label> <font color="white"> food Name : </font> </label><input name = "res_menu_name" type = "text" value = "${vo.res_menu_name}">
+    	<input type="hidden" id="res_menu_code" name="res_menu_code"
+									value='<c:out value="${RES_CODE.res_menu_code }" />'> 
+        <label> <font color="white"> food Name : </font> </label><input name = "res_menu_name" type = "text" value = "${RES_CODE.res_menu_name}">
         <br>
-        <label><font color="white"> food explan : </font> </label> <input name = "res_menu_explan" type = "text" value = "${vo.res_menu_explan}">
+        <label><font color="white"> food explan : </font> </label> <input name = "res_menu_explan" type = "text" value = "${RES_CODE.res_menu_explan}">
         <br>
-        <label><font color="white"> food price : </font> </label><input name = "res_menu_price" type = "text" value = "${vo.res_menu_price}">
-    </form>
+        <label><font color="white"> food price : </font> </label><input name = "res_menu_price" type = "text" value = "${RES_CODE.res_menu_price}">
+  
     <div class="primary-button">
     <button type="button" id="update_btn" class="btn" name="update_btn"
-   style="font-family: inherit; color:white; background-color:#FE9A2E; width: 50px; height: 50px;" >Update</button>
-</div>
+   style="font-family: inherit; color:white; background-color:#FE9A2E; width: 100px; height: 30px;" >Update</button>
+</div>  </form>
 </div>
 </div>
 </div>
 	</div>
 	
-<script>
-  $("#update_btn").click(function(){
-	        var frm = $("#frm").serialize(); 
-	        var res_menu_code = $("#res_menu_code").val(); 
-	        $.ajax({
-	            type : "get", 
-	            url : "/restaurant/updateMenu", 
-	            data : frm, 
-	            async : false, 
-	            dataType : "json", 
-	            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-	            success : function(data){
-	                $(opener.document).find("<h4 id=" + res_menu_name + ">").text(data.res_menu_name); 
-	                $(opener.document).find("<p id=" + res_menu_explan + ">").text(data.res_menu_explan);
-	                $(opener.document).find("<span id=" + res_menu_price + ">").text(data.res_menu_price); 
-	                self.close(); 
-	            },
-	            error: function(error){
-	            	console.log("error" + data);
-	            }
-	        });
-	    });
+	<script type="text/javascript">
+    
+    $("#update_btn").click(function(){
+        var frm = $("#frm").serialize(); 
+        var RES_CODE = $("#RES_CODE").val();
+        $.ajax({
+            type : "get", 
+            url : "/restaurant/updateMenu", 
+            data : frm, 
+            async : false, 
+            dataType : "json", 
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+            success : function(data){
+                alert('success' + data);
+            	window.location.reload();
+                self.close();
+            }
+        });
+    });
+    
+    
+   
+    
+  
+
 
   </script>
 
@@ -123,7 +129,6 @@
 		</div>
 	</footer>
 </body>
-</html>
 </html>
 
 

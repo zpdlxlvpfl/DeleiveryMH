@@ -13,12 +13,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hwyj.domain.CartVO;
+import com.hwyj.domain.ReviewVO;
 import com.hwyj.service.CartService;
 
 import lombok.AllArgsConstructor;
@@ -31,6 +33,21 @@ import lombok.extern.log4j.Log4j;
 public class CartRestController {
 	
 	private CartService cartService;
+	
+	
+	//장바구니 담기(이미 다른 매장의 메뉴가 담겨있을 경우에는 담지 못함 + 동일한 메뉴코드를 담으려고 하면 수량을 합쳐줌)
+	@PostMapping(value="/insert", consumes = "application/json", produces = { MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity<String> registerReview(@RequestBody CartVO cartVO, Authentication authentication){
+		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		cartVO.setId(userDetails.getUsername()); // 현재 로그인한 사용자 id 셋팅
+		
+		// 이미 다른 매장 메뉴가 담겨있을 경우 등록 안되고 메세지 띄우기
+		boolean insert=cartService.ShoppingCart(cartVO);
+		
+		return insert==true ? new ResponseEntity<>("success", HttpStatus.OK)
+							: new ResponseEntity<>("f",HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	//장바구니페이지 (목록)
 	@GetMapping(value="/cartList", produces= { MediaType.APPLICATION_JSON_UTF8_VALUE })

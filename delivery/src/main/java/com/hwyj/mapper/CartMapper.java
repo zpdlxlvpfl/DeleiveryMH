@@ -15,12 +15,7 @@ public interface CartMapper {
 	
 	//넣었던 메뉴와 똑같은 메뉴를 담으려고 할 때 수량 합쳐주기
 	public int sumAmount(CartVO cartVO);
-	
-//	//장바구니 넣기 (메뉴 여러개)
-//	public int insertCart(List<CartVO> cartVOList);
-	
-	
-	
+		
 	//장바구니 목록보기
 	public List<CartVO> cartList(String id);
 	
