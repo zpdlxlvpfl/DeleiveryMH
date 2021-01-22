@@ -98,7 +98,7 @@
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
 											<br />
-											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="amount" type="number" name="amount" min="0" max="20" value="1">
 											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 											<input type="hidden" value='<c:out value="${RES_CODE.RES_CODE}"/>'>
 										</c:forEach>
@@ -130,7 +130,7 @@
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
 											<br />
-											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="amount" type="number" name="amount" min="0" max="20" value="1">
 											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 										</c:forEach>
 									
@@ -160,7 +160,7 @@
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
 											<br />
-											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="amount" type="number" name="amount" min="0" max="20" value="1">
 											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 									</c:forEach>
 									<div class="primary-button">
@@ -189,7 +189,7 @@
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
 											<br />
-											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="amount" type="number" name="amount" min="0" max="20" value="1">
 											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 									</c:forEach>
 									<div class="primary-button">
@@ -218,7 +218,7 @@
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
 											<br />
-											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="amount" type="number" name="amount" min="0" max="20" value="1">
 											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 									</c:forEach>
 									<div class="primary-button">
@@ -248,7 +248,7 @@
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
 											<br />
-											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="amount" type="number" name="amount" min="0" max="20" value="1">
 											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 									</c:forEach>
 									<div class="primary-button">
@@ -277,7 +277,7 @@
 										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
 											&#8361;</span>
 											<br />
-											<input id="amount" type="number" name="amount" min="0" max="20">
+											<input id="amount" type="number" name="amount" min="0" max="20" value="1">
 											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
 									</c:forEach>
 									<div class="primary-button">

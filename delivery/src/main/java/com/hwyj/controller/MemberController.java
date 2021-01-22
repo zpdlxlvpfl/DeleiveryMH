@@ -1,13 +1,8 @@
 package com.hwyj.controller;
 
-import javax.inject.Inject;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hwyj.domain.CartVO;
 import com.hwyj.domain.CustomerVO;
-import com.hwyj.security.CustomUserDetailsService;
 import com.hwyj.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +20,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/member/*")
 @AllArgsConstructor
+@PreAuthorize("isAuthenticated()") //로그인한 사용자들만 접근가능
 public class MemberController {
 	
 	private MemberService memberService;
