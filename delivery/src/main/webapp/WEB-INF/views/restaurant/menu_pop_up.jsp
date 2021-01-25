@@ -41,70 +41,113 @@
 <script type="text/javascript">
 	window.jQuery
 			|| document
-					.write('<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
+					.write(
+							'<script src="../resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
 </script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	type="text/javascript"></script>
-	
-	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 
 </head>
 
 
 <body>
 
-
-<div class="parallax-content contact-content " id="contact-us">
-<div class="contact-form">
-               <div class="form-group">
-               
-               <div style="margin: 0 auto; width: 300px;">
-    	<form id = "frm" method="get">
-    	<input type="hidden" id="res_menu_code" name="res_menu_code"
-									value='<c:out value="${RES_CODE.res_menu_code }" />'> 
-        <label> <font color="white"> food Name : </font> </label><input name = "res_menu_name" type = "text" value = "${RES_CODE.res_menu_name}">
-        <br>
-        <label><font color="white"> food explan : </font> </label> <input name = "res_menu_explan" type = "text" value = "${RES_CODE.res_menu_explan}">
-        <br>
-        <label><font color="white"> food price : </font> </label><input name = "res_menu_price" type = "text" value = "${RES_CODE.res_menu_price}">
-  
-    <div class="primary-button">
-    <button type="button" id="update_btn" class="btn" name="update_btn"
-   style="font-family: inherit; color:white; background-color:#FE9A2E; width: 100px; height: 30px;" >Update</button>
-</div>  </form>
-</div>
-</div>
-</div>
+	<div class="fixed-side-navbar">
+		<input type="hidden" id="RES_CODE" name="RES_CODE"
+			value='<c:out value="${RES_CODE.RES_CODE }" />'>
+		<ul class="nav flex-column">
+			<li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="javascript:window.open('/restaurant/res_pop_up?RES_CODE=${RES_CODE.RES_CODE}')"
+				id="updateRes" onclick="updateRes"><span>updateRes</span></a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="/restaurant/deleteRes?RES_CODE=${RES_CODE.RES_CODE}"
+				onclick="if(!confirm('Are you sure you want to delete this ?')){return false;};"><span>DELETE
+						RES</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
+		</ul>
 	</div>
-	
+
+
+	<div class="parallax-content contact-content " id="contact-us">
+		<div class="contact-form">
+			<div class="form-group">
+
+				<div style="margin: 0 auto; width: 300px;">
+					<form id="frm" method="get">
+						<input type="hidden" id="res_menu_code" name="res_menu_code"
+							value='<c:out value="${RES_CODE.res_menu_code }" />'> <label>
+							<font color="white"> food Name : </font>
+						</label><input name="res_menu_name" type="text"
+							value="${RES_CODE.res_menu_name}"> <br> <label><font
+							color="white"> food explan : </font> </label> <input
+							name="res_menu_explan" type="text"
+							value="${RES_CODE.res_menu_explan}"> <br> <label><font
+							color="white"> food price : </font> </label><input name="res_menu_price"
+							type="text" value="${RES_CODE.res_menu_price}">
+
+						<div class="primary-button">
+							<button type="button" id="update_btn" class="btn"
+								name="update_btn"
+								style="font-family: inherit; color: white; background-color: #FE9A2E; width: 100px; height: 30px;">Update</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script type="text/javascript">
-    
-    $("#update_btn").click(function(){
-        var frm = $("#frm").serialize(); 
-        var RES_CODE = $("#RES_CODE").val();
-        $.ajax({
-            type : "get", 
-            url : "/restaurant/updateMenu", 
-            data : frm, 
-            async : false, 
-            dataType : "json", 
-            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-            success : function(data){
-                alert('success' + data);
-            	window.location.reload();
-                self.close();
-            }
-        });
-    });
-    
-    
-   
-    
-  
+	
+	function deleteRes(RES_CODE) {
+		var isa = confirm("Are you sure you want to delete this?");
+		var RES_CODE = $(RES_CODE);
+		success : function a(data) {
+		if (isa) {
+			alert("RES_CODE=" + RES_CODE);
+			window.location.reload();
+			return true;
+		} else {
+			return false;
+		}
+		}
 
+	}
 
-  </script>
+	function updateRes(RES_CODE) {
+		window.open("/restaurant/res_pop_up?res_code=" + res_code,
+				"rest_pop_up_frame", "width=500, height = 500");
+	}
+	
+	
+	
+	
+		$("#update_btn")
+				.click(
+						function() {
+							var frm = $("#frm").serialize();
+							var RES_CODE = $("#RES_CODE").val();
+							$
+									.ajax({
+										type : "get",
+										url : "/restaurant/updateMenu",
+										data : frm,
+										async : false,
+										dataType : "json",
+										contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+										success : function(data) {
+											alert('success' + data);
+											window.location.reload();
+											self.close();
+										}
+									});
+						});
+	</script>
 
 
 

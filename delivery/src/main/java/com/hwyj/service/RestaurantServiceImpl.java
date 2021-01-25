@@ -77,35 +77,29 @@ public class RestaurantServiceImpl implements RestaurantService {
 		log.info("메장등록@@@@@@@@" + menuvo);
 	}
 	
+	
 	@Override
-	public void rescodeUpDate() {
-		restaurantMapper.rescodeUpDate();
-		System.out.println("@@@@update start@@@@@@");
+	public ResVO ResInfo(String res_code) throws Exception {
+		log.info(restaurantMapper.ResInfo(res_code));
+		return restaurantMapper.ResInfo(res_code);
+	}
+	
+	
+	@Override
+	public boolean UpdateRes(ResVO resvo) {
+		return restaurantMapper.UpdateRes(resvo)==1;
+	}
+	
+	
+	@Override
+	public boolean deleteRes(ResVO resvo) {
+		return restaurantMapper.deleteRes(resvo)==1;
 		
 	}
 	
 	@Override
-	public List<ResVO> ResInfo() throws Exception {
-		log.info(restaurantMapper.ResInfo());
-		return restaurantMapper.ResInfo();
-	}
-	
-	
-	@Override
-	public void UpdateRes(ResVO resvo) {
-		restaurantMapper.UpdateRes(resvo);
-	}
-	
-	
-	@Override
-	public void deleteRes(ResVO resvo) {
-		restaurantMapper.deleteRes(resvo);
-		
-	}
-	
-	@Override
-	public List<String> userorder () {
-		return restaurantMapper.userorder();
+	public List<String> getorderList (String id) {
+		return restaurantMapper.getorderList(id);
 	}
 	
 	

@@ -159,7 +159,25 @@ public class CartController {
 	}
 
 	@GetMapping("/myOrderList")
-	public void myOrderList() {
+	@RequestMapping(value = "/myOrderList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public List<String> myOrderList(ModelMap model, RedirectAttributes rttr, HttpSession session, Authentication authentication, CartVO vo) throws Exception {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		String id = userDetails.getUsername();
+		// List<String> cartList = (List) session.getAttribute("cartList");
+		rttr.getFlashAttributes();
+		HashMap<String, Object> HashMapList = new HashMap<String, Object>();
+		List<String> OrderList = new ArrayList<String>();
+		UtilController util = new UtilController();
+		OrderList = cartService.getList(id);
+
+		// HashMapList.put("ID", userDetails.getUsername());
+		HashMapList.put("OrderList", OrderList);
+		model.addAttribute("OrderList", OrderList);
+		rttr.addFlashAttribute("OrderList", OrderList);
+		int a = (int) session.getAttribute("cart_no");
+		System.out.println("cart_no" + a + vo);
+		System.out.println("==22====OrderList=====\n" + OrderList);
+		return OrderList;
 
 	}
 

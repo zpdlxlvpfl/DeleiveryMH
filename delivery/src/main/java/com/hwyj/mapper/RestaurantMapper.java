@@ -29,11 +29,10 @@ public interface RestaurantMapper {
 	
 	public HashMap<String, Object> getresCount();
 	
-	public List<ResVO> ResInfo() throws Exception;
+	public ResVO ResInfo(String res_code) throws Exception;
 	
 	//주문정보
-	
-	public List<String> userorder ();
+	public List<String> getorderList (String id);
 	
 	//식당 리뷰 보기
 	
@@ -45,11 +44,10 @@ public interface RestaurantMapper {
 	
 	public void insertmenu (ResMenuVO menuvo); //메뉴등록
 
-	public void rescodeUpDate();
 	
-	public void UpdateRes (ResVO resvo); 
+	public int UpdateRes(ResVO resvo);
 	
-	public void deleteRes (ResVO resvo); 
+	public int deleteRes (ResVO resvo);
 	
 	public int UpdateMenu (ResMenuVO menuvo);
 	

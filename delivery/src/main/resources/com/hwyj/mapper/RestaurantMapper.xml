@@ -38,7 +38,7 @@
 	
 		
 <!--  메뉴보기 (식당이름, 메뉴이름, 메뉴설명, 메뉴가격) -->
-	<select id="menuList"  parameterType="map" resultType="String">	
+	<select id="menuList"   parameterType="map" resultType="com.hwyj.domain.ResMenuVO">	
 	<!--   SELECT res_menu.res_code,
  			   res_menu.res_menu_code,
 			   res_menu.res_menu_name,
@@ -56,8 +56,6 @@
 		FROM testdb.res_menu
 		right JOIN res ON res_menu.res_code = res.res_code
 		WHERE res_menu.res_code=#{res_code}
-		
-		
 	</select>
 	
 	
@@ -83,6 +81,11 @@
 	where res_menu_code=#{res_menu_code}
 	</select>
 	 
+	 
+	 <select id="ResInfo" resultType="com.hwyj.domain.ResVO">
+ 	select * from res where res_code=#{res_code}
+	</select>
+	 
 	
 	<select id="menuread" parameterType="map" resultType="com.hwyj.domain.ResMenuVO">	
 		    select  res_code ,
@@ -99,6 +102,29 @@
 		select res_menu_name,res_menu_price from testdb.res_menu where res_menu_code=#{res_menu_code}
 	</select>
 	
+		
+		<select id="getorderList">
+		select 
+		cart_no,
+		c.id,
+		menu1.res_menu_code,
+		menu1.res_menu_price*c.amount as sum,
+		menu1.res_code,
+        menu1.res_menu_name,
+     
+		member.m_name,
+		member.address,
+		member.tel
+		from testdb.cart as c
+
+		left outer join testdb.res_menu as menu1 on
+		c.res_menu_code=menu1.res_menu_code
+
+		left outer join testdb.member on
+		c.id=testdb.member.id
+        
+		where c.id=#{id} and payment='Y'
+	</select>
 		
 	
 	<!-- 이미지저장 테스트 -->
@@ -119,7 +145,7 @@
 	</insert>
 	
 		<!-- 수정 -->
-	<update id="UpdateRes">
+	<update id="UpdateRes" parameterType="com.hwyj.domain.ResVO">
 	UPDATE testdb.res
 	SET 
 	RES_NAME=#{RES_NAME},
@@ -130,19 +156,10 @@
 	</update>
 	
 	<!-- 삭제 -->
-	<delete id="deleteRes">
+	<delete id="deleteRes" parameterType="com.hwyj.domain.ResVO">
 		delete from testdb.res where RES_CODE=#{RES_CODE}
 	</delete>
-
 	
-		<select id="ResInfo" resultType="map">
-		SELECT *
-		FROM res
-	</select>
-	
-	<select id="userorder">
-	select * from cart where payment=#{Y}, cart_no=#{cart_no}
-	</select>
 	
 		<!-- 메뉴 등록 -->
 	<insert id="insertmenu" parameterType="com.hwyj.domain.ResMenuVO">
@@ -158,8 +175,6 @@
 		#{res_menu_name},
 		#{res_menu_explan},
 		#{res_menu_price}) 
-		
-
 	</insert>
 	
 			<!-- 수정 -->

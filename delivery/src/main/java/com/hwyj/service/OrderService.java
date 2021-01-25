@@ -8,17 +8,11 @@ import com.hwyj.domain.OrderVO;
 public interface OrderService {
 
 	// 주문내역
-	public List<OrderVO> orderList() throws Exception;
+	public List<String> orderList(String id) throws Exception;
 
-	// 등록
-	public void insertOrder(OrderVO orderVO);
-	
+	public List<String> read(String res_menu_code);
 
-	public void updateOrderResCode(OrderVO orderVO);
 
-	public List<OrderVO> read(String order_no);
-
-	public void updateOrder(String order_no);
 
 
 

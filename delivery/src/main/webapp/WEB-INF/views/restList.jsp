@@ -51,7 +51,7 @@
 					.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
 </script> -->
 
-<!-- 
+
 <script>
 	var restList = $("#restList");
 	var html = '';
@@ -121,7 +121,7 @@
 							});
 				});
 	};
-</script> -->
+</script>
 
 </head>
 <body>

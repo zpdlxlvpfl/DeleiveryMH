@@ -5,10 +5,12 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
@@ -27,30 +29,35 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
-	
+
+
 
 	<context:component-scan
 		base-package="com.hwyj.controller" />
-		<context:component-scan
+	<context:component-scan
 		base-package="com.hwyj.exception" />
 
 	<security:global-method-security
 		pre-post-annotations="enabled" secured-annotations="enabled" />
 
 	<!-- ㅇㅣㅁㅣㅈㅣ -->
-	<!-- 파일 업로드 객체 설정 --> 
-	<beans:bean id="multipartResolver" 
-	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-	 <beans:property name="maxUploadSize" value="10485760"/><!-- 10MB --> </beans:bean>
+	<!-- 파일 업로드 객체 설정 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760" /><!-- 
+			10MB -->
+	</beans:bean>
 
 
-		<beans:bean id="uploadPath" class="java.lang.String">	
-			<beans:constructor-arg
-				value="D:\DEV\sts_workspace\delivery\src\main\webapp\resources\profileImage">
-			</beans:constructor-arg>
+
+
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg
+			value="D:\DEV\sts_workspace\delivery\src\main\webapp\resources\profileImage">
+		</beans:constructor-arg>
 
 	</beans:bean>
+
 
 
 </beans:beans>

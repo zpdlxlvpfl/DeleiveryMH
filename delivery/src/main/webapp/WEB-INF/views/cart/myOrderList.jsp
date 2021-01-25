@@ -82,9 +82,10 @@
 							<div class="col-md-12">
 								<h4>주문 성공</h4>
 								<div class="line-dec"></div>
+							
 								<c:forEach items="${OrderList}" var="OrderList">
-									<input type="hidden" id="id" name="id"
-										value='<c:out value="${OrderList.id }" />'>
+									<input type="hidden" id="cart_no" name="cart_no"
+										value='<c:out value="${OrderList.cart_no }" />'>
 										
 									<td>주문번호: <c:out value="${OrderList.cart_no }" /></td> <br>
 									<td>아이디: <c:out value="${OrderList.id }" /></td><br>

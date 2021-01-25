@@ -47,15 +47,23 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
-<dependency>
 
-		<groupId>org.springframework</groupId>
 
-		<artifactId>spring-websocket</artifactId>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.5</version>
+		</dependency>
+		
+		
 
-		<version>${org.springframework-version}</version>
-
-</dependency>
 
 
 		<!-- 스프링에서 테스트를 위한 spring-test -->
@@ -122,6 +130,12 @@
 			<version>8.0.18</version>
 		</dependency>
 
+
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.4</version>
+</dependency> 
 		<!-- 추가 라이브러리 끝 -->
 
 

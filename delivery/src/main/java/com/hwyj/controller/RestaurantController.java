@@ -1,6 +1,6 @@
 package com.hwyj.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request; 
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -52,7 +52,6 @@ import com.hwyj.domain.ResVO;
 import com.hwyj.domain.ReviewVO;
 import com.hwyj.mapper.MemberMapper;
 import com.hwyj.mapper.RestaurantMapper;
-import com.hwyj.service.AllListDao;
 import com.hwyj.service.MemberService;
 import com.hwyj.service.RestaurantService;
 import com.mysql.cj.xdevapi.Result;
@@ -66,7 +65,6 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/restaurant/*")
 @AllArgsConstructor
 @PreAuthorize("hasAnyRole('ROLE_RES')")
-
 public class RestaurantController {
 
 	@Autowired
@@ -81,16 +79,12 @@ public class RestaurantController {
 	}
 
 	@GetMapping(value = "/test", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public String test(ModelMap model, String RES_CODE) throws Exception {
+	public void test(ModelMap model, String RES_CODE) throws Exception {
 		List<ResVO> list = restaurantService.restList();
 		System.out.println(list + "RestList@@@@@@@@@@@@@");
 		model.addAttribute("RestList", list);
 		restaurantService.read(RES_CODE);
 
-		for (ResVO temp : list) {
-			System.out.println(list);
-		}
-		return "/restaurant/test";
 	}
 
 	@GetMapping("/orderInfo")
@@ -99,6 +93,11 @@ public class RestaurantController {
 		String id = userDetails.getUsername();
 		model.addAttribute("OrderList", model);
 		return "orderInfo";
+
+	}
+
+	@GetMapping("/getOrderList")
+	public void getOrderList() {
 
 	}
 
@@ -122,7 +121,7 @@ public class RestaurantController {
 	 * return "/restaurant/menuread?RES_CODE=" + RES_CODE; }
 	 */
 
-	@GetMapping("/reshome")
+	@RequestMapping(value = "/reshome", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	public void reshome(String RES_CODE, ModelMap model, HttpSession session, RedirectAttributes rttr)
 			throws Exception {
 		rttr.getFlashAttributes();
@@ -219,11 +218,9 @@ public class RestaurantController {
 		menuList = restaurantService.menuread(RES_CODE);
 		HashMapList.put("HashMapList", menuList);
 		model.addAttribute("menuList", menuList);
-		model.addAttribute("HashMapList", HashMapList);
 		model.addAttribute("res_menu_code", menuvo.getRes_menu_code());
 		restaurantService.menuread(RES_CODE);
 		System.out.println(menuList + "LIST@@@@@@@@@@@@@@@@@@@");
-		rttr.addFlashAttribute("RES_CODE", RES_CODE);
 		rttr.addFlashAttribute("res_menu_code", menuvo.getRes_menu_code());
 		// return menuList;
 		// return "restaurant/menuList";
@@ -244,27 +241,25 @@ public class RestaurantController {
 		session.setAttribute("RES_CODE", res_code);
 		return restList;
 	}
-
-	@RequestMapping(value = "orderInfo", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public List<ResVO> ResInfo(Model model, String RES_CODE, RedirectAttributes rttr, Authentication authentication)
-			throws Exception {
-		rttr.getFlashAttributes();
-		HashMap<String, Object> hashlist = new HashMap<String, Object>();
-
-		List<ResVO> list = new ArrayList<>();
-		UtilController util = new UtilController();
-		hashlist.put("hashlist", restaurantService.ResInfo());
-		list = restaurantService.ResInfo();
-		// model.addAttribute("RES_CODE",RES_CODE);
-		model.addAttribute("ResInfo", list); //
-
-		System.out.println("@@@@@@ResInfo@@@@@@@@@" + list);
-		System.out.println("@@@@@@hashlist ResInfo@@@@@@@@@" + hashlist);
-		String callback = util.getJsonCallBackString("", list);
-		System.out.println("callback::" + callback);
-		return list;
-
-	}
+	/*
+	 * @RequestMapping(value = "orderInfo", method = RequestMethod.GET, produces =
+	 * "application/json; charset=utf8") public List<ResVO> ResInfo(Model model,
+	 * String RES_CODE, RedirectAttributes rttr, Authentication authentication)
+	 * throws Exception { rttr.getFlashAttributes(); HashMap<String, Object>
+	 * hashlist = new HashMap<String, Object>();
+	 * 
+	 * List<ResVO> list = new ArrayList<>(); UtilController util = new
+	 * UtilController(); hashlist.put("hashlist", restaurantService.ResInfo()); list
+	 * = restaurantService.ResInfo(); // model.addAttribute("RES_CODE",RES_CODE);
+	 * model.addAttribute("ResInfo", list); //
+	 * 
+	 * System.out.println("@@@@@@ResInfo@@@@@@@@@" + list);
+	 * System.out.println("@@@@@@hashlist ResInfo@@@@@@@@@" + hashlist); String
+	 * callback = util.getJsonCallBackString("", list);
+	 * System.out.println("callback::" + callback); return list;
+	 * 
+	 * }
+	 */
 
 	@GetMapping("/list")
 	public void ResInfo(String RES_CODE, Model model) {
@@ -317,16 +312,14 @@ public class RestaurantController {
 
 		System.out.println(read);
 		System.out.println(restaurantService.deleteMenu(menuvo));
-	
+
 		return read;
 
 	}
 
 
-	@GetMapping("/deleteRes")
-	public void deleteRes() {
-
-	}
+	
+	
 
 	@RequestMapping(value = "menu_pop_up", method = RequestMethod.GET)
 	public String user_pop_up(@RequestParam("res_menu_code") String res_menu_code, Model model) {
@@ -338,5 +331,61 @@ public class RestaurantController {
 
 		return "restaurant/menu_pop_up";
 	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value = "res_pop_up", method = RequestMethod.GET)
+	public String rest_pop_up(@RequestParam("RES_CODE") String RES_CODE,String res_menu_code, Model model) throws Exception {
+
+		ResVO vo = restaurantService.ResInfo(RES_CODE);
+		model.addAttribute("RES_CODE", vo);
+		System.out.println("@@@@@@@@@model@@@@@@@@" + model);
+		System.out.println("팝업" + restaurantService.ResInfo(RES_CODE));
+
+		return "restaurant/res_pop_up";
+	}
+	
+	
+
+	@RequestMapping(value = "/deleteRes", method = RequestMethod.GET)
+	public String deleteRes(@RequestParam(value = "RES_CODE", required = false) String RES_CODE,
+			RedirectAttributes rttr, Model model, ResVO vo,ResMenuVO menuvo) throws Exception {
+		rttr.getFlashAttributes();
+		ResVO resRead = restaurantService.ResInfo(RES_CODE);
+		resRead.setRES_CODE(vo.getRES_CODE());
+		restaurantService.deleteRes(vo);
+		if (restaurantService.deleteRes(vo))
+			rttr.addFlashAttribute("res_code", vo);
+		model.addAttribute("deleteres", vo);
+
+		System.out.println("================\n" +  RES_CODE);
+		System.out.println(restaurantService.deleteRes(vo));
+
+		return "redirect:/restaurant/restList";
+
+	}
+	
+
+	@RequestMapping(value = "/updateRes", method = RequestMethod.GET)
+	@ResponseBody
+	public ResVO Updateres(ResMenuVO menuvo,ResVO vo, String RES_CODE, ModelMap model, String res_menu_code,
+			RedirectAttributes rttr) throws Exception {
+		rttr.getFlashAttributes();
+		ResVO resRead = restaurantService.ResInfo(RES_CODE);
+		restaurantService.UpdateRes(vo);
+
+		if (restaurantService.UpdateRes(vo))
+			rttr.addFlashAttribute("res_code", vo);
+
+		System.out.println("업뎃 read" + restaurantService.read(menuvo.getRes_menu_code()));
+		System.out.println("================\n" + res_menu_code +  RES_CODE);
+		System.out.println("update@@@" + restaurantService.UpdateRes(vo));
+
+		return resRead;
+	}	
+
 
 }

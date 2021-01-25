@@ -21,7 +21,9 @@ public interface RestaurantService {
 	public List<ResMenuVO> menuread(String RES_CODE);
 	
 	
-	public List<String> userorder ();
+	public List<String> getorderList (String id);
+	
+	
 	
 	//식당보기 서비스
 	public List<ResVO> restList() throws Exception;
@@ -38,17 +40,17 @@ public interface RestaurantService {
 	
 	public void insertmenu(ResMenuVO menuvo);
 
-	public void rescodeUpDate();
 	
-	public void UpdateRes(ResVO resvo);
+	public boolean UpdateRes(ResVO resvo);
 	
-	public void deleteRes(ResVO resvo);
+	
+	public boolean deleteRes(ResVO resvo);
 	
 	public boolean UpdateMenu(ResMenuVO menuvo);
 	
 	public boolean deleteMenu(ResMenuVO menuvo);
 
-	public List<ResVO> ResInfo()throws Exception;
+	public ResVO ResInfo(String res_code)throws Exception;
 
 
 

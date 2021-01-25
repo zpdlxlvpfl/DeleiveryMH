@@ -418,8 +418,8 @@
 
 
 
-	<div class="parallax-content contact-content " id="contact-us"></div>
-
+	<div class="parallax-content contact-content " id="contact-us">
+</div>
 
 
 
