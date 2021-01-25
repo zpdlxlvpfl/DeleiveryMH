@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -71,16 +72,29 @@
 
     <body>
 
+	<div class="fixed-side-navbar">
+		<ul class="nav flex-column">
+			<li class="nav-item"><a class="nav-link" href="/"><span>Delivery</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="/foodmaptest"><span>Search</span></a></li>
+			<sec:authorize access="isAnonymous()">
+				<li class="nav-item"><a class="nav-link" href="/login"><span>LOGIN</span></a></li>
+			</sec:authorize>
+			<sec:authorize access="isAnonymous()">
+				<li class="nav-item"><a class="nav-link" href="/join"><span>JOIN</span></a></li>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ROLE_MEMBER')">
+				<li class="nav-item"><a class="nav-link" href="/cart/myCart"><span>CART</span></a></li>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<li class="nav-item"><a class="nav-link" href="/member/myInfo"><span>MYPAGE</span></a></li>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<li class="nav-item"><a class="nav-link"
+					href="/admin/memberList?pageNum=1&amount=10&auth=ROLE_MEMBER"><span>ADMINPAGE</span></a></li>
+			</sec:authorize>
+		</ul>
+	</div>
 
-        <div class="fixed-side-navbar">
-            <ul class="nav flex-column">
-                <li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="foodmaptest"><span>search</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
-            </ul>
-        </div>
 
 
         <div class="parallax-content baner-content" id="home">

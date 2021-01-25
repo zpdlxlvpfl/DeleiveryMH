@@ -32,23 +32,25 @@
 
 <body>
 
+	<form name="Logout" action="/logout" method="post">
 	<div class="fixed-side-navbar">
 		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="/"><span>Delivery</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="/foodmaptest"><span>Search</span></a></li>
 			<sec:authorize access="isAnonymous()">
-				<li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
+				<li class="nav-item"><a class="nav-link" href="/login"><span>LOGIN</span></a></li>
 			</sec:authorize>
-			<sec:authorize access="isAnonymous()">
-				<li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li>
+			<sec:authorize access="isAuthenticated()">
+				<li class="nav-item"><a class="nav-link" href="/member/myInfo"><span>MYPAGE</span></a></li>
 			</sec:authorize>
-			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
-			<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<sec:authorize access="isAuthenticated()">
 				<li class="nav-item"><a class="nav-link"
-					href="/admin/memberList?auth=ROLE_MEMBER"><span>#관리자페이지</span></a></li>
+					href="#" onclick="javascript:document.Logout.submit();"><span>LOGOUT</span></a></li>
 			</sec:authorize>
 		</ul>
 	</div>
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" /> 
+</form>
 
 
 
@@ -63,7 +65,7 @@
 							<b>장바구니</b>
 						</h4>
 						<div class="line-dec"></div>
-						<div id="removeAll" class="primary-button" style="color: #F8F8FF;">
+						<div id="removeAll" class="primary-button" style="color: #F8F8FF; cursor:pointer;">
 							<h3>
 								<b>전체삭제</b>
 							</h3>
@@ -315,7 +317,7 @@
 								cartService
 										.getCartList(function(cartList) {
 											var str = "";
-											var sum_str = '<div id="sumTotal" style="color:white;" align="center"><h4>총 주문금액 <b><span id="AAA">'
+											var sum_str = '<div id="sumTotal" style="color:white; text-shadow: 1px 1px 5px #000;" align="center"><h4>총 주문금액 <b><span id="AAA">'
 													+ numberWithCommas(cartList[0].sumTotal)
 													+ '</span>원</b></h4></div>';
 											// 			if(cartList==null || cartList.length==0){
