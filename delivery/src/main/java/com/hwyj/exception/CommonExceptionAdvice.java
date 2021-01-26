@@ -23,14 +23,14 @@ public class CommonExceptionAdvice {
 //        return "/login";
 //    }
 	
-//	//자바코드에서 에러발생 시 (400) @@@@@@(기능구현 거의 다 끝났을 때 주석풀기)@@@@@@
-//	@ExceptionHandler(BindException.class) 
-//	public String except(Exception e, Model model) { 
-//		log.error("exception......."+e.getMessage());
-//		model.addAttribute("exception", e);
-//		log.error(model);
-//		return "/exception/error400";
-//	}
+	//자바코드에서 에러발생 시 (400)
+	@ExceptionHandler(BindException.class) 
+	public String except(Exception e, Model model) { 
+		log.error("exception......."+e.getMessage());
+		model.addAttribute("exception", e);
+		log.error(model);
+		return "/exception/error400";
+	}
 	
 	//url요청에러 시 (404)
 	@ExceptionHandler(NoHandlerFoundException.class) 
@@ -39,12 +39,12 @@ public class CommonExceptionAdvice {
 		return "/exception/error404";
 	}
 	
-//	//405 에러 @@@@@@(기능구현 거의 다 끝났을 때 주석풀기)@@@@@@
-//	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-//    public String handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
-//        log.error("handleHttpRequestMethodNotSupportedException", e);
-//        
-//        return "/exception/error405";
-//    }
+	//405 에러
+	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public String handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        log.error("handleHttpRequestMethodNotSupportedException", e);
+        
+        return "/exception/error405";
+    }
 
 }
