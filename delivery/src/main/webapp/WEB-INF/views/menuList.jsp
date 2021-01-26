@@ -50,7 +50,7 @@
 <body>
 
 
-
+<form name="Logout" action="/logout" method="post">
 	<div class="parallax-content projects-content" id="portfolio">
 
 		<h1>
@@ -64,12 +64,21 @@
 		<ul class="nav flex-column">
 			<li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
+			<sec:authorize access="isAnonymous()">
 			<li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
+			</sec:authorize>
+			<sec:authorize access="isAnonymous()">
 			<li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
+			</sec:authorize>
+			<li class="nav-item"><a id="cart" class="nav-link" href="#" onclick="location.href='/cart/myCart'"><span>CART</span></a></li>
+			<sec:authorize access="isAuthenticated()">
+				<li class="nav-item"><a class="nav-link"
+					href="#" onclick="javascript:document.Logout.submit();"><span>LOGOUT</span></a></li>
+			</sec:authorize>
 		</ul>
 	</div>
-
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" /> 
+</form>
 
 
 
