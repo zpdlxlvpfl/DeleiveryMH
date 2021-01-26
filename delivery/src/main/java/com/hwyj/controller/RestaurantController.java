@@ -41,6 +41,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.AuthVO;
@@ -206,9 +207,9 @@ public class RestaurantController {
 	}
 
 	@RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public void menuList(ModelMap model, ResMenuVO menuvo, RedirectAttributes rttr, Authentication authentication,
+	public ModelAndView menuList(ModelMap model, ResMenuVO menuvo, RedirectAttributes rttr, Authentication authentication,
 			@RequestParam(value = "RES_CODE", required = false) String RES_CODE) throws Exception {
-		HttpSession session = null;
+        ModelAndView mav = new ModelAndView();
 		rttr.getFlashAttributes();
 		UtilController util = new UtilController();
 		HashMap<String, Object> HashMapList = new HashMap<>();
@@ -219,10 +220,14 @@ public class RestaurantController {
 		HashMapList.put("HashMapList", menuList);
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("res_menu_code", menuvo.getRes_menu_code());
+		//model.addAttribute("RES_CODE"+ menuvo.getRES_CODE());
 		restaurantService.menuread(RES_CODE);
 		System.out.println(menuList + "LIST@@@@@@@@@@@@@@@@@@@");
 		rttr.addFlashAttribute("res_menu_code", menuvo.getRes_menu_code());
-		// return menuList;
+		mav.addObject("menuList", menuList);
+		mav.addObject("RES_CODE", menuvo.getRES_CODE());
+		mav.addObject("res_menu_code", menuvo.getRes_menu_code());
+		return mav;
 		// return "restaurant/menuList";
 	}
 
@@ -297,23 +302,24 @@ public class RestaurantController {
 	}
 
 	@RequestMapping(value = "/deleteMenu", method = RequestMethod.GET)
-	@ResponseBody
-	public ResMenuVO deleteMenu(@RequestParam(value = "res_menu_code", required = false) String res_menu_code,
+	public String deleteMenu(@RequestParam(value = "res_menu_code", required = false) String res_menu_code,
 			String RES_CODE, RedirectAttributes rttr, Model model, ResMenuVO menuvo) throws Exception {
 		rttr.getFlashAttributes();
+        ModelAndView mav = new ModelAndView();
 		ResMenuVO read = restaurantService.read(menuvo.getRes_menu_code());
 		read.setRES_CODE(menuvo.getRES_CODE());
 		restaurantService.deleteMenu(menuvo);
 		if (restaurantService.deleteMenu(menuvo))
 			rttr.addFlashAttribute("res_menu_code", menuvo);
 		model.addAttribute("delete", menuvo);
-
+		String url = "/restaurant/menuList?RES_CODE="+read.getRES_CODE();
+		mav.addObject("URL", url);
 		System.out.println("================\n" + res_menu_code + read + RES_CODE);
 
 		System.out.println(read);
 		System.out.println(restaurantService.deleteMenu(menuvo));
 
-		return read;
+		return "redirect:/restaurant/menuList?RES_CODE="+read.getRES_CODE();
 
 	}
 
