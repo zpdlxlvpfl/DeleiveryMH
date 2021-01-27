@@ -74,24 +74,10 @@
 
 	<div class="fixed-side-navbar">
 		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link" href="/"><span>Delivery</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="/foodmaptest"><span>Search</span></a></li>
-			<sec:authorize access="isAnonymous()">
-				<li class="nav-item"><a class="nav-link" href="/login"><span>LOGIN</span></a></li>
-			</sec:authorize>
-			<sec:authorize access="isAnonymous()">
-				<li class="nav-item"><a class="nav-link" href="/join"><span>JOIN</span></a></li>
-			</sec:authorize>
-			<sec:authorize access="hasRole('ROLE_MEMBER')">
-				<li class="nav-item"><a class="nav-link" href="/cart/myCart"><span>CART</span></a></li>
-			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
-				<li class="nav-item"><a class="nav-link" href="/member/myInfo"><span>MYPAGE</span></a></li>
-			</sec:authorize>
-			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<li class="nav-item"><a class="nav-link"
-					href="/admin/memberList?pageNum=1&amount=10&auth=ROLE_MEMBER"><span>ADMINPAGE</span></a></li>
-			</sec:authorize>
+			<li class="nav-item"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li>
 		</ul>
 	</div>
 
