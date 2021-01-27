@@ -17,7 +17,8 @@ public interface RestaurantMapper {
 	
 	public List<ResMenuVO> menuList() throws Exception;
 	
-	public List<ResMenuVO> mymenuList()throws Exception;
+	public List<ResMenuVO> mainmenuList() throws Exception;
+	
 	
 	public List<ResMenuVO> menuread(String RES_CODE);
 
@@ -26,6 +27,7 @@ public interface RestaurantMapper {
 	//식당 정보 보기
 	
 	public List<ResVO> restList() throws Exception;
+	public List<ResVO> restList2() throws Exception;
 	
 	public HashMap<String, Object> getresCount();
 	

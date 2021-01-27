@@ -52,76 +52,6 @@
 </script> -->
 
 
-<script>
-	var restList = $("#restList");
-	var html = '';
-	function restList() {
-		var i = 0;
-
-		restaurantService
-				.restList(function(restList) {
-					$
-							.ajax({
-								type : "get",
-								url : "/restList",
-								dataType : "json",
-								data : {
-									RES_CODE : "${RES_CODE}",
-									RES_NAME : "${RES_NAME}",
-									RES_INFO : "${RES_INFO}",
-									DEL_PRICE : "${DEL_PRICE}"
-								},
-								error : function(data) {
-									alert("error" + restList);
-									console.log("error" + data + restList);
-								},
-								success : function(data) {
-									alert("data" + data + html);
-									console.log("data " + data + html);
-									for (i = 0, len = restList.length || 0; i < len; i++) {
-										html += '<div class="col-md-12"><div class="service-item"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='
-												+ RES_CODE.RES_CODE + '}"+'
-										RES_CODE.RES_NAME
-										'+ </a></h4>';
-										html += '<div class="line-dec">'
-												+ RES_CODE.RES_INFO + '</div>';
-										html += '<p>' + RES_CODE.RES_INFO
-												+ '</p>';
-										html += '<p>'
-												+ RES_CODE.DEL_PRICE
-												+ '<font color="orange">&#8361;</font></div>';
-
-										html += '<div class="service-item"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='
-												+ RES_CODE.RES_CODE + '}"+'
-										RES_CODE.RES_NAME
-										'+ </a></h4>';
-										html += '<div class="line-dec">'
-												+ RES_CODE.RES_INFO + '</div>';
-										html += '<p>' + RES_CODE.RES_INFO
-												+ '</p>';
-										html += '<p>'
-												+ RES_CODE.DEL_PRICE
-												+ '<font color="orange">&#8361;</font></div>';
-
-										html += '<div class="service-item"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='
-												+ RES_CODE.RES_CODE + '}"+'
-										RES_CODE.RES_NAME
-										'+ </a></h4>';
-										html += '<div class="line-dec">'
-												+ RES_CODE.RES_INFO + '</div>';
-										html += '<p>' + RES_CODE.RES_INFO
-												+ '</p>';
-										html += '<p>'
-												+ RES_CODE.DEL_PRICE
-												+ '<font color="orange">&#8361;</font></div></div>';
-
-									}
-
-								}
-							});
-				});
-	};
-</script>
 
 </head>
 <body>
@@ -179,26 +109,25 @@
 						</div>
 
 
-
 							<c:forEach items="${restList}" var="RES_CODE" varStatus="loop">
 							<c:set var="nextVal" value="${restList[loop.index]}"/>
 								<div class="col-md-12">
 									<div class="service-item">
+									<div class="left-text">
 										<input type="hidden" id="RES_CODE" name="RES_CODE"
 											value='<c:out value="${nextVal.RES_CODE }" />'> 
 										<h4>
 											<a href="/restaurant/menuList?RES_CODE=${nextVal.RES_CODE}">
 												${nextVal.RES_NAME }</a>
 										</h4>
-										<div class="line-dec">
+										<div class="line-dec"></div>
 											<p>${nextVal.RES_INFO }</p>
-										</div>
+										
 										Delivery Tips : ${nextVal.DEL_PRICE }<font color="orange">
 											&#8361; </font>
-									</div>
+									</div></div>
 								</div>
 							</c:forEach>
-
 						</div>
 					</div>
 				</div>

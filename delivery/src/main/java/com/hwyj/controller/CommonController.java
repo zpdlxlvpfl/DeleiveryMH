@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hwyj.domain.CustomerVO;
@@ -55,7 +56,6 @@ public class CommonController {
 
 	@Setter(onMethod_ = @Autowired)
 	private RestaurantService restaurantService;
-	
 
 	@GetMapping("/login") // 로그인 페이지
 	public void login(String error, Model model) {
@@ -71,96 +71,82 @@ public class CommonController {
 		return "redirect:/login";
 	}
 
-	@GetMapping("findId") //아이디 찾기 페이지
+	@GetMapping("findId") // 아이디 찾기 페이지
 	public void findId() {
 
 	}
 
-	@GetMapping("/findPw") //비번 찾기 페이지
+	@GetMapping("/findPw") // 비번 찾기 페이지
 	public void findPw() {
 
 	}
-
 
 	@GetMapping("/join") // 가입
 	public void join() {
 
 	}
 	
-	@GetMapping("/index") // 가입
-	public void index() {
+	/*
+	 * @GetMapping("index") public void index() {
+	 * 
+	 * }
+	 */
 
+
+	@RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public String menuList(ModelMap model, ResMenuVO menuvo, RedirectAttributes rttr, String RES_CODE)
+			throws Exception {
+		// HttpSession session = null;
+		// RES_CODE = (String)session.getAttribute("RES_CODE");
+		rttr.getFlashAttributes();
+		UtilController util = new UtilController();
+		HashMap<String, Object> HashMapList = new HashMap<>();
+		List<ResMenuVO> menuList = new ArrayList<>();
+		menuList = restaurantService.menuList();
+		menuList = restaurantService.menuread(RES_CODE);
+		HashMapList.put("HashMapList", menuList);
+		model.addAttribute("menuList", menuList);
+		model.addAttribute("HashMapList", HashMapList);
+		restaurantService.menuread(RES_CODE);
+		System.out.println(menuList + "LIST@@@@@@@@@@@@@@@@@@@");
+		return "menuList";
 	}
-
 
 	
-	   
-	   @RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-		public String menuList(ModelMap model, ResMenuVO menuvo, RedirectAttributes rttr, String RES_CODE)
-				throws Exception {
-			// HttpSession session = null;
-			// RES_CODE = (String)session.getAttribute("RES_CODE");
-			rttr.getFlashAttributes();
-			UtilController util = new UtilController();
-			HashMap<String, Object> HashMapList = new HashMap<>();
-			List<ResMenuVO> menuList = new ArrayList<>();
-			menuList = restaurantService.menuList();
-			menuList = restaurantService.menuread(RES_CODE);
-			HashMapList.put("HashMapList", menuList);
-			model.addAttribute("menuList", menuList);
-			model.addAttribute("HashMapList", HashMapList);
-			restaurantService.menuread(RES_CODE);
-			System.out.println(menuList + "LIST@@@@@@@@@@@@@@@@@@@");
-			return "menuList";
-	   }
-	   
-		/*
-		 * //메뉴목록보기 (템플릿 메인 사진 아래)
-		 * 
-		 * @RequestMapping(value = "index", method = RequestMethod.GET, produces
-		 * ="application/json; charset=utf8") public String menuList(ModelMap model,
-		 * ResMenuVO menuvo) throws Exception { HashMap<String, Object> HashMapList =
-		 * new HashMap<>(); //HashMap 인스턴스화 List<ResMenuVO> menuList = new
-		 * ArrayList<>(); //List 인스턴스화
-		 * 
-		 * menuList = restaurantService.menuList(); HashMapList.get("menuList");
-		 * HashMapList.put("menuList", menuList); HashMapList.put("HashMapList",
-		 * HashMapList); model.addAttribute("menuList", menuList);
-		 * model.addAttribute("HashMapList", HashMapList);
-		 * 
-		 * System.out.println("model@@@@@@@@@@@@@@@@@@@@@" + model);
-		 * System.out.println("hashMap@@@@@@@@@@@@@@@@@@@@" + HashMapList);
-		 * System.out.println("menuList@@@@@@@@@@@@@@@@@@@@" + menuList); return
-		 * "/index"; }
-		 */
+	@RequestMapping(value = "index", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public ModelAndView index(String RES_CODE, ResVO vo, ResMenuVO menu, ModelMap model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		List<ResVO> restList = restaurantService.restList2();
+		List<ResMenuVO> menuList = restaurantService.mainmenuList();		
 		
-		@GetMapping("/get")
-		public void get(String res_code,String res_menu_code,Model model,ResMenuVO menuvo) {
-			model.addAttribute("res_code",restaurantService.get(res_code));
-			model.addAttribute("menucode",restaurantService.menuread(res_menu_code));
-			System.out.println(model.addAttribute("res",restaurantService.get(res_code)));
-			System.out.println(model.addAttribute("res_menu_code",restaurantService.menuread(res_menu_code)));
-		}
-
-	@RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public String restList(ModelMap model, RedirectAttributes rttr, HttpSession session, String RES_CODE)
-			throws Exception {
-		ResVO vo = new ResVO();
-		rttr.getFlashAttributes();
-		RES_CODE = (String) session.getAttribute("RES_CODE");
-		List<ResVO> restList = new ArrayList<>();
-		restList = restaurantService.restList();
-		System.out.println(restList + "RestList@@@@@@@@@@@@@");
-		model.addAttribute("restList", restList);
-		restaurantService.read(RES_CODE);
-		System.out.println("=======list====" + restList);
-		// rttr.addAttribute("RES_CODE", RES_CODE);
-		return "restList";
+		mav.setViewName("index");
+		mav.addObject("RES_CODE", vo.getRES_CODE());
+		mav.addObject("res_code", menu.getRES_CODE());
+		mav.addObject("restList", restList);
+		mav.addObject("mainmenuList", menuList);
+		System.out.println("@rsetList@::" + restList);
+		System.out.println("@menuList@::" + menuList);
+		return mav;
 	}
+	
+
+	
+
+
 
 	@GetMapping("/maptest") // 현재위치
 	public void maptest() {
 
+	}
+
+	@RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public ModelAndView restList(String RES_CODE, ResVO vo, ResMenuVO menu) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		List<ResVO> restList = restaurantService.restList();
+		mav.setViewName("restList");
+		mav.addObject("restList", restList);
+		System.out.println("@rsetList@::" + restList);
+		return mav;
 	}
 
 	@GetMapping("/foodmaptest") // 음식점 마커

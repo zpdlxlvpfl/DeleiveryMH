@@ -288,21 +288,21 @@ public class RestaurantController {
 	public ResMenuVO UpdateMenu(ResMenuVO menuvo, String res_code, ModelMap model, String res_menu_code,
 			RedirectAttributes rttr) {
 		rttr.getFlashAttributes();
+        ModelAndView mav = new ModelAndView();
+      
 		ResMenuVO read = restaurantService.read(menuvo.getRes_menu_code());
 		restaurantService.UpdateMenu(menuvo);
 
 		if (restaurantService.UpdateMenu(menuvo))
 			rttr.addFlashAttribute("res_menu_code", menuvo);
-
+			mav.addObject("RES_CODE", read.getRES_CODE());
 		System.out.println("업뎃 read" + restaurantService.read(menuvo.getRes_menu_code()));
-		System.out.println("================\n" + res_menu_code + read + res_code);
-		System.out.println("update@@@" + restaurantService.UpdateMenu(menuvo));
-
+		System.out.println(read + "@@@@@@@@" + read.getRES_CODE());
 		return read;
 	}
 
 	@RequestMapping(value = "/deleteMenu", method = RequestMethod.GET)
-	public String deleteMenu(@RequestParam(value = "res_menu_code", required = false) String res_menu_code,
+	public ResMenuVO deleteMenu(@RequestParam(value = "res_menu_code", required = false) String res_menu_code,
 			String RES_CODE, RedirectAttributes rttr, Model model, ResMenuVO menuvo) throws Exception {
 		rttr.getFlashAttributes();
         ModelAndView mav = new ModelAndView();
@@ -316,10 +316,11 @@ public class RestaurantController {
 		mav.addObject("URL", url);
 		System.out.println("================\n" + res_menu_code + read + RES_CODE);
 
-		System.out.println(read);
+		
 		System.out.println(restaurantService.deleteMenu(menuvo));
+		System.out.println(read + "@@@@@@@@" + menuvo.getRES_CODE());
 
-		return "redirect:/restaurant/menuList?RES_CODE="+read.getRES_CODE();
+		return read;
 
 	}
 

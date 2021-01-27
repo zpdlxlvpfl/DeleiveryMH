@@ -105,6 +105,7 @@
 										contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 										success : function(data) {
 											alert('success' + data);
+											opener.location.reload();
 											self.close();
 										}
 									});
