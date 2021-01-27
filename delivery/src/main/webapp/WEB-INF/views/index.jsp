@@ -113,12 +113,18 @@
 
 	<div class="parallax-content baner-content" id="home">
 		<div class="container">
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<div class="primary-button">	
+					<br> <a href="/admin/memberList?pageNum=1&amount=10&auth=ROLE_MEMBER">관리자 페이지</a>
+				</div>
+			</sec:authorize>
 			<div class="first-content">
 				<h1>Delivery TEST</h1>
 				<span><em>Bootstrap</em>Delivery TEST</span>
 				<div class="primary-button">
 					<br> <a href="#services">More</a>
 				</div>
+				
 			</div>
 		</div>
 	</div>
