@@ -92,23 +92,23 @@ function menuList() {
 
 	}
 
-	function updateMenu(RES_CODE) {
+	function updateMenu() {
 		var RES_CODE = $(RES_CODE);
-		var res_menu_code = $(res_menu_code);
-		window.open();
-	}success : function(data) {
+		var url = "/restaurant/menuList?RES_CODE=";
+		console.log(RES_CODE);
+ 	success : function updateMenu(data) {
 		alert('success' + data);
-		document.location.href="/restaurant/menuList?RES_CODE="+RES_CODE;
-	    window.location.reload();
+		$("#update").load(window.location.href + "#update");
+	}location.replace();
 	}
 	
 	
 	
-	function deleteRes(RES_CODE) {
+	function deleteRest(RES_CODE) {
 		var RES_CODE = $(RES_CODE);
 		var res_menu_code = $(res_menu_code);
 		var isa = confirm("Are you sure you want to delete this?");
-		success : function a(data) {
+		success : function deleteRes(data) {
 		if (isa) {
 			alert("RES_CODE=" + RES_CODE);
 			window.location.reload();
@@ -120,11 +120,9 @@ function menuList() {
 
 	}
 
-	function updateRes(RES_CODE) {
+	function updateRest() {
 		var RES_CODE = $(RES_CODE);
 		var res_menu_code = $(res_menu_code);
-		window.open("/restaurant/res_pop_up?res_code=" + RES_CODE,
-				"user_pop_up_frame", "width=500, height = 500");
 		success : function(data) {
 			alert('success' + data);
 		}
@@ -149,15 +147,17 @@ function menuList() {
 	</div>
 
 
+<form name="Logout" action="/logout" method="post">
 	<div class="fixed-side-navbar">
 		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="logout"><span>Logout</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="#" onclick="location.href='/index'"><span>Delivery Home</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="#" onclick="location.href='/foodmaptest'"><span>Map Search</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="#" onclick="javascript:document.Logout.submit();" ><span>LOGOUT</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="restList"><span>Restaurant List</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="#"  onclick="location.href='/cart/myCart'"><span>TEST</span></a></li>
 		</ul>
 	</div>
+	</form>
 
 
 
@@ -182,11 +182,11 @@ function menuList() {
 								<h4>My restaurant</h4>
 								<div class="line-dec"></div>
 								<p>My restaurant Info Update/Delete</p> <br>
-								<div class="primary-button">
+								<div class="primary-button" >
 									<a href="javascript:window.open('/restaurant/res_pop_up?RES_CODE=${RES_CODE.RES_CODE}',updateRes,'width=500,height=500');"
-										id="updateRes" onclick="updateRes">Update</a> <a
+										id="updateRes" onclick="updateRest">Update</a> <a
 										href="/restaurant/deleteRes?RES_CODE=${RES_CODE.RES_CODE}"
-										onclick="if(!confirm('Are you sure you want to delete this ?')){return false;};">
+										onclick="if(!confirm('Are you sure you want to delete this ?')){return false;}; {location.replace();}">
 										Delete </a>
 								</div>
 							</div>
@@ -197,10 +197,10 @@ function menuList() {
 
 
 
-					<div class="col-md-8">
+					<div class="col-md-8" id="update">
 						<div class="left-text">
 							<div class="testimonials-item">
-								<div class="service-item">
+								<div class="service-item" >
 									<img src="../resources/img/0st-item.jpg" alt="">
 									<c:forEach items="${menuList}" var="RES_CODE" begin="0" end="0"
 										step="1" varStatus="i">
@@ -221,7 +221,7 @@ function menuList() {
 
 											<a
 												href="javascript:window.open('/restaurant/menu_pop_up?res_menu_code=${RES_CODE.res_menu_code}',updateMenu,'width=500,height=500');"
-												id="updateMenu" onclick="updateMenu"> Update </a> <a
+												id="updateMenu" onclick="javascript:updateMenu();"> Update </a> <a
 												href="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
 												onclick="if(!confirm('Are you sure you want to delete this ?')){return false;};">
 												Delete</a>

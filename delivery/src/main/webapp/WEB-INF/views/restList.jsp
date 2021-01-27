@@ -52,77 +52,6 @@
 </script> -->
 
 
-<script>
-	var restList = $("#restList");
-	var html = '';
-	function restList() {
-		var i = 0;
-
-		restaurantService
-				.restList(function(restList) {
-					$
-							.ajax({
-								type : "get",
-								url : "/restList",
-								dataType : "json",
-								data : {
-									RES_CODE : "${RES_CODE}",
-									RES_NAME : "${RES_NAME}",
-									RES_INFO : "${RES_INFO}",
-									DEL_PRICE : "${DEL_PRICE}"
-								},
-								error : function(data) {
-									alert("error" + restList);
-									console.log("error" + data + restList);
-								},
-								success : function(data) {
-									alert("data" + data + html);
-									console.log("data " + data + html);
-									for (i = 0, len = restList.length || 0; i < len; i++) {
-										html += '<div class="col-md-12"><div class="service-item"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='
-												+ RES_CODE.RES_CODE + '}"+'
-										RES_CODE.RES_NAME
-										'+ </a></h4>';
-										html += '<div class="line-dec">'
-												+ RES_CODE.RES_INFO + '</div>';
-										html += '<p>' + RES_CODE.RES_INFO
-												+ '</p>';
-										html += '<p>'
-												+ RES_CODE.DEL_PRICE
-												+ '<font color="orange">&#8361;</font></div>';
-
-										html += '<div class="service-item"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='
-												+ RES_CODE.RES_CODE + '}"+'
-										RES_CODE.RES_NAME
-										'+ </a></h4>';
-										html += '<div class="line-dec">'
-												+ RES_CODE.RES_INFO + '</div>';
-										html += '<p>' + RES_CODE.RES_INFO
-												+ '</p>';
-										html += '<p>'
-												+ RES_CODE.DEL_PRICE
-												+ '<font color="orange">&#8361;</font></div>';
-
-										html += '<div class="service-item"><h4><a href="/restaurant/reshome?RES_CODE=${RES_CODE='
-												+ RES_CODE.RES_CODE + '}"+'
-										RES_CODE.RES_NAME
-										'+ </a></h4>';
-										html += '<div class="line-dec">'
-												+ RES_CODE.RES_INFO + '</div>';
-										html += '<p>' + RES_CODE.RES_INFO
-												+ '</p>';
-										html += '<p>'
-												+ RES_CODE.DEL_PRICE
-												+ '<font color="orange">&#8361;</font></div></div>';
-
-									}
-
-								}
-							});
-				});
-	};
-</script>
-
 </head>
 <body>
 
@@ -156,8 +85,8 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div id="owl-testimonials" class="owl-carousel owl-theme">
-					
-					
+
+
 						<div class="col-md-8">
 							<div class="left-text">
 								<h4>Delivery TEST</h4>
@@ -180,90 +109,59 @@
 
 
 
-							<c:forEach items="${restList}" var="RES_CODE">
-							
-							
-								<div class="col-md-12">
-									<div class="service-item">
+						<c:forEach items="${restList}" var="RES_CODE" varStatus="loop">
+							<c:set var="nextVal" value="${restList[loop.index]}" />
+							<div class="col-md-12">
+								<div class="service-item">
+									<div class="left-text">
 										<input type="hidden" id="RES_CODE" name="RES_CODE"
-											value='<c:out value="${RES_CODE.RES_CODE }" />'> <input
-											type="hidden" id="${status.count}" disabled>
+											value='<c:out value="${nextVal.RES_CODE }" />'>
 										<h4>
-											<a href="/menuList?RES_CODE=${RES_CODE.RES_CODE}">
-												${RES_CODE.RES_NAME }</a>
+											<a href="/restaurant/menuList?RES_CODE=${nextVal.RES_CODE}">
+												${nextVal.RES_NAME }</a>
 										</h4>
-										<div class="line-dec">
-											<p>${RES_CODE.RES_INFO }</p>
-										</div>
-										Delivery Tips : ${RES_CODE.DEL_PRICE }<font color="orange">
-											&#8361; </font>
-									</div>
-
-
-									<div class="service-item">
-										<input type="hidden" id="RES_CODE" name="RES_CODE"
-											value='<c:out value="${RES_CODE.RES_CODE }" />'> <input
-											type="hidden" id="${status.count}" disabled>
-										<h4>
-											<a href="/menuList?RES_CODE=${RES_CODE.RES_CODE}">
-												${RES_CODE.RES_NAME }</a>
-										</h4>
-										<div class="line-dec">
-											<p>${RES_CODE.RES_INFO }</p>
-										</div>
-										Delivery Tips : ${RES_CODE.DEL_PRICE }<font color="orange">
-											&#8361; </font>
-									</div>
-
-
-									<div class="service-item">
-										<input type="hidden" id="RES_CODE" name="RES_CODE"
-											value='<c:out value="${RES_CODE.RES_CODE }" />'> <input
-											type="hidden" id="${status.count}" disabled>
-										<h4>
-											<a href="/menuList?RES_CODE=${RES_CODE.RES_CODE}">
-												${RES_CODE.RES_NAME }</a>
-										</h4>
-										<div class="line-dec">
-											<p>${RES_CODE.RES_INFO }</p>
-										</div>
-										Delivery Tips : ${RES_CODE.DEL_PRICE }<font color="orange">
-											&#8361; </font>
+										<div class="line-dec"></div>
+										<p>${nextVal.RES_INFO }</p>
+										<p>
+											Delivery Tips : ${nextVal.DEL_PRICE }<font color="orange">
+												&#8361; </font>
+										</p>
 									</div>
 								</div>
-							</c:forEach>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
+			</div>
+			
 
+
+
+			<div class="parallax-content contact-content " id="contact-us"></div>
+
+
+
+
+
+			<footer>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="primary-button">
+								<a href="#home">Back To Top</a>
+							</div>
+							<ul>
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-google"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+							</ul>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-
-
-
-	<div class="parallax-content contact-content " id="contact-us"></div>
-
-
-
-
-
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="primary-button">
-						<a href="#home">Back To Top</a>
-					</div>
-					<ul>
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-						<li><a href="#"><i class="fa fa-google"></i></a></li>
-						<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
+			</footer>
 </body>
 </html>

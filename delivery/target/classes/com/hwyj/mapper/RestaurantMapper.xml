@@ -59,6 +59,12 @@
 	</select>
 	
 	
+	
+	<select id="mainmenuList" parameterType="String" resultType="com.hwyj.domain.ResMenuVO">
+	select res_code,res_menu_name,res_menu_price from testdb.res_menu where res_menu_code > 0 and res_code >0
+	</select>
+	
+	
 	<!-- 매장 리스트 -->
 		<select id="restList" parameterType="String" resultType="com.hwyj.domain.ResVO">
 		 SELECT 
@@ -72,6 +78,21 @@
 		(res_menu.res_code IS not NULL)
 		group by res.res_name,res_menu.res_code
 		
+		</select>
+		
+		<select id="restList2" parameterType="String" resultType="com.hwyj.domain.ResVO">
+		SELECT 
+        res.res_code,
+        res.res_name,
+        res.res_info,
+        res.del_price
+        
+		FROM res
+		right JOIN res_menu ON res.res_code = res_menu.res_code
+        right JOIN review ON res.res_code = review.res_code
+		WHERE res.res_code is not null AND
+		(res_menu.res_code IS not NULL)
+		group by res.res_name,res_menu.res_code order by count(review.res_code) desc
 		</select>
 	
  	<select id="read" resultType="com.hwyj.domain.ResMenuVO">

@@ -15,6 +15,8 @@ public interface RestaurantService {
 	//메뉴보기 서비스
 	public List<ResMenuVO> menuList() throws Exception;
 	
+	public List<ResMenuVO> mainmenuList() throws Exception;
+	
 	
 	public ResMenuVO get(String res_menu_code);
 	
@@ -27,6 +29,8 @@ public interface RestaurantService {
 	
 	//식당보기 서비스
 	public List<ResVO> restList() throws Exception;
+	
+	public List<ResVO> restList2() throws Exception;
 	
 	
 	public ResMenuVO read(String res_menu_code);

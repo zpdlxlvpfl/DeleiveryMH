@@ -36,7 +36,8 @@
 <script>
 	window.jQuery
 			|| document
-					.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
+					.write(
+							'<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
 </script>
 <script src="resources/js/vendor/bootstrap.min.js"></script>
 <script src="resources/js/plugins.js"></script>
@@ -48,36 +49,30 @@
 
 
 <body>
-<form name="Logout" action="/logout" method="post">
-	<div class="fixed-side-navbar">
-		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link" href="/"><span>Delivery</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="/foodmaptest"><span>Search</span></a></li>
-			<sec:authorize access="isAnonymous()">
-				<li class="nav-item"><a class="nav-link" href="/login"><span>LOGIN</span></a></li>
-			</sec:authorize>
-			<sec:authorize access="isAnonymous()">
-				<li class="nav-item"><a class="nav-link" href="/join"><span>JOIN</span></a></li>
-			</sec:authorize>
-			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
-			<sec:authorize access="hasRole('ROLE_MEMBER')">
-				<li class="nav-item"><a class="nav-link" href="/cart/myCart"><span>CART</span></a></li>
-			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
-				<li class="nav-item"><a class="nav-link" href="/member/myInfo"><span>MYPAGE</span></a></li>
-			</sec:authorize>
-			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<li class="nav-item"><a class="nav-link"
-					href="/admin/memberList?pageNum=1&amount=10&auth=ROLE_MEMBER"><span>ADMINPAGE</span></a></li>
-			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
-				<li class="nav-item"><a class="nav-link"
-					href="#" onclick="javascript:document.Logout.submit();"><span>LOGOUT</span></a></li>
-			</sec:authorize>
-		</ul>
-	</div>
-<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" /> 
-</form>
+	<form name="Logout" action="/logout" method="post">
+		<div class="fixed-side-navbar">
+			<ul class="nav flex-column">
+				<li class="nav-item"><a class="nav-link" href="#"><span>Delivery</span></a></li>
+				<li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
+				<sec:authorize access="isAnonymous()">
+					<li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
+					<li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<li class="nav-item"><a class="nav-link" href="#"
+					onclick="location.href='/member/myInfo'"><span>MYPAGE</span></a></li> 
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<li class="nav-item"><a class="nav-link" href="#"
+						onclick="javascript:document.Logout.submit();"><span>LOGOUT</span></a></li>
+				</sec:authorize>
+			</ul>
+		</div>
+		<input type="hidden" name="${_csrf.parameterName }"
+			value="${_csrf.token }" />
+	</form>
 
 	<div class="parallax-content baner-content" id="home">
 		<div class="container">
@@ -114,36 +109,31 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="col-md-8">
 					<div class="row">
-						<div class="col-md-6">
-							<div class="service-item">
-								<h4>Delivery TEST</h4>
-								<div class="line-dec"></div>
-								<p>test test test test test test</p>
+
+						<c:forEach items="${restList}" var="RES_CODE" begin="0" end="3"
+							step="1" varStatus="i">
+
+							<div class="col-md-6">
+								<div class="service-item">
+									<input type="hidden" id="RES_CODE" name="RES_CODE"
+										value='<c:out value="${RES_CODE.RES_CODE }" />'>
+									<h4>
+										<a href="/mainmenuList?RES_CODE=${RES_CODE.RES_CODE}">
+											${RES_CODE.RES_NAME }</a>
+									</h4>
+									<div class="line-dec"></div>
+									<p>${RES_CODE.RES_INFO }</p>
+									<p>
+										Delivery Tips : ${RES_CODE.DEL_PRICE }<font color="orange">
+											&#8361; </font>
+									</p>
+								</div>
 							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="service-item">
-								<h4>Delivery TEST</h4>
-								<div class="line-dec"></div>
-								<p>test test test test test test</p>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="service-item">
-								<h4>Delivery TEST</h4>
-								<div class="line-dec"></div>
-								<p>test test test test test test</p>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="service-item">
-								<h4>Delivery TEST</h4>
-								<div class="line-dec"></div>
-								<p>test test test test test test</p>
-							</div>
-						</div>
+						</c:forEach>
+
 					</div>
 				</div>
 			</div>
@@ -161,33 +151,66 @@
 				<div class="col-md-12">
 
 					<div id="owl-testimonials" class="owl-carousel owl-theme">
-					
-						
+
+
+
+
+						<div class="item">
+							<div class="testimonials-item">
+								<img src="resources/img/0st-item.jpg">
+								<div class="text-content">
+
+									<c:forEach items="${mainmenuList}" var="mainmenuList" begin="0"
+										end="0" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${mainmenuList.res_menu_name}">
+											</c:out>
+										</h4>
+										<span><c:out value="${mainmenuList.res_menu_price}"></c:out>
+											&#8361;</span>
+									</c:forEach>
+
+								</div>
+							</div>
+						</div>
+
+
+
 
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="resources/img/1st-big-item.jpg" data-lightbox="image-1"><img
 									src="resources/img/1st-item.jpg" alt=""></a>
 								<div class="text-content">
-								
-										<c:forEach items="${HashMapList}" var="res_code" begin="1" end="1" step="1" varStatus="i">
-										<h4> <c:out value=" ${res_code.res_menu_name}"> </c:out></h4>
-									<span><c:out value="${res_code.res_menu_price}"></c:out> &#8361;</span>
+
+									<c:forEach items="${mainmenuList}" var="res_code" begin="1"
+										end="1" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${res_code.res_menu_name}">
+											</c:out>
+										</h4>
+										<span><c:out value="${res_code.res_menu_price}"></c:out>
+											&#8361;</span>
 									</c:forEach>
-									
+
 								</div>
 							</div>
 						</div>
-				
+
 
 						<div class="item">
 							<div class="testimonials-item">
 								<a href="resources/img/2nd-big-item.jpg" data-lightbox="image-1"><img
 									src="resources/img/2nd-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-										<c:forEach items="${HashMapList}" var="res_code" begin="2" end="2" step="1" varStatus="i">
-										<h4> <c:out value=" ${res_code.res_menu_name}"> </c:out></h4>
-										<span><c:out value="${res_code.res_menu_price}"></c:out> &#8361;</span>
+									<c:forEach items="${mainmenuList}" var="res_code" begin="2"
+										end="2" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${res_code.res_menu_name}">
+											</c:out>
+										</h4>
+										<span><c:out value="${res_code.res_menu_price}"></c:out>
+											&#8361;</span>
 									</c:forEach>
 								</div>
 							</div>
@@ -197,9 +220,13 @@
 								<a href="resources/img/3rd-big-item.jpg" data-lightbox="image-1"><img
 									src="resources/img/3rd-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-										<c:forEach items="${HashMapList}" var="res_code" begin="3" end="3" step="1" varStatus="i">
-										<h4> <c:out value="${res_code.res_menu_name}" /> </h4>
-										<span><c:out value="${res_code.res_menu_price}" />&#8361; </span>
+									<c:forEach items="${mainmenuList}" var="res_code" begin="3"
+										end="3" step="1" varStatus="i">
+										<h4>
+											<c:out value="${res_code.res_menu_name}" />
+										</h4>
+										<span><c:out value="${res_code.res_menu_price}" />&#8361;
+										</span>
 									</c:forEach>
 								</div>
 							</div>
@@ -209,9 +236,13 @@
 								<a href="resources/img/4th-big-item.jpg" data-lightbox="image-1"><img
 									src="resources/img/4th-item.jpg" alt="" id="$"></a>
 								<div class="text-content">
-										<c:forEach items="${HashMapList}" var="res_code" begin="4" end="4" step="1" varStatus="i">
-										<h4> <c:out value="${res_code.res_menu_name}" /> </h4>
-										<span><c:out value="${res_code.res_menu_price}"></c:out>&#8361; </span>
+									<c:forEach items="${mainmenuList}" var="res_code" begin="4"
+										end="4" step="1" varStatus="i">
+										<h4>
+											<c:out value="${res_code.res_menu_name}" />
+										</h4>
+										<span><c:out value="${res_code.res_menu_price}"></c:out>&#8361;
+										</span>
 									</c:forEach>
 								</div>
 							</div>
@@ -221,9 +252,13 @@
 								<a href="resources/img/5th-big-item.jpg" data-lightbox="image-1"><img
 									src="resources/img/5th-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-										<c:forEach items="${HashMapList}" var="res_code" begin="5" end="5" step="1" varStatus="i">
-										<h4> <c:out value="${res_code.res_menu_name}" /> </h4>
-										<span><c:out value="${res_code.res_menu_price}"></c:out>&#8361; </span>
+									<c:forEach items="${mainmenuList}" var="res_code" begin="5"
+										end="5" step="1" varStatus="i">
+										<h4>
+											<c:out value="${res_code.res_menu_name}" />
+										</h4>
+										<span><c:out value="${res_code.res_menu_price}"></c:out>&#8361;
+										</span>
 									</c:forEach>
 								</div>
 							</div>
@@ -233,9 +268,13 @@
 								<a href="resources/img/6th-big-item.jpg" data-lightbox="image-1"><img
 									src="resources/img/6th-item.jpg" alt="" id=""></a>
 								<div class="text-content">
-										<c:forEach items="${HashMapList}" var="res_code" begin="6" end="6" step="1" varStatus="i">
-											<h4> <c:out value="${res_code.res_menu_name}" /> </h4>
-										<span><c:out value="${res_code.res_menu_price}"></c:out>&#8361; </span>
+									<c:forEach items="${mainmenuList}" var="res_code" begin="6"
+										end="6" step="1" varStatus="i">
+										<h4>
+											<c:out value="${res_code.res_menu_name}" />
+										</h4>
+										<span><c:out value="${res_code.res_menu_price}"></c:out>&#8361;
+										</span>
 									</c:forEach>
 								</div>
 							</div>
@@ -246,40 +285,6 @@
 		</div>
 	</div>
 
-	<div class="tabs-content" id="our-story">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 mx-auto">
-					<div class="wrapper">
-						<section id="first-tab-group" class="tabgroup">
-							<div id="tab1">
-								<img src="resources/img/1st-tab.jpg" alt=""><br>
-								<p>lalallalalalalalalalsdatstseTESTSETETSETWQE!.</p>
-							</div>
-							<div id="tab2">
-								<img src="resources/img/2nd-tab.jpg" alt=""><br>
-								<p>lalallalalalalalalalqteststseTESTSETETSETWQE!.</p>
-							</div>
-							<div id="tab3">
-								<img src="resources/img/3rd-tab.jpg" alt=""><br>
-								<p>lalallalalalalalalalsdastseTESTSETETSETWQE!.</p>
-							</div>
-							<div id="tab4">
-								<img src="resources/img/4th-tab.jpg" alt=""><br>
-								<p>lalallalalalalalalalsd tstseTESTSETETSETWQE!.</p>
-							</div>
-						</section>
-						<ul class="tabs clearfix" data-tabgroup="first-tab-group">
-							<li><a href="#tab1" class="active">2008 - 2014</a></li>
-							<li><a href="#tab2">2014 - 2016</a></li>
-							<li><a href="#tab3">2016 - 2019</a></li>
-							<li><a href="#tab4">2019 - Now</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 
@@ -455,7 +460,6 @@
 
 
 
-
 	<footer>
 		<div class="container">
 			<div class="row">
@@ -474,7 +478,7 @@
 			</div>
 		</div>
 	</footer>
-	
+
 
 
 
