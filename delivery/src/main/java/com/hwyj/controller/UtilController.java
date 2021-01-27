@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class UtilController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-		private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 		/**
 		 * Gets the json call back string.

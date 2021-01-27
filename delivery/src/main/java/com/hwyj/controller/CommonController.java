@@ -86,11 +86,7 @@ public class CommonController {
 
 	}
 	
-	/*
-	 * @GetMapping("index") public void index() {
-	 * 
-	 * }
-	 */
+	 
 
 
 	@RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
@@ -113,13 +109,13 @@ public class CommonController {
 	}
 
 	
-	@RequestMapping(value = "index", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	public ModelAndView index(String RES_CODE, ResVO vo, ResMenuVO menu, ModelMap model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		List<ResVO> restList = restaurantService.restList2();
 		List<ResMenuVO> menuList = restaurantService.mainmenuList();		
 		
-		mav.setViewName("index");
+		mav.setViewName("/index");
 		mav.addObject("RES_CODE", vo.getRES_CODE());
 		mav.addObject("res_code", menu.getRES_CODE());
 		mav.addObject("restList", restList);
@@ -130,7 +126,6 @@ public class CommonController {
 	}
 	
 
-	
 
 
 
