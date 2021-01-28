@@ -82,33 +82,17 @@
 
 
 	<div class="service-content" id="services">
+		<h4><font color="white" size="14px">Restaurant </font> <font color="orange" size="6px"> List </font></h4>
+		<br>
 		<div class="container">
 			<div class="row">
+				
 				<div class="col-md-12">
 					<div id="owl-testimonials" class="owl-carousel owl-theme">
 					
 					
-						<div class="col-md-8">
-							<div class="left-text">
-								<h4>Delivery TEST</h4>
-								<div class="line-dec"></div>
-								<p>
-									Delivery TEST abcdefgsadqasdfaffadac <a rel="nofollow"
-										href="https://templatemo.com"> website</a> whsskwhfflek.
-								</p>
-								<ul>
-									<li>- test test test test test test</li>
-									<li>- test test test test test test</li>
-									<li>- test test test test test test</li>
-									<li>- test test test test test test</li>
-								</ul>
-								<div class="primary-button">
-									<a href="#portfolio">Delivery TEST</a>
-								</div>
-							</div>
-						</div>
 
-
+						
 							<c:forEach items="${restList}" var="RES_CODE" varStatus="loop">
 							<c:set var="nextVal" value="${restList[loop.index]}"/>
 								<div class="col-md-12">

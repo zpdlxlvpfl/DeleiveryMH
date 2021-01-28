@@ -7,7 +7,7 @@
 </style>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Restaurant</title>
+<title>Restaurant write</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -43,10 +43,10 @@
 <div class="parallax-content baner-content" id="home">
 	<div class="container">
 		<div class="first-content">
-			<h1 style="font-size: 100px">Restaurant Write Test</h1>
+			<h1 style="font-size: 100px">Restaurant Write</h1>
 			<br>
 			<p>
-				<span><em>Restaurant Write TEST</em></span>
+				<span><em>Restaurant Write</em></span>
 			</p>
 			<br> <br>
 

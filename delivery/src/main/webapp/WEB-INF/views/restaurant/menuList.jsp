@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Delivery TEST Template</title>
+<title>Delivery Web Service</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -154,7 +154,7 @@ function menuList() {
             <li class="nav-item"><a class="nav-link" href="reswrite"><span>Restaurant Registration</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="#" onclick="javascript:document.Logout.submit();" ><span>LOGOUT</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="restList"><span>Restaurant List</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#"  onclick="location.href='/cart/myCart'"><span>TEST</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="menuwrite"><span>Menu write</span></a></li>
 		</ul>
 	</div>
 	</form>
