@@ -150,12 +150,12 @@
 					contentType : "application/json; charset=utf-8;",
 					data : json,
 					success : function(json) {
-						alert("success" + json);
+						alert("주문하시겠습니까?");
 						console.log("success" + json);
 						  document.location.href="/cart/myOrderList";
 					},
 					error : function(error) {
-						alert("error."+ json);
+						alert("에러발생 관리자에게 문의하세요.");
 					}
 				});
 

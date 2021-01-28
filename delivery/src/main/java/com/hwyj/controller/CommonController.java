@@ -157,7 +157,7 @@ public class CommonController {
 	@Autowired
 	private MemberService memberservice;
 
-	@GetMapping("/insertCustomer") // ㅎㅗㅣㅇㅜㅓㄴㄱㅏㅇㅣㅂ
+	@GetMapping("/insertCustomer") // 회원가입
 	@ResponseBody
 	public String insertCustomer(Locale locale, CustomerVO csVO, Model model) {
 		log.info("test");

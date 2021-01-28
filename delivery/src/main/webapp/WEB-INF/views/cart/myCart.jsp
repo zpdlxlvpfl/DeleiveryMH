@@ -454,7 +454,7 @@
 					url : "/cart/OrderList",
 					data : json,
 					success : function(json) {
-						alert('성공');
+						alert('주문내역 확인 페이지로 이동합니다.');
 					},
 					error : function(error) {
 						alert("error." + data);

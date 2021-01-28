@@ -323,7 +323,8 @@
 
 
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1ae9605eb7fea18b91aa4e9f1d11e64&libraries=services,clusterer,drawing"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1ae9605eb7fea18b91aa4e9f1d11e64&libraries=services,
+		Dclusterer,drawing"></script>
 	<div class="parallax-content contact-content" id="contact-us">
 		<div class="container">
 			<div class="row">
@@ -423,8 +424,10 @@
 			// 지도 중심좌표를 접속위치로 변경 
 			map.setCenter(locPosition);
 		}
+	
 		
 		
+	//검색
 		// 마커를 담을 배열 
 		var markers = [];
 

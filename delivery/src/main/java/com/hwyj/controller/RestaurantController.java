@@ -123,7 +123,7 @@ public class RestaurantController {
 		// rttr.addAttribute("insertres");
 		session.setAttribute("RES_CODE", resvo.getRES_CODE());
 		System.out.println(session);
-		return "redirect:/restaurant/reshome";
+		return "redirect:/restaurant/menuwrite";
 	}
 
 	// 메뉴 등록
