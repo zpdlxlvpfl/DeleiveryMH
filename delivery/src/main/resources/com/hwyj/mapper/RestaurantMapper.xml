@@ -57,8 +57,9 @@
 		right JOIN res ON res_menu.res_code = res.res_code
 		WHERE res_menu.res_code=#{res_code}
 	</select>
-	
-	
+	<update id="rescode" parameterType="String">
+	update testdb.member set res_code=#{res_code} where id=#{id}
+	</update>
 	
 	<select id="mainmenuList" parameterType="String" resultType="com.hwyj.domain.ResMenuVO">
 	select res_code,res_menu_name,res_menu_price from testdb.res_menu where res_menu_code > 0 and res_code >0

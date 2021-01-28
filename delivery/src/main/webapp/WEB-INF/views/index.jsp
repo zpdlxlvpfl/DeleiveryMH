@@ -91,6 +91,7 @@
 			<ul class="nav flex-column">
 				<li class="nav-item"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery</span></a></li>
 				<li class="nav-item"><a class="nav-link" href="restList"><span>Restaurant List</span></a></li>
+				<li class="nav-item"><a class="nav-link" href="#" onclick="location.href='/restaurant/restList'"><span>OWNER</span></a></li>
 				<sec:authorize access="isAnonymous()">
 					<li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
 				</sec:authorize>

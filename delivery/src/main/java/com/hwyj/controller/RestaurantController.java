@@ -95,13 +95,17 @@ public class RestaurantController {
 	public void menuwrite() {
 
 	}
+	
+	
 
 	// 매장 등록
 	@RequestMapping(value = "/insertres", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	public String insertres(Authentication authentication, ResMenuVO menuvo, HttpSession session, ResVO resvo, 
-			Model model, RedirectAttributes rttr) {
+			Model model, RedirectAttributes rttr,CustomerVO cu) {
 		String RES_ROLE = (String) session.getAttribute("RES_ROLE");
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		
+		
 		Calendar cal = Calendar.getInstance();
 		CustomerVO vo = new CustomerVO();
 
@@ -117,6 +121,8 @@ public class RestaurantController {
 		String RES_CODE = ymd + "_" + subNum;
 
 		resvo.setRES_CODE(RES_CODE);
+		cu.setId(userDetails.getUsername());
+		cu.setRes_code(RES_CODE);
 		restaurantService.insertres(resvo);
 		log.info(RES_CODE);
 		System.out.println(resvo);
@@ -126,44 +132,12 @@ public class RestaurantController {
 		return "redirect:/restaurant/menuwrite";
 	}
 
-	// 메뉴 등록
-	@RequestMapping(value = "insertmenu", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public String insertmenu(ResMenuVO menuvo, HttpSession session, RedirectAttributes rttr,
-			Authentication authentication) {
-		// HttpSession session = null;
-		// String RES_CODE = (String)session.getAttribute("RES_CODE");
-		rttr.getFlashAttributes();
-		String RES_ROLE = (String) session.getAttribute("RES_ROLE");
-		ResVO vo = new ResVO();
-
-		String RES_CODE = (String) session.getAttribute("RES_CODE");
-
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
-		String ymd = ym + new DecimalFormat("00").format(cal.get(Calendar.DATE));
-		String subNum = "";
-
-		for (int i = 1; i <= 6; i++) {
-			subNum += (int) (Math.random() * 10);
-		}
-
-		String res_menu_code = ymd + "_Menu" + subNum;
-		menuvo.setRes_menu_code(res_menu_code);
-		menuvo.setRES_CODE(RES_CODE);
-
-		restaurantService.insertmenu(menuvo);
-		System.out.println(menuvo);
-		System.out.println(session + "RESROLE@@@@@@@@@@@@\n" + RES_ROLE);
-
-		return "redirect:/restaurant/restList";
-
-	}
+	
 	
 	//메뉴 목록겸 관리페이지
 	@RequestMapping(value = "menuList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	public ModelAndView menuList(ModelMap model, ResMenuVO menuvo, RedirectAttributes rttr, Authentication authentication,
-			@RequestParam(value = "RES_CODE", required = false) String RES_CODE) throws Exception {
+			@RequestParam(value = "RES_CODE", required = false) String RES_CODE, HttpSession session) throws Exception {
         ModelAndView mav = new ModelAndView();
 		rttr.getFlashAttributes();
 		UtilController util = new UtilController();
@@ -175,16 +149,55 @@ public class RestaurantController {
 		HashMapList.put("HashMapList", menuList);
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("res_menu_code", menuvo.getRes_menu_code());
-		//model.addAttribute("RES_CODE"+ menuvo.getRES_CODE());
+		model.addAttribute("RES_CODE"+ menuvo.getRES_CODE());
 		restaurantService.menuread(RES_CODE);
 		System.out.println(menuList + "LIST@@@@@@@@@@@@@@@@@@@");
-		rttr.addFlashAttribute("res_menu_code", menuvo.getRes_menu_code());
+		rttr.addFlashAttribute("RES_CODE", menuvo.getRES_CODE());
+		RES_CODE = menuvo.getRES_CODE();
+		session.setAttribute("RES_CODE", RES_CODE);
 		mav.addObject("menuList", menuList);
 		mav.addObject("RES_CODE", menuvo.getRES_CODE());
 		mav.addObject("res_menu_code", menuvo.getRes_menu_code());
+		
+		;
 		return mav;
 		// return "restaurant/menuList";
 	}
+	// 메뉴 등록
+		@RequestMapping(value = "insertmenu", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+		public String insertmenu(ResMenuVO menuvo, HttpSession session, RedirectAttributes rttr, ModelMap model,
+				Authentication authentication) {
+			// HttpSession session = null;
+			// String RES_CODE = (String)session.getAttribute("RES_CODE");
+			ModelAndView mav = new ModelAndView();
+			rttr.getFlashAttributes();
+			String RES_ROLE = (String) session.getAttribute("RES_ROLE");
+			ResVO vo = new ResVO();
+			String RES_CODE = (String) session.getAttribute("RES_CODE");
+			
+			Calendar cal = Calendar.getInstance();
+			int year = cal.get(Calendar.YEAR);
+			String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+			String ymd = ym + new DecimalFormat("00").format(cal.get(Calendar.DATE));
+			String subNum = "";
+
+			for (int i = 1; i <= 6; i++) {
+				subNum += (int) (Math.random() * 10);
+			}
+
+			String res_menu_code = ymd + "_Menu" + subNum;
+			menuvo.setRes_menu_code(res_menu_code);
+			model.addAttribute("RES_CODE", menuvo);
+			menuvo.setRES_CODE(RES_CODE);
+
+			restaurantService.insertmenu(menuvo);
+			System.out.println(menuvo);
+			System.out.println(session + "RESROLE@@@@@@@@@@@@\n" + RES_ROLE);
+			System.out.println(RES_CODE+ "RES_CODE@@");
+
+			return "redirect:/restaurant/restList";
+
+		}
 
 	//매장리스트
 	@RequestMapping(value = "restList", method = RequestMethod.GET, produces = "application/json; charset=utf8")
@@ -235,6 +248,7 @@ public class RestaurantController {
 	}
 
 	@RequestMapping(value = "/deleteMenu", method = RequestMethod.GET)
+	@ResponseBody
 	public ResMenuVO deleteMenu(@RequestParam(value = "res_menu_code", required = false) String res_menu_code,
 			String RES_CODE, RedirectAttributes rttr, Model model, ResMenuVO menuvo) throws Exception {
 		rttr.getFlashAttributes();
@@ -248,8 +262,6 @@ public class RestaurantController {
 		String url = "/restaurant/menuList?RES_CODE="+read.getRES_CODE();
 		mav.addObject("URL", url);
 		System.out.println("================\n" + res_menu_code + read + RES_CODE);
-
-		
 		System.out.println(restaurantService.deleteMenu(menuvo));
 		System.out.println(read + "@@@@@@@@" + menuvo.getRES_CODE());
 
@@ -276,9 +288,9 @@ public class RestaurantController {
 	
 	
 	
-	
 	@RequestMapping(value = "res_pop_up", method = RequestMethod.GET)
-	public String rest_pop_up(@RequestParam("RES_CODE") String RES_CODE,String res_menu_code, Model model) throws Exception {
+	public String rest_pop_up(@RequestParam("RES_CODE") 
+		String RES_CODE,String res_menu_code, Model model) throws Exception {
 
 		ResVO vo = restaurantService.ResInfo(RES_CODE);
 		model.addAttribute("RES_CODE", vo);

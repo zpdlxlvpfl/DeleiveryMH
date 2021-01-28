@@ -49,7 +49,6 @@ var RES_CODE = $(RES_CODE);
 var res_menu_code = $(res_menu_code);
 
 function menuList() {
-
 	restaurantService.menuList(function(menuList) {
 		$.ajax({
 			url : "/restaurant/menuList",
@@ -75,7 +74,6 @@ function menuList() {
 		});
 	});
 }
-
 	function deleteMenu(RES_CODE) {
 		var is = confirm("Are you sure you want to delete this?");
 		var RES_CODE = $(RES_CODE);
@@ -91,7 +89,6 @@ function menuList() {
 		}
 
 	}
-
 	function updateMenu() {
 		var RES_CODE = $(RES_CODE);
 		var url = "/restaurant/menuList?RES_CODE=";
@@ -101,9 +98,6 @@ function menuList() {
 		$("#update").load(window.location.href + "#update");
 	}location.replace();
 	}
-	
-	
-	
 	function deleteRest(RES_CODE) {
 		var RES_CODE = $(RES_CODE);
 		var res_menu_code = $(res_menu_code);
@@ -119,7 +113,6 @@ function menuList() {
 		}
 
 	}
-
 	function updateRest() {
 		var RES_CODE = $(RES_CODE);
 		var res_menu_code = $(res_menu_code);
@@ -154,7 +147,7 @@ function menuList() {
             <li class="nav-item"><a class="nav-link" href="reswrite"><span>Restaurant Registration</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="#" onclick="javascript:document.Logout.submit();" ><span>LOGOUT</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="restList"><span>Restaurant List</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="menuwrite"><span>Menu write</span></a></li>
+			<li class="nav-item"><a class="nav-link"  href="menuwrite" ><span>Menu write</span></a></li>
 		</ul>
 	</div>
 	</form>
@@ -183,10 +176,11 @@ function menuList() {
 								<div class="line-dec"></div>
 								<p>My restaurant Info Update/Delete</p> <br>
 								<div class="primary-button" >
-									<a href="javascript:window.open('/restaurant/res_pop_up?RES_CODE=${RES_CODE.RES_CODE}',updateRes,'width=500,height=500');"
+									<a href="javascript:window.open('/restaurant/res_pop_up?RES_CODE=${RES_CODE.RES_CODE}'
+									,updateRes,'width=500,height=500');"
 										id="updateRes" onclick="updateRest">Update</a> <a
 										href="/restaurant/deleteRes?RES_CODE=${RES_CODE.RES_CODE}"
-										onclick="if(!confirm('Are you sure you want to delete this ?')){return false;}; {location.replace();}">
+					    onclick="if(!confirm('Are you sure you want to delete this ?')){return false;}; {location.replace();}">
 										Delete </a>
 								</div>
 							</div>
@@ -197,20 +191,19 @@ function menuList() {
 
 
 
-					<div class="col-md-8" id="update">
-						<div class="left-text">
-							<div class="testimonials-item">
-								<div class="service-item" >
-									<img src="../resources/img/0st-item.jpg" alt="">
-									<c:forEach items="${menuList}" var="RES_CODE" begin="0" end="0"
-										step="1" varStatus="i">
-										<input type="hidden" id="RES_CODE" name="RES_CODE"
-											value='<c:out value="${RES_CODE.RES_CODE }" />'>
-
-										<h4 id="res_menu_name">
-											<c:out value=" ${RES_CODE.res_menu_name}">
-											</c:out>
-										</h4>
+							<div class="col-md-8" id="update">
+								<div class="left-text">
+									<div class="testimonials-item">
+										<div class="service-item" >
+											<img src="../resources/img/0st-item.jpg" alt="">
+											<c:forEach items="${menuList}" var="RES_CODE" begin="0" end="0"
+												step="1" varStatus="i">
+												<input type="hidden" id="RES_CODE" name="RES_CODE"
+													value='<c:out value="${RES_CODE.RES_CODE }" />'>
+												<h4 id="res_menu_name">
+													<c:out value=" ${RES_CODE.res_menu_name}">
+													</c:out>
+												</h4>
 										<div class="line-dec"></div>
 										<p id="res_menu_explan">
 											<c:out value=" ${RES_CODE.res_menu_explan}" />
@@ -218,16 +211,15 @@ function menuList() {
 										<span id="res_menu_price"><c:out
 												value="${RES_CODE.res_menu_price}"></c:out> &#8361;</span>
 										<div class="primary-button">
-
 											<a
-												href="javascript:window.open('/restaurant/menu_pop_up?res_menu_code=${RES_CODE.res_menu_code}',updateMenu,'width=500,height=500');"
+												href="javascript:window.open
+												('/restaurant/menu_pop_up?res_menu_code=${RES_CODE.res_menu_code}'
+												,updateMenu,'width=500,height=500');"
 												id="updateMenu" onclick="javascript:updateMenu();"> Update </a> <a
 												href="/restaurant/deleteMenu?res_menu_code=${RES_CODE.res_menu_code}"
 												onclick="if(!confirm('Are you sure you want to delete this ?')){return false;};">
 												Delete</a>
 										</div>
-
-
 									</c:forEach>
 								</div>
 							</div>

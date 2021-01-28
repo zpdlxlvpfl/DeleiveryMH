@@ -40,13 +40,14 @@
 
 </form>
 
+
 <div class="parallax-content baner-content" id="home">
 	<div class="container">
 		<div class="first-content">
-			<h1 style="font-size: 100px">Restaurant Write </h1>
+			<h1 style="font-size: 100px">Menu Write </h1>
 			<br>
 			<p>
-				<span><em>Restaurant Write </em></span>
+				<span><em>Menu Write </em></span>
 			</p>
 			<br>
 			<br>
@@ -66,7 +67,6 @@
 
 					
 						<div style="margin: 0 auto; width: 300px;">
-						
 						
 						<fieldset>
 						
@@ -148,9 +148,11 @@
 <script>
 		$(document).ready(
 				function() {
+					var RES_CODE = $(RES_CODE);
 					$("#insertmenu").click(
 							function() {
 								var json = {
+									RES_CODE : $("#RES_CODE").val(),
 									res_menu_name : $("#res_menu_name").val(),
 									res_menu_explan : $("#res_menu_explan").val(),
 									res_menu_price : $("#res_menu_price").val()
