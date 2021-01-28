@@ -150,7 +150,7 @@ function menuList() {
 <form name="Logout" action="/logout" method="post">
 	<div class="fixed-side-navbar">
 		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link" href="#" onclick="location.href='/index'"><span>Delivery Home</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery Home</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="#" onclick="location.href='/foodmaptest'"><span>Map Search</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="#" onclick="javascript:document.Logout.submit();" ><span>LOGOUT</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="restList"><span>Restaurant List</span></a></li>

@@ -58,7 +58,7 @@
 
 	<div class="fixed-side-navbar">
 		<ul class="nav flex-column">
-			<li class="nav-restList"><a class="nav-link" href="index"><span>Delivery</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery</span></a></li>
 			<li class="nav-restList"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
 			<li class="nav-restList"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
 			<li class="nav-restList"><a class="nav-link" href="join"><span>JOIN</span></a></li>

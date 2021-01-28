@@ -62,8 +62,7 @@
 
    <div class="fixed-side-navbar">
       <ul class="nav flex-column">
-         <li class="nav-item"><a class="nav-link" href="index"><span>Delivery Home</span></a></li>
-         <li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
+         <li class="nav-item"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery Home</span></a></li>
          <sec:authorize access="isAnonymous()">
          <li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
          </sec:authorize>
@@ -302,6 +301,226 @@
 
       </div>
    </div>
+	<div class="service-content" id="services">
+
+		<div class="row">
+			<div class="col-md-12">
+				<div id="owl-testimonials" class="owl-carousel owl-theme">
+
+
+					<div class="col-md-8">
+						<div class="left-text">
+							<div class="testimonials-item">
+								<div class="service-item">
+									<img src="../resources/img/0st-item.jpg" alt="">
+										<c:forEach items="${menuList}" var="RES_CODE" begin="0"
+										end="0" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${RES_CODE.res_menu_name}">
+											</c:out>
+										</h4>
+										<div class="line-dec"></div>
+										<p>
+											<c:out value=" ${RES_CODE.res_menu_explan}" />
+										</p>
+										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="1" max="20" value="1">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
+											<input type="hidden" value='<c:out value="${RES_CODE.RES_CODE}"/>'>
+										</c:forEach>
+									
+									<div class="primary-button">
+										<a class="btn" id="cartClick">cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="col-md-8">
+						<div class="left-text">
+							<div class="testimonials-item">
+								<div class="service-item">
+									<img src="../resources/img/1st-item.jpg" alt="">
+										<c:forEach items="${menuList}" var="RES_CODE" begin="1"
+										end="1" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${RES_CODE.res_menu_name}">
+											</c:out>
+										</h4>
+										<div class="line-dec"></div>
+										<p>
+											<c:out value=" ${RES_CODE.res_menu_explan}" />
+										</p>
+										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="1" max="20" value="1">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
+										</c:forEach>
+									
+									<div class="primary-button">
+										<a class="btn" id="cartClick">cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-8">
+						<div class="left-text">
+							<div class="testimonials-item">
+								<div class="service-item">
+									<img src="../resources/img/2nd-item.jpg" alt="" id="">
+									<c:forEach items="${menuList}" var="RES_CODE" begin="2"
+										end="2" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${RES_CODE.res_menu_name}">
+											</c:out>
+										</h4>
+										<div class="line-dec"></div>
+										<p>
+											<c:out value=" ${RES_CODE.res_menu_explan}" />
+										</p>
+										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="1" max="20" value="1">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
+									</c:forEach>
+									<div class="primary-button">
+										<a class="btn" id="cartClick">cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-8">
+						<div class="left-text">
+							<div class="testimonials-item">
+								<div class="service-item">
+									<img src="../resources/img/3rd-item.jpg" alt="" id="">
+									<c:forEach items="${menuList}" var="RES_CODE" begin="3"
+										end="3" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${RES_CODE.res_menu_name}">
+											</c:out>
+										</h4>
+										<div class="line-dec"></div>
+										<p>
+											<c:out value=" ${RES_CODE.res_menu_explan}" />
+										</p>
+										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="1" max="20" value="1">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
+									</c:forEach>
+									<div class="primary-button">
+										<a class="btn" id="cartClick">cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-8">
+						<div class="left-text">
+							<div class="testimonials-item">
+								<div class="service-item">
+									<img src="../resources/img/4th-item.jpg" alt="">
+									<c:forEach items="${menuList}" var="RES_CODE" begin="4"
+										end="4" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${RES_CODE.res_menu_name}">
+											</c:out>
+										</h4>
+										<div class="line-dec"></div>
+										<p>
+											<c:out value=" ${RES_CODE.res_menu_explan}" />
+										</p>
+										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="1" max="20" value="1">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
+									</c:forEach>
+									<div class="primary-button">
+										<a class="btn" id="cartClick">cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-md-8">
+						<div class="left-text">
+							<div class="testimonials-item">
+								<div class="service-item">
+									<img src="../resources/img/5th-item.jpg" alt="" id="">
+									<c:forEach items="${menuList}" var="RES_CODE" begin="5"
+										end="5" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${RES_CODE.res_menu_name}">
+											</c:out>
+										</h4>
+										<div class="line-dec"></div>
+										<p>
+											<c:out value=" ${RES_CODE.res_menu_explan}" />
+										</p>
+										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="1" max="20" value="1">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
+									</c:forEach>
+									<div class="primary-button">
+										<a class="btn" id="cartClick">cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-8">
+						<div class="left-text">
+							<div class="testimonials-item">
+								<div class="service-item">
+								<img src="../resources/img/6th-item.jpg" alt="" id="">
+									<c:forEach items="${menuList}" var="RES_CODE" begin="6"
+										end="6" step="1" varStatus="i">
+										<h4>
+											<c:out value=" ${RES_CODE.res_menu_name}">
+											</c:out>
+										</h4>
+										<div class="line-dec"></div>
+										<p>
+											<c:out value=" ${RES_CODE.res_menu_explan}" />
+										</p>
+										<span><c:out value="${RES_CODE.res_menu_price}"></c:out>
+											&#8361;</span>
+											<br />
+											<input id="amount" type="number" name="amount" min="1" max="20" value="1">
+											<input id="rRes_menu_code" type="hidden" value='<c:out value="${RES_CODE.res_menu_code}"/>'>
+									</c:forEach>
+									<div class="primary-button">
+										<a class="btn" id="cartClick">cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
 
 
 

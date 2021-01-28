@@ -115,7 +115,7 @@ public class CommonController {
 		List<ResVO> restList = restaurantService.restList2();
 		List<ResMenuVO> menuList = restaurantService.mainmenuList();		
 		
-		mav.setViewName("/index");
+		mav.setViewName("index");
 		mav.addObject("RES_CODE", vo.getRES_CODE());
 		mav.addObject("res_code", menu.getRES_CODE());
 		mav.addObject("restList", restList);
@@ -125,8 +125,7 @@ public class CommonController {
 		return mav;
 	}
 	
-
-
+	
 
 
 	@GetMapping("/maptest") // 현재위치

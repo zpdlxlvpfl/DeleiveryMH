@@ -89,7 +89,7 @@
 	<form name="Logout" action="/logout" method="post">
 		<div class="fixed-side-navbar">
 			<ul class="nav flex-column">
-				<li class="nav-item"><a class="nav-link" href="#"><span>Delivery</span></a></li>
+				<li class="nav-item"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery</span></a></li>
 				<li class="nav-item"><a class="nav-link" href="restList"><span>Restaurant List</span></a></li>
 				<sec:authorize access="isAnonymous()">
 					<li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>

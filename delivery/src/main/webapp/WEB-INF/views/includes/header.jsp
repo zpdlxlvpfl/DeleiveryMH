@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>#배달웹서비스</title>
+    <title>배달웹서비스</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../resources/docs/4/minty/bootstrap.css">
     <link rel="stylesheet" href="../resources/docs/_assets/css/custom.min.css">
@@ -23,7 +23,7 @@
   <body>
   <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div class="container">
-        <a href="../" class="navbar-brand">#배달웹서비스</a>
+        <a href="../" class="navbar-brand">배달웹서비스</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -40,7 +40,7 @@
                 <a class="dropdown-item" rel="noopener" href="/cart/myCart">장바구니</a>
               </sec:authorize>
               <sec:authorize access="hasRole('ROLE_MEMBER')">
-                <a class="dropdown-item" href="#">주문내역</a>
+                <a class="dropdown-item" href="/cart/myOrderList">주문내역</a>
               </sec:authorize>
               <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <a class="dropdown-item" href="/admin/memberList?pageNum=1&amount=10&auth=ROLE_MEMBER">회원목록</a>
