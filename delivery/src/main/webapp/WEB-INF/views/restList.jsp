@@ -57,7 +57,7 @@
 
 	<div class="fixed-side-navbar">
 		<ul class="nav flex-column">
-			<li class="nav-restList"><a class="nav-link" href="index"><span>Delivery</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="/"><span>Delivery</span></a></li>
 			<li class="nav-restList"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
 			<li class="nav-restList"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
 			<li class="nav-restList"><a class="nav-link" href="join"><span>JOIN</span></a></li>
@@ -117,7 +117,7 @@
 										<input type="hidden" id="RES_CODE" name="RES_CODE"
 											value='<c:out value="${nextVal.RES_CODE }" />'>
 										<h4>
-											<a href="/restaurant/menuList?RES_CODE=${nextVal.RES_CODE}">
+											<a href="/menuList?RES_CODE=${nextVal.RES_CODE}">
 												${nextVal.RES_NAME }</a>
 										</h4>
 										<div class="line-dec"></div>
