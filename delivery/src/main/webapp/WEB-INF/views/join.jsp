@@ -99,7 +99,7 @@
 <body>
    <div class="fixed-side-navbar">
       <ul class="nav flex-column">
-         <li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
+         <li class="nav-item"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery</span></a></li>
          <li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
          <li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
          <li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li>
@@ -111,10 +111,10 @@
    <div class="parallax-content baner-content" id="home">
       <div class="container">
          <div class="first-content">
-            <h1>JOIN TEST</h1>
+            <h1>JOIN</h1>
             <br>
             <p>
-               <span><em>JOIN</em> TEST</span>
+               <span><em>JOIN</em></span>
             </p>
             <br> <br>
 

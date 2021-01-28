@@ -91,21 +91,8 @@
 					
 						<div class="col-md-8">
 							<div class="left-text">
-								<h4>Delivery TEST</h4>
+								<h4>Restaurant List</h4>
 								<div class="line-dec"></div>
-								<p>
-									Delivery TEST abcdefgsadqasdfaffadac <a rel="nofollow"
-										href="https://templatemo.com"> website</a> whsskwhfflek.
-								</p>
-								<ul>
-									<li>- test test test test test test</li>
-									<li>- test test test test test test</li>
-									<li>- test test test test test test</li>
-									<li>- test test test test test test</li>
-								</ul>
-								<div class="primary-button">
-									<a href="#portfolio">Delivery TEST</a>
-								</div>
 							</div>
 						</div>
 

@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Delivery TEST Template</title>
+<title>Delivery Service</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -119,8 +119,8 @@
 				</div>
 			</sec:authorize>
 			<div class="first-content">
-				<h1>Delivery TEST</h1>
-				<span><em>Bootstrap</em>Delivery TEST</span>
+				<h1>Delivery</h1>
+				<span><em>How do you like</em> this dish today?</span>
 				<div class="primary-button">
 					<br> <a href="#services">More</a>
 				</div>
@@ -135,21 +135,11 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="left-text">
-						<h4>Delivery TEST</h4>
+						<h4>Delivery Service</h4>
 						<div class="line-dec"></div>
 						<p>
-							Delivery TEST abcdefgsadqasdfaffadac <a rel="nofollow"
-								href="https://templatemo.com"> website</a> whsskwhfflek.
+							현재 리뷰가 제일 많은 매장들입니다.
 						</p>
-						<ul>
-							<li>- test test test test test test</li>
-							<li>- test test test test test test</li>
-							<li>- test test test test test test</li>
-							<li>- test test test test test test</li>
-						</ul>
-						<div class="primary-button">
-							<a href="#portfolio">Delivery TEST</a>
-						</div>
 					</div>
 				</div>
 
