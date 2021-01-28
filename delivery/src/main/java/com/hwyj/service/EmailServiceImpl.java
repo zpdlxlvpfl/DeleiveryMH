@@ -30,7 +30,7 @@ public class EmailServiceImpl implements EmailService {
 			MimeMessage msg=jmailSender.createMimeMessage();
 			MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
 			
-			msgHelper.setFrom("testhan70@gmail.com", "OO배달서비스"); //발신메일, 이름
+			msgHelper.setFrom("teHMst@gmail.com", "OO배달서비스"); //발신메일, 이름
 			msgHelper.setTo(emailVO.getReceiveMail()); //수신자 메일주소
 			
 			if(request.equals("findId")) { //요청된 서비스가 아이디 찾기라면
