@@ -28,18 +28,17 @@
 <script src="../resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 <body>
-
+<form name="Logout" action="/logout" method="post">
     <div class="fixed-side-navbar">
         <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="index"><span>Delivery</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="logout"><span>Logout</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="join.html"><span>JOIN</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
+           <li class="nav-restList"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery</span></a></li>
+            <li class="nav-restList"><a class="nav-link" href="reswrite"><span>Restaurant Registration</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="#"><span>UP</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="#" onclick="javascript:document.Logout.submit();" ><span>LOGOUT</span></a></li>
         </ul>
     </div>
 
-
+</form>
 
 <div class="parallax-content baner-content" id="home">
 	<div class="container">

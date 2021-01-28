@@ -25,19 +25,20 @@
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
 	rel="stylesheet">
 
-<script src="../resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+<script
+	src="../resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
+<form name="Logout" action="/logout" method="post">
+    <div class="fixed-side-navbar">
+        <ul class="nav flex-column">
+           <li class="nav-restList"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery</span></a></li>
+            <li class="nav-restList"><a class="nav-link" href="restList"><span>Restaurant List</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="#"><span>UP</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="#" onclick="javascript:document.Logout.submit();" ><span>LOGOUT</span></a></li>
+        </ul>
+    </div>
 
-<div class="fixed-side-navbar">
-	<ul class="nav flex-column">
-		<li class="nav-item"><a class="nav-link" href="home"><span>Delivery</span></a></li>
-		<li class="nav-item"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
-		<li class="nav-item"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
-		<li class="nav-item"><a class="nav-link" href="join"><span>JOIN</span></a></li>
-		<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
-	</ul>
-</div>
-
+</form>
 
 <div class="parallax-content baner-content" id="home">
 	<div class="container">
@@ -54,7 +55,8 @@
 				<div class="form-group" style="float: center;">
 					<form id="contact"
 						action="${pageContext.request.contextPath }/file/upload.do"
-						method="post"> <!-- 파일 업로드 구현 테스트중임 -->
+						method="post">
+						<!-- 파일 업로드 구현 테스트중임 -->
 
 
 						<div class="filebox">
@@ -66,13 +68,12 @@
 
 
 						<div style="margin: 0 auto; width: 300px;">
-						
+
 
 							<fieldset>
 
 								<input name="RES_NAME" id="RES_NAME" type="text"
-									class="form-control" 
-									placeholder="Restaurant_name.."
+									class="form-control" placeholder="Restaurant_name.."
 									style="font-family: inherit; width: 300px; height: 40px;">
 							</fieldset>
 
@@ -83,21 +84,22 @@
 									style="font-family: inherit; width: 300px; height: 150px;">
 							</fieldset>
 
-							
-								<fieldset>
-							
+
+							<fieldset>
+
 								<input name="DEL_PRICE" id="DEL_PRICE" type="number"
-									class="form-control"  placeholder="Del_price .."
+									class="form-control" placeholder="Del_price .."
 									style="font-family: inherit; width: 300px; height: 40px;">
 							</fieldset>
-							
-						
+
+
 						</div>
 						<fieldset>
 							<div style="float: center;">
 								<p>
-									<button type="button" id="insertres" name ="insertres"
-										class="btn"	style="font-family: inherit; width: 300px; height: 60px;">WRITE</button>
+									<button type="button" id="insertres" name="insertres"
+										class="btn"
+										style="font-family: inherit; width: 300px; height: 60px;">WRITE</button>
 								</p>
 							</div>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -105,7 +107,7 @@
 					</form>
 				</div>
 			</div>
-	</div>
+		</div>
 	</div>
 
 	<div class="col-md-6"></div>
@@ -133,54 +135,66 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-	type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		type="text/javascript"></script>
 
-<script>
-	window.jQuery
-			|| document
-					.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
-</script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" ><\/script>')
+	</script>
 
 
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/plugins.js"></script>
 	<script src="../resources/js/main.js"></script>
-	
-	<script>
-		$(document).ready(
-				function() {
-					$("#insertres").click(
-							function() {
-								var json = {
-									RES_CODE :  $("#RES_CODE").val(),
-									RES_NAME : $("#RES_NAME").val(),
-									RES_INFO : $("#RES_INFO").val(),
-									DEL_PRICE : $("#DEL_PRICE").val()
-									//RES_DATE : $("#RES_DATE").val()
-								};
 
-								for (var data in json) {
-									if (json[data] == 0) {
-										alert($("#" + data).attr("placeholder")
-												+ " 정보를 입력해주세요.");
-										$("#" + data).focus();
-										return false;
-									}
-								}
-									$.ajax({
-										type : "GET",
-										url : "/restaurant/insertres",
-										data : json,
-										success : function(string) {
-											alert('매장 등록 성공');
-											document.location.href="/restaurant/menuwrite";
-										},
-										error : function(error) {
-											alert("에러" + error);
-										}
-									});
-								});
-				});
+	<script>
+		$(document)
+				.ready(
+						function() {
+							$("#insertres")
+									.click(
+											function() {
+												var json = {
+													RES_CODE : $("#RES_CODE")
+															.val(),
+													RES_NAME : $("#RES_NAME")
+															.val(),
+													RES_INFO : $("#RES_INFO")
+															.val(),
+													DEL_PRICE : $("#DEL_PRICE")
+															.val()
+												//RES_DATE : $("#RES_DATE").val()
+												};
+
+												for ( var data in json) {
+													if (json[data] == 0) {
+														alert($("#" + data)
+																.attr(
+																		"placeholder")
+																+ " 정보를 입력해주세요.");
+														$("#" + data).focus();
+														return false;
+													}
+												}
+												$
+														.ajax({
+															type : "GET",
+															url : "/restaurant/insertres",
+															data : json,
+															success : function(
+																	string) {
+																alert('매장 등록 성공');
+																document.location.href = "/restaurant/menuwrite";
+															},
+															error : function(
+																	error) {
+																alert("에러"
+																		+ error);
+															}
+														});
+											});
+						});
 	</script>
 </html>

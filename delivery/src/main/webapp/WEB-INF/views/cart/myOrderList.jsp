@@ -46,16 +46,17 @@
 
 
 
-
+<form name="Logout" action="/logout" method="post">
 	<div class="fixed-side-navbar">
 		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link" href="#home"><span>Delivery</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#services"><span>Services</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="login.html"><span>LOGIN</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="join.html"><span>JOIN</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="#"
+				onclick="location.href='/'"><span>Delivery Home</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="myCart"><span>myCart</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="#" onclick="javascript:document.Logout.submit();" ><span>LOGOUT</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="#"><span>UP</span></a></li>
 		</ul>
 	</div>
+	</form>
 
 	<div class="parallax-content projects-content" id="portfolio">
 
@@ -82,27 +83,34 @@
 							<div class="col-md-12">
 								<h4>주문 성공</h4>
 								<div class="line-dec"></div>
-							
+
 								<c:forEach items="${OrderList}" var="OrderList">
 									<input type="hidden" id="cart_no" name="cart_no"
 										value='<c:out value="${OrderList.cart_no }" />'>
-										
-									<td>주문번호: <c:out value="${OrderList.cart_no }" /></td> <br>
-									<td>아이디: <c:out value="${OrderList.id }" /></td><br>
-									<td>이름: <c:out value="${OrderList.m_name }" /></td><br>
-									<td>주소: <c:out value="${OrderList.address }" /></td><br>
-									<td>메뉴이름 : <c:out value="${OrderList.res_menu_name }" /></td> <br>
-									<td>총액 :<c:out value="${OrderList.sum }" /></td><br>
-									<td>전화번호 :<c:out value="${OrderList.tel }" /></td><br>
-									</c:forEach>
- 								
-								</div>
+
+									<td>주문번호: <c:out value="${OrderList.cart_no }" /></td>
+									<br>
+									<td>아이디: <c:out value="${OrderList.id }" /></td>
+									<br>
+									<td>이름: <c:out value="${OrderList.m_name }" /></td>
+									<br>
+									<td>주소: <c:out value="${OrderList.address }" /></td>
+									<br>
+									<td>메뉴이름 : <c:out value="${OrderList.res_menu_name }" /></td>
+									<br>
+									<td>총액 :<c:out value="${OrderList.sum }" /></td>
+									<br>
+									<td>전화번호 :<c:out value="${OrderList.tel }" /></td>
+									<br>
+								</c:forEach>
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
 
 

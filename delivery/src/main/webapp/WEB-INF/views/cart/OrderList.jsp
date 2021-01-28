@@ -47,15 +47,17 @@
 
 
 
+<form name="Logout" action="/logout" method="post">
 	<div class="fixed-side-navbar">
 		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link" href="#home"><span>Delivery</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#services"><span>Services</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="login.html"><span>LOGIN</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="join.html"><span>JOIN</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="#"
+				onclick="location.href='/'"><span>Delivery Home</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="myCart"><span>myCart</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="#" onclick="javascript:document.Logout.submit();" ><span>LOGOUT</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="#"><span>UP</span></a></li>
 		</ul>
 	</div>
+	</form>
 
 	<div class="parallax-content projects-content" id="portfolio">
 

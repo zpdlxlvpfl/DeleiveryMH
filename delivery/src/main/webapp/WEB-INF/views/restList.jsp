@@ -52,18 +52,20 @@
 </script> -->
 
 
+
 </head>
 <body>
-
-	<div class="fixed-side-navbar">
-		<ul class="nav flex-column">
-			<li class="nav-restList"><a class="nav-link" href="/"><span>Delivery</span></a></li>
-			<li class="nav-restList"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
+<form name="Logout" action="/logout" method="post">
+    <div class="fixed-side-navbar">
+        <ul class="nav flex-column">
+           <li class="nav-restList"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery Home</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="#"><span>UP</span></a></li>
 			<li class="nav-restList"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
 			<li class="nav-restList"><a class="nav-link" href="join"><span>JOIN</span></a></li>
-			<li class="nav-restList"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
-		</ul>
-	</div>
+					<li class="nav-item"><a class="nav-link" href="#" onclick="javascript:document.Logout.submit();" ><span>LOGOUT</span></a></li>
+        </ul>
+    </div>
+</form>
 
 
 
@@ -85,8 +87,8 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div id="owl-testimonials" class="owl-carousel owl-theme">
-
-
+					
+					
 						<div class="col-md-8">
 							<div class="left-text">
 								<h4>Delivery TEST</h4>
@@ -108,60 +110,54 @@
 						</div>
 
 
-
-						<c:forEach items="${restList}" var="RES_CODE" varStatus="loop">
-							<c:set var="nextVal" value="${restList[loop.index]}" />
-							<div class="col-md-12">
-								<div class="service-item">
+							<c:forEach items="${restList}" var="RES_CODE" varStatus="loop">
+							<c:set var="nextVal" value="${restList[loop.index]}"/>
+								<div class="col-md-12">
+									<div class="service-item">
 									<div class="left-text">
 										<input type="hidden" id="RES_CODE" name="RES_CODE"
-											value='<c:out value="${nextVal.RES_CODE }" />'>
+											value='<c:out value="${nextVal.RES_CODE }" />'> 
 										<h4>
 											<a href="/menuList?RES_CODE=${nextVal.RES_CODE}">
 												${nextVal.RES_NAME }</a>
 										</h4>
 										<div class="line-dec"></div>
-										<p>${nextVal.RES_INFO }</p>
-										<p>
-											Delivery Tips : ${nextVal.DEL_PRICE }<font color="orange">
-												&#8361; </font>
-										</p>
-									</div>
+											<p>${nextVal.RES_INFO }</p>
+										
+										Delivery Tips : ${nextVal.DEL_PRICE }<font color="orange">
+											&#8361; </font>
+									</div></div>
 								</div>
-							</div>
-						</c:forEach>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-			</div>
-			
 
-
-
-			<div class="parallax-content contact-content " id="contact-us"></div>
+	<div class="parallax-content contact-content " id="contact-us"></div>
 
 
 
 
 
-			<footer>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="primary-button">
-								<a href="#home">Back To Top</a>
-							</div>
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="#"><i class="fa fa-google"></i></a></li>
-								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-							</ul>
-						</div>
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="primary-button">
+						<a href="#home">Back To Top</a>
 					</div>
+					<ul>
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+						<li><a href="#"><i class="fa fa-google"></i></a></li>
+						<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+					</ul>
 				</div>
-			</footer>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

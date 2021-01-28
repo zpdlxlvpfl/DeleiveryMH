@@ -55,16 +55,16 @@
 
 </head>
 <body>
-
-	<div class="fixed-side-navbar">
-		<ul class="nav flex-column">
-			<li class="nav-restList"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery</span></a></li>
-			<li class="nav-restList"><a class="nav-link" href="foodmaptest"><span>Search</span></a></li>
-			<li class="nav-restList"><a class="nav-link" href="login"><span>LOGIN</span></a></li>
-			<li class="nav-restList"><a class="nav-link" href="join"><span>JOIN</span></a></li>
-			<li class="nav-restList"><a class="nav-link" href="#contact-us"><span>TEST</span></a></li>
-		</ul>
-	</div>
+<form name="Logout" action="/logout" method="post">
+    <div class="fixed-side-navbar">
+        <ul class="nav flex-column">
+           <li class="nav-restList"><a class="nav-link" href="#" onclick="location.href='/'"><span>Delivery</span></a></li>
+            <li class="nav-restList"><a class="nav-link" href="reswrite"><span>Restaurant Registration</span></a></li>
+			<li class="nav-restList"><a class="nav-link" href="#"><span>UP</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="#" onclick="javascript:document.Logout.submit();" ><span>LOGOUT</span></a></li>
+        </ul>
+    </div>
+</form>
 
 
 
